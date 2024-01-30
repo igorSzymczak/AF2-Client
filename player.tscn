@@ -12,6 +12,7 @@ script = ExtResource("1_1s26i")
 engine = NodePath("Engine")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
 position_smoothing_enabled = true
 
 [node name="Engine" parent="." instance=ExtResource("3_sq35h")]

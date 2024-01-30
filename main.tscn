@@ -16,8 +16,7 @@ shader_parameter/speed2 = 0.2
 
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_beigd")
-position = Vector2(5.72205e-06, 1.09673e-05)
-scale = Vector2(1216, 720)
+scale = Vector2(2800, 1415)
 texture = SubResource("PlaceholderTexture2D_bikko")
 script = ExtResource("3_ubkci")
 

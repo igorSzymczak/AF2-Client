@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://mignawcuevan"]
+[gd_scene load_steps=28 format=3 uid="uid://mignawcuevan"]
 
 [ext_resource type="Texture2D" uid="uid://csoo1j28sqnm0" path="res://Thrust Particle 1.png" id="1_7x0bo"]
+[ext_resource type="Script" path="res://engine.gd" id="1_rdbml"]
 [ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://Thrust Particle 2.png" id="2_j1qfo"]
 [ext_resource type="Texture2D" uid="uid://cifrqdsox61kg" path="res://Thrust Particle 3.png" id="2_n7ren"]
 
@@ -172,8 +173,10 @@ color_ramp = SubResource("GradientTexture1D_d4hbf")
 alpha_curve = SubResource("CurveTexture_dnwfh")
 
 [node name="Engine" type="Node2D"]
+script = ExtResource("1_rdbml")
 
 [node name="Idle" type="GPUParticles2D" parent="."]
+amount = 16
 process_material = SubResource("ParticleProcessMaterial_kcq65")
 texture = ExtResource("1_7x0bo")
 speed_scale = 2.0
@@ -183,15 +186,13 @@ process_material = SubResource("ParticleProcessMaterial_nte1d")
 texture = ExtResource("1_7x0bo")
 speed_scale = 2.0
 
-[node name="Startup" type="GPUParticles2D" parent="."]
-visible = false
+[node name="Spark" type="GPUParticles2D" parent="."]
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_q64qx")
 texture = ExtResource("2_n7ren")
 speed_scale = 2.0
 
 [node name="Speeding" type="GPUParticles2D" parent="."]
-visible = false
 position = Vector2(-25, 0)
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_q7rmp")
@@ -199,7 +200,6 @@ texture = ExtResource("2_n7ren")
 speed_scale = 2.0
 
 [node name="Accelerate" type="GPUParticles2D" parent="."]
-visible = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_23pot")
 texture = ExtResource("2_j1qfo")

@@ -6,18 +6,10 @@ const MAX_SPEED = 500.0
 const DRAG_COEF = 100.0
 var speed = 150.0
 
-@onready var idle = $Engine/Idle
-@onready var thruster = $Engine/Accelerate
-@onready var sparks = $Engine/Startup
-@onready var speeding = $Engine/Speeding
-@onready var light = $Engine/Light
+@export var engine : Thruster
 
 func _ready():
-	idle.emitting = true
-	thruster.emitting = false
-	sparks.emitting = false
-	speeding.emitting = false
-	light.emitting = false
+	engine.init()
 
 func _physics_process(delta):
 	var pos_diff = get_global_mouse_position() - position
@@ -35,28 +27,25 @@ func _physics_process(delta):
 	elif !velocity.is_equal_approx(Vector2(0,0)):
 		velocity -= velocity.normalized() * DRAG_COEF * delta
 	
-	handleThrust(velocity)
-	
+	handleThrust()
 	move_and_slide()
 
-func handleThrust(velocity):
+func handleThrust():
 	if Input.is_action_pressed("Accelerate"):
-		idle.emitting = false
 		if velocity.length() > 75.0:
-			thruster.emitting = true
-			sparks.emitting = false
-			speeding.emitting = true
-			light.emitting = true
+			engine.runningState(true)
+			engine.activeState(true)
+			engine.startState(false)
 			speed = 450
 		else:
-			thruster.emitting = false
-			sparks.emitting = true
-			speeding.emitting = false
-			light.emitting = false
+			engine.runningState(false)
+			engine.startState(true)
+			engine.activeState(false)
 			speed = 150
 	else:
-		thruster.emitting = false
-		sparks.emitting = false
-		idle.emitting = true
-		speeding.emitting = false
+		if velocity.length() <= 75.0:
+			engine.activeState(false)
+		engine.runningState(false)
+		engine.idleState()
+		engine.startState(false)
 

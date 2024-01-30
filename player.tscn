@@ -7,11 +7,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_5t75r"]
 radius = 22.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("engine")]
 script = ExtResource("1_1s26i")
+engine = NodePath("Engine")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_speed = 10.0
+position_smoothing_enabled = true
 
 [node name="Engine" parent="." instance=ExtResource("3_sq35h")]
 position = Vector2(-28, 0)

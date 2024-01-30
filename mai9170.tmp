@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dl641yn1w35sn"]
 
+[ext_resource type="Texture2D" uid="uid://c6xpwoivsnnn6" path="res://space-911785.jpg" id="1_5n5ac"]
 [ext_resource type="PackedScene" uid="uid://biw3togj1rlk7" path="res://player.tscn" id="1_fw8kr"]
 [ext_resource type="Shader" path="res://parallax_test.gdshader" id="1_rooer"]
-[ext_resource type="Script" path="res://Background.gd" id="3_ubkci"]
+[ext_resource type="Script" path="res://Space-911785.gd" id="3_ubkci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_beigd"]
 shader = ExtResource("1_rooer")
@@ -10,16 +11,15 @@ shader_parameter/mouse = null
 shader_parameter/time = null
 shader_parameter/speed2 = 0.2
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bikko"]
-
 [node name="Main" type="Node2D"]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Space-911785" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_beigd")
-position = Vector2(5.72205e-06, 1.09673e-05)
-scale = Vector2(1216, 720)
-texture = SubResource("PlaceholderTexture2D_bikko")
+position = Vector2(449, 457)
+texture = ExtResource("1_5n5ac")
 script = ExtResource("3_ubkci")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_fw8kr")]
+position = Vector2(529, 396)
 slide_on_ceiling = false

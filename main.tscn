@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl641yn1w35sn"]
+
+[ext_resource type="Texture2D" uid="uid://c6xpwoivsnnn6" path="res://space-911785.jpg" id="1_5n5ac"]
+[ext_resource type="PackedScene" uid="uid://biw3togj1rlk7" path="res://player.tscn" id="1_fw8kr"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Space-911785" type="Sprite2D" parent="."]
+position = Vector2(449, 457)
+texture = ExtResource("1_5n5ac")
+
+[node name="Player" parent="." instance=ExtResource("1_fw8kr")]
+position = Vector2(529, 396)
+slide_on_ceiling = false

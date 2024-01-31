@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cifrqdsox61kg"
-path="res://.godot/imported/Thrust Particle 3.png-87dbfb350c5b0cd4c9a391f2b4c36b45.ctex"
+uid="uid://csoo1j28sqnm0"
+path="res://.godot/imported/Thrust Particle 1.png-a60eed750613b4ce77f2750b9006f11c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Thrust Particle 3.png"
-dest_files=["res://.godot/imported/Thrust Particle 3.png-87dbfb350c5b0cd4c9a391f2b4c36b45.ctex"]
+source_file="res://Ships/Assets/Thrust Particle 1.png"
+dest_files=["res://.godot/imported/Thrust Particle 1.png-a60eed750613b4ce77f2750b9006f11c.ctex"]
 
 [params]
 

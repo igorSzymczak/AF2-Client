@@ -1,9 +1,9 @@
 [gd_scene load_steps=28 format=3 uid="uid://mignawcuevan"]
 
-[ext_resource type="Texture2D" uid="uid://csoo1j28sqnm0" path="res://Thrust Particle 1.png" id="1_7x0bo"]
-[ext_resource type="Script" path="res://engine.gd" id="1_rdbml"]
-[ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://Thrust Particle 2.png" id="2_j1qfo"]
-[ext_resource type="Texture2D" uid="uid://cifrqdsox61kg" path="res://Thrust Particle 3.png" id="2_n7ren"]
+[ext_resource type="Texture2D" uid="uid://csoo1j28sqnm0" path="res://Ships/Assets/Thrust Particle 1.png" id="1_7x0bo"]
+[ext_resource type="Script" path="res://Ships/engine.gd" id="1_rdbml"]
+[ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://Ships/Assets/Thrust Particle 2.png" id="2_j1qfo"]
+[ext_resource type="Texture2D" uid="uid://cifrqdsox61kg" path="res://Ships/Assets/Thrust Particle 3.png" id="2_n7ren"]
 
 [sub_resource type="Curve" id="Curve_sthmy"]
 _data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]

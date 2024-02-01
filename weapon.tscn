@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlpghmyrrlb3h"]
+
+[ext_resource type="Script" path="res://weapon.gd" id="1_5qb8r"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_5qb8r")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(13, 0)
+
+[node name="BulletDirection" type="Marker2D" parent="."]
+position = Vector2(53, 0)
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true

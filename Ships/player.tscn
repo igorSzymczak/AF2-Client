@@ -1,17 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://biw3togj1rlk7"]
+[gd_scene load_steps=8 format=3 uid="uid://biw3togj1rlk7"]
 
-[ext_resource type="Script" path="res://Ships/player.gd" id="1_1s26i"]
-[ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://Ships/Assets/shiptemp.png" id="1_kf84x"]
+[ext_resource type="Script" path="res://ships/player.gd" id="1_1s26i"]
+[ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://assets/shiptemp.png" id="1_kf84x"]
 [ext_resource type="PackedScene" uid="uid://b4nd1xkp87gpe" path="res://bullet.tscn" id="2_c5m65"]
-[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://Ships/engine.tscn" id="3_sq35h"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://ships/engine.tscn" id="3_sq35h"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://components/HealthComponent.tscn" id="5_83r50"]
+[ext_resource type="PackedScene" uid="uid://dlpghmyrrlb3h" path="res://weapon.tscn" id="6_eh4j6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5t75r"]
-radius = 22.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
+radius = 12.0
+height = 74.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("engine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("engine", "weapon", "health")]
 script = ExtResource("1_1s26i")
 engine = NodePath("Engine")
-bullet_scene = ExtResource("2_c5m65")
+weapon = NodePath("Weapon")
+health = NodePath("HealthComponent")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
@@ -28,15 +32,11 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_kf84x")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 0)
-shape = SubResource("CircleShape2D_5t75r")
-
-[node name="BulletSpawn" type="Marker2D" parent="."]
 position = Vector2(13, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_p8t61")
 
-[node name="BulletDirection" type="Marker2D" parent="."]
-position = Vector2(53, 0)
+[node name="HealthComponent" parent="." instance=ExtResource("5_83r50")]
 
-[node name="Cooldown" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="Weapon" parent="." instance=ExtResource("6_eh4j6")]
+bullet_scene = ExtResource("2_c5m65")

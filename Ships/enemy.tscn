@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://7mnl8wn3hw2e"]
+
+[ext_resource type="Script" path="res://ships/enemy.gd" id="1_3u4y5"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://ships/engine.tscn" id="3_hf2r0"]
+[ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://assets/shiptemp.png" id="4_12av8"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://components/HealthComponent.tscn" id="4_b1r8b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6lv"]
+radius = 12.0
+height = 74.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("engine", "healthComponent")]
+slide_on_ceiling = false
+script = ExtResource("1_3u4y5")
+engine = NodePath("Engine")
+healthComponent = NodePath("HealthComponent")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="Engine" parent="." instance=ExtResource("3_hf2r0")]
+position = Vector2(-28, 0)
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(16, -2.50111e-12)
+rotation = 1.57079
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_12av8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_b1r8b")]
+MAX_HEALTH = 1000
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(13, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_jy6lv")

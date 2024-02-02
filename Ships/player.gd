@@ -9,13 +9,15 @@ const SPEED := 500.0
 
 var direction := Vector2.ZERO
 
-
-@export var engine : Thruster
-@export var weapon: Weapon
-@export var health_component: HealthComponent
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var weapon: Weapon = $Weapon
+@onready var engine: Thruster = $Engine
+@onready var team: Node2D = $Team
 
 func _ready() -> void:
 	health_component.connect("health_depleted", handle_death)
+	weapon.initialize(team.team)
+
 
 func _physics_process(delta: float) -> void:
 	# Rotate the player towards the mouse at a set turn speed
@@ -23,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	rotation = rotate_toward(rotation, atan2(pos_diff.y, pos_diff.x), TURN_SPEED * delta)
 
 	if Input.is_action_pressed("Shoot"):
-		weapon.shoot(self)
+		weapon.shoot()
 
 	# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 	direction = Vector2(cos(rotation), sin(rotation))
@@ -45,13 +47,12 @@ func handle_death() -> void:
 func handle_hit() -> void:
 	health_component.damage(20)
 
+func get_team() -> int:
+	return team.team
+
 func handle_thrust() -> void:
 	if Input.is_action_pressed("Accelerate"):
-		engine.runningState(true)
-		engine.activeState(true)
+		engine.activate_thruster()
 	else:
-		if velocity.length() <= 75.0:
-			engine.activeState(false)
-		engine.runningState(false)
-		engine.idleState()
+		engine.deactivate_thruster(velocity)
 

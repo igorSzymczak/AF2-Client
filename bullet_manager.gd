@@ -1,7 +1,7 @@
 extends Node2D
 
-func handle_bullet_spawned(bullet: Bullet, position: Vector2, direction: Vector2, shooter: CharacterBody2D) -> void:
+func handle_bullet_spawned(bullet: Bullet, pos: Vector2, direction: Vector2, team: int) -> void:
 	add_child(bullet)
-	bullet.global_position = position
+	bullet.global_position = pos
 	bullet.set_direction(direction)
-	bullet.shooter = shooter
+	bullet.team = team

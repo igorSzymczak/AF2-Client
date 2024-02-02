@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7mnl8wn3hw2e"]
+[gd_scene load_steps=12 format=3 uid="uid://7mnl8wn3hw2e"]
 
 [ext_resource type="Script" path="res://ships/enemy.gd" id="1_3u4y5"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://ships/engine.tscn" id="3_hf2r0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dlpghmyrrlb3h" path="res://weapons/weapon.tscn" id="4_s688c"]
 [ext_resource type="Script" path="res://ships/AI.gd" id="5_tqeby"]
 [ext_resource type="PackedScene" uid="uid://b4nd1xkp87gpe" path="res://weapons/bullet.tscn" id="5_ug2ol"]
+[ext_resource type="PackedScene" uid="uid://dpf2hgh1ctfnx" path="res://team.tscn" id="8_gacli"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6lv"]
 radius = 12.0
@@ -18,11 +19,9 @@ radius = 933.174
 [sub_resource type="CircleShape2D" id="CircleShape2D_03kt6"]
 radius = 336.621
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("engine", "health_component") groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 slide_on_ceiling = false
 script = ExtResource("1_3u4y5")
-engine = NodePath("Engine")
-health_component = NodePath("HealthComponent")
 
 [node name="Ship" type="Sprite2D" parent="."]
 position = Vector2(16, -2.50111e-12)
@@ -71,6 +70,9 @@ metadata/_edit_lock_ = true
 
 [node name="AimingAt" type="Marker2D" parent="AI"]
 position = Vector2(0.00030117, 48)
+
+[node name="Team" parent="." instance=ExtResource("8_gacli")]
+team = 1
 
 [connection signal="body_exited" from="AI/ChaseZone" to="AI" method="_on_chase_zone_body_exited"]
 [connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]

@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4nd1xkp87gpe"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_b65ex"]
-[ext_resource type="Texture2D" uid="uid://cifrqdsox61kg" path="res://assets/Thrust Particle 3.png" id="2_72hvf"]
+[ext_resource type="Script" path="res://weapons/bullet.gd" id="1_8ux8a"]
+[ext_resource type="Texture2D" uid="uid://cifrqdsox61kg" path="res://assets/Thrust Particle 3.png" id="2_8l16u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnqgw"]
 
 [node name="Bullet" type="Area2D"]
 top_level = true
 visibility_layer = 2
-script = ExtResource("1_b65ex")
+script = ExtResource("1_8ux8a")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tnqgw")
@@ -17,6 +17,6 @@ shape = SubResource("CircleShape2D_tnqgw")
 modulate = Color(1, 0.85098, 0.745098, 1)
 self_modulate = Color(1, 1, 0.74902, 1)
 position = Vector2(0, -2)
-texture = ExtResource("2_72hvf")
+texture = ExtResource("2_8l16u")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

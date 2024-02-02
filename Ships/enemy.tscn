@@ -1,19 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://7mnl8wn3hw2e"]
+[gd_scene load_steps=11 format=3 uid="uid://7mnl8wn3hw2e"]
 
 [ext_resource type="Script" path="res://ships/enemy.gd" id="1_3u4y5"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://ships/engine.tscn" id="3_hf2r0"]
 [ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://assets/shiptemp.png" id="4_12av8"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://components/HealthComponent.tscn" id="4_b1r8b"]
+[ext_resource type="PackedScene" uid="uid://dlpghmyrrlb3h" path="res://weapons/weapon.tscn" id="4_s688c"]
+[ext_resource type="Script" path="res://ships/AI.gd" id="5_tqeby"]
+[ext_resource type="PackedScene" uid="uid://b4nd1xkp87gpe" path="res://weapons/bullet.tscn" id="5_ug2ol"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jy6lv"]
 radius = 12.0
 height = 74.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("engine", "healthComponent")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ieqcm"]
+radius = 933.174
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_03kt6"]
+radius = 336.621
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("engine", "health_component") groups=["enemy"]]
 slide_on_ceiling = false
 script = ExtResource("1_3u4y5")
 engine = NodePath("Engine")
-healthComponent = NodePath("HealthComponent")
+health_component = NodePath("HealthComponent")
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(16, -2.50111e-12)
+rotation = 1.57079
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_12av8")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(13, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_jy6lv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
@@ -23,16 +43,34 @@ position_smoothing_speed = 10.0
 [node name="Engine" parent="." instance=ExtResource("3_hf2r0")]
 position = Vector2(-28, 0)
 
-[node name="Ship" type="Sprite2D" parent="."]
-position = Vector2(16, -2.50111e-12)
-rotation = 1.57079
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_12av8")
+[node name="Weapon" parent="." instance=ExtResource("4_s688c")]
+bullet_scene = ExtResource("5_ug2ol")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_b1r8b")]
 MAX_HEALTH = 1000
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="AI" type="Node2D" parent="."]
 position = Vector2(13, 0)
 rotation = -1.57079
-shape = SubResource("CapsuleShape2D_jy6lv")
+script = ExtResource("5_tqeby")
+
+[node name="ChaseZone" type="Area2D" parent="AI"]
+position = Vector2(-8.1567e-05, -13)
+rotation = 1.57079
+
+[node name="ChaseRadius" type="CollisionShape2D" parent="AI/ChaseZone"]
+position = Vector2(13, 0)
+shape = SubResource("CircleShape2D_ieqcm")
+
+[node name="DetectionZone" type="Area2D" parent="AI"]
+
+[node name="DetectionRadius" type="CollisionShape2D" parent="AI/DetectionZone"]
+rotation = 1.57079
+shape = SubResource("CircleShape2D_03kt6")
+metadata/_edit_lock_ = true
+
+[node name="AimingAt" type="Marker2D" parent="AI"]
+position = Vector2(0.00030117, 48)
+
+[connection signal="body_exited" from="AI/ChaseZone" to="AI" method="_on_chase_zone_body_exited"]
+[connection signal="body_entered" from="AI/DetectionZone" to="AI" method="_on_detection_zone_body_entered"]

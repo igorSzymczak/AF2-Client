@@ -6,6 +6,9 @@ class_name Thruster
 @onready var speeding = $Speeding
 @onready var accelerate = $Accelerate
 
+func _ready() -> void:
+	init()
+
 func activeState(b : bool):
 	light.emitting = b
 

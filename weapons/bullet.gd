@@ -3,6 +3,7 @@ class_name Bullet
 
 const SPEED := 1200
 var direction := Vector2.ZERO
+var shooter = null
 
 func _physics_process(delta: float) -> void:
 	if direction != Vector2.ZERO:
@@ -16,7 +17,7 @@ func _on_lifetime_timeout() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body == shooter:
 		return
 
 	if body.has_method("handle_hit"):

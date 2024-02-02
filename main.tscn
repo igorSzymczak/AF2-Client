@@ -20,9 +20,10 @@ script = ExtResource("1_xcpwa")
 
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_beigd")
-scale = Vector2(2800, 1415)
+scale = Vector2(3400, 1800)
 texture = SubResource("PlaceholderTexture2D_bikko")
 script = ExtResource("3_ubkci")
+metadata/_edit_lock_ = true
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("4_3l1hc")
@@ -31,5 +32,10 @@ script = ExtResource("4_3l1hc")
 slide_on_ceiling = false
 
 [node name="Enemy" parent="." instance=ExtResource("6_qasxn")]
-position = Vector2(-316, -219)
-rotation = -0.789089
+position = Vector2(-651.068, -515.673)
+
+[node name="Enemy2" parent="." instance=ExtResource("6_qasxn")]
+position = Vector2(-491.068, -348.673)
+
+[node name="Enemy3" parent="." instance=ExtResource("6_qasxn")]
+position = Vector2(-743.068, -360.673)

@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://6bkbmxrojq2g"]
+
+[ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://assets/particles/Thrust Particle 2.png" id="1_vxbm8"]
+
+[sub_resource type="Curve" id="Curve_24k4p"]
+_data = [Vector2(0, 0.668919), 0.0, 0.0, 0, 0, Vector2(1, 0.00675678), -5.18412, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dnwfh"]
+curve = SubResource("Curve_24k4p")
+
+[sub_resource type="Gradient" id="Gradient_dc66j"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.526163, 1)
+colors = PackedColorArray(0.995255, 0.967918, 0.952284, 1, 0.979256, 0.905876, 0.610439, 1, 0.379477, 0.221055, 0.202949, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d4hbf"]
+gradient = SubResource("Gradient_dc66j")
+
+[sub_resource type="Curve" id="Curve_x1bv5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8btv"]
+curve = SubResource("Curve_x1bv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_23pot"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 55.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 120.0
+scale_min = 0.6
+scale_max = 0.7
+scale_over_velocity_min = 115.0
+scale_over_velocity_max = 285.0
+scale_over_velocity_curve = SubResource("CurveTexture_p8btv")
+color_ramp = SubResource("GradientTexture1D_d4hbf")
+alpha_curve = SubResource("CurveTexture_dnwfh")
+
+[node name="Accelerate" type="GPUParticles2D"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_23pot")
+texture = ExtResource("1_vxbm8")
+visibility_rect = Rect2(-500, -500, 1000, 1000)

@@ -1,0 +1,132 @@
+[gd_scene load_steps=19 format=3 uid="uid://dl641yn1w35sn"]
+
+[ext_resource type="Script" path="res://scenes/world/world.gd" id="1_rvknj"]
+[ext_resource type="Shader" path="res://scenes/starfield/parallax_test.gdshader" id="2_qjheb"]
+[ext_resource type="PackedScene" uid="uid://jmgdw535ks2o" path="res://globals/SoundManager/sound_manager.tscn" id="3_66qvb"]
+[ext_resource type="Script" path="res://scenes/starfield/Background.gd" id="3_kkj7o"]
+[ext_resource type="Script" path="res://scenes/weapons/bullet_manager.gd" id="4_o2uum"]
+[ext_resource type="PackedScene" uid="uid://b4801adrniots" path="res://scenes/objects/Spawners/spawner.tscn" id="6_1s4gk"]
+[ext_resource type="AudioStream" uid="uid://bm7y4j3fmf80j" path="res://audio/music/Theme Gellan.mp3" id="6_dmf3x"]
+[ext_resource type="PackedScene" uid="uid://6boohbiplenv" path="res://scenes/objects/Structures/structure.tscn" id="7_5wm6x"]
+[ext_resource type="Texture2D" uid="uid://d0dumkrrbhfn4" path="res://assets/structures/Sun.png" id="8_4ebxa"]
+[ext_resource type="Shader" path="res://addons/planet2d/planet.gdshader" id="9_4w2dq"]
+[ext_resource type="Texture2D" uid="uid://dyvtwpq6m7m8t" path="res://assets/structures/Endarion.png" id="10_3uoau"]
+[ext_resource type="Texture2D" uid="uid://c83eeqogs1wdh" path="res://assets/structures/planets/eath_512.jpg" id="10_3030c"]
+[ext_resource type="PackedScene" uid="uid://2twcrktxuv2s" path="res://scenes/objects/Spawners/Turrets/turret.tscn" id="11_jvkq6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_beigd"]
+shader = ExtResource("2_qjheb")
+shader_parameter/mouse = null
+shader_parameter/time = null
+shader_parameter/zoom = 0.6
+shader_parameter/speed2 = 0.2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bikko"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kjt8q"]
+radius = 74.1687
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iavx7"]
+radius = 111.221
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcjy5"]
+shader = ExtResource("9_4w2dq")
+shader_parameter/texture_scale = Vector2(0.5, 0.535)
+shader_parameter/texture_offset = Vector2(-6.705, 0.885)
+shader_parameter/atmosphere_color = Vector3(41.175, 25.005, 143.395)
+shader_parameter/atmosphere_intensity = 61.96
+shader_parameter/light_color = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(-0.855, -0.545, 1)
+shader_parameter/light_minimum = 0.2
+shader_parameter/light_maximum = 1.2
+shader_parameter/specular_color = Vector3(1, 1, 1)
+shader_parameter/specular_intensity = 0.1
+shader_parameter/specular_shininess = 1.0
+shader_parameter/fade = 0.0
+shader_parameter/pixelize_enabled = false
+shader_parameter/pixelize_scale = 1.0
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_rvknj")
+
+[node name="Soundtrack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_dmf3x")
+volume_db = -17.056
+autoplay = true
+max_distance = 1e+06
+bus = &"Music"
+
+[node name="SoundManager" parent="." instance=ExtResource("3_66qvb")]
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_beigd")
+position = Vector2(1023, 564)
+scale = Vector2(5438, 2878.94)
+texture = SubResource("PlaceholderTexture2D_bikko")
+script = ExtResource("3_kkj7o")
+
+[node name="Planets" type="Node2D" parent="."]
+
+[node name="Sun" parent="Planets" instance=ExtResource("7_5wm6x")]
+self_modulate = Color(1.75, 1.75, 0, 1)
+position = Vector2(926, -543)
+is_sun = true
+poi_type = "sun"
+
+[node name="Collision" type="CollisionShape2D" parent="Planets/Sun"]
+shape = SubResource("CircleShape2D_kjt8q")
+
+[node name="Sprite" type="Sprite2D" parent="Planets/Sun"]
+self_modulate = Color(1.3, 1.2, 1.1, 1)
+texture = ExtResource("8_4ebxa")
+
+[node name="Endarion" parent="Planets/Sun" node_paths=PackedStringArray("local_sun") instance=ExtResource("7_5wm6x")]
+position = Vector2(745, 240)
+orbit_time_MS = 3000.0
+is_shown = false
+local_sun = NodePath("..")
+
+[node name="Collision" type="CollisionShape2D" parent="Planets/Sun/Endarion"]
+shape = SubResource("CircleShape2D_iavx7")
+
+[node name="Sprite" type="Sprite2D" parent="Planets/Sun/Endarion"]
+position = Vector2(348, -8)
+scale = Vector2(0.926667, 0.926667)
+texture = ExtResource("10_3uoau")
+
+[node name="Aerth" parent="Planets/Sun/Endarion" node_paths=PackedStringArray("local_sun") instance=ExtResource("7_5wm6x")]
+position = Vector2(348, -8)
+orbit_time_MS = -6000.0
+is_shadered = true
+local_sun = NodePath("../..")
+
+[node name="Collision" type="CollisionShape2D" parent="Planets/Sun/Endarion/Aerth"]
+visible = false
+shape = SubResource("CircleShape2D_iavx7")
+
+[node name="Sprite" type="Sprite2D" parent="Planets/Sun/Endarion/Aerth"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_gcjy5")
+position = Vector2(-348, 8.5)
+scale = Vector2(0.718765, 1.44531)
+texture = ExtResource("10_3030c")
+
+[node name="Spawner" parent="Planets/Sun/Endarion/Aerth" instance=ExtResource("6_1s4gk")]
+position = Vector2(-108, -153)
+max_enemies = 0
+enemies_at_once = 0
+
+[node name="Turret1" parent="Planets/Sun/Endarion/Aerth/Spawner" instance=ExtResource("11_jvkq6")]
+position = Vector2(-51, -41)
+
+[node name="Spawner" parent="Planets/Sun" instance=ExtResource("6_1s4gk")]
+position = Vector2(-162, 158)
+max_enemies = 5
+enemies_at_once = 5
+orbit_time_MS = -4000.0
+team = 0
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource("4_o2uum")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]

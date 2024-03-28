@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://7mnl8wn3hw2e"]
+
+[ext_resource type="Script" path="res://scenes/entities/Actor/actor.gd" id="1_1smpc"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_naiqk"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_jjsg6"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_0ew5j"]
+[ext_resource type="PackedScene" uid="uid://c0rt7qn77lrxv" path="res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn" id="7_bfsjr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmuxc"]
+radius = 0.01
+
+[node name="Actor" type="CharacterBody2D" groups=["points_of_interest"]]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_1smpc")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-27, 0)
+rotation = -1.57079
+shape = SubResource("CircleShape2D_vmuxc")
+
+[node name="Sprite" parent="." instance=ExtResource("7_bfsjr")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_naiqk")]
+MAX_SHIELD = 300.0
+SHIELD_REGEN_VALUE = 20.0
+SHIELD_REGEN_BOOST = 1.0
+MAX_HEALTH = 200.0
+
+[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_jjsg6")]
+offset_left = -48.0
+offset_top = 41.0
+offset_right = 48.0
+offset_bottom = 49.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_0ew5j")]
+offset_left = -48.0
+offset_top = 29.0
+offset_right = 48.0
+offset_bottom = 37.0

@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://cu0u4mqhf2e0w"]
+
+[ext_resource type="Script" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_5smns"]
+[ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://assets/ships/shiptemp.png" id="3_rkgb1"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_5ttqo"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
+[ext_resource type="PackedScene" uid="uid://bhkpp6iw15tmm" path="res://scenes/components/Hitbox/HitboxComponent.tscn" id="7_1r675"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
+radius = 12.0
+height = 74.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvxov"]
+bg_color = Color(0.141176, 0.141176, 0.141176, 0.290196)
+corner_radius_top_left = 1024
+corner_radius_top_right = 1024
+corner_radius_bottom_right = 1024
+corner_radius_bottom_left = 1024
+
+[node name="Player" type="CharacterBody2D" groups=["points_of_interest"]]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_q57er")
+
+[node name="Engine" parent="." instance=ExtResource("2_5smns")]
+position = Vector2(-28, -2.50111e-12)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(13, -6.82121e-13)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_p8t61")
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(16, -2.50111e-12)
+rotation = 1.57079
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_rkgb1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_emusc")]
+MAX_SHIELD = 1000.0
+SHIELD_REGEN_VALUE = 20.0
+SHIELD_REGEN_BOOST = 2.0
+MAX_HEALTH = 1000.0
+
+[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_5ttqo")]
+offset_left = -48.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 48.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_c3jqm")]
+offset_left = -48.0
+offset_top = 29.0
+offset_right = 48.0
+offset_bottom = 37.0
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_1r675")]
+health_component = NodePath("../HealthComponent")
+
+[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(13, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_p8t61")
+
+[node name="Nickname" type="PanelContainer" parent="."]
+top_level = true
+custom_minimum_size = Vector2(200, 0)
+offset_left = -229.0
+offset_top = -113.0
+offset_right = 918.0
+offset_bottom = 32.0
+scale = Vector2(0.4, 0.4)
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvxov")
+
+[node name="MarginContainer" type="MarginContainer" parent="Nickname"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Nickname/MarginContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Nickname"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true

@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://cud1q2neti0nv"]
+
+[ext_resource type="Script" path="res://scenes/ui/Death Screen/death_screen.gd" id="1_qvo6u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1d6ta"]
+bg_color = Color(0.0392157, 0.0588235, 0.0784314, 0.172549)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gdhr"]
+
+[node name="DeathScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qvo6u")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1d6ta")
+
+[node name="Top" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/Top"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_constants/separation = 200
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4gdhr")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Top"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Top/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="YouAreDead" type="Label" parent="PanelContainer/Top/MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "You're Dead"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RespawnTimer" type="Label" parent="PanelContainer/Top/MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Respawn in 10 sec..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/Bottom"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/Bottom/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="KilledBy" type="Label" parent="PanelContainer/Bottom/MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Killed by"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Killer" type="Label" parent="PanelContainer/Bottom/MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "peepsqueek"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/Bottom"]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4gdhr")

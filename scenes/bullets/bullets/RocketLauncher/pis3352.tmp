@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://tp2ey8uut024"]
+
+[ext_resource type="Script" path="res://weapons/weapons/Pistol/pistol_round_2.gd" id="1_u6oow"]
+[ext_resource type="Texture2D" uid="uid://cy1y88a2yxdc3" path="res://assets/Short Projectile Purple.png" id="2_78q1k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npq0t"]
+
+[node name="PistolRound2" type="Area2D"]
+script = ExtResource("1_u6oow")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_npq0t")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-3, 0)
+texture = ExtResource("2_78q1k")
+
+[node name="TeamLabel" type="Label" parent="."]
+clip_contents = true
+offset_left = -11.0
+offset_top = -48.0
+offset_right = 9.0
+offset_bottom = -25.0
+text = "t _"

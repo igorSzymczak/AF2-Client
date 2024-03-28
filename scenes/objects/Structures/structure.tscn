@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6boohbiplenv"]
+
+[ext_resource type="Script" path="res://scenes/objects/Structures/structure.gd" id="1_aljvs"]
+
+[node name="Structure" type="Area2D" groups=["points_of_interest"]]
+script = ExtResource("1_aljvs")

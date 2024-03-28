@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://2twcrktxuv2s"]
+
+[ext_resource type="Script" path="res://scenes/objects/Spawners/Turrets/turret.gd" id="1_345vf"]
+[ext_resource type="Texture2D" uid="uid://bsi3wjg85r870" path="res://assets/turrets/laser2.png" id="2_fdern"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_cla8p"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_177gw"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_7i8ty"]
+[ext_resource type="PackedScene" uid="uid://bhkpp6iw15tmm" path="res://scenes/components/Hitbox/HitboxComponent.tscn" id="7_v5ggs"]
+
+[sub_resource type="Gradient" id="Gradient_kxjgn"]
+offsets = PackedFloat32Array(0, 0.674033, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0.709804, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_enrc6"]
+gradient = SubResource("Gradient_kxjgn")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ndts7"]
+radius = 70.0
+height = 140.0
+
+[node name="Turret" type="Node2D"]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_345vf")
+death_particle_gradient = SubResource("GradientTexture1D_enrc6")
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fdern")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_cla8p")]
+modulate = Color(1, 1, 1, 0.901961)
+MAX_SHIELD = 200.0
+SHIELD_REGEN_VALUE = 30.0
+SHIELD_REGEN_BOOST = 1.0
+MAX_HEALTH = 200.0
+
+[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_177gw")]
+offset_left = -40.0
+offset_top = 51.4286
+offset_right = 30.0
+offset_bottom = 61.4286
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_7i8ty")]
+offset_left = -40.0
+offset_top = 35.4286
+offset_right = 30.0
+offset_bottom = 45.4286
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_v5ggs")]
+visible = false
+health_component = NodePath("../HealthComponent")
+
+[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-7.14286, -1.31958e-14)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ndts7")

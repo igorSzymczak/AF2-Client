@@ -1,0 +1,263 @@
+[gd_scene load_steps=9 format=3 uid="uid://duauim31qmjgx"]
+
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/esc_menu.gd" id="1_uv064"]
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
+[ext_resource type="PackedScene" uid="uid://dbwuqf2oql4bi" path="res://scenes/ui/elements/buttons/menu_button.tscn" id="2_lop0p"]
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/NicknameInput.gd" id="3_lsuid"]
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/Settings.gd" id="4_61k3t"]
+[ext_resource type="PackedScene" uid="uid://360b6gad5l5a" path="res://scenes/ui/elements/volume slider/volume_slider.tscn" id="6_77mv8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
+bg_color = Color(0, 0, 0, 0.780392)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvjfu"]
+
+[node name="ESCMenu" type="Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_uv064")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yt3jc")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Main" type="Control" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+script = ExtResource("2_8nhoy")
+
+[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Top"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+
+[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Your Nickname"
+horizontal_alignment = 1
+
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Main/Top"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="NicknameInput" type="LineEdit" parent="PanelContainer/MarginContainer/Main/Top"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Type here..."
+alignment = 1
+max_length = 15
+expand_to_text_length = true
+script = ExtResource("3_lsuid")
+
+[node name="Center" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -146.5
+offset_bottom = 146.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Center"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Main/Center"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="ReturnButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Return"
+
+[node name="ShipButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Ship"
+
+[node name="SettingsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Settings"
+
+[node name="ShopButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Shop"
+
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="QuitButton" parent="PanelContainer/MarginContainer/Main/Bottom" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Exit Game"
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Bottom"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Settings" type="Control" parent="PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_61k3t")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.929
+offset_bottom = -0.26001
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xvjfu")
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="SettingsTitle" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Music Volume"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Music"
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "SFX Volume"
+horizontal_alignment = 1
+
+[node name="SFXVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Effects"
+
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="InterfaceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Interface Volume"
+horizontal_alignment = 1
+
+[node name="InterfaceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Interface"
+
+[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="AmbienceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Ambience Volume"
+horizontal_alignment = 1
+
+[node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+unique_name_in_owner = true
+layout_mode = 2
+bus_name = "Interface"
+
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings"]
+layout_mode = 2
+offset_top = 888.0
+offset_right = 240.0
+offset_bottom = 940.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 10
+alignment = 2
+
+[node name="ReturnToMainButton" parent="PanelContainer/MarginContainer/Settings/Bottom" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Return"
+
+[connection signal="button_down" from="PanelContainer/MarginContainer/Main/Center/SettingsButton" to="." method="_on_settings_button_button_down"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Main/Bottom/QuitButton" to="PanelContainer/MarginContainer/Main" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/InterfaceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_interface_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/AmbienceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_ambience_volume_slider_value_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Settings/Bottom/ReturnToMainButton" to="." method="_on_return_to_main_button_pressed"]

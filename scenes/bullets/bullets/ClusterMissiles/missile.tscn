@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://5vyl3cjn8enb"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullets/ClusterMissiles/missile.gd" id="1_dio6v"]
+[ext_resource type="Texture2D" uid="uid://crn4vd1bsktxn" path="res://assets/projectiles/missile red.png" id="2_q2ia7"]
+
+[sub_resource type="Curve" id="Curve_1dnbw"]
+_data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_co1ty"]
+offsets = PackedFloat32Array(0.323699, 1)
+colors = PackedColorArray(2.00392, 0.372549, 0, 0.372549, 1, 0.4324, 0.292559, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m2n86"]
+radius = 3.0
+height = 34.0
+
+[node name="Missile" type="Area2D"]
+top_level = true
+visibility_layer = 2
+monitoring = false
+monitorable = false
+script = ExtResource("1_dio6v")
+
+[node name="Trail" type="Line2D" parent="."]
+modulate = Color(1.74902, 0.443137, 0, 1)
+top_level = true
+width = 7.5
+width_curve = SubResource("Curve_1dnbw")
+gradient = SubResource("Gradient_co1ty")
+
+[node name="TrailPosition" type="Marker2D" parent="."]
+position = Vector2(-18, 0)
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+self_modulate = Color(2, 0.784, 0, 1)
+position = Vector2(-4, 0)
+scale = Vector2(0.636364, 0.454545)
+texture = ExtResource("2_q2ia7")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_m2n86")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

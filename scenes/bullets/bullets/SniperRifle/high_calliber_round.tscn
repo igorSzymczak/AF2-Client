@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg67jrd1ong8i"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullets/SniperRifle/high_calliber_round.gd" id="1_fbrxr"]
+[ext_resource type="Texture2D" uid="uid://r7wp6ot3ueuk" path="res://assets/projectiles/Laser Broad 2.png" id="2_tccqw"]
+[ext_resource type="Texture2D" uid="uid://c54jisxt5080o" path="res://assets/projectiles/Glow Oval Blue.png" id="3_y80aq"]
+[ext_resource type="Texture2D" uid="uid://dq1x2gxffnbt0" path="res://assets/projectiles/White Zap.png" id="4_6rpdh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62is0"]
+
+[node name="HighCalliberRound" type="Area2D"]
+top_level = true
+visibility_layer = 2
+monitorable = false
+script = ExtResource("1_fbrxr")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+modulate = Color(0.34902, 0.721569, 1, 1)
+position = Vector2(-20, -1)
+rotation = 1.5708
+scale = Vector2(0.141851, 0.531581)
+texture = ExtResource("2_tccqw")
+
+[node name="GlowOvalBlue" type="Sprite2D" parent="BulletSprite"]
+modulate = Color(1, 1, 1, 0.188235)
+position = Vector2(7.45145, 138.09)
+rotation = -1.5708
+scale = Vector2(0.750026, 0.463973)
+texture = ExtResource("3_y80aq")
+
+[node name="Zap" type="Sprite2D" parent="BulletSprite"]
+modulate = Color(0, 1, 1, 0.780392)
+position = Vector2(11.9972, 122.277)
+rotation = -1.5708
+scale = Vector2(1.76497, 3.60607)
+texture = ExtResource("4_6rpdh")
+
+[node name="GlowOvalBlue2" type="Sprite2D" parent="BulletSprite"]
+modulate = Color(1, 1, 1, 0.188235)
+position = Vector2(3.95964, -39.5048)
+rotation = -1.5708
+scale = Vector2(0.307182, 0.342446)
+texture = ExtResource("3_y80aq")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_62is0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

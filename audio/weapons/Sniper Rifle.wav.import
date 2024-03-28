@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3jygo2ayu5xc"
+path="res://.godot/imported/Sniper Rifle.wav-8e9251cfd631f668ab08e36f7494d851.sample"
+
+[deps]
+
+source_file="res://audio/weapons/Sniper Rifle.wav"
+dest_files=["res://.godot/imported/Sniper Rifle.wav-8e9251cfd631f668ab08e36f7494d851.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

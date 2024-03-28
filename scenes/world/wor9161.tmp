@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://dl641yn1w35sn"]
+
+[ext_resource type="Script" path="res://scenes/world/world.gd" id="1_rvknj"]
+[ext_resource type="Shader" path="res://scenes/starfield/parallax_test.gdshader" id="2_qjheb"]
+[ext_resource type="Script" path="res://scenes/starfield/Background.gd" id="3_kkj7o"]
+[ext_resource type="Script" path="res://scenes/weapons/bullet_manager.gd" id="4_o2uum"]
+[ext_resource type="PackedScene" uid="uid://biw3togj1rlk7" path="res://scenes/ships/player.tscn" id="5_7s5gi"]
+[ext_resource type="PackedScene" uid="uid://b4801adrniots" path="res://scenes/world/spawner.tscn" id="6_1s4gk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_beigd"]
+shader = ExtResource("2_qjheb")
+shader_parameter/mouse = null
+shader_parameter/time = null
+shader_parameter/speed2 = 0.2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bikko"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rvknj")
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_beigd")
+scale = Vector2(3400, 1800)
+texture = SubResource("PlaceholderTexture2D_bikko")
+script = ExtResource("3_kkj7o")
+metadata/_edit_lock_ = true
+
+[node name="BulletManager" type="Node2D" parent="."]
+script = ExtResource("4_o2uum")
+
+[node name="Player" parent="." instance=ExtResource("5_7s5gi")]
+slide_on_ceiling = false
+
+[node name="Spawner" parent="." instance=ExtResource("6_1s4gk")]
+position = Vector2(-421, -221)

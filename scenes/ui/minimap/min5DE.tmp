@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://jxppw8syh3ni"]
+
+[ext_resource type="Script" path="res://scenes/ui/minimap/minimap.gd" id="1_qrkje"]
+[ext_resource type="PackedScene" uid="uid://dy7eq70olddga" path="res://scenes/ui/POI Manager/poi_manager.tscn" id="2_vktws"]
+[ext_resource type="Texture2D" uid="uid://b716678pi8f2c" path="res://assets/ui/radar/radar.png" id="2_wptqw"]
+[ext_resource type="Texture2D" uid="uid://iybr46mjrovs" path="res://assets/ui/radar/radar bg.png" id="3_d8p0r"]
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="4_uuq8y"]
+[ext_resource type="Texture2D" uid="uid://c2vtyajjv1ov8" path="res://assets/ui/radar/Player Arrow.png" id="5_n520u"]
+
+[node name="Radar" type="BoxContainer"]
+script = ExtResource("1_qrkje")
+
+[node name="PoiManager" parent="." instance=ExtResource("2_vktws")]
+
+[node name="RadarFrame" type="Sprite2D" parent="."]
+position = Vector2(59, -96)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_wptqw")
+
+[node name="Screen" type="Sprite2D" parent="RadarFrame"]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+clip_children = 2
+position = Vector2(1, 1)
+texture = ExtResource("3_d8p0r")
+
+[node name="DotPlanet" type="Sprite2D" parent="RadarFrame/Screen"]
+modulate = Color(0, 0.533333, 0, 1)
+position = Vector2(171.5, -188.5)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("4_uuq8y")
+
+[node name="DotEnemy" type="Sprite2D" parent="RadarFrame/Screen"]
+self_modulate = Color(0.843137, 0, 0, 1)
+position = Vector2(194, -136)
+scale = Vector2(0.166667, 0.166667)
+texture = ExtResource("4_uuq8y")
+
+[node name="DotSpawner" type="Sprite2D" parent="RadarFrame/Screen"]
+self_modulate = Color(0.843137, 0, 0, 1)
+position = Vector2(184, -161)
+scale = Vector2(0.229167, 0.229167)
+texture = ExtResource("4_uuq8y")
+
+[node name="PlayerArrow" type="Sprite2D" parent="RadarFrame/Screen"]
+position = Vector2(-1, -1)
+scale = Vector2(0.533334, 0.533334)
+texture = ExtResource("5_n520u")

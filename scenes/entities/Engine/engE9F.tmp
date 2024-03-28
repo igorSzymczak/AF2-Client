@@ -1,0 +1,262 @@
+[gd_scene load_steps=30 format=3 uid="uid://mignawcuevan"]
+
+[sub_resource type="GDScript" id="GDScript_manow"]
+script/source = "extends Node2D
+class_name Thruster
+
+@onready var idle = $Idle
+@onready var light = $Light
+@onready var speeding = $Speeding
+@onready var accelerate = $Accelerate
+var active: bool = false
+var particles_scale := 10.0
+
+func _ready() -> void:
+	idle.emitting = true
+	light.emitting = false
+	accelerate.emitting = false
+	speeding.emitting = false
+	
+	idle.process_material.scale_min *= particles_scale
+	idle.process_material.scale_max *= particles_scale
+	light.process_material.scale_min *= particles_scale
+	light.process_material.scale_max *= particles_scale
+	speeding.process_material.scale_min *= particles_scale
+	speeding.process_material.scale_max *= particles_scale
+	accelerate.process_material.scale_min *= particles_scale
+	accelerate.process_material.scale_max *= particles_scale
+
+func activate_thruster() -> void:
+	active = true
+	accelerate.emitting = true
+	speeding.emitting = true
+	light.emitting = true
+
+func deactivate_thruster(velocity: Vector2) -> void:
+	active = false
+	if velocity.length() <= 75.0:
+		light.emitting = false
+		idle.emitting = true
+	accelerate.emitting = false
+	speeding.emitting = false
+"
+
+[sub_resource type="Curve" id="Curve_sthmy"]
+_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cggpy"]
+curve = SubResource("Curve_sthmy")
+
+[sub_resource type="Gradient" id="Gradient_ox0ho"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.0813954, 0.372093, 1)
+colors = PackedColorArray(0.542647, 0.287812, 0, 1, 0.301961, 0.0588235, 0.0588235, 1, 0.169245, 0.169245, 0.169245, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_foe4m"]
+gradient = SubResource("Gradient_ox0ho")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yyy8w"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.35
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_foe4m")
+alpha_curve = SubResource("CurveTexture_cggpy")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1mmut"]
+load_path = "res://.godot/imported/Thrust Particle 1.png-433951dcec8071c0b137ba03f45346f2.ctex"
+
+[sub_resource type="Curve" id="Curve_s11yl"]
+_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ijhs1"]
+curve = SubResource("Curve_s11yl")
+
+[sub_resource type="Gradient" id="Gradient_f8foa"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.0988372, 1)
+colors = PackedColorArray(0.831373, 0, 0, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r0lgl"]
+gradient = SubResource("Gradient_f8foa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oihos"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 0.85
+color_ramp = SubResource("GradientTexture1D_r0lgl")
+alpha_curve = SubResource("CurveTexture_ijhs1")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ig5n"]
+load_path = "res://.godot/imported/Thrust Particle 1.png-433951dcec8071c0b137ba03f45346f2.ctex"
+
+[sub_resource type="Curve" id="Curve_3gqq8"]
+_data = [Vector2(0, 0), 0.0, 3.80618, 0, 0, Vector2(0.228495, 0.97973), 0.586487, 0.586487, 0, 0, Vector2(1, 0), -2.73208, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vo6hy"]
+curve = SubResource("Curve_3gqq8")
+
+[sub_resource type="Gradient" id="Gradient_xa562"]
+offsets = PackedFloat32Array(0.334302, 0.476744, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.917844, 0.739886, 1, 0.929412, 0.301961, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4ybhk"]
+gradient = SubResource("Gradient_xa562")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uf3j6"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(-1, 0, 0)
+spread = 55.0
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -90.0
+radial_accel_max = -90.0
+scale_min = 0.1
+scale_max = 0.3
+color_ramp = SubResource("GradientTexture1D_4ybhk")
+alpha_curve = SubResource("CurveTexture_vo6hy")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iy8yi"]
+load_path = "res://.godot/imported/Thrust Particle 3.png-aec580a5c614ec98836f4ecc8ca5e518.ctex"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f3iy3"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(25, 0, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(-1, 0, 0)
+spread = 60.0
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+color_ramp = SubResource("GradientTexture1D_4ybhk")
+alpha_curve = SubResource("CurveTexture_vo6hy")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ncdt"]
+load_path = "res://.godot/imported/Thrust Particle 3.png-aec580a5c614ec98836f4ecc8ca5e518.ctex"
+
+[sub_resource type="Curve" id="Curve_24k4p"]
+_data = [Vector2(0, 0.668919), 0.0, 0.0, 0, 0, Vector2(1, 0.00675678), -5.18412, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dnwfh"]
+curve = SubResource("Curve_24k4p")
+
+[sub_resource type="Gradient" id="Gradient_dc66j"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.526163, 1)
+colors = PackedColorArray(0.995255, 0.967918, 0.952284, 1, 0.979256, 0.905876, 0.610439, 1, 0.379477, 0.221055, 0.202949, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d4hbf"]
+gradient = SubResource("Gradient_dc66j")
+
+[sub_resource type="Curve" id="Curve_x1bv5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8btv"]
+curve = SubResource("Curve_x1bv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wlaxq"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 55.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 120.0
+scale_min = 0.6
+scale_max = 0.7
+scale_over_velocity_min = 115.0
+scale_over_velocity_max = 285.0
+scale_over_velocity_curve = SubResource("CurveTexture_p8btv")
+color_ramp = SubResource("GradientTexture1D_d4hbf")
+alpha_curve = SubResource("CurveTexture_dnwfh")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sctnc"]
+load_path = "res://.godot/imported/Thrust Particle 2.png-ecb85399d45e5c0a68952588e29a3970.ctex"
+
+[node name="Engine" type="Node2D"]
+script = SubResource("GDScript_manow")
+
+[node name="Idle" type="GPUParticles2D" parent="."]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_yyy8w")
+texture = SubResource("CompressedTexture2D_1mmut")
+speed_scale = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+
+[node name="Light" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_oihos")
+texture = SubResource("CompressedTexture2D_8ig5n")
+speed_scale = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+
+[node name="Spark" type="GPUParticles2D" parent="."]
+visible = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_uf3j6")
+texture = SubResource("CompressedTexture2D_iy8yi")
+speed_scale = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+
+[node name="Speeding" type="GPUParticles2D" parent="."]
+position = Vector2(-25, 0)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_f3iy3")
+texture = SubResource("CompressedTexture2D_6ncdt")
+speed_scale = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+
+[node name="Accelerate" type="GPUParticles2D" parent="."]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_wlaxq")
+texture = SubResource("CompressedTexture2D_sctnc")
+visibility_rect = Rect2(-500, -500, 1000, 1000)

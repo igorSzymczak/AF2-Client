@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://f75o6776i3u"]
+
+[ext_resource type="Script" path="res://globals/ExplosionManager/explosions/bullet_small.gd" id="3_axeda"]
+[ext_resource type="Texture2D" uid="uid://bka561t431p1d" path="res://assets/projectiles/Glow Oval.png" id="3_jreyy"]
+[ext_resource type="Texture2D" uid="uid://ck3visa4v1hd2" path="res://assets/projectiles/Small Glow White.png" id="3_y4d18"]
+
+[node name="BulletSmall" type="Area2D"]
+modulate = Color(1, 0.039, 0.196, 1)
+script = ExtResource("3_axeda")
+
+[node name="Distortion2" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.035, 0.035)
+texture = ExtResource("3_y4d18")
+
+[node name="GlowOval" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.160784)
+scale = Vector2(0.069284, 0.0692841)
+texture = ExtResource("3_jreyy")

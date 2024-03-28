@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cyrjt5o077lv1"]
+
+[ext_resource type="Texture2D" uid="uid://cacfvfcry1b1f" path="res://assets/particles/explosion1.png" id="1_ejtoy"]
+[ext_resource type="Script" path="res://globals/ExplosionManager/explosions/explosion_medium/explosion_medium.gd" id="2_owcbu"]
+
+[sub_resource type="Gradient" id="Gradient_j84dh"]
+offsets = PackedFloat32Array(0.00314465, 0.122642, 0.58805, 0.72327)
+colors = PackedColorArray(2, 2, 2, 0.627, 1, 1, 0, 0.627451, 1, 0.309804, 0, 0.847059, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5oj1d"]
+gradient = SubResource("Gradient_j84dh")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_e4tif"]
+_data = [Vector2(0, 0.257353), 0.0, 0.0, 0, 0, Vector2(0.144509, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tvnhn"]
+curve = SubResource("Curve_e4tif")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48b3o"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+angle_max = 180.0
+direction = Vector3(1, -200, 0)
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.4
+scale_max = 1.6
+scale_curve = SubResource("CurveTexture_tvnhn")
+color_ramp = SubResource("GradientTexture1D_5oj1d")
+
+[node name="ExplosionMedium" type="GPUParticles2D"]
+self_modulate = Color(2, 2, 2, 1)
+z_index = 3
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_48b3o")
+texture = ExtResource("1_ejtoy")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+script = ExtResource("2_owcbu")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

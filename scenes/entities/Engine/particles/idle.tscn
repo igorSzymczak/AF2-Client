@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://u2byke68jilv"]
+
+[ext_resource type="Texture2D" uid="uid://csoo1j28sqnm0" path="res://assets/particles/Thrust Particle 1.png" id="1_sbfij"]
+
+[sub_resource type="Curve" id="Curve_sthmy"]
+_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cggpy"]
+curve = SubResource("Curve_sthmy")
+
+[sub_resource type="Gradient" id="Gradient_ox0ho"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.0813954, 0.372093, 1)
+colors = PackedColorArray(0.542647, 0.287812, 0, 1, 0.301961, 0.0588235, 0.0588235, 1, 0.169245, 0.169245, 0.169245, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_foe4m"]
+gradient = SubResource("Gradient_ox0ho")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kcq65"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.35
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_foe4m")
+alpha_curve = SubResource("CurveTexture_cggpy")
+
+[node name="Idle" type="GPUParticles2D"]
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_kcq65")
+texture = ExtResource("1_sbfij")
+speed_scale = 2.0
+visibility_rect = Rect2(-500, -500, 1000, 1000)

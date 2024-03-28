@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://y4hetgssvu6u"]
+
+[ext_resource type="Texture2D" uid="uid://dcn8s74a2sjyn" path="res://assets/ships/Nexar Reaver/Nexar Reaver.png" id="1_gctjj"]
+[ext_resource type="Texture2D" uid="uid://c468ylpm7rsda" path="res://assets/ships/Nexar Reaver/Nexar Reaver Lights.png" id="2_04ocu"]
+[ext_resource type="Script" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_6cr4w"]
+[ext_resource type="Script" path="res://assets/ships/Nexar Reaver/Animation.gd" id="3_50kql"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_fr04d"]
+[ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_m7hr6"]
+[ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="6_slaw8"]
+[ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="7_rpu0e"]
+[ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="8_p1sny"]
+
+[sub_resource type="Animation" id="Animation_dyips"]
+resource_name = "NexarReaverPulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1.5, 1.5, 1.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0.756863), Color(1, 1, 1, 1), Color(1, 1, 1, 0.756863)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwjmk"]
+_data = {
+"NexarReaverPulse": SubResource("Animation_dyips")
+}
+
+[node name="NexarReaver" type="Sprite2D" node_paths=PackedStringArray("engine")]
+rotation = 1.5708
+texture = ExtResource("1_gctjj")
+script = ExtResource("2_6cr4w")
+engine = NodePath("Engine")
+health = 7
+armor = 8
+shield = 8
+shield_regen = 7
+ship_name = "Nexar Reaver"
+hangar_scale = Vector2(0.5, 0.5)
+
+[node name="Lights" type="Sprite2D" parent="."]
+modulate = Color(1, 0.27451, 0, 1)
+self_modulate = Color(1, 1, 1, 0.951642)
+position = Vector2(-0.445443, 0)
+scale = Vector2(1.06012, 0.943242)
+texture = ExtResource("2_04ocu")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dwjmk")
+}
+speed_scale = 0.33
+script = ExtResource("3_50kql")
+
+[node name="Engine" parent="." instance=ExtResource("4_fr04d")]
+modulate = Color(1, 0.470588, 0.145098, 1)
+show_behind_parent = true
+position = Vector2(0, 91.2726)
+rotation = -1.5708
+
+[node name="Light" parent="Engine" instance=ExtResource("5_m7hr6")]
+position = Vector2(-0.363627, 0)
+
+[node name="Idle" parent="Engine" instance=ExtResource("6_slaw8")]
+position = Vector2(0.0909091, 0)
+
+[node name="Speeding" parent="Engine" instance=ExtResource("7_rpu0e")]
+position = Vector2(-11, 0)
+
+[node name="Accelerate" parent="Engine" instance=ExtResource("8_p1sny")]
+position = Vector2(0.0909092, 0)

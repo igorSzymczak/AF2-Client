@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4801adrniots"]
+
+[ext_resource type="Script" path="res://scenes/objects/Spawners/spawner.gd" id="1_micgo"]
+[ext_resource type="PackedScene" uid="uid://7mnl8wn3hw2e" path="res://scenes/entities/Actor/actor.tscn" id="2_wrdwt"]
+[ext_resource type="Texture2D" uid="uid://msajke14wda1" path="res://assets/spawners/spawner.png" id="3_d3guo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsthn"]
+size = Vector2(164, 111)
+
+[node name="Spawner" type="Node2D" groups=["points_of_interest"]]
+script = ExtResource("1_micgo")
+spawn_enemy_scene = ExtResource("2_wrdwt")
+max_enemies = 5
+enemies_at_once = 5
+
+[node name="SpawnerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.53125, 0.53125)
+texture = ExtResource("3_d3guo")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_dsthn")
+disabled = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

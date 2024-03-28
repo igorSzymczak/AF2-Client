@@ -1,0 +1,43 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://caielb1lvw72d"]
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_4v7gs"]
+resource_name = "Compressor"
+threshold = -5.0
+ratio = 5.0
+gain = 3.0
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_u4d2j"]
+resource_name = "Limiter"
+ceiling_db = -10.0
+soft_clip_db = 0.0
+soft_clip_ratio = 20.0
+
+[resource]
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectCompressor_4v7gs")
+bus/1/effect/0/enabled = false
+bus/2/name = &"Effects"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectLimiter_u4d2j")
+bus/2/effect/0/enabled = true
+bus/3/name = &"Interface"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/4/name = &"Ambience"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Master"

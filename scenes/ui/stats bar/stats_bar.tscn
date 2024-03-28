@@ -1,0 +1,225 @@
+[gd_scene load_steps=21 format=3 uid="uid://cy26brtaxuquf"]
+
+[ext_resource type="Script" path="res://scenes/ui/stats bar/stats_bar.gd" id="1_0611j"]
+[ext_resource type="Shader" path="res://scenes/ui/stats bar/health_bar.gdshader" id="1_cinpn"]
+[ext_resource type="Shader" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="1_e6rxl"]
+[ext_resource type="Texture2D" uid="uid://bt2nlch0i14cl" path="res://assets/effects/Corrosive Down.png" id="1_ymr8q"]
+[ext_resource type="Texture2D" uid="uid://bw5ghbu7ek5dk" path="res://assets/effects/Kinetic Down.png" id="2_ufteg"]
+[ext_resource type="Texture2D" uid="uid://6af0cxxkq4oq" path="res://assets/effects/Energy Down.png" id="3_3g7xt"]
+
+[sub_resource type="Gradient" id="Gradient_lk3i1"]
+offsets = PackedFloat32Array(0, 0.527363, 1)
+colors = PackedColorArray(0.25098, 0.407843, 0.698039, 1, 0.360784, 0.584314, 1, 1, 0.195201, 0.202001, 0.277222, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n5o8"]
+gradient = SubResource("Gradient_lk3i1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jkul4"]
+seed = 4
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_jkul4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ypu7"]
+shader = ExtResource("1_e6rxl")
+shader_parameter/scroll1 = Vector2(-0.135, -0.01)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
+shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aiud2"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_prjor")
+
+[sub_resource type="Gradient" id="Gradient_bpfx1"]
+offsets = PackedFloat32Array(0, 0.636816, 1)
+colors = PackedColorArray(0.129412, 0.698039, 0.54902, 1, 0.0901961, 0.494118, 0.388235, 1, 0.772549, 0, 0.32549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m6yum"]
+gradient = SubResource("Gradient_bpfx1")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j7ghs"]
+seed = 8
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmv42"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_j7ghs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bb1kx"]
+shader = ExtResource("1_cinpn")
+shader_parameter/scroll1 = Vector2(0.035, 0.11)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
+shader_parameter/texture2 = SubResource("NoiseTexture2D_kmv42")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_m6yum")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3n4yo"]
+seed = -3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pjaes"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_3n4yo")
+
+[node name="StatsBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0611j")
+
+[node name="Background" type="Polygon2D" parent="."]
+position = Vector2(66, -66)
+skew = -0.523599
+color = Color(0.0941176, 0.0941176, 0.0941176, 0.792157)
+antialiased = true
+polygon = PackedVector2Array(-10, -10, 271.732, -10, 271.732, 60, -10, 60)
+vertex_colors = PackedColorArray(0.145098, 0.0941176, 0.0941176, 0.792157, 0.0941176, 0.0941176, 0.0941176, 0.792157, 0.133333, 0.0941176, 0.0941176, 0.792157, 0.137255, 0, 0, 0.792157)
+
+[node name="ShieldBar" type="Polygon2D" parent="Background"]
+clip_children = 1
+position = Vector2(37.2679, 3.46407)
+scale = Vector2(1.09, 1)
+color = Color(0.360784, 0.584314, 1, 1)
+polygon = PackedVector2Array(0, 20, 200, 20, 200, 0, 0, 0)
+
+[node name="Shield" type="Sprite2D" parent="Background/ShieldBar"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4ypu7")
+position = Vector2(110.889, -14.7283)
+scale = Vector2(0.409284, 0.379023)
+skew = 0.427606
+texture = SubResource("NoiseTexture2D_aiud2")
+metadata/_edit_lock_ = true
+
+[node name="HealthBar" type="Polygon2D" parent="Background"]
+clip_children = 1
+position = Vector2(37.1436, 27.7128)
+scale = Vector2(1.09093, 1)
+color = Color(0.129412, 0.698039, 0.54902, 1)
+polygon = PackedVector2Array(0, 20, 200, 20, 200, 0, 0, 0)
+
+[node name="Health" type="Sprite2D" parent="Background/HealthBar"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_bb1kx")
+position = Vector2(136.597, -70.0308)
+scale = Vector2(0.410804, 0.408799)
+skew = 0.427606
+texture = SubResource("NoiseTexture2D_pjaes")
+metadata/_edit_lock_ = true
+
+[node name="EffectPanel1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = -132.0
+offset_right = 102.4
+offset_bottom = -79.6
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="CorrosiveDown" type="Sprite2D" parent="EffectPanel1"]
+position = Vector2(26, 26)
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("1_ymr8q")
+
+[node name="EffectPanel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = -0.124
+anchor_right = 0.028
+anchor_bottom = -0.124
+offset_left = 107.4
+offset_top = -132.0
+offset_right = 159.8
+offset_bottom = -79.6
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="KineticDown" type="Sprite2D" parent="EffectPanel2"]
+position = Vector2(26.475, 25.875)
+scale = Vector2(0.646875, 0.646875)
+texture = ExtResource("2_ufteg")
+
+[node name="EffectPanel3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 164.8
+offset_top = -132.0
+offset_right = 217.2
+offset_bottom = -79.6
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel3"]
+position = Vector2(25.825, 25.625)
+scale = Vector2(0.634375, 0.634375)
+texture = ExtResource("3_3g7xt")
+
+[node name="EffectPanel4" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 222.2
+offset_top = -132.0
+offset_right = 274.6
+offset_bottom = -79.6
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel4"]
+position = Vector2(25.925, 26.125)
+scale = Vector2(0.621875, 0.621875)
+texture = ExtResource("3_3g7xt")
+
+[node name="EffectPanel5" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 279.6
+offset_top = -132.0
+offset_right = 332.0
+offset_bottom = -79.6
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel5"]
+position = Vector2(27.4, 26)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_3g7xt")
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = -46.0
+offset_right = 131.0
+offset_bottom = -23.0
+text = "HP"
+
+[node name="ShieldLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = -67.0
+offset_right = 120.0
+offset_bottom = -44.0
+text = "SH"
+
+[node name="HealthAmountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = -45.0
+offset_right = 340.0
+offset_bottom = -22.0
+text = "10000
+"
+horizontal_alignment = 1
+
+[node name="ShieldAmountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 111.0
+offset_top = -66.0
+offset_right = 339.0
+offset_bottom = -43.0
+text = "10000
+"
+horizontal_alignment = 1

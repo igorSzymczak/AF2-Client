@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg67jrd1ong8i"]
+
+[ext_resource type="Script" path="res://weapons/weapons/PistolRound/pistol_round.gd" id="1_4pr8p"]
+[ext_resource type="Texture2D" uid="uid://dbogx2v0fvtbb" path="res://assets/Short Projectile Lime.png" id="2_nsg5x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62is0"]
+radius = 31.0
+
+[node name="PistolRound" type="Area2D"]
+top_level = true
+visibility_layer = 2
+script = ExtResource("1_4pr8p")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_62is0")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-5, 0)
+texture = ExtResource("2_nsg5x")
+
+[node name="TeamLabel" type="Label" parent="."]
+clip_contents = true
+offset_left = -11.0
+offset_top = -48.0
+offset_right = 9.0
+offset_bottom = -25.0
+text = "t _"

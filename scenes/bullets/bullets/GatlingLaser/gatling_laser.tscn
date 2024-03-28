@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg67jrd1ong8i"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullets/GatlingLaser/gatling_laser.gd" id="1_ohgnq"]
+[ext_resource type="Texture2D" uid="uid://bb8asqi5apbe5" path="res://assets/projectiles/Laser Long.png" id="2_7y1gm"]
+[ext_resource type="Texture2D" uid="uid://b77185in0njue" path="res://assets/projectiles/Bullet Dust.png" id="3_gwqwp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62is0"]
+radius = 3.0
+
+[node name="GatlingLaser" type="Area2D"]
+top_level = true
+visibility_layer = 2
+rotation = 1.5708
+monitorable = false
+script = ExtResource("1_ohgnq")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-16, -6.03961e-14)
+rotation = 1.5708
+scale = Vector2(0.235028, 0.235028)
+texture = ExtResource("2_7y1gm")
+
+[node name="Dust" type="Sprite2D" parent="BulletSprite"]
+modulate = Color(0, 1, 1, 0.698039)
+position = Vector2(0.000555038, 42.5481)
+rotation = -1.5708
+scale = Vector2(3.26583, 3.26583)
+texture = ExtResource("3_gwqwp")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_62is0")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

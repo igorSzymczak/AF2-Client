@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cohaqpgblddcb"]
+
+[ext_resource type="Script" path="res://scenes/ui/ShipSelect/ship_select.gd" id="1_v11rp"]
+
+[node name="ShipSelect" type="Container"]
+custom_minimum_size = Vector2(0, 36)
+offset_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_v11rp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="ShipControl" type="Control" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="ShipLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 24)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 24
+text = "Ship Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

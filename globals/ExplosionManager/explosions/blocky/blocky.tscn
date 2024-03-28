@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://b110eqsus1vpo"]
+
+[ext_resource type="Texture2D" uid="uid://ck3visa4v1hd2" path="res://assets/projectiles/Small Glow White.png" id="1_lioiw"]
+[ext_resource type="Script" path="res://globals/ExplosionManager/explosions/blocky/blocky.gd" id="1_xhfff"]
+
+[sub_resource type="Gradient" id="Gradient_j84dh"]
+offsets = PackedFloat32Array(0, 0.792453, 1)
+colors = PackedColorArray(0.925965, 0.00324028, 7.52765e-05, 1, 0, 0.0659891, 0.0670362, 0.847059, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5oj1d"]
+gradient = SubResource("Gradient_j84dh")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_e4tif"]
+_data = [Vector2(0, 0.404412), 0.0, 0.0, 0, 0, Vector2(0.17052, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tvnhn"]
+curve = SubResource("Curve_e4tif")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48b3o"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_tvnhn")
+color_ramp = SubResource("GradientTexture1D_5oj1d")
+
+[node name="Blocky" type="GPUParticles2D"]
+self_modulate = Color(3, 3, 3, 1)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_48b3o")
+texture = ExtResource("1_lioiw")
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+script = ExtResource("1_xhfff")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://co4eekalpp6kr"]
+
+[ext_resource type="Theme" uid="uid://dk1bu2y8w4psy" path="res://scenes/ui/main_theme.tres" id="1_g2o6o"]
+[ext_resource type="Script" path="res://scenes/ui/game.gd" id="2_1c0im"]
+[ext_resource type="PackedScene" uid="uid://bs1m1idguikev" path="res://scenes/ui/power bar/power_bar.tscn" id="2_3clpu"]
+[ext_resource type="PackedScene" uid="uid://cy26brtaxuquf" path="res://scenes/ui/stats bar/stats_bar.tscn" id="3_yit8b"]
+[ext_resource type="PackedScene" uid="uid://jxppw8syh3ni" path="res://scenes/ui/minimap/minimap.tscn" id="4_y376n"]
+[ext_resource type="PackedScene" uid="uid://dkfidcf3py1w5" path="res://scenes/ui/Boss Health/boss_health.tscn" id="5_6age8"]
+[ext_resource type="PackedScene" uid="uid://beqp17tn4b47x" path="res://scenes/ui/Chat/chat.tscn" id="5_p0jm6"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_g2o6o")
+script = ExtResource("2_1c0im")
+
+[node name="PanelBottom" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Center" type="VBoxContainer" parent="PanelBottom"]
+layout_mode = 2
+size_flags_horizontal = 4
+metadata/_edit_lock_ = true
+
+[node name="Filler" type="Polygon2D" parent="PanelBottom/Center"]
+visible = false
+z_index = 1
+position = Vector2(-63, -50.2857)
+scale = Vector2(1, 0.971429)
+color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+antialiased = true
+polygon = PackedVector2Array(-10, -9.7, 271.732, -9.7, 271.732, 60, 130.921, 60, -10, 60)
+
+[node name="Power Bar" parent="PanelBottom/Center" instance=ExtResource("2_3clpu")]
+layout_mode = 2
+
+[node name="StatsBar" parent="PanelBottom/Center" instance=ExtResource("3_yit8b")]
+layout_mode = 2
+
+[node name="BossHealth" parent="PanelBottom/Center" instance=ExtResource("5_6age8")]
+layout_mode = 2
+
+[node name="Minimap" parent="PanelBottom" instance=ExtResource("4_y376n")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Chat" parent="." instance=ExtResource("5_p0jm6")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 412.0
+offset_bottom = 242.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_vertical = 3

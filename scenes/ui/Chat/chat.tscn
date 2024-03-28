@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://beqp17tn4b47x"]
+
+[ext_resource type="Script" path="res://scenes/ui/Chat/chat.gd" id="1_oaqis"]
+[ext_resource type="Script" path="res://scenes/ui/Chat/MessageInput.gd" id="2_216dv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q15iy"]
+bg_color = Color(0, 0, 0, 0.470588)
+border_color = Color(0.0392157, 0.0784314, 0.0392157, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcjyu"]
+bg_color = Color(0, 0, 0, 0.470588)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqf6w"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -560.0
+offset_bottom = -770.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oaqis")
+
+[node name="MessagesPanel" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_right = 400.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_q15iy")
+
+[node name="MarginContainer" type="MarginContainer" parent="MessagesPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MessagesPanel/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MessagesContainer" type="VBoxContainer" parent="MessagesPanel/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+alignment = 2
+
+[node name="InputPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rcjyu")
+
+[node name="MarginContainer" type="MarginContainer" parent="InputPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InputPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InputPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MessageInput" type="LineEdit" parent="InputPanel/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_jqf6w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jqf6w")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_jqf6w")
+placeholder_text = " Type Message..."
+max_length = 128
+script = ExtResource("2_216dv")
+
+[connection signal="text_submitted" from="InputPanel/MarginContainer/HBoxContainer/VBoxContainer/MessageInput" to="." method="_on_message_input_text_submitted"]

@@ -12,7 +12,13 @@ class_name HangarMenu extends Control
 @onready var my_ships_section = %MyShipsSection
 @onready var my_ships_container = %MyShipsContainer
 @onready var left_hangar_title = %LeftHangarTitle
+
 @onready var right_hangar_title = %RightHangarTitle
+@onready var health_points: HBoxContainer = %HealthPoints
+@onready var armor_points: HBoxContainer = %ArmorPoints
+@onready var shield_points: HBoxContainer = %ShieldPoints
+@onready var sh_regen_points: HBoxContainer = %ShieldRegenPoints
+
 @onready var center_ship: ShipComponent = %CenterShip
 
 @onready var default_right_panel_pos_x: float = get_viewport_rect().size.x - 300

@@ -131,7 +131,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 32
+theme_override_constants/separation = 2
 
 [node name="MyShipsSection" type="Control" parent="Left/MarginContainer/VBoxContainer/Sections"]
 unique_name_in_owner = true
@@ -201,18 +201,22 @@ autowrap_mode = 3
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ShipName" type="Label" parent="Right/MarginContainer/VBoxContainer"]
+[node name="ShipInfo" type="VBoxContainer" parent="Right/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ShipName" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Nexar Blade"
 horizontal_alignment = 1
 
-[node name="HealthStat" type="Control" parent="Right/MarginContainer/VBoxContainer"]
+[node name="HealthStat" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/HealthStat"]
+[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -222,110 +226,111 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer"]
+[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Text"]
+[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/Text"]
 layout_mode = 2
 text = "Health"
 
-[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Text"]
+[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/Text"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Points" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer"]
+[node name="HealthPoints" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point2"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point2"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point3"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point3"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point4"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point4"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point5"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point5"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point6"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point6"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point7"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point7"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point8"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point8"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point9"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point9"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points"]
+[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/HealthStat/MarginContainer/Points/Point10"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/HealthStat/MarginContainer/HealthPoints/Point10"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="ArmorStat" type="Control" parent="Right/MarginContainer/VBoxContainer"]
+[node name="ArmorStat" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ArmorStat"]
+[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,110 +340,111 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer"]
+[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Text"]
+[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/Text"]
 layout_mode = 2
 text = "Armor"
 
-[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Text"]
+[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/Text"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Points" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer"]
+[node name="ArmorPoints" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point2"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point2"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point3"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point3"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point4"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point4"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point5"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point5"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point6"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point6"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point7"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point7"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point8"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point8"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point9"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point9"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points"]
+[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ArmorStat/MarginContainer/Points/Point10"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ArmorStat/MarginContainer/ArmorPoints/Point10"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="ShieldStat" type="Control" parent="Right/MarginContainer/VBoxContainer"]
+[node name="ShieldStat" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShieldStat"]
+[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -448,110 +454,111 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer"]
+[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Text"]
+[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/Text"]
 layout_mode = 2
 text = "Shield"
 
-[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Text"]
+[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/Text"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Points" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer"]
+[node name="ShieldPoints" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point2"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point2"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point3"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point3"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point4"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point4"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point5"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point5"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point6"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point6"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point7"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point7"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point8"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point8"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point9"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point9"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points"]
+[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldStat/MarginContainer/Points/Point10"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldStat/MarginContainer/ShieldPoints/Point10"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="ShieldRegenStat" type="Control" parent="Right/MarginContainer/VBoxContainer"]
+[node name="ShieldRegenStat" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat"]
+[node name="MarginContainer" type="MarginContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -561,109 +568,111 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer"]
+[node name="Text" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
 
-[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Text"]
+[node name="Title" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/Text"]
 layout_mode = 2
 text = "Sh. Regen"
 
-[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Text"]
+[node name="Separator2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/Text"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="Points" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer"]
+[node name="ShieldRegenPoints" type="HBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="Point1" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point1" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point1"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point1"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point2" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point2"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point2"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point3" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point3"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point3"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point4" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point4"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point4"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point5" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point5"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point5"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point6" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point6"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point6"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point7" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point7"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point7"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point8" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point8"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point8"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point9" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point9"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point9"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points"]
+[node name="Point10" type="Control" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShieldRegenStat/MarginContainer/Points/Point10"]
+[node name="Polygon2D" type="Polygon2D" parent="Right/MarginContainer/VBoxContainer/ShipInfo/ShieldRegenStat/MarginContainer/ShieldRegenPoints/Point10"]
 position = Vector2(8, 12)
 polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
 
-[node name="OtherStats" type="VBoxContainer" parent="Right/MarginContainer/VBoxContainer"]
+[node name="OtherStats" type="VBoxContainer" parent="Right/MarginContainer/VBoxContainer/ShipInfo"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Right/MarginContainer/VBoxContainer/OtherStats"]
+[node name="Label" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfo/OtherStats"]
 layout_mode = 2
 text = "+ 20% Attack Speed
 + 75% Energy Dmg"

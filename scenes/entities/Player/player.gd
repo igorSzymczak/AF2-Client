@@ -208,11 +208,11 @@ func handle_movement(delta: float) -> void:
 
 		if !velocity.is_equal_approx(Vector2.ZERO):
 			velocity -= velocity.normalized() * DRAG_COEF * delta
-
 		handle_thrust()
 		move_and_slide()
-	else:
-		global_position = landed_structure.global_position
+	
+	elif landed_structure != null:
+		global_position = global_position.lerp(landed_structure.global_position, delta * 5)
 
 func handle_death() -> void:
 	GlobalSignals.emit_signal("create_explosion", global_position, "explosion_large", 1, {})
@@ -313,14 +313,13 @@ func land_on(structure: Structure):
 		GameManager.can_perform_actions = false
 		velocity = Vector2.ZERO
 		
-		var position_tween: Tween = create_tween()
-		position_tween.tween_property(self, "global_position", structure.global_position, 1.0)
-		
 		var rotation_tween: Tween = create_tween()
 		rotation_tween.tween_property(self, "rotation", 0, 1)
 		
 		GlobalSignals.close_all_ui.emit()
-		GlobalSignals.open_ui.emit("hangar")
+		
+		if landed_structure is Hangar:
+			GlobalSignals.open_ui.emit("hangar")
 	
 	elif !IS_MAIN_PLAYER:
 		nickname_container.hide()

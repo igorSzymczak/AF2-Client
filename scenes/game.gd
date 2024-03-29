@@ -75,6 +75,7 @@ func add_newly_connected_player_character(username):
 func add_previously_connected_player_characters(players: Dictionary):
 	for username in players:
 		add_player_character(username)
+	GameManager.Players = players
 
 @rpc("authority", "call_local", "reliable")
 func update_planet_position(planet_name: String, pos: Vector2): GameManager.update_planet_position(planet_name, pos)
@@ -139,6 +140,9 @@ func update_player_shield(username: String, shield: float): GameManager.update_p
 
 @rpc("authority", "call_local", "reliable")
 func update_player_alive(username: String, alive: bool): GameManager.update_player_alive(username, alive)
+
+@rpc("authority", "call_local", "reliable")
+func update_player_ship_name(username: String, ship_name: String): GameManager.update_player_ship_name(username, ship_name)
 
 @rpc("authority", "call_local", "reliable")
 func player_death_args(death_args: Dictionary):

@@ -52,8 +52,18 @@ var death_args: Dictionary
 func set_death_args(args):
 	death_args = args
 
+var last_server_ship_name := ""
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
+	var server_ship_name: String = GameManager.get_player_ship_name(name)
+	if last_server_ship_name != server_ship_name:
+		last_server_ship_name = server_ship_name
+		set_ship(last_server_ship_name)
+		if IS_MAIN_PLAYER:
+			GlobalSignals.close_current_ui.emit()
+	
+	if landed_structure == null and last_server_ship_name != ship.name:
+		set_ship(last_server_ship_name)
 	
 	if IS_MAIN_PLAYER:
 		if health_component.health > health_component.MAX_HEALTH:
@@ -298,13 +308,11 @@ func camera_zoom_out(delta: float) -> void:
 
 func set_ship(new_ship_name: String):
 	var new_ship: ShipComponent = ShipManager.get_ship(new_ship_name)
-	if new_ship == null:
-		push_error("Player > set_ship(): Such Ship Component doesn't exist: " + new_ship_name)
-	else:
-		ship.queue_free()
-		add_child(new_ship)
-		ship = new_ship
-		engine = ship.engine
+	if new_ship == null: return
+	ship.queue_free()
+	add_child(new_ship)
+	ship = new_ship
+	engine = ship.engine
 
 func land_on(structure: Structure):
 	landed_structure = structure
@@ -343,7 +351,6 @@ func animate_leave_structure(username: String):
 		landed_structure = null
 		health_component.show()
 		if IS_MAIN_PLAYER:
-			set_ship("NexarBlade")
 			GameManager.can_perform_actions = true
 		elif !IS_MAIN_PLAYER:
 			nickname_container.show()

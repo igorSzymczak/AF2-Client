@@ -79,6 +79,7 @@ func add_player(username):
 			"health": player.health_component.MAX_HEALTH,
 			"shield": player.health_component.MAX_SHIELD,
 			"alive": player.alive,
+			"ship_name": "NexarCarrier"
 		}
 
 func remove_player(username: String):
@@ -164,6 +165,14 @@ func get_player_alive(username: String) -> bool:
 func update_player_alive(username: String, alive: bool):
 	if Players.has(username):
 		Players[username]["alive"] = alive
+
+func get_player_ship_name(username: String) -> String:
+	if Players.has(username):
+		return Players[username]["ship_name"]
+	return "NexarCarrier"
+func update_player_ship_name(username: String, ship_name: String):
+	if Players.has(username):
+		Players[username]["ship_name"] = ship_name
 
 signal death_args(args: Dictionary)
 

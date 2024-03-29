@@ -119,6 +119,10 @@ func rotate_point_around_center(point: Vector2, center: Vector2, angle_degrees: 
 
 var structure_data: Dictionary = { "name": name }
 func get_structure_data() -> Dictionary: return structure_data
+func set_structure_data(data: Dictionary):
+	structure_data = data
+	if GameManager.local_player.landed_structure != null:
+		GlobalSignals.set_ui_args.emit(data)
 
 func land_player_on(username: String, structure_name: String):
 	if structure_name == name:
@@ -149,4 +153,4 @@ func land_player(username: String, structure_name: String):
 
 @rpc("authority", "call_remote", "reliable")
 func update_structure_data(data: Dictionary):
-	structure_data = data
+	set_structure_data(data)

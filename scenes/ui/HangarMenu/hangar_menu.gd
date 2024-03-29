@@ -8,7 +8,11 @@ class_name HangarMenu extends Control
 @onready var shop_button_underline = %ShopButtonUnderline
 @onready var my_ships_button_underline = %MyShipsButtonUnderline
 @onready var shop_section = %ShopSection
+@onready var shop_container= %ShopContainer
 @onready var my_ships_section = %MyShipsSection
+@onready var my_ships_container = %MyShipsContainer
+@onready var left_hangar_title = %LeftHangarTitle
+@onready var right_hangar_title = %RightHangarTitle
 @onready var center_ship: ShipComponent = %CenterShip
 
 @onready var default_right_panel_pos_x: float = get_viewport_rect().size.x - 300
@@ -26,12 +30,28 @@ var opened = false
 func _process(delta):
 	default_right_panel_pos_x = get_viewport_rect().size.x - 300
 	play_current_animation(delta)
-	
-	## For Testing Purposes ONLY
-	#if Input.is_action_just_pressed("Menu"):
-		#opened = !opened
-		#if opened: select_animation("open")
-		#if !opened: select_animation("close")
+
+var args: Dictionary
+var hangar_name := "Unknown Hangar"
+var ships_to_buy : Dictionary
+func set_args(new_args: Dictionary):
+	args = new_args
+	if !args.is_empty():
+		if args.has("name"):
+			hangar_name = args.name
+		if args.has("ships_to_buy"):
+			ships_to_buy = args.ships_to_buy
+		
+		left_hangar_title.set_text(hangar_name)
+		right_hangar_title.set_text(hangar_name)
+
+		if !ships_to_buy.is_empty():
+			for child in shop_container.get_children():
+				shop_container.remove_child(child)
+				child.queue_free()
+			for ship_name in ships_to_buy:
+				var ship_select = ShipManager.create_ship_select(ship_name)
+				shop_container.add_child(ship_select)
 
 var animation_finished = true
 var selected_animation = null

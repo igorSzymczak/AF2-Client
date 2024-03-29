@@ -9,10 +9,10 @@ extends CanvasLayer
 
 func _ready():
 	GlobalSignals.connect("set_ui", set_to)
-	GlobalSignals.connect("set_ui_args", set_current_args)
 	GlobalSignals.connect("open_ui", open_ui)
 	GlobalSignals.connect("close_current_ui", close_current)
 	GlobalSignals.connect("close_all_ui", close_all)
+	GlobalSignals.connect("set_ui_args", set_current_args)
 	
 	#_print_queue()
 
@@ -107,7 +107,7 @@ func _close_current_ui():
 @onready var chat_message_input = game.chat.message_input
 func handle_changing_menus():
 	if Input.is_action_just_pressed("Menu"):
-		if current_ui == game:
+		if current_ui == game and GameManager.local_player.landed_structure == null:
 			open_ui("esc")
 		elif current_ui != auth_screen and current_ui != death:
 			close_current()

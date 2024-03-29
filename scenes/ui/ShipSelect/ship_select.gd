@@ -1,15 +1,18 @@
-extends Control
+class_name ShipSelect extends Control
 
 @export var engine_active: bool = false
 
-@export var ship_component: ShipComponent
+@export var ship_name: String
 @onready var ship_control: Control = %ShipControl
 @onready var ship_label: Label = %ShipLabel
 
+var ship_component: ShipComponent = null
 func _ready():
+	ship_component = ShipManager.get_ship(ship_name)
 	if !ship_component: 
 		push_error("Ship Component not specified!")
 		return
+	add_child(ship_component)
 	
 	if !engine_active: ship_component.engine.queue_free()
 	ship_component.set_rotation(0)

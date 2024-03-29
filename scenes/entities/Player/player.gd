@@ -318,8 +318,11 @@ func land_on(structure: Structure):
 		
 		GlobalSignals.close_all_ui.emit()
 		
+		await get_tree().create_timer(0.5).timeout
+		
 		if landed_structure is Hangar:
 			GlobalSignals.open_ui.emit("hangar")
+			GlobalSignals.set_ui_args.emit(landed_structure.get_structure_data())
 	
 	elif !IS_MAIN_PLAYER:
 		nickname_container.hide()

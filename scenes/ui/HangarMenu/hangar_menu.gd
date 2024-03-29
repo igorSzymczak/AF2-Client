@@ -94,6 +94,7 @@ func display_ship_info(ship: ShipComponent):
 		buy_button.show()
 		buy_button.set_disabled(false)
 		if current_section == shop_section:
+			buy_button.set_text("Buy")
 			if owned_ships.has(current_ship_name):
 				buy_button.set_disabled(true)
 		elif current_section == my_ships_section:

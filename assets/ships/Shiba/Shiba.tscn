@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://csrclt5lr46qg"]
+[gd_scene load_steps=20 format=3 uid="uid://csrclt5lr46qg"]
 
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_i22xs"]
 [ext_resource type="Script" path="res://assets/ships/Shiba/Shiba.gd" id="2_px2t7"]
@@ -46,6 +46,13 @@ metadata/_snap_count = 6
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ih4il"]
 gradient = SubResource("Gradient_p2qa4")
 
+[sub_resource type="Curve" id="Curve_gf1m8"]
+_data = [Vector2(0, 1), 0.0, 0.19476, 0, 0, Vector2(1, 0.488872), -1.89733, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2xotv"]
+curve = SubResource("Curve_gf1m8")
+
 [sub_resource type="Curve" id="Curve_5vhdo"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
 point_count = 2
@@ -69,7 +76,7 @@ gravity = Vector3(0, 0, 0)
 linear_accel_min = 100.0
 linear_accel_max = 120.0
 scale_min = 0.6
-scale_max = 0.7
+scale_curve = SubResource("CurveTexture_2xotv")
 scale_over_velocity_min = 115.0
 scale_over_velocity_max = 285.0
 scale_over_velocity_curve = SubResource("CurveTexture_uic6q")

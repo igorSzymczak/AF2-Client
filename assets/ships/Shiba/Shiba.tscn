@@ -1,0 +1,113 @@
+[gd_scene load_steps=18 format=3 uid="uid://csrclt5lr46qg"]
+
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_i22xs"]
+[ext_resource type="Script" path="res://assets/ships/Shiba/Shiba.gd" id="2_px2t7"]
+[ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="3_38vm3"]
+[ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="4_vi0yj"]
+[ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="5_xk78t"]
+[ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="6_r6wfv"]
+[ext_resource type="Texture2D" uid="uid://dri5b8g4akoh0" path="res://assets/ships/Shiba/Shiba.png" id="7_2dn40"]
+
+[sub_resource type="Animation" id="Animation_r3s3s"]
+resource_name = "ShibaRainbowThruster"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite/Engine:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.737255, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_belse"]
+_data = {
+"ShibaRainbowThruster": SubResource("Animation_r3s3s")
+}
+
+[sub_resource type="Curve" id="Curve_3eoqq"]
+_data = [Vector2(0, 0.668919), 0.0, 0.0, 0, 0, Vector2(1, 0.00675678), -5.18412, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_13ome"]
+curve = SubResource("Curve_3eoqq")
+
+[sub_resource type="Gradient" id="Gradient_p2qa4"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333, 1)
+colors = PackedColorArray(0.768627, 0, 0.952941, 1, 1, 0.0784314, 0, 1, 2.00392, 0.576471, 0, 1, 2.00392, 1, 0, 1, 0, 0.756863, 0.129412, 1, 0, 0.619608, 1, 1, 0, 0, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 6
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ih4il"]
+gradient = SubResource("Gradient_p2qa4")
+
+[sub_resource type="Curve" id="Curve_5vhdo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uic6q"]
+curve = SubResource("Curve_5vhdo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7d7j0"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 0.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 30.0
+initial_velocity_max = 55.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 120.0
+scale_min = 0.6
+scale_max = 0.7
+scale_over_velocity_min = 115.0
+scale_over_velocity_max = 285.0
+scale_over_velocity_curve = SubResource("CurveTexture_uic6q")
+color_ramp = SubResource("GradientTexture1D_ih4il")
+alpha_curve = SubResource("CurveTexture_13ome")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x77jx"]
+load_path = "res://.godot/imported/Thrust Particle 2.png-dafd64bfdab672b0e6584fac00f8b7e9.ctex"
+
+[node name="Shiba" type="Sprite2D" node_paths=PackedStringArray("engine")]
+self_modulate = Color(1, 1, 1, 0)
+texture = ExtResource("7_2dn40")
+script = ExtResource("2_px2t7")
+engine = NodePath("Sprite/Engine")
+ship_name = "Shiba"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_belse")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("7_2dn40")
+
+[node name="Engine" parent="Sprite" instance=ExtResource("2_i22xs")]
+show_behind_parent = true
+position = Vector2(-49, 44.2726)
+
+[node name="Light" parent="Sprite/Engine" instance=ExtResource("3_38vm3")]
+position = Vector2(-0.363627, 0)
+
+[node name="Idle" parent="Sprite/Engine" instance=ExtResource("4_vi0yj")]
+position = Vector2(8.09091, 0)
+
+[node name="Speeding" parent="Sprite/Engine" instance=ExtResource("5_xk78t")]
+position = Vector2(-11, 0)
+
+[node name="Accelerate" parent="Sprite/Engine" instance=ExtResource("6_r6wfv")]
+position = Vector2(0.0909092, 0)
+process_material = SubResource("ParticleProcessMaterial_7d7j0")
+texture = SubResource("CompressedTexture2D_x77jx")

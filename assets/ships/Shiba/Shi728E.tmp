@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://csrclt5lr46qg"]
+
+[ext_resource type="Script" path="res://scenes/components/ShipComponent/ship_component.gd" id="1_2jrw5"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_i22xs"]
+[ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="3_38vm3"]
+[ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="4_vi0yj"]
+[ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="5_xk78t"]
+[ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="6_r6wfv"]
+[ext_resource type="Texture2D" uid="uid://dri5b8g4akoh0" path="res://assets/ships/Shiba/Shiba.png" id="7_2dn40"]
+
+[sub_resource type="GDScript" id="GDScript_leab0"]
+
+[node name="Shiba" type="Sprite2D"]
+script = ExtResource("1_2jrw5")
+
+[node name="Engine" parent="." instance=ExtResource("2_i22xs")]
+modulate = Color(0.737255, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(-56, 42.2726)
+script = SubResource("GDScript_leab0")
+
+[node name="Light" parent="Engine" instance=ExtResource("3_38vm3")]
+position = Vector2(-0.363627, 0)
+
+[node name="Idle" parent="Engine" instance=ExtResource("4_vi0yj")]
+position = Vector2(0.0909091, 0)
+
+[node name="Speeding" parent="Engine" instance=ExtResource("5_xk78t")]
+position = Vector2(-11, 0)
+
+[node name="Accelerate" parent="Engine" instance=ExtResource("6_r6wfv")]
+position = Vector2(0.0909092, 0)
+
+[node name="Shiba" type="Sprite2D" parent="."]
+texture = ExtResource("7_2dn40")

@@ -4,7 +4,8 @@ var Ships: Dictionary = {
 	"NexarBlade": preload("res://assets/ships/Nexar Blade/nexar_blade.tscn"),
 	"NexarCarrier": preload("res://assets/ships/Nexar Carrier/nexar_carrier.tscn"),
 	"NexarReaver": preload("res://assets/ships/Nexar Reaver/nexar_reaver.tscn"),
-	"NexarZlatte": preload("res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn")
+	"NexarZlatte": preload("res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn"),
+	"Shiba": preload("res://assets/ships/Shiba/Shiba.tscn"),
 }
 var ship_select_scene: PackedScene = preload("res://scenes/ui/ShipSelect/ship_select.tscn")
 

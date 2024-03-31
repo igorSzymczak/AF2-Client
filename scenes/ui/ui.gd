@@ -95,7 +95,7 @@ func _open_current_ui():
 	else: current_ui.show()
 
 func _close_current_ui():
-	if GameManager.local_player and current_ui != game:
+	if GameManager.local_player and !current_ui in [game, death, esc_menu, auth_screen]:
 		if GameManager.local_player.landed_structure != null:
 			GameManager.local_player.request_leave_structure.rpc_id(1, AuthManager.my_username)
 	

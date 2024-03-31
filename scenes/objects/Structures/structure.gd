@@ -69,7 +69,7 @@ func update_shader(delta: float) -> void:
 	
 	var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
 	var t = (distance_to_sun_squared - 100000) / 100000
-	var light_z = atan(t)
+	var light_z = atan(t) - 1
 
 	
 	

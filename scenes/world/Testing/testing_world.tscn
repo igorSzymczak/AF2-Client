@@ -57,7 +57,7 @@ shader_parameter/light_direction = Vector3(-0.855, -0.545, 1)
 shader_parameter/light_minimum = 0.2
 shader_parameter/light_maximum = 1.2
 shader_parameter/specular_color = Vector3(1, 1, 1)
-shader_parameter/specular_intensity = 0.1
+shader_parameter/specular_intensity = 0.0
 shader_parameter/specular_shininess = 1.0
 shader_parameter/fade = 0.0
 shader_parameter/pixelize_enabled = false
@@ -122,11 +122,12 @@ shape = SubResource("CircleShape2D_jkw5k")
 scale = Vector2(1.69375, 1.69375)
 texture = ExtResource("15_3expg")
 
-[node name="Aerth" parent="Planets/Sun" instance=ExtResource("7_q3uef")]
+[node name="Aerth" parent="Planets/Sun" node_paths=PackedStringArray("local_sun") instance=ExtResource("7_q3uef")]
 position = Vector2(1078, 267)
 landable = true
 orbit_time_MS = -6000.0
 is_shadered = true
+local_sun = NodePath("..")
 
 [node name="LandArea" type="CollisionShape2D" parent="Planets/Sun/Aerth"]
 shape = SubResource("CircleShape2D_t23ch")

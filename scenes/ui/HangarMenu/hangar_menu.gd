@@ -26,8 +26,6 @@ class_name HangarMenu extends Control
 @onready var shield_regen_points: HBoxContainer = %ShieldRegenPoints
 @onready var buy_button: BetterButton = %BuyButton
 
-@onready var center_ship: ShipComponent = %CenterShip
-
 @onready var default_right_panel_pos_x: float = get_viewport_rect().size.x - menu_width
 @onready var current_section: Control = shop_section
 @onready var default_section_pos_x: float = 0.0
@@ -37,7 +35,6 @@ func _ready():
 	left_panel.position.x = -menu_width
 	right_panel.position.x = default_right_panel_pos_x + menu_width
 	hide()
-	center_ship.engine.activate_thruster()
 
 var opened = false
 func _process(delta):
@@ -49,9 +46,8 @@ var hangar_name := "Unknown Hangar"
 var ships_to_buy : Dictionary
 var owned_ships : Dictionary
 func set_args(new_args: Dictionary):
-	#print(new_args)
-	args = new_args
-	if !args.is_empty():
+	if !new_args.is_empty():
+		args = new_args
 		if args.has("name"):
 			hangar_name = args.name
 		if args.has("ships_to_buy"):
@@ -80,6 +76,7 @@ func set_args(new_args: Dictionary):
 				my_ships_container.add_child(ship_select)
 				ship_select.pressed.connect(display_ship_info.bind(ship_select.ship_component))
 
+var land_ship_name: String
 var current_ship_name := ""
 func display_ship_info(ship: ShipComponent):
 	if is_instance_valid(ship) and current_ship_name != ship.name:
@@ -91,6 +88,7 @@ func display_ship_info(ship: ShipComponent):
 		var shield = ship.shield
 		var shield_regen = ship.shield_regen
 		
+		ship_name_label.set_text(ship_name)
 		buy_button.show()
 		buy_button.set_disabled(false)
 		if current_section == shop_section:
@@ -99,7 +97,8 @@ func display_ship_info(ship: ShipComponent):
 				buy_button.set_disabled(true)
 		elif current_section == my_ships_section:
 			buy_button.set_text("Select")
-		ship_name_label.set_text(ship_name)
+			if ship.name == land_ship_name:
+				buy_button.set_disabled(true)
 		
 		for child in health_points.get_children(): child.show()
 		for child in armor_points.get_children(): child.show()
@@ -134,7 +133,6 @@ func display_ship_info(ship: ShipComponent):
 		
 		GameManager.local_player.set_ship(ship.name)
 		GameManager.local_player.engine.activate_thruster()
-		
 
 var animation_finished = true
 var selected_animation = null
@@ -142,6 +140,7 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		selected_animation = "open"
 		animation_finished = false
+		land_ship_name = GameManager.local_player.ship.name
 		display_ship_info(GameManager.local_player.ship)
 		
 	elif animation_name == "close":

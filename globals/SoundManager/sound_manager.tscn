@@ -30,7 +30,7 @@ bus = &"Effects"
 
 [node name="ClusterMissilesHit" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("3_shfl7")
-volume_db = -10.0
+volume_db = -4.0
 pitch_scale = 2.0
 max_distance = 10000.0
 max_polyphony = 10
@@ -45,6 +45,7 @@ bus = &"Effects"
 
 [node name="PistolShoot" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("5_ffbuk")
+volume_db = 5.0
 max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
@@ -65,7 +66,7 @@ bus = &"Effects"
 
 [node name="RocketLauncherHit" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("3_shfl7")
-volume_db = -7.5
+volume_db = -2.5
 pitch_scale = 1.35
 max_distance = 10000.0
 max_polyphony = 10
@@ -80,7 +81,7 @@ bus = &"Effects"
 
 [node name="PiercingGunShoot" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("9_t2ybf")
-volume_db = -5.0
+volume_db = -6.5
 pitch_scale = 0.75
 max_distance = 10000.0
 max_polyphony = 10
@@ -94,7 +95,7 @@ bus = &"Effects"
 
 [node name="SpawnerLaserGunShoot" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("11_k13ha")
-volume_db = -5.0
+volume_db = -6.5
 max_polyphony = 10
 bus = &"Effects"
 
@@ -120,6 +121,7 @@ bus = &"Effects"
 
 [node name="HomerusDeath" type="AudioStreamPlayer2D" parent="Bosses"]
 stream = ExtResource("14_u0jht")
+volume_db = -2.5
 max_distance = 9999.0
 
 [node name="UI" type="Node" parent="."]

@@ -4,16 +4,16 @@
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
 [ext_resource type="PackedScene" uid="uid://dbwuqf2oql4bi" path="res://scenes/ui/elements/buttons/menu_button.tscn" id="2_lop0p"]
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/NicknameInput.gd" id="3_lsuid"]
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/Settings.gd" id="4_61k3t"]
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/Settings.gd" id="5_72kll"]
 [ext_resource type="PackedScene" uid="uid://360b6gad5l5a" path="res://scenes/ui/elements/volume slider/volume_slider.tscn" id="6_77mv8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
-bg_color = Color(0, 0, 0, 0.780392)
+bg_color = Color(0, 0, 0, 0.784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvjfu"]
 
 [node name="ESCMenu" type="Control"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -22,7 +22,6 @@ size_flags_horizontal = 0
 script = ExtResource("1_uv064")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-clip_children = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,6 +31,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yt3jc")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+clip_contents = true
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
@@ -149,7 +149,7 @@ layout_mode = 2
 [node name="Settings" type="Control" parent="PanelContainer/MarginContainer"]
 visible = false
 layout_mode = 2
-script = ExtResource("4_61k3t")
+script = ExtResource("5_72kll")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Settings"]
 layout_mode = 1

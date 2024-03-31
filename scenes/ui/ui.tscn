@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://chcxaewbmb4p7"]
+[gd_scene load_steps=8 format=3 uid="uid://chcxaewbmb4p7"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_2c1t4"]
 [ext_resource type="PackedScene" uid="uid://co4eekalpp6kr" path="res://scenes/ui/game.tscn" id="2_nkdw5"]
 [ext_resource type="PackedScene" uid="uid://cud1q2neti0nv" path="res://scenes/ui/Death Screen/death_screen.tscn" id="3_xshnj"]
 [ext_resource type="PackedScene" uid="uid://duauim31qmjgx" path="res://scenes/ui/ESC Menu/esc_menu.tscn" id="4_4qyyq"]
 [ext_resource type="PackedScene" uid="uid://cctbruyrj1i8n" path="res://scenes/ui/Auth Screen/auth_screen.tscn" id="5_wjlru"]
+[ext_resource type="PackedScene" uid="uid://be4mwemfpshms" path="res://scenes/ui/Structure Menu/structure_menu.tscn" id="6_loyla"]
 [ext_resource type="PackedScene" uid="uid://b6qw4705uuu8l" path="res://scenes/ui/HangarMenu/hangar_menu.tscn" id="6_xr3hv"]
 
 [node name="UI" type="CanvasLayer"]
@@ -23,6 +24,10 @@ visible = false
 z_index = 10
 
 [node name="HangarMenu" parent="." instance=ExtResource("6_xr3hv")]
+visible = false
+z_index = 9
+
+[node name="StructureMenu" parent="." instance=ExtResource("6_loyla")]
 visible = false
 z_index = 9
 

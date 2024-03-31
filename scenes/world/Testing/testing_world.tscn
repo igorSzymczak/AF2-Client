@@ -44,7 +44,7 @@ radius = 75.0
 radius = 200.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23ch"]
-radius = 100.0
+radius = 225.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4jygj"]
 shader = ExtResource("9_ockqu")
@@ -74,13 +74,14 @@ planets = [NodePath("Planets/Sun"), NodePath("Planets/Sun/Aerth")]
 
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tbgsy")
-position = Vector2(1023, 564)
+position = Vector2(-1, -1)
 scale = Vector2(5438, 2878.94)
 texture = SubResource("PlaceholderTexture2D_ngnn3")
 script = ExtResource("3_28mi7")
 
 [node name="Soundtrack" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_mauus")
+volume_db = -5.0
 autoplay = true
 max_distance = 1e+06
 bus = &"Music"
@@ -123,11 +124,11 @@ texture = ExtResource("15_3expg")
 
 [node name="Aerth" parent="Planets/Sun" instance=ExtResource("7_q3uef")]
 position = Vector2(1078, 267)
+landable = true
 orbit_time_MS = -6000.0
 is_shadered = true
 
 [node name="LandArea" type="CollisionShape2D" parent="Planets/Sun/Aerth"]
-visible = false
 shape = SubResource("CircleShape2D_t23ch")
 
 [node name="Sprite" type="Sprite2D" parent="Planets/Sun/Aerth"]

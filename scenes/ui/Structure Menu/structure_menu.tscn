@@ -1,0 +1,773 @@
+[gd_scene load_steps=11 format=3 uid="uid://be4mwemfpshms"]
+
+[ext_resource type="Script" path="res://scenes/ui/Structure Menu/structure_menu.gd" id="1_blcxh"]
+[ext_resource type="Script" path="res://scenes/ui/Structure Menu/sections/main.gd" id="2_wmips"]
+[ext_resource type="Script" path="res://scenes/ui/Structure Menu/sections/Ships.gd" id="4_b2287"]
+[ext_resource type="PackedScene" uid="uid://dbwuqf2oql4bi" path="res://scenes/ui/elements/buttons/menu_button.tscn" id="4_m1e70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
+bg_color = Color(0, 0, 0, 0.784314)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nkgc"]
+bg_color = Color(0, 0, 0, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qb1a"]
+bg_color = Color(0.152941, 0.513726, 0, 0.462745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.054902, 1, 0.0235294, 0.403922)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n72f"]
+bg_color = Color(0.152941, 0.513726, 0, 0.462745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.054902, 1, 0.0235294, 0.65098)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mbi5q"]
+bg_color = Color(0.152941, 0.513726, 0, 0.0784314)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 1, 0.00784314, 0.0901961)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ystpj"]
+bg_color = Color(0.152941, 0.513726, 0, 0.462745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.611765)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[node name="StructureMenu" type="Control"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_blcxh")
+
+[node name="Left" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 60.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yt3jc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Left"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Main" type="Control" parent="Left/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_wmips")
+
+[node name="Top" type="VBoxContainer" parent="Left/MarginContainer/Main"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="Center" type="VBoxContainer" parent="Left/MarginContainer/Main"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -146.5
+offset_bottom = 146.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="MainStructureTitle" type="Label" parent="Left/MarginContainer/Main/Center"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Unknown Structure"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Left/MarginContainer/Main/Center"]
+layout_mode = 2
+
+[node name="Separator2" type="Control" parent="Left/MarginContainer/Main/Center"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="ShipsButton" parent="Left/MarginContainer/Main/Center" instance=ExtResource("4_m1e70")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Change Ship"
+
+[node name="Separator" type="Control" parent="Left/MarginContainer/Main/Center"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Bottom" type="VBoxContainer" parent="Left/MarginContainer/Main"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ExitButton" parent="Left/MarginContainer/Main/Bottom" instance=ExtResource("4_m1e70")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Fly Away"
+
+[node name="Separator" type="Control" parent="Left/MarginContainer/Main/Bottom"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Ships" type="Control" parent="Left/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+script = ExtResource("4_b2287")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Left/MarginContainer/Ships"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="ShipsLeftStructureTitle" type="Label" parent="Left/MarginContainer/Ships/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Unkown Structure"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="Left/MarginContainer/Ships/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Left/MarginContainer/Ships/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="MyShipsContainer" type="VBoxContainer" parent="Left/MarginContainer/Ships/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="ReturnButton" parent="Left/MarginContainer/Ships/VBoxContainer" instance=ExtResource("4_m1e70")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Return"
+
+[node name="ShipsRight" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -174.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4nkgc")
+
+[node name="MarginContainer" type="MarginContainer" parent="ShipsRight"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShipsRight/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="ShipsRightStructureTitle" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Unkown Structure"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="ShipsRight/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ShipInfoContainer" type="VBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ShipName" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Nexar Blade"
+horizontal_alignment = 1
+
+[node name="HealthStat" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Health"
+
+[node name="HealthAmount" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "10"
+
+[node name="HealthPoints" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="Point" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point2" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point2"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point3" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point3"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point4" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point4"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point5" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point5"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point6" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point6"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point7" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point7"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point8" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point8"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point9" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point9"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point10" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer/HealthPoints/Point10"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="ArmorStat" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Armor"
+
+[node name="ArmorAmount" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "10"
+
+[node name="ArmorPoints" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="Point" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point2" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point2"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point3" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point3"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point4" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point4"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point5" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point5"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point6" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point6"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point7" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point7"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point8" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point8"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point9" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point9"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point10" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer/ArmorPoints/Point10"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="ShieldStat" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Shield"
+
+[node name="ShieldAmount" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "10"
+
+[node name="ShieldPoints" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="Point" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point2" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point2"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point3" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point3"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point4" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point4"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point5" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point5"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point6" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point6"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point7" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point7"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point8" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point8"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point9" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point9"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point10" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer/ShieldPoints/Point10"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="ShieldRegenStat" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Title" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Sh. Regen"
+
+[node name="ShieldRegenAmount" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "10"
+
+[node name="ShieldRegenPoints" type="HBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="Point" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point2" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point2"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point3" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point3"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point4" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point4"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point5" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point5"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point6" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point6"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point7" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point7"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point8" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point8"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point9" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point9"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="Point10" type="Control" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer/ShieldRegenPoints/Point10"]
+position = Vector2(8, 12)
+polygon = PackedVector2Array(0, -10, 10, -10, 0, 10, -10, 10)
+
+[node name="OtherStats" type="VBoxContainer" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/OtherStats"]
+layout_mode = 2
+text = "+ 20% Attack Speed
++ 75% Energy Dmg"
+
+[node name="SelectButton" parent="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer" instance=ExtResource("4_m1e70")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 0.337255)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_1qb1a")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8n72f")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_mbi5q")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ystpj")
+text = "Select"
+hover_underline_effect = false
+
+[connection signal="pressed" from="Left/MarginContainer/Main/Center/ShipsButton" to="." method="_on_ships_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/Main/Bottom/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/Ships/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/SelectButton" to="." method="_on_select_button_pressed"]

@@ -126,18 +126,18 @@ func set_structure_data(data: Dictionary):
 
 func land_player_on(username: String, structure_name: String):
 	if structure_name == name:
-		var player = GameManager.get_player(username)
+		var player: Player = GameManager.get_player(username)
 		player.land_on(self)
 
 func handle_landing(_delta: float):
+	if !Input.is_action_just_pressed("Land"): return
 	if !landable: return
 	if !GameManager.local_player: return
 	if GameManager.local_player.landed_structure != null: return
 	if !GameManager.local_player.alive: return
 	
-	if Input.is_action_just_pressed("Land"):
-		if get_overlapping_bodies().has(GameManager.local_player):
-			request_land.rpc_id(1, AuthManager.my_username, name)
+	if get_overlapping_bodies().has(GameManager.local_player):
+		request_land.rpc_id(1, AuthManager.my_username, name)
 
 func try_to_land(_username: String, _structure_name: String): pass # Only Server
 

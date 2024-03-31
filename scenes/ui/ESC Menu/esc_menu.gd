@@ -1,6 +1,6 @@
 extends Control
 
-@onready var menu_width = 300.0
+@onready var menu_width = 350.0
 @onready var main_section = $PanelContainer/MarginContainer/Main
 @onready var settings_section = $PanelContainer/MarginContainer/Settings
 

@@ -307,12 +307,16 @@ func camera_zoom_out(delta: float) -> void:
 	GlobalSignals.emit_signal("camera_offset", camera_offset)
 
 func set_ship(new_ship_name: String):
+	if new_ship_name == ship.name: return
+	
 	var new_ship: ShipComponent = ShipManager.get_ship(new_ship_name)
 	if new_ship == null: return
 	ship.queue_free()
 	add_child(new_ship)
 	ship = new_ship
 	engine = ship.engine
+
+## 		Landing
 
 func land_on(structure: Structure):
 	landed_structure = structure
@@ -331,6 +335,11 @@ func land_on(structure: Structure):
 		if landed_structure is Hangar:
 			GlobalSignals.open_ui.emit("hangar")
 			GlobalSignals.set_ui_args.emit(landed_structure.get_structure_data())
+		
+		else:
+			GlobalSignals.open_ui.emit("structure")
+			GlobalSignals.set_ui_args.emit(landed_structure.get_structure_data())
+			
 	
 	elif !IS_MAIN_PLAYER:
 		nickname_container.hide()

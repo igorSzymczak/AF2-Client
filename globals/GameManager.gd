@@ -94,7 +94,6 @@ func get_player(username: String):
 
 signal weapon_fired(shooter_name: String, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
 
-signal player_nickname(nick: String)
 func get_player_nickname(username: String) -> String:
 	if Players.has(username):
 		return Players[username]["nickname"]

@@ -58,7 +58,7 @@ func add_player_character(username: String):
 	#print("Successfully added new player character: " + str(username) + "!")
 	GameManager.add_player(username)
 	
-	if username == AuthManager.my_username or username == UserPreferences.load_or_create().nickname:
+	if username == AuthManager.my_username:
 		local_player_character = player_character
 		GameManager.local_player = player_character
 		GlobalSignals.emit_signal("give_main_player", local_player_character)
@@ -94,7 +94,6 @@ func set_planets_positions(planets_positions: Array):
 
 
 func client_signals():
-	GameManager.connect("player_nickname", handle_update_nickname)
 	GameManager.connect("local_player_position", handle_update_position)
 	GameManager.connect("local_player_rotation", handle_update_rotation)
 	GameManager.connect("local_player_velocity", handle_update_velocity)
@@ -106,7 +105,6 @@ func client_signals():
 
 ## PLAYERS
 
-func handle_update_nickname(nick: String): update_player_nickname.rpc_id(1, AuthManager.my_username, nick)
 func handle_update_position(pos: Vector2): update_player_position.rpc_id(1, AuthManager.my_username, pos)
 func handle_update_rotation(rot: float): update_player_rotation.rpc_id(1, AuthManager.my_username, rot)
 func handle_update_velocity(vel: Vector2): update_player_velocity.rpc_id(1, AuthManager.my_username, vel)

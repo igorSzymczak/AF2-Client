@@ -17,3 +17,11 @@ signal received_message(message: String)
 func broadcast_message(message: String):
 	received_message.emit(message)
 
+signal nickname_changed(nickname: String)
+@rpc("any_peer", "call_remote", "reliable")
+func request_nickname_change(username: String, nickname: String):
+	try_nickname_change(username, nickname)
+
+
+func try_nickname_change(_username: String, _nickname: String):
+	pass # Only Server

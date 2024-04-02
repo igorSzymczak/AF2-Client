@@ -30,8 +30,8 @@ var default_screen = "register"
 var user_prefs: UserPreferences
 func _ready():
 	user_prefs = UserPreferences.load_or_create()
-	if user_prefs and user_prefs.default_auth_screen:
-		default_screen = user_prefs.default_auth_screen
+	if user_prefs and !user_prefs.last_username.is_empty():
+		default_screen = "login"
 	
 	error_label.hide()
 	success_label.hide()
@@ -39,6 +39,14 @@ func _ready():
 		_switch_to_login()
 	else:
 		_switch_to_register()
+	
+	var last_username: String
+	
+	if user_prefs and user_prefs.last_username:
+		last_username = user_prefs.last_username
+	
+	if !last_username.is_empty():
+		login_username.set_text(last_username)
 	
 	# Hiding Messages on Text Change
 	register_username.text_changed.connect(hide_messages)
@@ -62,6 +70,12 @@ func _ready():
 	
 	AuthManager.error.connect(throw_error)
 	AuthManager.success.connect(throw_success)
+	AuthManager.logged_in.connect(_handle_logged_in)
+
+func _handle_logged_in():
+	if user_prefs:
+		user_prefs.last_username = AuthManager.my_username
+		user_prefs.save()
 
 func hide_messages(_ignored):
 	error_label.hide()
@@ -69,7 +83,10 @@ func hide_messages(_ignored):
 
 func _switch_to_login():
 	print("Switched to Login Screen")
-	login_username.grab_focus()
+	if user_prefs and !user_prefs.last_username.is_empty():
+		login_password.grab_focus()
+	else:
+		login_username.grab_focus()
 	
 	register_screen.hide()
 	login_screen.show()
@@ -85,6 +102,7 @@ func _switch_to_register():
 
 func _handle_register_enter(_ignored): submit_register()
 
+var registered_username
 func submit_register():
 	var provided_username = register_username.text
 	var provided_password = register_password.text
@@ -113,6 +131,7 @@ func submit_register():
 	elif provided_password != provided_password_rep:
 		throw_error(011) ## Password1 is not Password2
 	else:
+		registered_username = provided_username
 		var username = provided_username
 		var password = provided_password
 		AuthManager.request_register.rpc_id(1, username, password)
@@ -176,10 +195,13 @@ func throw_success(code: int):
 		register_username.clear()
 		register_password.clear()
 		register_password_rep.clear()
+		# User created a account, set default login and switch to login screen
+		login_username.set_text(registered_username)
+		if user_prefs:
+			user_prefs.last_username = registered_username
+			user_prefs.save()
 		
-		# User created a account, so set logging in as default screen
-		user_prefs.default_auth_screen = "login"
-		user_prefs.save()
+		_switch_to_login()
 		
 	elif code == 1:
 		message = "Logged In Successfully!"

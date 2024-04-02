@@ -47,11 +47,13 @@ var can_perform_actions = true
 ## Planets
 
 
-func add_planet(planet_name: String, pos: Vector2):
+func add_planet(planet_name: String, pos: Vector2, landable: bool, is_safezone: bool):
 	if !Planets.has(planet_name):
 		Planets[planet_name] = {
 			"name": planet_name,
 			"global_position": pos,
+			"landable": landable,
+			"is_safezone": is_safezone
 		}
 
 func get_planet_position(planet_name: String) -> Vector2:
@@ -62,6 +64,18 @@ func update_planet_position(planet_name: String, pos: Vector2):
 	if Planets.has(planet_name):
 		Planets[planet_name]["global_position"] = pos
 
+func get_planet_landable(planet_name: String) -> bool:
+	if Planets.has(planet_name):
+		return Planets[planet_name]["landable"]
+	return false
+func update_planet_landable(planet_name: String, landable: bool):
+	if Planets.has(planet_name):
+		Planets[planet_name]["landable"] = landable
+
+func get_planet_is_safezone(planet_name: String) -> bool:
+	if Planets.has(planet_name):
+		return Planets[planet_name]["is_safezone"]
+	return false
 
 ## Players
 
@@ -79,7 +93,8 @@ func add_player(username):
 			"health": player.health_component.MAX_HEALTH,
 			"shield": player.health_component.MAX_SHIELD,
 			"alive": player.alive,
-			"ship_name": "NexarCarrier"
+			"ship_name": "NexarCarrier",
+			"monitorable": false,
 		}
 
 func remove_player(username: String):
@@ -173,6 +188,14 @@ func update_player_ship_name(username: String, ship_name: String):
 	if Players.has(username):
 		Players[username]["ship_name"] = ship_name
 
+func get_player_monitorable(username: String) -> bool:
+	if Players.has(username):
+		return Players[username]["monitorable"]
+	return false
+func update_player_monitorable(username: String, monitorable: bool):
+	if Players.has(username):
+		Players[username]["monitorable"] = monitorable
+
 signal death_args(args: Dictionary)
 
 signal player_info(player_info: Dictionary)
@@ -205,7 +228,6 @@ func add_bullet(
 ):
 	if !Bullets.has(bullet_name):
 		var bullet_scene: PackedScene = BulletScenes[bullet_path]
-		#print(bullet_path)
 		Bullets[bullet_name] = {
 			"name": bullet_name,
 			"global_position": global_pos,
@@ -246,20 +268,10 @@ func remove_bullet(bullet_name: String):
 ## Spawners
 
 
-func add_spawner(spawner_name: String, id: int, global_position: Vector2, rotation: float,
-				health: float, shield: float, eye_pos: Vector2, eye_trigger: bool, active: bool):
+func add_spawner(spawner: Dictionary):
+	var id = spawner.id
 	if !Spawners.has(id):
-		Spawners[id] = {
-			"name": spawner_name,
-			"id": id,
-			"global_position": global_position,
-			"rotation": rotation,
-			"health": health,
-			"shield": shield,
-			"eye_position": eye_pos,
-			"eye_trigger": eye_trigger,
-			"active": active
-		}
+		Spawners[id] = spawner
 
 func update_spawner_position(id: int, pos: Vector2):
 	if Spawners.has(id):
@@ -310,7 +322,6 @@ func get_spawner_eye_trigger(id: int) -> bool:
 	return false
 
 func update_spawner_active(id: int, active: bool):
-	print("set active to: " + str(active))
 	if Spawners.has(id):
 		Spawners[id]["active"] = active
 func get_spawner_active(id: int) -> bool:

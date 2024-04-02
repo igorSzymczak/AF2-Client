@@ -258,7 +258,7 @@ func handle_change_weapon() -> void:
 		handle_shoot()
 
 func handle_shoot() -> void:
-	if alive and GameManager.can_perform_actions and not GameManager.is_mouse_over_menu():
+	if alive and GameManager.can_perform_actions and not GameManager.is_mouse_over_menu() and GameManager.get_player_monitorable(name):
 		var index: int = GameManager.PlayerInfo.current_weapon
 		var power_usage: float = GameManager.PlayerInfo.weapons[index].power_usage
 		var current_power: float = GameManager.PlayerInfo.current_power

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://2t5noopc2okk"]
+[gd_scene load_steps=43 format=3 uid="uid://2t5noopc2okk"]
 
 [ext_resource type="Script" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
 [ext_resource type="Shader" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
@@ -14,8 +14,11 @@
 [ext_resource type="Shader" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
 [ext_resource type="Texture2D" uid="uid://c83eeqogs1wdh" path="res://assets/structures/planets/eath_512.jpg" id="10_26elg"]
 [ext_resource type="PackedScene" uid="uid://uuy2hrkbxif3" path="res://scenes/objects/Structures/Hangar/hangar.tscn" id="12_uiqek"]
+[ext_resource type="Texture2D" uid="uid://c8yex6f1sds5l" path="res://assets/structures/InvertGlow.png" id="14_4cia3"]
 [ext_resource type="PackedScene" uid="uid://cu67f3v2dyl2k" path="res://scenes/bosses/Homerus/homerus.tscn" id="14_t01pc"]
 [ext_resource type="Texture2D" uid="uid://ds2tfqapyfhvw" path="res://assets/structures/Hangar.png" id="15_3expg"]
+[ext_resource type="Shader" path="res://scenes/ui/power bar/power_bar.gdshader" id="15_ry44w"]
+[ext_resource type="Shader" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="18_gmaqq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgsy"]
 shader = ExtResource("2_q65fh")
@@ -42,6 +45,69 @@ radius = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jkw5k"]
 radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1j1jk"]
+radius = 500.0
+
+[sub_resource type="Gradient" id="Gradient_pm7ta"]
+offsets = PackedFloat32Array(0, 0.527363, 1)
+colors = PackedColorArray(0.25098, 0.407843, 0.698039, 1, 0.360784, 0.584314, 1, 1, 0.195201, 0.202001, 0.277222, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n5o8"]
+gradient = SubResource("Gradient_pm7ta")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d828q"]
+seed = 4
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_d828q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4dtfb"]
+shader = ExtResource("18_gmaqq")
+shader_parameter/scroll1 = Vector2(-0.135, -0.01)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
+shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_462n5"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_prjor")
+
+[sub_resource type="Gradient" id="Gradient_4goaf"]
+offsets = PackedFloat32Array(0, 0.191824, 0.435, 0.68)
+colors = PackedColorArray(0, 0, 0, 1, 0.940404, 0, 0.0124335, 1, 0.996148, 0.449134, 9.62615e-07, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n1ep3"]
+gradient = SubResource("Gradient_4goaf")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m8xj3"]
+seed = 4
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rk3le"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_m8xj3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0kn8"]
+shader = ExtResource("15_ry44w")
+shader_parameter/scroll1 = Vector2(0.045, 0.11)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
+shader_parameter/texture2 = SubResource("NoiseTexture2D_rk3le")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_n1ep3")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8e34m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_076eo"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_8e34m")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23ch"]
 radius = 225.0
@@ -109,34 +175,100 @@ shape = SubResource("CircleShape2D_lw624")
 self_modulate = Color(1.3, 1.2, 1.1, 1)
 texture = ExtResource("8_j6wtj")
 
-[node name="TemporaryHangar" parent="Planets/Sun" instance=ExtResource("12_uiqek")]
-position = Vector2(-272, 0)
+[node name="TemporaryHangar" parent="Planets/Sun" node_paths=PackedStringArray("aura_blue", "aura_red") instance=ExtResource("12_uiqek")]
+position = Vector2(-704, -440)
 landable = true
 orbit_time_MS = 5000.0
+aura_blue = NodePath("AuraBlue")
+aura_red = NodePath("AuraRed")
 poi_type = "hangar"
 
 [node name="LandArea" type="CollisionShape2D" parent="Planets/Sun/TemporaryHangar"]
+visible = false
 shape = SubResource("CircleShape2D_jkw5k")
+
+[node name="SafeZone" type="Area2D" parent="Planets/Sun/TemporaryHangar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planets/Sun/TemporaryHangar/SafeZone"]
+shape = SubResource("CircleShape2D_1j1jk")
+debug_color = Color(0, 0.819608, 0, 0.152941)
 
 [node name="Sprite" type="Sprite2D" parent="Planets/Sun/TemporaryHangar"]
 scale = Vector2(1.69375, 1.69375)
 texture = ExtResource("15_3expg")
 
-[node name="Aerth" parent="Planets/Sun" node_paths=PackedStringArray("local_sun") instance=ExtResource("7_q3uef")]
-position = Vector2(1078, 267)
+[node name="AuraBlue" type="Sprite2D" parent="Planets/Sun/TemporaryHangar"]
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderBlue" type="Sprite2D" parent="Planets/Sun/TemporaryHangar/AuraBlue"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4dtfb")
+position = Vector2(2.58716, 1.15637)
+scale = Vector2(1.74183, 1.61305)
+texture = SubResource("NoiseTexture2D_462n5")
+
+[node name="AuraRed" type="Sprite2D" parent="Planets/Sun/TemporaryHangar"]
+visible = false
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderRed" type="Sprite2D" parent="Planets/Sun/TemporaryHangar/AuraRed"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_n0kn8")
+position = Vector2(15.4963, -39.7095)
+scale = Vector2(1.99001, 1.9803)
+texture = SubResource("NoiseTexture2D_076eo")
+
+[node name="Aerth" parent="Planets/Sun" node_paths=PackedStringArray("aura_blue", "aura_red", "local_sun") instance=ExtResource("7_q3uef")]
+position = Vector2(1462, 459)
 landable = true
 orbit_time_MS = -6000.0
+aura_blue = NodePath("AuraBlue")
+aura_red = NodePath("AuraRed")
 is_shadered = true
 local_sun = NodePath("..")
 
 [node name="LandArea" type="CollisionShape2D" parent="Planets/Sun/Aerth"]
+visible = false
 shape = SubResource("CircleShape2D_t23ch")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Sprite" type="Sprite2D" parent="Planets/Sun/Aerth"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_4jygj")
 scale = Vector2(0.718765, 1.44531)
 texture = ExtResource("10_26elg")
+
+[node name="AuraBlue" type="Sprite2D" parent="Planets/Sun/Aerth"]
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(0.56, 0.56)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderBlue" type="Sprite2D" parent="Planets/Sun/Aerth/AuraBlue"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4dtfb")
+position = Vector2(2.58716, 1.15637)
+scale = Vector2(1.74183, 1.61305)
+texture = SubResource("NoiseTexture2D_462n5")
+
+[node name="AuraRed" type="Sprite2D" parent="Planets/Sun/Aerth"]
+visible = false
+clip_children = 1
+scale = Vector2(0.56, 0.56)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderRed" type="Sprite2D" parent="Planets/Sun/Aerth/AuraRed"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_n0kn8")
+position = Vector2(15.4963, -39.7095)
+scale = Vector2(1.99001, 1.9803)
+texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Homerus" parent="." instance=ExtResource("14_t01pc")]
 position = Vector2(-7, -3047)

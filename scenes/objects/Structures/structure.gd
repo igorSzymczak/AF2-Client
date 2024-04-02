@@ -5,6 +5,9 @@ class_name Structure
 @export var orbit_time_MS: float
 @export var is_shown: bool = true
 
+@export var aura_blue: Node2D
+@export var aura_red: Node2D
+
 const time_multiplier: float = 12
 
 @export var is_sun: bool = false
@@ -13,6 +16,9 @@ const time_multiplier: float = 12
 @onready var orbit: Structure
 @onready var sprite: Sprite2D = $Sprite
 @onready var land_area: CollisionShape2D = $LandArea
+
+var is_safezone: bool = false
+var safezone: Area2D
 
 @export var poi_type: String = "planet"
 	
@@ -28,12 +34,23 @@ func _ready():
 		$Sprite.visible = false
 
 func _process(delta: float) -> void:
+	set_safezone()
+	
 	update_server_position()
+	update_landable()
 	
 	self_orbit(delta)
 	update_shader(delta)
 	handle_landing(delta)
 
+func set_safezone():
+	if !is_safezone:
+		is_safezone = GameManager.get_planet_is_safezone(name)
+		if !is_safezone: return
+	if is_instance_valid(safezone): return
+	
+	safezone = $SafeZone
+	
 var server_pos := Vector2.ZERO
 func update_server_position():
 	var temp = GameManager.get_planet_position(name)
@@ -41,6 +58,38 @@ func update_server_position():
 	if temp != server_pos:
 		server_pos = temp
 		global_position = server_pos
+
+@onready var server_landable: bool = landable
+func update_landable():
+	server_landable = GameManager.get_planet_landable(name)
+	if server_landable != landable:
+		landable = server_landable
+		
+		if !is_instance_valid(aura_blue) or !is_instance_valid(aura_red):
+			return
+		
+		aura_blue.show()
+		aura_red.show()
+		
+		if landable:
+			var blue_tween := create_tween()
+			blue_tween.tween_property(aura_blue, "modulate:a", 1, 2)
+			
+			var red_tween := create_tween()
+			red_tween.tween_property(aura_red, "modulate:a", 0, 2)
+			
+			await get_tree().create_timer(2).timeout
+			if landable: aura_red.hide()
+			
+		elif !landable:
+			var blue_tween := create_tween()
+			blue_tween.tween_property(aura_blue, "modulate:a", 0, 2)
+			
+			var red_tween := create_tween()
+			red_tween.tween_property(aura_red, "modulate:a", 1, 2)
+			
+			await get_tree().create_timer(2).timeout
+			if landable: aura_blue.hide()
 
 func self_orbit(delta: float) -> void:
 	if !orbit:

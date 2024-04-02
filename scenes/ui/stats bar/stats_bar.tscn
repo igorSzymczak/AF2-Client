@@ -11,14 +11,14 @@
 offsets = PackedFloat32Array(0, 0.527363, 1)
 colors = PackedColorArray(0.25098, 0.407843, 0.698039, 1, 0.360784, 0.584314, 1, 1, 0.195201, 0.202001, 0.277222, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n5o8"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kqnwa"]
 gradient = SubResource("Gradient_lk3i1")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jkul4"]
 seed = 4
 frequency = 0.0024
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_22i11"]
 generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_jkul4")
@@ -27,15 +27,15 @@ noise = SubResource("FastNoiseLite_jkul4")
 shader = ExtResource("1_e6rxl")
 shader_parameter/scroll1 = Vector2(-0.135, -0.01)
 shader_parameter/scroll2 = Vector2(-0.085, 0.095)
-shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
-shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+shader_parameter/texture2 = SubResource("NoiseTexture2D_22i11")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_kqnwa")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0024y"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aiud2"]
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_prjor")
+noise = SubResource("FastNoiseLite_0024y")
 
 [sub_resource type="Gradient" id="Gradient_bpfx1"]
 offsets = PackedFloat32Array(0, 0.636816, 1)

@@ -118,5 +118,13 @@ func handle_changing_menus():
 			if Time.get_ticks_msec() - 10 > chat.last_sent_time:
 				if !chat_message_input.has_focus():
 					chat_message_input.grab_focus()
+	if Input.is_action_just_pressed("Fullscreen"):
+		swap_fullscreen_mode()
 
 	chat.position.x = esc_menu.position.x + esc_menu.menu_width + default_chat_pos_x
+
+func swap_fullscreen_mode():
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

@@ -80,13 +80,18 @@ func add_previously_connected_player_characters(players: Dictionary):
 @rpc("authority", "call_local", "reliable")
 func update_planet_position(planet_name: String, pos: Vector2): GameManager.update_planet_position(planet_name, pos)
 
+@rpc("authority", "call_local", "reliable")
+func update_planet_landable(planet_name: String, landable: bool): GameManager.update_planet_landable(planet_name, landable)
+
 @rpc # Only Clients
 func add_existing_planets(Planets: Dictionary):
 	for i in Planets:
 		var planet_name: String = Planets[i]["name"]
 		var pos: Vector2 = Planets[i]["global_position"]
+		var landable: bool = Planets[i]["landable"]
+		var is_safezone: bool = Planets[i]["is_safezone"]
 		
-		GameManager.add_planet(planet_name, pos)
+		GameManager.add_planet(planet_name, pos, landable, is_safezone)
 
 @rpc
 func set_planets_positions(planets_positions: Array):
@@ -138,6 +143,9 @@ func update_player_shield(username: String, shield: float): GameManager.update_p
 
 @rpc("authority", "call_local", "reliable")
 func update_player_alive(username: String, alive: bool): GameManager.update_player_alive(username, alive)
+
+@rpc("authority", "call_local", "reliable")
+func update_player_monitorable(username: String, monitorable: bool): GameManager.update_player_monitorable(username, monitorable)
 
 @rpc("authority", "call_local", "reliable")
 func update_player_ship_name(username: String, ship_name: String): GameManager.update_player_ship_name(username, ship_name)
@@ -203,17 +211,17 @@ func add_existing_spawners(Spawners: Dictionary):
 
 func handle_add_spawners(Spawners: Dictionary):
 	for i in Spawners:
-		var spawner_name = Spawners[i]["name"]
-		var id = Spawners[i]["id"]
-		var pos = Spawners[i]["global_position"]
-		var rot = Spawners[i]["rotation"]
-		var health = Spawners[i]["health"]
-		var shield = Spawners[i]["shield"]
-		var eye_pos = Spawners[i]["eye_position"]
-		var eye_trigger = Spawners[i]["eye_trigger"]
-		var active = Spawners[i]["active"]
-		GameManager.add_spawner(spawner_name, id, pos, rot, health, shield, eye_pos, eye_trigger, active)
-		create_spawner(id)
+		#var spawner_name = Spawners[i]["name"]
+		#var id = Spawners[i]["id"]
+		#var pos = Spawners[i]["global_position"]
+		#var rot = Spawners[i]["rotation"]
+		#var health = Spawners[i]["health"]
+		#var shield = Spawners[i]["shield"]
+		#var eye_pos = Spawners[i]["eye_position"]
+		#var eye_trigger = Spawners[i]["eye_trigger"]
+		#var active = Spawners[i]["active"]
+		GameManager.add_spawner(Spawners[i])
+		create_spawner(Spawners[i].id)
 
 # Client
 func create_spawner(id: int):

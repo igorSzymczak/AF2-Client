@@ -5,9 +5,21 @@ extends Control
 
 @onready var messages_container = %MessagesContainer
 @onready var message_input = %MessageInput
+@onready var scroll_container = %ScrollContainer
+@onready var scrollbar: VScrollBar = scroll_container.get_v_scroll_bar()
 @onready var default_placeholder: String = message_input.placeholder_text
+
+var max_scroll
 func _ready():
 	ChatManager.received_message.connect(create_message)
+	scrollbar.changed.connect(scroll_to_bottom)
+	max_scroll = scrollbar.max_value
+
+
+func scroll_to_bottom():
+	if max_scroll != scrollbar.max_value:
+		max_scroll = scrollbar.max_value
+		scroll_container.scroll_vertical = scrollbar.max_value
 
 func remove_overflow():
 	if is_instance_valid(messages_container):

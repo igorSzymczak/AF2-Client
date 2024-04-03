@@ -84,6 +84,7 @@ func activate() -> void:
 	
 	health_component.set_visible(true)
 	hitbox_component.set_monitorable(true)
+	GlobalSignals.emit_signal("setup_poi", self)
 
 func deactivate() -> void:
 	GlobalSignals.emit_signal("delete_poi", self)

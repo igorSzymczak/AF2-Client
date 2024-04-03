@@ -19,6 +19,7 @@ var landed_structure: Structure = null
 @onready var ship: ShipComponent = $ShipComponent
 @onready var engine: Thruster = $ShipComponent/Engine
 @onready var camera: Camera2D = $Camera2D
+@onready var reticle: Sprite2D = $Reticle
 
 var nickname: String
 
@@ -47,6 +48,7 @@ func _ready() -> void:
 	if !IS_MAIN_PLAYER:
 		camera.set_enabled(false)
 		call_deferred("other_player_setup_poi")
+		reticle.hide()
 
 func other_player_setup_poi():
 	GlobalSignals.emit_signal("setup_poi", self)
@@ -84,6 +86,9 @@ func _physics_process(delta: float) -> void:
 			regen_power(delta)
 		
 		emit_server_signals()
+		
+		handle_reticle(delta)
+		
 	else:
 		handle_other_player(delta)
 
@@ -238,6 +243,19 @@ func handle_movement(delta: float) -> void:
 func handle_death() -> void:
 	GlobalSignals.emit_signal("create_explosion", global_position, "explosion_large", 1, {})
 
+func handle_reticle(delta: float):
+	if user_prefs.disable_mouse_aim:
+		var power: float = min(1.0, max(0.0, velocity.length() / 100.0))
+		var reticle_scale: float = 1.0 + sin( float(Time.get_ticks_msec()) / 250.0 ) / 5.0
+			
+		reticle.global_rotation += delta * power
+		reticle.scale = Vector2(reticle_scale, reticle_scale)
+		if !GameManager.get_player_monitorable(name):
+			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 0, delta * 5) 
+		else:
+			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 1, delta * 5) 
+	else:
+		reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 0, delta * 5) 
 
 var engine_active: bool
 func handle_thrust() -> void:

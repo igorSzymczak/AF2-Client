@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cu0u4mqhf2e0w"]
+[gd_scene load_steps=9 format=3 uid="uid://cu0u4mqhf2e0w"]
 
 [ext_resource type="Script" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_5ttqo"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
+[ext_resource type="Texture2D" uid="uid://b1gyqxf8ompt1" path="res://assets/ui/other/Reticle.png" id="6_rarct"]
 [ext_resource type="PackedScene" uid="uid://y4hetgssvu6u" path="res://assets/ships/Nexar Reaver/nexar_reaver.tscn" id="7_ec8if"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
@@ -83,3 +84,7 @@ text = "Nickname"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="Reticle" type="Sprite2D" parent="."]
+position = Vector2(900, 0)
+texture = ExtResource("6_rarct")

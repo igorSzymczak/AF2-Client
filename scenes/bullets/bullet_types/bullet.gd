@@ -21,7 +21,7 @@ var current_life_time: int
 var server_timestamp: int
 
 @onready var initial_scale: Vector2 = $BulletSprite.get_scale()
-@onready var shoot_time: int = server_timestamp - current_life_time
+@onready var shoot_time: int
 
 var server_pos: Vector2
 
@@ -32,16 +32,21 @@ func _ready():
 	rotation = direction_speed.angle()
 	
 	## Calculate the route bullet already did on server
-	var t: int = roundi(Time.get_unix_time_from_system() * 1000)
+	var t: int = roundi(Time.get_unix_time_from_system() * 100)
 	var latency = t - server_timestamp
-	var delta_time: int = roundi(get_physics_process_delta_time() * 1000.0)
+	shoot_time = Time.get_ticks_msec() - latency
+	var delta_time: int = roundi(get_physics_process_delta_time() * 1000)
 	var client_life_time := delta_time
 	while client_life_time < latency:
 		client_life_time += delta_time
 		update_position()
 	if is_deterministic:
 		global_position = calculated_global_position
-
+	
+	print(latency)
+	#print("if shoot_time + life_time - current_time <= time_to_vanish")
+	
+	
 func _physics_process(delta: float) -> void:
 	if !GameManager.Bullets.has(name): crash_bullet()
 	
@@ -84,12 +89,14 @@ func special_effects() -> void:
 	pass
 
 func bullet_scale_out() -> void:
-	var current_time: int = roundi(Time.get_unix_time_from_system() * 1000)
+	var current_time: int = Time.get_ticks_msec()
+	#print("if " + str(shoot_time) + " + " + str(life_time) + " - " + str(current_time) + " <= " + str(time_to_vanish))
 	if shoot_time + life_time - current_time <= time_to_vanish:
 		var new_scale = (shoot_time + life_time - current_time) / time_to_vanish
 		$BulletSprite.set_scale(Vector2(initial_scale.x * new_scale, initial_scale.y * new_scale))
 		
 	if current_time - shoot_time >= life_time:
+		#print("bullet destroyed")
 		# Bullet Ran out of Life Time
 		GameManager.remove_bullet(name)
 		queue_free()

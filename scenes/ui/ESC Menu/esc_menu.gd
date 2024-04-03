@@ -8,6 +8,8 @@ extends Control
 @onready var default_section_pos_x: float = 30.0
 func _ready():
 	position.x = -menu_width
+	main_section.show()
+	settings_section.hide()
 
 func _process(delta):
 	play_current_animation(delta)

@@ -6,6 +6,7 @@ extends Control
 @onready var effects_slider = %SFXVolumeSlider
 @onready var interface_slider = %InterfaceVolumeSlider
 @onready var ambience_slider = %AmbienceVolumeSlider
+@onready var dma_checkbox = %DisableMouseAim
 
 var user_prefs: UserPreferences
 
@@ -15,6 +16,9 @@ func _ready():
 	if effects_slider: effects_slider.value = user_prefs.effects_audio_level
 	if interface_slider: interface_slider.value = user_prefs.interface_audio_level
 	if ambience_slider: ambience_slider.value = user_prefs.ambience_audio_level
+	
+	if dma_checkbox: dma_checkbox.button_pressed = user_prefs.disable_mouse_aim
+	
 
 func _on_music_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(music_slider.bus_index, linear_to_db(value))
@@ -39,4 +43,9 @@ func _on_ambience_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(ambience_slider.bus_index, linear_to_db(value))
 	if user_prefs:
 		user_prefs.ambience_audio_level = value
+		user_prefs.save()
+
+func _on_disable_mouse_aim_pressed():
+	if user_prefs:
+		user_prefs.disable_mouse_aim = !user_prefs.disable_mouse_aim
 		user_prefs.save()

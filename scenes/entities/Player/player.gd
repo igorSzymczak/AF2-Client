@@ -26,7 +26,10 @@ var IS_MAIN_PLAYER: bool
 
 var default_label_pos: Vector2
 var alive: = true
+var user_prefs: UserPreferences
 func _ready() -> void:
+	user_prefs = UserPreferences.load_or_create()
+	
 	nickname = name
 	nickname_label.set_text(nickname)
 	default_label_pos = nickname_container.position
@@ -203,10 +206,18 @@ func handle_other_player(delta) -> void:
 var direction := Vector2.ZERO
 func handle_movement(delta: float) -> void:
 	# Rotate the player towards the mouse at a set turn speed
-	if IS_MAIN_PLAYER and landed_structure == null:
-		var target_rotation = global_position.angle_to_point(get_global_mouse_position())
-		rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
-	
+	if !user_prefs.disable_mouse_aim:
+		if IS_MAIN_PLAYER and landed_structure == null:
+			var target_rotation = global_position.angle_to_point(get_global_mouse_position())
+			rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
+	elif user_prefs.disable_mouse_aim:
+		if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
+			pass
+		elif Input.is_action_pressed("TurnLeft"):
+			rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta)
+		elif Input.is_action_pressed("TurnRight"):
+			rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta)
+
 	if landed_structure == null:
 		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 		direction = Vector2(cos(rotation), sin(rotation))

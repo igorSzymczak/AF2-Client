@@ -168,75 +168,107 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
-[node name="SettingsTitle" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="Sound" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+
+[node name="SoundSettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-text = "Settings"
+text = "Audio
+"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-theme_override_constants/separation = 30
 
-[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+[node name="MusicVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Music"
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
-custom_minimum_size = Vector2(0, 15)
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "SFX Volume"
 horizontal_alignment = 1
 
-[node name="SFXVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+[node name="SFXVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Effects"
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
-custom_minimum_size = Vector2(0, 15)
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="InterfaceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="InterfaceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Interface Volume"
 horizontal_alignment = 1
 
-[node name="InterfaceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+[node name="InterfaceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Interface"
 
-[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
-custom_minimum_size = Vector2(0, 15)
+[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="AmbienceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="AmbienceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Ambience Volume"
 horizontal_alignment = 1
 
-[node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" instance=ExtResource("6_77mv8")]
+[node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Interface"
 
-[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
-custom_minimum_size = Vector2(0, 15)
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Gameplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+layout_mode = 2
+
+[node name="GameplaySettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Gameplay"
+horizontal_alignment = 1
+
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="DisableMouseAim" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 16
+theme_override_constants/check_v_offset = 0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 23
+text = "Disable Mouse Aim"
+alignment = 1
+icon_alignment = 1
+expand_icon = true
 
 [node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings"]
 layout_mode = 2
@@ -256,8 +288,9 @@ text = "Return"
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/Main/Center/SettingsButton" to="." method="_on_settings_button_button_down"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Bottom/QuitButton" to="PanelContainer/MarginContainer/Main" method="_on_quit_button_pressed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/InterfaceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_interface_volume_slider_value_changed"]
-[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/AmbienceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_ambience_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/InterfaceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_interface_volume_slider_value_changed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/AmbienceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_ambience_volume_slider_value_changed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay/DisableMouseAim" to="PanelContainer/MarginContainer/Settings" method="_on_disable_mouse_aim_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/Bottom/ReturnToMainButton" to="." method="_on_return_to_main_button_pressed"]

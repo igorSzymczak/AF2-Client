@@ -208,6 +208,8 @@ func handle_other_player(delta) -> void:
 		GlobalSignals.emit_signal("delete_poi", self)
 		call_deferred("queue_free")
 
+var last_rotation_dir := 0.0
+var rotation_acceleration := 0.0
 var direction := Vector2.ZERO
 func handle_movement(delta: float) -> void:
 	# Rotate the player towards the mouse at a set turn speed
@@ -219,9 +221,16 @@ func handle_movement(delta: float) -> void:
 		if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
 			pass
 		elif Input.is_action_pressed("TurnLeft"):
-			rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta)
+			last_rotation_dir = PI
+			rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+			rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta * rotation_acceleration)
 		elif Input.is_action_pressed("TurnRight"):
-			rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta)
+			last_rotation_dir = -PI
+			rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+			rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta * rotation_acceleration)
+		else:
+			rotation_acceleration = max(0.0, rotation_acceleration - delta * 6)
+			rotation = rotate_toward(rotation, rotation + last_rotation_dir, TURN_SPEED * delta * rotation_acceleration)
 
 	if landed_structure == null:
 		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
@@ -244,7 +253,7 @@ func handle_death() -> void:
 	GlobalSignals.emit_signal("create_explosion", global_position, "explosion_large", 1, {})
 
 func handle_reticle(delta: float):
-	if user_prefs.disable_mouse_aim:
+	if user_prefs.reticle:
 		var power: float = min(1.0, max(0.0, velocity.length() / 100.0))
 		var reticle_scale: float = 1.0 + sin( float(Time.get_ticks_msec()) / 250.0 ) / 5.0
 			

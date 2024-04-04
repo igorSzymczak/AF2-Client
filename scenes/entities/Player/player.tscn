@@ -86,5 +86,7 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="Reticle" type="Sprite2D" parent="."]
+z_index = 100
+z_as_relative = false
 position = Vector2(900, 0)
 texture = ExtResource("6_rarct")

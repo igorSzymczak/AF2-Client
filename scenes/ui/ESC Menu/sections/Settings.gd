@@ -7,6 +7,7 @@ extends Control
 @onready var interface_slider = %InterfaceVolumeSlider
 @onready var ambience_slider = %AmbienceVolumeSlider
 @onready var dma_checkbox = %DisableMouseAim
+@onready var reticle_checkbox = %Reticle
 
 var user_prefs: UserPreferences
 
@@ -18,6 +19,7 @@ func _ready():
 	if ambience_slider: ambience_slider.value = user_prefs.ambience_audio_level
 	
 	if dma_checkbox: dma_checkbox.button_pressed = user_prefs.disable_mouse_aim
+	if reticle_checkbox: reticle_checkbox.button_pressed = user_prefs.reticle
 	
 
 func _on_music_volume_slider_value_changed(value):
@@ -48,4 +50,10 @@ func _on_ambience_volume_slider_value_changed(value):
 func _on_disable_mouse_aim_pressed():
 	if user_prefs:
 		user_prefs.disable_mouse_aim = !user_prefs.disable_mouse_aim
+		user_prefs.save()
+
+
+func _on_reticle_pressed():
+	if user_prefs:
+		user_prefs.reticle = !user_prefs.reticle
 		user_prefs.save()

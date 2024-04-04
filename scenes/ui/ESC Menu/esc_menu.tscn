@@ -270,6 +270,25 @@ alignment = 1
 icon_alignment = 1
 expand_icon = true
 
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Reticle" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Shows which direction the player is aiming"
+theme_override_constants/h_separation = 16
+theme_override_constants/check_v_offset = 0
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 23
+text = "Show Reticle"
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
 [node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings"]
 layout_mode = 2
 offset_top = 888.0
@@ -293,4 +312,5 @@ text = "Return"
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/InterfaceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_interface_volume_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/AmbienceVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_ambience_volume_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay/DisableMouseAim" to="PanelContainer/MarginContainer/Settings" method="_on_disable_mouse_aim_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay/Reticle" to="PanelContainer/MarginContainer/Settings" method="_on_reticle_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/Bottom/ReturnToMainButton" to="." method="_on_return_to_main_button_pressed"]

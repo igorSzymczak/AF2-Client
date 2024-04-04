@@ -13,7 +13,7 @@ script = ExtResource("1_2c1t4")
 
 [node name="Game" parent="." instance=ExtResource("2_nkdw5")]
 visible = false
-z_index = 1
+z_index = 5
 
 [node name="DeathScreen" parent="." instance=ExtResource("3_xshnj")]
 visible = false

@@ -215,8 +215,22 @@ func handle_movement(delta: float) -> void:
 	# Rotate the player towards the mouse at a set turn speed
 	if !user_prefs.disable_mouse_aim:
 		if IS_MAIN_PLAYER and landed_structure == null:
-			var target_rotation = global_position.angle_to_point(get_global_mouse_position())
-			rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
+			var mouse_pos: Vector2 = get_global_mouse_position()
+			var target_rotation: float = global_position.angle_to_point(mouse_pos)
+			
+			if abs(angle_difference(rotation, target_rotation)) > TURN_SPEED * delta * 3:
+				## Increase acceleration
+				rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+				rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta * rotation_acceleration)
+			else:
+				if abs(angle_difference(rotation, target_rotation)) > TURN_SPEED * delta / 3:
+					## Increase acceleration
+					rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+				else:
+					## Decrease acceleration
+					rotation_acceleration = max(0.0, rotation_acceleration - delta * 12)
+				rotation = lerp_angle(rotation, target_rotation, delta * 9)
+			
 	elif user_prefs.disable_mouse_aim:
 		if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
 			pass

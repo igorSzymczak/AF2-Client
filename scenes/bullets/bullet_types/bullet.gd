@@ -43,7 +43,7 @@ func _ready():
 	if is_deterministic:
 		global_position = calculated_global_position
 	
-	print(latency)
+	#print(latency)
 	#print("if shoot_time + life_time - current_time <= time_to_vanish")
 	
 	

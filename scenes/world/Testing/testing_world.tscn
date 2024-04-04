@@ -227,7 +227,7 @@ texture = SubResource("NoiseTexture2D_076eo")
 [node name="Aerth" parent="Planets/Sun" node_paths=PackedStringArray("aura_blue", "aura_red", "local_sun") instance=ExtResource("7_q3uef")]
 position = Vector2(1462, 459)
 landable = true
-orbit_time_MS = -6000.0
+orbit_time_MS = -12000.0
 aura_blue = NodePath("AuraBlue")
 aura_red = NodePath("AuraRed")
 is_shadered = true

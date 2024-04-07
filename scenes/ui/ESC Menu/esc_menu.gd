@@ -3,6 +3,7 @@ extends Control
 @onready var menu_width = 350.0
 @onready var main_section = $PanelContainer/MarginContainer/Main
 @onready var settings_section = $PanelContainer/MarginContainer/Settings
+@onready var keybinds_section = $PanelContainer/MarginContainer/Keybinds
 
 @onready var current_section: Control = main_section
 @onready var default_section_pos_x: float = 30.0
@@ -20,12 +21,18 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		selected_animation = "open"
 		animation_finished = false
+		current_section.hide()
+		main_section.show()
 	elif animation_name == "close":
 		selected_animation = "close"
 		animation_finished = false
 	elif animation_name == "settings":
 		if current_section != settings_section and animation_finished:
 			selected_animation = "settings"
+			animation_finished = false
+	elif animation_name == "keybinds":
+		if current_section != keybinds_section and animation_finished:
+			selected_animation = "keybinds"
 			animation_finished = false
 	elif animation_name == "main":
 		if current_section != main_section and animation_finished:
@@ -51,6 +58,8 @@ func play_current_animation(delta: float):
 				hide()
 		elif selected_animation == "settings":
 			hide_current_and_show(delta, settings_section)
+		elif selected_animation == "keybinds":
+			hide_current_and_show(delta, keybinds_section)
 		elif selected_animation == "main":
 			hide_current_and_show(delta, main_section)
 
@@ -105,4 +114,7 @@ func hide_current_and_show(delta, selected_section: Control):
 			current_section = selected_section
 
 func _on_settings_button_button_down(): select_animation("settings")
+func _on_keybinds_button_pressed():select_animation("keybinds")
 func _on_return_to_main_button_pressed(): select_animation("main")
+
+

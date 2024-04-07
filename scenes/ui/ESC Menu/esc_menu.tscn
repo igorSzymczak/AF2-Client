@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://duauim31qmjgx"]
+[gd_scene load_steps=11 format=3 uid="uid://duauim31qmjgx"]
 
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/esc_menu.gd" id="1_uv064"]
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/NicknameInput.gd" id="3_lsuid"]
 [ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/Settings.gd" id="5_72kll"]
 [ext_resource type="PackedScene" uid="uid://360b6gad5l5a" path="res://scenes/ui/elements/volume slider/volume_slider.tscn" id="6_77mv8"]
+[ext_resource type="Script" path="res://scenes/ui/ESC Menu/Keybinds.gd" id="7_d6wb6"]
+[ext_resource type="PackedScene" uid="uid://drgvryt6jud63" path="res://scenes/ui/elements/buttons/keybind_button.tscn" id="8_0ibdm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -13,6 +15,7 @@ bg_color = Color(0, 0, 0, 0.784314)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvjfu"]
 
 [node name="ESCMenu" type="Control"]
+z_index = 20
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 3
 anchors_preset = 9
@@ -117,6 +120,12 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Settings"
 
+[node name="KeybindsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Keybinds"
+
 [node name="ShopButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -155,8 +164,8 @@ script = ExtResource("5_72kll")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.929
-offset_bottom = -0.26001
+anchor_bottom = 0.926
+offset_bottom = -0.440063
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_xvjfu")
@@ -290,10 +299,12 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings"]
-layout_mode = 2
-offset_top = 888.0
-offset_right = 240.0
-offset_bottom = 940.0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -305,7 +316,77 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Return"
 
+[node name="Keybinds" type="Control" parent="PanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("7_d6wb6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Keybinds"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.926
+offset_bottom = -56.4401
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Keybinds" type="Label" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Keybinds"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="KeybindButton" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+layout_mode = 2
+
+[node name="KeybindButton2" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+layout_mode = 2
+
+[node name="KeybindButton3" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+layout_mode = 2
+
+[node name="KeybindButton4" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+layout_mode = 2
+
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ResetButton" parent="PanelContainer/MarginContainer/Keybinds/Bottom" instance=ExtResource("2_lop0p")]
+z_index = 20
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Reset to Default"
+
+[node name="ReturnToMainButton2" parent="PanelContainer/MarginContainer/Keybinds/Bottom" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Return"
+
 [connection signal="button_down" from="PanelContainer/MarginContainer/Main/Center/SettingsButton" to="." method="_on_settings_button_button_down"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/KeybindsButton" to="." method="_on_keybinds_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Bottom/QuitButton" to="PanelContainer/MarginContainer/Main" method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]
@@ -314,3 +395,5 @@ text = "Return"
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay/DisableMouseAim" to="PanelContainer/MarginContainer/Settings" method="_on_disable_mouse_aim_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay/Reticle" to="PanelContainer/MarginContainer/Settings" method="_on_reticle_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Settings/Bottom/ReturnToMainButton" to="." method="_on_return_to_main_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Keybinds/Bottom/ResetButton" to="PanelContainer/MarginContainer/Keybinds" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Keybinds/Bottom/ReturnToMainButton2" to="." method="_on_return_to_main_button_pressed"]

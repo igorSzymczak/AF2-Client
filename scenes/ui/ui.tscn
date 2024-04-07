@@ -21,14 +21,13 @@ z_index = 1
 
 [node name="ESCMenu" parent="." instance=ExtResource("4_4qyyq")]
 visible = false
-z_index = 10
 
 [node name="HangarMenu" parent="." instance=ExtResource("6_xr3hv")]
 visible = false
-z_index = 9
+z_index = 10
 
 [node name="StructureMenu" parent="." instance=ExtResource("6_loyla")]
 visible = false
-z_index = 9
+z_index = 10
 
 [node name="AuthScreen" parent="." instance=ExtResource("5_wjlru")]

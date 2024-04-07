@@ -180,6 +180,7 @@ func land_player_on(username: String, structure_name: String):
 
 func handle_landing(_delta: float):
 	if !Input.is_action_just_pressed("Land"): return
+	if !GameManager.can_perform_actions: return
 	if !landable: return
 	if !GameManager.local_player: return
 	if GameManager.local_player.landed_structure != null: return

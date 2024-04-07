@@ -114,7 +114,7 @@ func handle_changing_menus():
 		elif current_ui != auth_screen and current_ui != death:
 			close_current()
 	if Input.is_action_just_pressed("TypeMessage"):
-		if current_ui in [game, esc_menu]:
+		if current_ui in [game]:
 			if Time.get_ticks_msec() - 10 > chat.last_sent_time:
 				if !chat_message_input.has_focus():
 					chat_message_input.grab_focus()

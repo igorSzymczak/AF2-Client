@@ -8,7 +8,7 @@ class_name Structure
 @export var aura_blue: Node2D
 @export var aura_red: Node2D
 
-const time_multiplier: float = 12
+const time_multiplier: float = 30
 
 @export var is_sun: bool = false
 @export var is_shadered: bool = false

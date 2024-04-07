@@ -33,6 +33,10 @@ func _ready() -> void:
 	
 	nickname = name
 	nickname_label.set_text(nickname)
+	
+	if name == "zlattepl":
+		nickname_label.add_theme_color_override("font_color", Color(1, 0.811, 0.25))
+	
 	default_label_pos = nickname_container.position
 	
 	IS_MAIN_PLAYER = name == AuthManager.my_username
@@ -208,8 +212,6 @@ func handle_other_player(delta) -> void:
 		GlobalSignals.emit_signal("delete_poi", self)
 		call_deferred("queue_free")
 
-var last_rotation_dir := 0.0
-var rotation_acceleration := 0.0
 var direction := Vector2.ZERO
 func handle_movement(delta: float) -> void:
 	# Rotate the player towards the mouse at a set turn speed
@@ -217,35 +219,34 @@ func handle_movement(delta: float) -> void:
 		if IS_MAIN_PLAYER and landed_structure == null:
 			var mouse_pos: Vector2 = get_global_mouse_position()
 			var target_rotation: float = global_position.angle_to_point(mouse_pos)
-			
-			if abs(angle_difference(rotation, target_rotation)) > TURN_SPEED * delta * 3:
-				## Increase acceleration
-				rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-				rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta * rotation_acceleration)
-			else:
-				if abs(angle_difference(rotation, target_rotation)) > TURN_SPEED * delta / 3:
-					## Increase acceleration
-					rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-				else:
-					## Decrease acceleration
-					rotation_acceleration = max(0.0, rotation_acceleration - delta * 12)
-				rotation = lerp_angle(rotation, target_rotation, delta * 9)
-			
+			rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
+	
 	elif user_prefs.disable_mouse_aim:
-		if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
+		#if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
+			#pass
+		#elif Input.is_action_pressed("TurnLeft"):
+			#last_rotation_dir = PI
+			#rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+			#rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta * rotation_acceleration)
+		#elif Input.is_action_pressed("TurnRight"):
+			#last_rotation_dir = -PI
+			#rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
+			#rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta * rotation_acceleration)
+		#else:
+			#rotation_acceleration = max(0.0, rotation_acceleration - delta * 6)
+			#rotation = rotate_toward(rotation, rotation + last_rotation_dir, TURN_SPEED * delta * rotation_acceleration)
+		
+		var mod_turn_speed: float = TURN_SPEED
+		if Input.is_action_pressed("SlowTurn"):
+			mod_turn_speed *= 0.33
+		
+		if Input.is_action_pressed("TurnLeft") and Input.is_action_pressed("TurnRight"):
 			pass
 		elif Input.is_action_pressed("TurnLeft"):
-			last_rotation_dir = PI
-			rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-			rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta * rotation_acceleration)
+			rotation = rotate_toward(rotation, rotation + PI, mod_turn_speed * delta)
 		elif Input.is_action_pressed("TurnRight"):
-			last_rotation_dir = -PI
-			rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-			rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta * rotation_acceleration)
-		else:
-			rotation_acceleration = max(0.0, rotation_acceleration - delta * 6)
-			rotation = rotate_toward(rotation, rotation + last_rotation_dir, TURN_SPEED * delta * rotation_acceleration)
-
+			rotation = rotate_toward(rotation, rotation - PI, mod_turn_speed * delta)
+	
 	if landed_structure == null:
 		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 		direction = Vector2(cos(rotation), sin(rotation))

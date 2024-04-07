@@ -44,7 +44,7 @@ stream_3/weight = 1.0
 radius = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jkw5k"]
-radius = 200.0
+radius = 250.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1j1jk"]
 radius = 500.0
@@ -140,8 +140,8 @@ planets = [NodePath("Planets/Sun"), NodePath("Planets/Sun/Aerth")]
 
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tbgsy")
-position = Vector2(-1, -1)
-scale = Vector2(5438, 2878.94)
+position = Vector2(0, 0.00012207)
+scale = Vector2(7811, 4135.23)
 texture = SubResource("PlaceholderTexture2D_ngnn3")
 script = ExtResource("3_28mi7")
 
@@ -188,6 +188,7 @@ visible = false
 shape = SubResource("CircleShape2D_jkw5k")
 
 [node name="SafeZone" type="Area2D" parent="Planets/Sun/TemporaryHangar"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Planets/Sun/TemporaryHangar/SafeZone"]
 shape = SubResource("CircleShape2D_1j1jk")

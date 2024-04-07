@@ -1,6 +1,18 @@
 extends Control
 
 @onready var chat = $Chat
+@onready var safezone_label = %SafezoneLabel
+
+func _process(_delta: float):
+	var local_player: Player = GameManager.local_player
+	if (
+		is_instance_valid(local_player) and 
+		local_player.alive and 
+		GameManager.get_player_monitorable(local_player.name) and 
+		local_player.landed_structure == null
+	):
+		safezone_label.hide()
+	else: safezone_label.show()
 
 var selected_animation = null
 var animation_finished = true

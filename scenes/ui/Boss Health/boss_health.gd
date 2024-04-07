@@ -29,7 +29,7 @@ func _process(_delta):
 		var boss_pos: Vector2 = HomerusManager.global_position
 		var distance = player_pos.distance_to(boss_pos)
 		var boss_alive = HomerusManager.left_segment_alive or HomerusManager.right_segment_alive or HomerusManager.main_segment_alive
-		if distance < 5000 and boss_alive:
+		if distance < 2500 and boss_alive:
 			set_visibility(true)
 		else: 
 			set_visibility(false)

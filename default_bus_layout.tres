@@ -10,7 +10,6 @@ gain = 3.0
 resource_name = "Limiter"
 ceiling_db = -10.0
 soft_clip_db = 0.0
-soft_clip_ratio = 20.0
 
 [resource]
 bus/1/name = &"Music"

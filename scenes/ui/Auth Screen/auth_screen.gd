@@ -71,6 +71,14 @@ func _ready():
 	AuthManager.error.connect(throw_error)
 	AuthManager.success.connect(throw_success)
 	AuthManager.logged_in.connect(_handle_logged_in)
+	
+	if !last_username.is_empty():
+		login_password.grab_focus.call_deferred()
+		await get_tree().create_timer(0.2).timeout
+		login_password.grab_focus.call_deferred()
+
+#func _process(_delta):
+	#login_password.grab_focus()
 
 func _handle_logged_in():
 	if user_prefs:
@@ -82,23 +90,21 @@ func hide_messages(_ignored):
 	success_label.hide()
 
 func _switch_to_login():
+	register_screen.hide()
+	login_screen.show()
 	print("Switched to Login Screen")
 	if user_prefs and !user_prefs.last_username.is_empty():
 		login_password.grab_focus()
 	else:
 		login_username.grab_focus()
 	
-	register_screen.hide()
-	login_screen.show()
-	login_username.show()
 
 func _switch_to_register():
+	login_screen.hide()
+	register_screen.show()
 	print("Switched to Register Screen")
 	register_username.grab_focus()
 	
-	login_screen.hide()
-	register_screen.show()
-	register_username.show()
 
 func _handle_register_enter(_ignored): submit_register()
 

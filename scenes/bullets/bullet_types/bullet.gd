@@ -37,11 +37,11 @@ func _ready():
 	shoot_time = Time.get_ticks_msec() - latency
 	var delta_time: int = roundi(get_physics_process_delta_time() * 1000)
 	var client_life_time := delta_time
-	while client_life_time < latency:
-		client_life_time += delta_time
-		update_position()
-	if is_deterministic:
-		global_position = calculated_global_position
+	#while client_life_time < latency:
+		#client_life_time += delta_time
+		#update_position()
+	#if is_deterministic:
+		#global_position = calculated_global_position
 	
 	#print(latency)
 	#print("if shoot_time + life_time - current_time <= time_to_vanish")

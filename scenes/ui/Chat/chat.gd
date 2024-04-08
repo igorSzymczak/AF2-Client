@@ -36,9 +36,13 @@ func _on_message_input_text_submitted(new_text):
 	if t - SEND_INTERVAL < last_sent_time or new_text.length() < 1:
 		message_input.add_theme_color_override("font_color", Color(1.0, 0.24, 0.24))
 		message_input.add_theme_color_override("font_placeholder_color", Color(1.0, 0.24, 0.24, 0.6))
+		message_input.placeholder_text = " pls do not spam!"
+		
 		await get_tree().create_timer(0.5).timeout
+		
 		message_input.remove_theme_color_override("font_color")
 		message_input.remove_theme_color_override("font_placeholder_color")
+		message_input.placeholder_text = default_placeholder
 	else:
 		# Message Sent to Server
 		last_sent_time = t

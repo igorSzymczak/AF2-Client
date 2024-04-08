@@ -118,6 +118,8 @@ func handle_changing_menus():
 			if Time.get_ticks_msec() - 10 > chat.last_sent_time:
 				if !chat_message_input.has_focus():
 					chat_message_input.grab_focus()
+				else:
+					chat_message_input.release_focus()
 	if Input.is_action_just_pressed("Fullscreen"):
 		swap_fullscreen_mode()
 

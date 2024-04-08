@@ -25,10 +25,8 @@ func remove_overflow():
 	if is_instance_valid(messages_container):
 		var message_count = messages_container.get_child_count()
 		var overflow = 0
-		while message_count > MAX_MESSAGES:
-			overflow += 1
-			messages_container.get_child(-1).queue_free.call_deferred()
-			message_count = messages_container.get_child_count() - overflow
+		if message_count > MAX_MESSAGES:
+			messages_container.get_child(0).queue_free()
 
 var last_sent_time := 0
 func _on_message_input_text_submitted(new_text):

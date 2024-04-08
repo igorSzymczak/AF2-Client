@@ -326,6 +326,7 @@ func handle_shoot() -> void:
 			GameManager.PlayerInfo.current_power = current_power
 			GameManager.PlayerInfo.weapons[index].last_shot = last_shot
 			
+			
 			GameManager.player_shoot.emit(index)
 
 func regen_power(delta) -> void:

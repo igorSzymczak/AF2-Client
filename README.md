@@ -3,7 +3,7 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 
 ## Roadmap:
 
-### Progress made by TheTruePancake (big thx for letting me continue your work bro)
+### Progress made by <a href="https://github.com/GoranPetrusev"> TheTruePancake </a> (big thx for letting me continue your work bro)
 - choosing game engine
 - basing movement
 - background shader

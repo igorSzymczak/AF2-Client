@@ -39,6 +39,7 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 
 ### Third (Current) month
 - [ ] debugging current game release
+- [ ] simple graphics settings
 - [ ] Ship stats
 - [ ] Exp & Levels
 - [ ] stat multipliers

@@ -228,5 +228,7 @@ func _on_return_button_pressed():
 	select_animation("main")
 
 func _on_exit_button_pressed():
-	pass # Replace with function body.
+	if GameManager.local_player.landed_structure != null:
+		GameManager.local_player.request_leave_structure.rpc_id(1, AuthManager.my_username)
+		GlobalSignals.set_ui.emit("game")
 

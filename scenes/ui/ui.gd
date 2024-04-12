@@ -17,13 +17,25 @@ func _ready():
 	
 	#_print_queue()
 
-func _process(_delta):
+var no_ui_time := 0.0
+func _process(delta):
 	handle_changing_menus()
+	#_print_queue()
+	if ui_queue.is_empty():
+		no_ui_time += delta
+		if no_ui_time > 1.0:
+			open_ui("game")
+			no_ui_time = 0
+	else:
+		no_ui_time = 0
 
 @onready var current_ui = auth_screen
 @onready var ui_queue: Array[Control] = [current_ui]
 
-func start_game(): set_to("game")
+func start_game(): 
+	_print_queue()
+	set_to("game")
+	_print_queue()
 
 func to_scene(ui: String):
 	if ui.to_lower() == "game": return game
@@ -52,9 +64,8 @@ func open_ui(ui: String):
 
 func close_current():
 	_close_current_ui()
-	if ui_queue.is_empty():
-		open_ui("game")
-	current_ui = ui_queue[-1]
+	if !ui_queue.is_empty():
+		current_ui = ui_queue[-1]
 	#_print_queue()
 
 func close_all():
@@ -79,7 +90,6 @@ func is_mouse_over_menu() -> bool:
 			if ui.get_global_rect().has_point(mouse_pos):
 				return true
 	return false
-			
 
 func _print_queue():
 	var ui_list = "[ "
@@ -102,13 +112,23 @@ func _close_current_ui():
 	if current_ui.has_method("select_animation"):
 		current_ui.select_animation("close")
 	else: current_ui.hide()
+	#_print_queue()
+	#print("removing " + current_ui.name)
 	ui_queue.pop_back()
+	#_print_queue()
+	#print()
 
 @onready var chat = game.chat
 @onready var default_chat_pos_x = chat.position.x
 @onready var chat_message_input = game.chat.message_input
 func handle_changing_menus():
-	if Input.is_action_just_pressed("Menu"):
+	if (
+		Input.is_action_just_pressed("Menu")
+		or (
+			GameManager.local_player and
+			GameManager.local_player.landed_structure != null and Input.is_action_just_pressed("Land")
+		)
+	):
 		if current_ui == game and GameManager.local_player.landed_structure == null:
 			open_ui("esc")
 		elif current_ui != auth_screen and current_ui != death:

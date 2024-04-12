@@ -3,6 +3,9 @@ extends Control
 @onready var chat = $Chat
 @onready var safezone_label = %SafezoneLabel
 
+var selected_animation = null
+var animation_finished = true
+var next_animation: String
 func _process(_delta: float):
 	var local_player: Player = GameManager.local_player
 	if (
@@ -13,10 +16,23 @@ func _process(_delta: float):
 	):
 		safezone_label.hide()
 	else: safezone_label.show()
+	
+	if next_animation and animation_finished:
+		var player_landed = GameManager.local_player and GameManager.local_player.landed_structure != null
+		if (
+			(player_landed and next_animation == "open")
+			or (!player_landed and next_animation == "close")
+		):
+			next_animation = ""
+			return
+		var anim_to_play = next_animation
+		next_animation = ""
+		print("executing next_animation: " + anim_to_play)
+		select_animation(anim_to_play)
 
-var selected_animation = null
-var animation_finished = true
 func select_animation(animation_name: String):
+	if !animation_finished: 
+		next_animation = animation_name
 	if animation_finished:
 		if animation_name == "open":
 			animation_finished = false

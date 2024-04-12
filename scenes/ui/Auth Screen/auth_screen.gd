@@ -9,7 +9,6 @@ const PASSWORD_MIN_DIGITS := 1
 const PASSWORD_MIN_LETTERS := 1
 const PASSWORD_MIN_SPECIAL := 1
 
-
 @onready var register_screen: Panel = %RegisterScreen
 @onready var register_username: LineEdit = %RegisterUsername
 @onready var register_password: LineEdit = %RegisterPassword
@@ -28,6 +27,7 @@ const PASSWORD_MIN_SPECIAL := 1
 
 var default_screen = "register"
 var user_prefs: UserPreferences
+var last_username: String
 func _ready():
 	user_prefs = UserPreferences.load_or_create()
 	if user_prefs and !user_prefs.last_username.is_empty():
@@ -39,8 +39,6 @@ func _ready():
 		_switch_to_login()
 	else:
 		_switch_to_register()
-	
-	var last_username: String
 	
 	if user_prefs and user_prefs.last_username:
 		last_username = user_prefs.last_username
@@ -71,6 +69,9 @@ func _ready():
 	AuthManager.error.connect(throw_error)
 	AuthManager.success.connect(throw_success)
 	AuthManager.logged_in.connect(_handle_logged_in)
+	
+	throw_error(201)
+	multiplayer.connected_to_server.connect(on_connect)
 	
 	if !last_username.is_empty():
 		login_password.grab_focus.call_deferred()
@@ -172,24 +173,24 @@ func throw_error(code: int):
 	elif code == 009: message = "Registration Fail: Password must have at least 1 Letter."
 	elif code == 010: message = "Registration Fail: Password must have at least 1 Special Character."
 	elif code == 011: message = "Registration Fail: Repeated Password Does Not Match"
-	#elif code == 002: message = "Failed to create an Account: Password must be minimum " + str(PASSWORD_MIN_LENGTH) + " Characters long."
-	#elif code == 003: message = "Failed to create an Account: Password Can not be the same as Username. "
-	#elif code == 004: message = "Failed to create an Account: Passwords don't match."
-	#elif code == 005: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 006: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 007: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 008: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 009: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 0010: message = "Failed to create an Account: This Username is Already Taken."
-	#elif code == 0011: message = "Failed to create an Account: This Username is Already Taken."
-		
+	
 		## Logging In
-		
+	
 	elif code == 101: message = "Failed to Log In: Please Fill in all Fields"
 	elif code == 102: message = "Failed to Log In: Username doesn't exist."
 	elif code == 103: message = "Failed to Log In: Wrong Password."
 	elif code == 104: message = "Failed to Log In: You are already Connected to the Server. If that's not you, please contact @zlotyyy on Discord"
 	elif code == 999: message = "Something weird happened, Please contact zlotyyy on Discord "
+	
+		## Other
+	
+	elif code == 201: message = "Disconnected from Server"
+	elif code == 202: message = "There is an update available. You have to update your game to play!"
+	
+	if code >= 200 and code < 300:
+		login_screen.hide()
+		register_screen.hide()
+	
 	print("Auth Error: " + message)
 	error_label.set_text(message)
 
@@ -213,6 +214,15 @@ func throw_success(code: int):
 		message = "Logged In Successfully!"
 		login_username.clear()
 		login_password.clear()
+	elif code == 2:
+		message = "Game version up to date"
+		if !last_username.is_empty():
+			_switch_to_login()
+			login_password.grab_focus.call_deferred()
+			await get_tree().create_timer(0.2).timeout
+			login_password.grab_focus.call_deferred()
+		else:
+			_switch_to_register()
 	
 	await get_tree().create_timer(0.01).timeout
 	error_label.hide()
@@ -242,3 +252,13 @@ func get_regex_data(text: String) -> Dictionary:
 	}
 	
 	return regex_data
+
+func on_connect() -> void:
+	AuthManager.request_latest_version.rpc_id(1)
+	
+	await AuthManager.version_updated
+	
+	if AuthManager.latest_version == AuthManager.version:
+		throw_success(2)
+	else:
+		throw_error(202)

@@ -103,12 +103,14 @@ layout_mode = 2
 theme_override_constants/separation = 30
 
 [node name="ReturnButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Return"
 
 [node name="ShipButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
@@ -127,6 +129,7 @@ theme_override_font_sizes/font_size = 26
 text = "Keybinds"
 
 [node name="ShopButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26

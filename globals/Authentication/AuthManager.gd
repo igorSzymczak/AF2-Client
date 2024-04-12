@@ -3,6 +3,10 @@ extends Node
 var is_logged_in := false
 var my_username: String
 
+var version := "Beta 2.2"
+var latest_version: String
+
+
 signal joined()
 signal logged_in()
 func handle_login(server_username):
@@ -10,10 +14,16 @@ func handle_login(server_username):
 	my_username = server_username
 	logged_in.emit()
 
-func try_register(_client_id: int, _username: String, _password: String):
-	pass # Only Server
-func try_login(_client_id: int, _username: String, _password: String):
-	pass # Only Server
+signal version_updated
+func update_latest_version(ver: String):
+	latest_version = ver
+	
+	version_updated.emit()
+	
+
+func try_register(_client_id: int, _username: String, _password: String): pass # Only Server
+func try_login(_client_id: int, _username: String, _password: String): pass # Only Server
+func _send_latest_version(_client_id: int): pass # Only Server
 
 signal error(code: int)
 @rpc("authority", "call_remote", "reliable")
@@ -38,3 +48,11 @@ func request_login(username: String, password: String):
 @rpc("authority", "call_remote", "reliable")
 func log_in_user(server_username: String):
 	handle_login(server_username) # Only Client
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_latest_version():
+	_send_latest_version(multiplayer.get_remote_sender_id())
+
+@rpc("authority", "call_remote", "reliable")
+func send_latest_version(ver: String):
+	update_latest_version(ver)

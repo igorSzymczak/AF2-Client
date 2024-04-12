@@ -222,20 +222,6 @@ func handle_movement(delta: float) -> void:
 			rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
 	
 	elif user_prefs.disable_mouse_aim:
-		#if Input.is_action_pressed("TurnLeft") and Input.is_action_just_pressed("TurnRight"):
-			#pass
-		#elif Input.is_action_pressed("TurnLeft"):
-			#last_rotation_dir = PI
-			#rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-			#rotation = rotate_toward(rotation, rotation + PI, TURN_SPEED * delta * rotation_acceleration)
-		#elif Input.is_action_pressed("TurnRight"):
-			#last_rotation_dir = -PI
-			#rotation_acceleration = min(1.0, rotation_acceleration + delta * 3)
-			#rotation = rotate_toward(rotation, rotation - PI, TURN_SPEED * delta * rotation_acceleration)
-		#else:
-			#rotation_acceleration = max(0.0, rotation_acceleration - delta * 6)
-			#rotation = rotate_toward(rotation, rotation + last_rotation_dir, TURN_SPEED * delta * rotation_acceleration)
-		
 		var mod_turn_speed: float = TURN_SPEED
 		if Input.is_action_pressed("SlowTurn"):
 			mod_turn_speed *= 0.33
@@ -251,13 +237,15 @@ func handle_movement(delta: float) -> void:
 		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 		direction = Vector2(cos(rotation), sin(rotation))
 		if Input.is_action_pressed("Accelerate") and GameManager.can_perform_actions:
-			velocity += direction * SPEED * delta
+			velocity += direction * SPEED * delta * 1.5
 			velocity = velocity.limit_length(MAX_SPEED)
 		elif Input.is_action_pressed("Decelerate") and GameManager.can_perform_actions:
 			velocity -= velocity.normalized() * DECELERATION_SPEED * delta
 
 		if !velocity.is_equal_approx(Vector2.ZERO):
-			velocity -= velocity.normalized() * DRAG_COEF * delta
+			velocity -= velocity.normalized() * DRAG_COEF * delta / 2.5
+		else:
+			velocity = Vector2.ZERO
 		handle_thrust()
 		move_and_slide()
 	
@@ -311,7 +299,10 @@ func handle_change_weapon() -> void:
 		handle_shoot()
 
 func handle_shoot() -> void:
+	print(GameManager.is_mouse_over_menu())
 	if alive and GameManager.can_perform_actions and not GameManager.is_mouse_over_menu() and GameManager.get_player_monitorable(name):
+		
+		print("shooting")
 		var index: int = GameManager.PlayerInfo.current_weapon
 		var power_usage: float = GameManager.PlayerInfo.weapons[index].power_usage
 		var current_power: float = GameManager.PlayerInfo.current_power
@@ -336,7 +327,7 @@ func regen_power(delta) -> void:
 	
 	if current_power < max_power:
 		var percentage_of_max = current_power / max_power
-		var power_regen_multiplier = max(0.2, min(0.75, percentage_of_max))
+		var power_regen_multiplier = max(0.3, min(0.75, percentage_of_max))
 		
 		current_power += (delta * pow(PI, 3)) * power_regen_multiplier * max(1, pow(power_regen_rate, 1.0/4.0))
 	current_power = min(current_power, max_power)
@@ -346,7 +337,7 @@ var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:
 	var zoom_value: float
 	if landed_structure == null:
-		zoom_value = max(0.45, 0.5 - abs(velocity.length()) * delta / 100.0)
+		zoom_value = max(0.37, 0.42 - abs(velocity.length()) / 10000.0)
 	else:
 		zoom_value = 1
 	var zoom_vector: Vector2 = camera.zoom.lerp(Vector2(zoom_value, zoom_value), delta)
@@ -390,10 +381,12 @@ func land_on(structure: Structure):
 			GlobalSignals.open_ui.emit("hangar")
 			GlobalSignals.set_ui_args.emit(landed_structure.get_structure_data())
 		
-		else:
+		elif is_instance_valid(landed_structure):
 			GlobalSignals.open_ui.emit("structure")
 			GlobalSignals.set_ui_args.emit(landed_structure.get_structure_data())
-			
+		else:
+			GlobalSignals.open_ui.emit("structure")
+		
 	
 	elif !IS_MAIN_PLAYER:
 		nickname_container.hide()

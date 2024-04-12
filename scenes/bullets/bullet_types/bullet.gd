@@ -32,11 +32,11 @@ func _ready():
 	rotation = direction_speed.angle()
 	
 	## Calculate the route bullet already did on server
-	var t: int = roundi(Time.get_unix_time_from_system() * 100)
-	var latency = t - server_timestamp
-	shoot_time = Time.get_ticks_msec() - latency
-	var delta_time: int = roundi(get_physics_process_delta_time() * 1000)
-	var client_life_time := delta_time
+	#var t: int = roundi(Time.get_unix_time_from_system() * 100)
+	#var latency = t - server_timestamp
+	shoot_time = Time.get_ticks_msec()
+	#var delta_time: int = roundi(get_physics_process_delta_time() * 1000)
+	#var client_life_time := delta_time
 	#while client_life_time < latency:
 		#client_life_time += delta_time
 		#update_position()

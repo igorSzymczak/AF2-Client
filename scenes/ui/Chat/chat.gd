@@ -24,7 +24,6 @@ func scroll_to_bottom():
 func remove_overflow():
 	if is_instance_valid(messages_container):
 		var message_count = messages_container.get_child_count()
-		var overflow = 0
 		if message_count > MAX_MESSAGES:
 			messages_container.get_child(0).queue_free()
 

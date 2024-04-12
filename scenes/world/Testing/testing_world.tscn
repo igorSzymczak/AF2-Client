@@ -1,7 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://2t5noopc2okk"]
+[gd_scene load_steps=44 format=3 uid="uid://2t5noopc2okk"]
 
 [ext_resource type="Script" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
 [ext_resource type="Shader" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
+[ext_resource type="Script" path="res://scenes/world/Testing/ImageBG.gd" id="2_q4866"]
 [ext_resource type="Script" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
 [ext_resource type="AudioStream" uid="uid://da4t5kutoglbb" path="res://audio/music/Adelante.ogg" id="4_i1nhf"]
 [ext_resource type="Script" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
@@ -138,7 +139,27 @@ glow_enabled = true
 script = ExtResource("1_rvknj")
 planets = [NodePath("Planets/Sun"), NodePath("Planets/Sun/Aerth")]
 
+[node name="ImageBG" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+script = ExtResource("2_q4866")
+
+[node name="ColorRect" type="ColorRect" parent="ImageBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6695.0
+offset_top = -6974.0
+offset_right = 5735.0
+offset_bottom = 5974.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_tbgsy")
 position = Vector2(0, 0.00012207)
 scale = Vector2(7811, 4135.23)

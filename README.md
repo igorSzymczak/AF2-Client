@@ -1,4 +1,4 @@
-# AF2 Client
+# AF2
 Astroflux devs abononed their project, so i am here to continue it in a new game
 
 ## Roadmap:
@@ -38,7 +38,7 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 - server optimizations
 
 ### Third (Current) month
-- [ ] debugging current game release
+- [x] debug current game release
 - [ ] simple graphics settings
 - [ ] Ship stats
 - [ ] Exp & Levels

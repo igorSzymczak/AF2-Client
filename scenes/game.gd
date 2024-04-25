@@ -6,8 +6,8 @@ class_name Game
 @export var current_world: Node2D
 
 const PORT: int = 7000
-#const ADDRESS: String = "127.0.0.1"
-const ADDRESS: String = "130.61.143.133"
+const ADDRESS: String = "127.0.0.1"
+#const ADDRESS: String = "130.61.143.133"
 
 var local_player_character: Player
 
@@ -60,7 +60,8 @@ func add_player_character(username: String):
 	if username == AuthManager.my_username:
 		local_player_character = player_character
 		GameManager.local_player = player_character
-		GlobalSignals.emit_signal("give_main_player", local_player_character)
+		GlobalSignals.give_main_player.emit(local_player_character)
+		AuthManager.joined.emit()
 
 @rpc("authority", "call_local", "reliable")
 func remove_player(username: String):
@@ -135,10 +136,25 @@ func update_player_velocity(username: String, vel: Vector2): GameManager.update_
 func update_player_engine_active(username: String, activity: bool): GameManager.update_player_engine_active(username, activity)
 
 @rpc("authority", "call_local", "reliable")
+func update_player_lvl(username: String, lvl: int): GameManager.update_player_lvl(username, lvl)
+
+@rpc("authority", "call_local", "reliable")
+func update_player_max_health(username: String, max_health: float): GameManager.update_player_max_health(username, max_health)
+
+@rpc("authority", "call_local", "reliable")
 func update_player_health(username: String, health: float): GameManager.update_player_health(username, health)
 
 @rpc("authority", "call_local", "reliable")
+func update_player_armor(username: String, armor: float): GameManager.update_player_armor(username, armor)
+
+@rpc("authority", "call_local", "reliable")
+func update_player_max_shield(username: String, max_shield: float): GameManager.update_player_max_shield(username, max_shield)
+
+@rpc("authority", "call_local", "reliable")
 func update_player_shield(username: String, shield: float): GameManager.update_player_shield(username, shield)
+
+@rpc("authority", "call_local", "reliable")
+func update_player_shield_regen(username: String, shield_regen: float): GameManager.update_player_shield_regen(username, shield_regen)
 
 @rpc("authority", "call_local", "reliable")
 func update_player_alive(username: String, alive: bool): GameManager.update_player_alive(username, alive)
@@ -210,15 +226,6 @@ func add_existing_spawners(Spawners: Dictionary):
 
 func handle_add_spawners(Spawners: Dictionary):
 	for i in Spawners:
-		#var spawner_name = Spawners[i]["name"]
-		#var id = Spawners[i]["id"]
-		#var pos = Spawners[i]["global_position"]
-		#var rot = Spawners[i]["rotation"]
-		#var health = Spawners[i]["health"]
-		#var shield = Spawners[i]["shield"]
-		#var eye_pos = Spawners[i]["eye_position"]
-		#var eye_trigger = Spawners[i]["eye_trigger"]
-		#var active = Spawners[i]["active"]
 		GameManager.add_spawner(Spawners[i])
 		create_spawner(Spawners[i].id)
 
@@ -239,7 +246,13 @@ func update_spawner_position(id: int, pos: Vector2): GameManager.update_spawner_
 func update_spawner_rotation(id: int, rot: float): GameManager.update_spawner_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
+func update_spawner_max_health(id: int, max_health: float): GameManager.update_spawner_max_health(id, max_health)
+
+@rpc("authority", "call_local", "reliable")
 func update_spawner_health(id: int, health: float): GameManager.update_spawner_health(id, health)
+
+@rpc("authority", "call_local", "reliable")
+func update_spawner_max_shield(id: int, max_shield: float): GameManager.update_spawner_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_spawner_shield(id: int, shield: float): GameManager.update_spawner_shield(id, shield)
@@ -263,21 +276,16 @@ func add_existing_turrets(Turrets: Dictionary):
 
 func handle_add_turrets(Turrets: Dictionary):
 	for i in Turrets:
-		var turret_name = Turrets[i]["name"]
-		var id = Turrets[i]["id"]
-		var pos = Turrets[i]["global_position"]
-		var rot = Turrets[i]["rotation"]
-		var health = Turrets[i]["health"]
-		var shield = Turrets[i]["shield"]
-		GameManager.add_turret(turret_name, id, pos, rot, health, shield)
-		create_turret(id)
+		var turret = Turrets[i]
+		GameManager.add_turret(turret)
+		create_turret(turret.id)
 
 @rpc("authority", "call_local", "reliable")
-func add_turret(turret_name: String, id: int, pos: Vector2, rot: float, health: float, shield: float):
-	GameManager.add_turret(turret_name, id, pos, rot, health, shield)
+func add_turret(turret: Dictionary):
+	GameManager.add_turret(turret)
 	
 	# Only on Client
-	create_turret(id)
+	create_turret(turret.id)
 
 @rpc("authority", "call_local", "reliable")
 func remove_turret(id: int):
@@ -301,7 +309,13 @@ func update_turret_position(id: int, pos: Vector2): GameManager.update_turret_po
 func update_turret_rotation(id: int, rot: float): GameManager.update_turret_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
+func update_turret_max_health(id: int, max_health: float): GameManager.update_turret_max_health(id, max_health)
+
+@rpc("authority", "call_local", "reliable")
 func update_turret_health(id: int, health: float): GameManager.update_turret_health(id, health)
+
+@rpc("authority", "call_local", "reliable")
+func update_turret_max_shield(id: int, max_shield: float): GameManager.update_turret_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_turret_shield(id: int, shield: float): GameManager.update_turret_shield(id, shield)
@@ -316,22 +330,16 @@ func add_existing_enemies(Enemies: Dictionary):
 
 func handle_add_enemies(Enemies: Dictionary):
 	for i in Enemies:
-		var enemy_name = Enemies[i]["name"]
-		var id = Enemies[i]["id"]
-		var pos = Enemies[i]["global_position"]
-		var rot = Enemies[i]["rotation"]
-		var health = Enemies[i]["health"]
-		var shield = Enemies[i]["shield"]
-		var engine_active = Enemies[i]["engine_active"]
-		GameManager.add_enemy(enemy_name, id, pos, rot, health, shield, engine_active)
-		create_enemy(id)
+		var enemy: Dictionary = Enemies[i]
+		GameManager.add_enemy(enemy)
+		create_enemy(enemy.id)
 
 @rpc("authority", "call_local", "reliable")
-func add_enemy(enemy_name: String, id: int, pos: Vector2, rot: float, health: float, shield: float, engine_active: bool):
-	GameManager.add_enemy(enemy_name, id, pos, rot, health, shield, engine_active)
+func add_enemy(enemy: Dictionary):
+	GameManager.add_enemy(enemy)
 	
 	# Only on Client
-	create_enemy(id)
+	create_enemy(enemy.id)
 
 @rpc("authority", "call_local", "reliable")
 func remove_enemy(id: int):
@@ -339,12 +347,12 @@ func remove_enemy(id: int):
 
 
 func create_enemy(id: int):
-	var enemy = preload("res://scenes/entities/Actor/actor.tscn").instantiate()
+	var enemy: Actor = preload("res://scenes/entities/Actor/actor.tscn").instantiate()
 	enemy.name = str(id)
 	
-	var enemy_data = GameManager.Enemies[id]
-	enemy.global_position = enemy_data["global_position"]
-	enemy.rotation = enemy_data["rotation"]
+	var enemy_data: Dictionary = GameManager.Enemies[id]
+	enemy.global_position = enemy_data.global_position
+	enemy.rotation = enemy_data.rotation
 	
 	current_world.add_child(enemy)
 
@@ -355,7 +363,13 @@ func update_enemy_position(id: int, pos: Vector2): GameManager.update_enemy_posi
 func update_enemy_rotation(id: int, rot: float): GameManager.update_enemy_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
+func update_enemy_max_health(id: int, max_health: float): GameManager.update_enemy_max_health(id, max_health)
+
+@rpc("authority", "call_local", "reliable")
 func update_enemy_health(id: int, health: float): GameManager.update_enemy_health(id, health)
+
+@rpc("authority", "call_local", "reliable")
+func update_enemy_max_shield(id: int, max_shield: float): GameManager.update_enemy_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_enemy_shield(id: int, shield: float): GameManager.update_enemy_shield(id, shield)

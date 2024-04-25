@@ -39,10 +39,6 @@ position_smoothing_speed = 10.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_emusc")]
 z_index = 1
-MAX_SHIELD = 1000.0
-SHIELD_REGEN_VALUE = 20.0
-SHIELD_REGEN_BOOST = 2.0
-MAX_HEALTH = 1000.0
 
 [node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_5ttqo")]
 offset_left = -48.0

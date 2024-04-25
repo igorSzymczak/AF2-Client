@@ -1,7 +1,8 @@
 extends Control
 
-@onready var chat = $Chat
+@onready var chat = %Chat
 @onready var safezone_label = %SafezoneLabel
+@onready var center = %Center
 
 var selected_animation = null
 var animation_finished = true
@@ -51,3 +52,7 @@ func select_animation(animation_name: String):
 			await get_tree().create_timer(0.3).timeout
 			hide()
 			animation_finished = true
+
+
+
+

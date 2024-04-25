@@ -74,6 +74,8 @@ texture = ExtResource("7_2dn40")
 script = ExtResource("2_px2t7")
 engine = NodePath("Sprite/Engine")
 ship_name = "Shiba"
+base_health = 500
+base_shield = 500
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

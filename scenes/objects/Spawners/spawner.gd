@@ -77,8 +77,8 @@ func activate() -> void:
 	sprite.set_texture(original_sprite_texture)
 	
 	# Regen Turrets and hp
-	health_component._set_health(health_component.MAX_HEALTH)
-	health_component._set_shield(health_component.MAX_SHIELD)
+	health_component._set_health(health_component.max_health)
+	health_component._set_shield(health_component.max_shield)
 	
 	# set Amount of Enemies to just the Existing ones (0 if all killed)
 	

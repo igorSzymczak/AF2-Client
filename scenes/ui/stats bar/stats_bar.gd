@@ -13,35 +13,43 @@ var health: float
 var max_shield: float
 var shield: float
 
-func set_health(player_health: float) -> void:
-	health = player_health
-	if !max_health:
-		max_health = health
-func set_shield(player_shield: float) -> void:
-	shield = player_shield
-	if !max_shield:
-		max_shield = shield
-
 var default_health_offset: float
 var default_shield_offset: float
 
-func _ready() -> void:
-	GlobalSignals.connect("player_health", set_health)
-	GlobalSignals.connect("player_shield", set_shield)
-	
-	default_health_offset = health_noise.position.x
-	default_shield_offset = shield_noise.position.x
-func _process(_delta):
+func set_max_health(value: float):
+	max_health = value
+	draw_bars()
+func set_health(value: float):
+	health = value
+	draw_bars()
+func set_max_shield(value: float):
+	max_shield = value
+	draw_bars()
+func set_shield(value: float):
+	shield = value
 	draw_bars()
 
+
+func _ready() -> void:
+	default_health_offset = health_noise.position.x
+	default_shield_offset = shield_noise.position.x
+	
+	await AuthManager.joined
+	
+	var health_component: HealthComponent = GameManager.local_player.health_component
+	health_component.max_health_changed.connect(set_max_health)
+	health_component.health_changed.connect(set_health)
+	health_component.max_shield_changed.connect(set_max_shield)
+	health_component.shield_changed.connect(set_shield)
+
 func draw_bars() -> void:
-	health_amount_label.text = str(round(health))
-	shield_amount_label.text = str(round(shield))
+	health_amount_label.text = Functions.shorten_number(health)
+	shield_amount_label.text = Functions.shorten_number(shield) 
 	
-	var bar_width = health_noise.get_rect().size.x * health_noise.scale.x
+	var bar_width: float = health_noise.get_rect().size.x * health_noise.scale.x
 	
-	var hp_percentage = health / max_health
-	var sh_percentage = shield / max_shield
+	var hp_percentage: float = health / max_health
+	var sh_percentage: float = shield / max_shield
 	
 	health_noise.position.x = default_health_offset - bar_width * (1 - hp_percentage)
 	shield_noise.position.x = default_shield_offset - bar_width * (1 - sh_percentage)

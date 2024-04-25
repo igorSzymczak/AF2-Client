@@ -80,21 +80,26 @@ func get_planet_is_safezone(planet_name: String) -> bool:
 ## Players
 
 
-func add_player(username):
+func add_player(username: String):
 	if !Players.has(username):
 		var player: Player = get_node("/root/Game/World/" + username)
 		Players[username] = {
 			"username": username,
-			"nickname": "Player " + player.name.substr(0, 3),
+			"nickname": "Player " + username.substr(0, 3),
 			"global_position": player.global_position,
 			"rotation": player.rotation,
 			"velocity": player.velocity,
 			"engine_active": false,
-			"health": player.health_component.MAX_HEALTH,
-			"shield": player.health_component.MAX_SHIELD,
+			"max_health": player.health_component.max_health,
+			"health": player.health_component.health,
+			"armor": player.health_component.armor,
+			"max_shield": player.health_component.max_shield,
+			"shield": player.health_component.shield,
+			"shield_regen": player.health_component.shield_regen,
 			"alive": player.alive,
 			"ship_name": "NexarCarrier",
 			"monitorable": false,
+			"lvl": 0
 		}
 
 func remove_player(username: String):
@@ -154,7 +159,14 @@ func update_player_engine_active(username: String, activity: bool):
 	if Players.has(username):
 		Players[username]["engine_active"] = activity
 
-signal player_health(username: String, health: float)
+func get_player_max_health(username: String) -> float:
+	if Players.has(username):
+		return Players[username]["max_health"]
+	return 0
+func update_player_max_health(username: String, max_health: float):
+	if Players.has(username):
+		Players[username]["max_health"] = max_health
+
 func get_player_health(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["health"]
@@ -163,7 +175,22 @@ func update_player_health(username: String, health: float):
 	if Players.has(username):
 		Players[username]["health"] = health
 
-signal player_shield(username: String, shield: float)
+func get_player_armor(username: String) -> float:
+	if Players.has(username):
+		return Players[username]["armor"]
+	return 0
+func update_player_armor(username: String, armor: float):
+	if Players.has(username):
+		Players[username]["armor"] = armor
+
+func get_player_max_shield(username: String) -> float:
+	if Players.has(username):
+		return Players[username]["max_shield"]
+	return 0
+func update_player_max_shield(username: String, max_shield: float):
+	if Players.has(username):
+		Players[username]["max_shield"] = max_shield
+
 func get_player_shield(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["shield"]
@@ -171,6 +198,14 @@ func get_player_shield(username: String) -> float:
 func update_player_shield(username: String, shield: float):
 	if Players.has(username):
 		Players[username]["shield"] = shield
+
+func get_player_shield_regen(username: String) -> float:
+	if Players.has(username):
+		return Players[username]["shield_regen"]
+	return 0
+func update_player_shield_regen(username: String, shield_regen: float):
+	if Players.has(username):
+		Players[username]["shield_regen"] = shield_regen
 
 func get_player_alive(username: String) -> bool:
 	if Players.has(username):
@@ -196,6 +231,14 @@ func update_player_monitorable(username: String, monitorable: bool):
 	if Players.has(username):
 		Players[username]["monitorable"] = monitorable
 
+func get_player_lvl(username: String) -> int:
+	if Players.has(username):
+		return Players[username]["lvl"]
+	return 0
+func update_player_lvl(username: String, lvl: int):
+	if Players.has(username):
+		Players[username]["lvl"] = lvl
+
 signal death_args(args: Dictionary)
 
 signal player_info(player_info: Dictionary)
@@ -205,7 +248,7 @@ func set_player_info(new_player_info: Dictionary):
 signal player_shoot(index: int)
 
 
-## WEPAONS & BULLETS
+## WEAPONS & BULLETS
 
 
 @onready var ui = get_node("/root/Game/UI")
@@ -289,6 +332,14 @@ func get_spawner_rotation(id: int) -> float:
 		return Spawners[id]["rotation"]
 	return 0
 
+func get_spawner_max_health(id: int) -> float:
+	if Spawners.has(id):
+		return Spawners[id]["max_health"]
+	return 0
+func update_spawner_max_health(id: int, max_health: float):
+	if Spawners.has(id):
+		Spawners[id]["max_health"] = max_health
+
 func get_spawner_health(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["health"]
@@ -296,6 +347,14 @@ func get_spawner_health(id: int) -> float:
 func update_spawner_health(id: int, health: float):
 	if Spawners.has(id):
 		Spawners[id]["health"] = health
+
+func get_spawner_max_shield(id: int) -> float:
+	if Spawners.has(id):
+		return Spawners[id]["max_shield"]
+	return 0
+func update_spawner_max_shield(id: int, max_shield: float):
+	if Spawners.has(id):
+		Spawners[id]["max_shield"] = max_shield
 
 func get_spawner_shield(id: int) -> float:
 	if Spawners.has(id):
@@ -333,16 +392,10 @@ func get_spawner_active(id: int) -> bool:
 ## TURRETS
 
 
-func add_turret(turret_name: String, id: int, global_position: Vector2, rotation: float, health: float, shield: float):
+func add_turret(turret: Dictionary):
+	var id: int = turret.id
 	if !Turrets.has(id):
-		Turrets[id] = {
-			"name": turret_name,
-			"id": id,
-			"global_position": global_position,
-			"rotation": rotation,
-			"health": health,
-			"shield": shield
-		}
+		Turrets[id] = turret
 
 func remove_turret(id: int): if Turrets.has(id): Turrets.erase(id)
 
@@ -362,6 +415,14 @@ func get_turret_rotation(id: int) -> float:
 		return Turrets[id]["rotation"]
 	return 0
 
+func get_turret_max_health(id: int) -> float:
+	if Turrets.has(id):
+		return Turrets[id]["max_health"]
+	return 0
+func update_turret_max_health(id: int, max_health: float):
+	if Turrets.has(id):
+		Turrets[id]["max_health"] = max_health
+
 func get_turret_health(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["health"]
@@ -369,6 +430,14 @@ func get_turret_health(id: int) -> float:
 func update_turret_health(id: int, health: float):
 	if Turrets.has(id):
 		Turrets[id]["health"] = health
+
+func get_turret_max_shield(id: int) -> float:
+	if Turrets.has(id):
+		return Turrets[id]["max_shield"]
+	return 0
+func update_turret_max_shield(id: int, max_shield: float):
+	if Turrets.has(id):
+		Turrets[id]["max_shield"] = max_shield
 
 func get_turret_shield(id: int) -> float:
 	if Turrets.has(id):
@@ -382,17 +451,10 @@ func update_turret_shield(id: int, shield: float):
 ## ENEMIES
 
 
-func add_enemy(enemy_name: String, id: int, pos: Vector2, rot: float, health: float, shield: float, engine_active: bool):
+func add_enemy(enemy: Dictionary):
+	var id: int = enemy.id
 	if !Enemies.has(id):
-		Enemies[id] = {
-			"name": enemy_name,
-			"id": id,
-			"global_position": pos,
-			"rotation": rot,
-			"health": health,
-			"shield": shield,
-			"engine_active": engine_active
-		}
+		Enemies[id] = enemy
 
 func remove_enemy(id: int): if Enemies.has(id): Enemies.erase(id)
 
@@ -412,6 +474,14 @@ func get_enemy_rotation(id: int) -> float:
 		return Enemies[id]["rotation"]
 	return 0
 
+func get_enemy_max_health(id: int) -> float:
+	if Enemies.has(id):
+		return Enemies[id]["max_health"]
+	return 0
+func update_enemy_max_health(id: int, max_health: float):
+	if Enemies.has(id):
+		Enemies[id]["max_health"] = max_health
+
 func get_enemy_health(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["health"]
@@ -419,6 +489,14 @@ func get_enemy_health(id: int) -> float:
 func update_enemy_health(id: int, health: float):
 	if Enemies.has(id):
 		Enemies[id]["health"] = health
+
+func get_enemy_max_shield(id: int) -> float:
+	if Enemies.has(id):
+		return Enemies[id]["max_shield"]
+	return 0
+func update_enemy_max_shield(id: int, max_shield: float):
+	if Enemies.has(id):
+		Enemies[id]["max_shield"] = max_shield
 
 func get_enemy_shield(id: int) -> float:
 	if Enemies.has(id):

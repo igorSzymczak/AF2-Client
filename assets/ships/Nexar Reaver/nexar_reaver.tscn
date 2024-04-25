@@ -36,12 +36,16 @@ rotation = 1.5708
 texture = ExtResource("1_gctjj")
 script = ExtResource("2_6cr4w")
 engine = NodePath("Engine")
+ship_name = "Nexar Reaver"
+hangar_scale = Vector2(0.5, 0.5)
 health = 7
 armor = 8
 shield = 8
 shield_regen = 7
-ship_name = "Nexar Reaver"
-hangar_scale = Vector2(0.5, 0.5)
+base_health = 690
+base_armor = 48
+base_shield = 760
+base_shield_regen = 66
 
 [node name="Lights" type="Sprite2D" parent="."]
 modulate = Color(1, 0.27451, 0, 1)

@@ -22,7 +22,7 @@ func _ready() -> void:
 	GlobalSignals.connect("give_main_player", _setup_main_player)
 
 func _process(delta):
-	if is_instance_valid(player):
+	if is_instance_valid(player) and visible:
 		position = player.position
 		material.set_shader_parameter("time", elapsed_time)
 		material.set_shader_parameter("mouse", player.position/10000.0 * zoom_scale + camera_offset/10000)

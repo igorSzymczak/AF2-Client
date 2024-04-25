@@ -32,10 +32,8 @@ func _process(delta):
 @onready var current_ui = auth_screen
 @onready var ui_queue: Array[Control] = [current_ui]
 
-func start_game(): 
-	_print_queue()
+func start_game():
 	set_to("game")
-	_print_queue()
 
 func to_scene(ui: String):
 	if ui.to_lower() == "game": return game
@@ -137,9 +135,9 @@ func handle_changing_menus():
 		if current_ui in [game]:
 			if Time.get_ticks_msec() - 10 > chat.last_sent_time:
 				if !chat_message_input.has_focus():
-					chat_message_input.grab_focus()
+					chat_message_input.grab_focus.call_deferred()
 				else:
-					chat_message_input.release_focus()
+					chat_message_input.release_focus.call_deferred()
 	if Input.is_action_just_pressed("Fullscreen"):
 		swap_fullscreen_mode()
 

@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://dh4cge3ha7gd0"]
+
+[ext_resource type="Texture2D" uid="uid://c1m7db1ntbnk5" path="res://assets/ships/Nexar Blade/Nexar Blade.png" id="1_w8j1s"]
+[ext_resource type="Script" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_b0v7y"]
+[ext_resource type="Texture2D" uid="uid://17q5anm5rw0p" path="res://assets/ships/Nexar Blade/Nexar Blade Lights.png" id="3_cwl5g"]
+[ext_resource type="Script" path="res://assets/ships/Nexar Blade/Animation.gd" id="4_rii5j"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="5_ym6a7"]
+[ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="6_8jg85"]
+[ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="7_3noi5"]
+[ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="8_ofvpo"]
+[ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="9_moy4u"]
+
+[sub_resource type="Animation" id="Animation_yuinr"]
+resource_name = "NexarBladePulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.588235), Color(1, 1, 1, 1), Color(1, 1, 1, 0.588235)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wfkjq"]
+_data = {
+"NexarBladePulse": SubResource("Animation_yuinr")
+}
+
+[node name="NexarBlade" type="Sprite2D" node_paths=PackedStringArray("engine")]
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_w8j1s")
+script = ExtResource("2_b0v7y")
+engine = NodePath("Engine")
+ship_name = "Nexar Blade"
+health = 6
+shield_regen = 6
+
+[node name="Lights" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 5.96046e-08)
+texture = ExtResource("3_cwl5g")
+metadata/_edit_lock_ = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wfkjq")
+}
+speed_scale = 0.33
+script = ExtResource("4_rii5j")
+
+[node name="Engine" parent="." instance=ExtResource("5_ym6a7")]
+modulate = Color(0.737255, 0, 0, 1)
+show_behind_parent = true
+position = Vector2(0, 77.2726)
+rotation = -1.5708
+
+[node name="Light" parent="Engine" instance=ExtResource("6_8jg85")]
+position = Vector2(-0.363627, 0)
+
+[node name="Idle" parent="Engine" instance=ExtResource("7_3noi5")]
+position = Vector2(0.0909091, 0)
+
+[node name="Speeding" parent="Engine" instance=ExtResource("8_ofvpo")]
+position = Vector2(-11, 0)
+
+[node name="Accelerate" parent="Engine" instance=ExtResource("9_moy4u")]
+position = Vector2(0.0909092, 0)

@@ -26,6 +26,9 @@ ChatManager="*res://globals/ChatManager/ChatManager.gd"
 HomerusManager="*res://scenes/bosses/Homerus/HomerusManager.gd"
 AuthManager="*res://globals/Authentication/AuthManager.gd"
 ShipManager="*res://globals/ShipManager/ShipManager.gd"
+EXP="*res://globals/Experience/exp_manager.gd"
+InventoryManager="*res://globals/Inventory/inventory_manager.gd"
+Functions="*res://globals/Functions/functions.gd"
 
 [display]
 
@@ -137,7 +140,7 @@ SlowTurn={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"
+renderer/rendering_method.web="forward_plus"
 viewport/glow/upscale_mode=1
 viewport/gi/use_half_resolution=false

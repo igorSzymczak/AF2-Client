@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdnddkg6so8im"]
+
+[ext_resource type="Script" path="res://scenes/ui/ExpBar/exp_bar.gd" id="1_by6cv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dcnkt"]
+bg_color = Color(0.0784314, 0.0784314, 0.137255, 0.470588)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rglry"]
+bg_color = Color(0.427451, 0.00392157, 0.87451, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.8, 0.8, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="ExpBar" type="ProgressBar"]
+custom_minimum_size = Vector2(0, 24)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_dcnkt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rglry")
+value = 66.0
+show_percentage = false
+script = ExtResource("1_by6cv")
+
+[node name="LvlLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "120"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true

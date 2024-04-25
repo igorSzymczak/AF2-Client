@@ -185,11 +185,15 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_3utq7")
 script = ExtResource("2_pohn7")
 engine = NodePath("Engine")
+ship_name = "Nexar Zlatte"
 health = 1
 armor = 0
 shield = 3
 shield_regen = 2
-ship_name = "Nexar Zlatte"
+base_health = 100
+base_armor = 3
+base_shield = 320
+base_shield_regen = 22
 
 [node name="Lights" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 0, 1)

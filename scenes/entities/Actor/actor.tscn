@@ -25,10 +25,6 @@ shape = SubResource("CircleShape2D_vmuxc")
 [node name="Sprite" parent="." instance=ExtResource("7_bfsjr")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_naiqk")]
-MAX_SHIELD = 300.0
-SHIELD_REGEN_VALUE = 20.0
-SHIELD_REGEN_BOOST = 1.0
-MAX_HEALTH = 200.0
 
 [node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_jjsg6")]
 offset_left = -48.0

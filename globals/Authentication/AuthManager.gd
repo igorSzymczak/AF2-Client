@@ -3,7 +3,7 @@ extends Node
 var is_logged_in := false
 var my_username: String
 
-var version := "Beta 2.2"
+var version := "Beta 3.0"
 var latest_version: String
 
 
@@ -56,3 +56,5 @@ func request_latest_version():
 @rpc("authority", "call_remote", "reliable")
 func send_latest_version(ver: String):
 	update_latest_version(ver)
+
+

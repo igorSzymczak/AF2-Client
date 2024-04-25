@@ -36,10 +36,14 @@ rotation = 1.5708
 texture = ExtResource("1_nsvxk")
 script = ExtResource("2_sop6d")
 engine = NodePath("Engine")
+ship_name = "Nexar Carrier"
 health = 8
 armor = 3
 shield_regen = 10
-ship_name = "Nexar Carrier"
+base_health = 820
+base_armor = 22
+base_shield = 500
+base_shield_regen = 75
 
 [node name="Lights" type="Sprite2D" parent="."]
 modulate = Color(0.443137, 0.862745, 1, 1)

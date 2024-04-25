@@ -22,6 +22,7 @@ var landed_structure: Structure = null
 @onready var reticle: Sprite2D = $Reticle
 
 var nickname: String
+var lvl := 0
 
 var IS_MAIN_PLAYER: bool
 
@@ -32,7 +33,7 @@ func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()
 	
 	nickname = name
-	nickname_label.set_text(nickname)
+	nickname_label.set_text(str(lvl) + " " + nickname)
 	
 	if name == "zlattepl":
 		nickname_label.add_theme_color_override("font_color", Color(1, 0.811, 0.25))
@@ -65,6 +66,10 @@ var last_server_ship_name := ""
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
 	var server_ship_name: String = GameManager.get_player_ship_name(name)
+	if lvl != GameManager.get_player_lvl(name):
+		lvl = GameManager.get_player_lvl(name)
+		nickname_label.set_text(str(lvl) + " " + nickname)
+	
 	if last_server_ship_name != server_ship_name:
 		last_server_ship_name = server_ship_name
 		set_ship(last_server_ship_name)
@@ -75,9 +80,9 @@ func _physics_process(delta: float) -> void:
 		set_ship(last_server_ship_name)
 	
 	if IS_MAIN_PLAYER:
-		if health_component.health > health_component.MAX_HEALTH:
-			health_component._set_health(health_component.MAX_HEALTH)
-			global_position = Vector2(randi_range(-5000, 5000), randi_range(-5000, 5000))
+		#if health_component.health > health_component.MAX_HEALTH:
+			#health_component._set_health(health_component.MAX_HEALTH)
+			#global_position = Vector2(randi_range(-5000, 5000), randi_range(-5000, 5000))
 		
 		
 		handle_movement(delta)
@@ -118,7 +123,7 @@ func emit_server_signals():
 		server_nickname = GameManager.get_player_nickname(name)
 		if server_nickname != nickname:
 			nickname = server_nickname
-			nickname_label.set_text(nickname)
+			nickname_label.set_text(str(lvl) + " " + nickname)
 		
 		server_alive = GameManager.get_player_alive(name)
 		
@@ -173,7 +178,7 @@ func handle_other_player(delta) -> void:
 		server_nickname = GameManager.get_player_nickname(name)
 		if server_nickname != nickname:
 			nickname = server_nickname
-			nickname_label.set_text(nickname)
+			nickname_label.set_text(str(lvl) + " " + nickname)
 		
 		server_position = GameManager.get_player_position(name)
 		server_rotation = GameManager.get_player_rotation(name)
@@ -299,10 +304,8 @@ func handle_change_weapon() -> void:
 		handle_shoot()
 
 func handle_shoot() -> void:
-	print(GameManager.is_mouse_over_menu())
 	if alive and GameManager.can_perform_actions and not GameManager.is_mouse_over_menu() and GameManager.get_player_monitorable(name):
 		
-		print("shooting")
 		var index: int = GameManager.PlayerInfo.current_weapon
 		var power_usage: float = GameManager.PlayerInfo.weapons[index].power_usage
 		var current_power: float = GameManager.PlayerInfo.current_power
@@ -316,7 +319,6 @@ func handle_shoot() -> void:
 			
 			GameManager.PlayerInfo.current_power = current_power
 			GameManager.PlayerInfo.weapons[index].last_shot = last_shot
-			
 			
 			GameManager.player_shoot.emit(index)
 

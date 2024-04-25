@@ -141,17 +141,14 @@ planets = [NodePath("Planets/Sun"), NodePath("Planets/Sun/Aerth")]
 
 [node name="ImageBG" type="CanvasLayer" parent="."]
 layer = -1
-follow_viewport_enabled = true
 script = ExtResource("2_q4866")
 
 [node name="ColorRect" type="ColorRect" parent="ImageBG"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6695.0
-offset_top = -6974.0
-offset_right = 5735.0
-offset_bottom = 5974.0
+offset_right = -959.0
+offset_bottom = -999.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2

@@ -30,13 +30,13 @@ func _set_shield(new_shield: float) -> void:
 	
 	smooth_shield_bar_visibility()
 	
-func init_shield(_shield):
+func init_shield(_shield: float):
 	max_value = _shield
-	shield = _shield
-	value = shield
 	damage_bar.max_value = shield
-	damage_bar.value = shield
 	combo_start = max_value
+	
+	if value > max_value:
+		_set_shield(_shield)
 	
 	modulate.a = 0
 	smooth_shield_bar_visibility()

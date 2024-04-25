@@ -1,4 +1,4 @@
-extends Control
+extends VBoxContainer
 
 @export var SEND_INTERVAL: int = 1000
 @export var MAX_MESSAGES: int = 40

@@ -88,6 +88,11 @@ func display_ship_info(ship: ShipComponent):
 		var shield = ship.shield
 		var shield_regen = ship.shield_regen
 		
+		var base_health: float = ship.base_health
+		var base_armor: float = ship.base_armor
+		var base_shield: float = ship.base_shield
+		var base_shield_regen: float = ship.base_shield_regen
+		
 		ship_name_label.set_text(ship_name)
 		buy_button.show()
 		buy_button.set_disabled(false)
@@ -105,10 +110,10 @@ func display_ship_info(ship: ShipComponent):
 		for child in shield_points.get_children(): child.show()
 		for child in shield_regen_points.get_children(): child.show()
 		
-		health_amount.set_text(str(health))
-		armor_amount.set_text(str(armor))
-		shield_amount.set_text(str(shield))
-		shield_regen_amount.set_text(str(shield_regen))
+		health_amount.set_text(str(base_health))
+		armor_amount.set_text(str(base_armor))
+		shield_amount.set_text(str(base_shield))
+		shield_regen_amount.set_text(str(base_shield_regen))
 		
 		for child in health_points.get_children():
 			if health < 10:

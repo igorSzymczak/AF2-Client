@@ -9,3 +9,8 @@ class_name ShipComponent extends Sprite2D
 @export var armor := 5
 @export var shield := 5
 @export var shield_regen := 5
+
+@export var base_health := 50
+@export var base_armor := 50
+@export var base_shield := 50
+@export var base_shield_regen := 50

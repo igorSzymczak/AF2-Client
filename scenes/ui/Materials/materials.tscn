@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=3 uid="uid://cykkh2wew6crk"]
+
+[ext_resource type="Script" path="res://scenes/ui/Materials/materials.gd" id="1_g0ksg"]
+[ext_resource type="Texture2D" uid="uid://cpjj8oaj1f7pc" path="res://assets/ui/inventory/steel.png" id="1_o50fp"]
+[ext_resource type="Texture2D" uid="uid://wcdd1ygbse85" path="res://assets/ui/inventory/hydrogen_crystals.png" id="2_tne6b"]
+[ext_resource type="Texture2D" uid="uid://ddtwfkxlvu0bi" path="res://assets/ui/inventory/plasma_fluids.png" id="3_r4rxh"]
+[ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="4_sj1pd"]
+
+[node name="Materials" type="PanelContainer"]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.065
+anchor_right = 1.0
+anchor_bottom = 0.065
+offset_left = -218.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = 24.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("1_g0ksg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Steel" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Steel"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Steel/Icon"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_o50fp")
+stretch_mode = 5
+
+[node name="SteelAmount" type="Label" parent="MarginContainer/HBoxContainer/Steel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HydrogenCrystals" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HydrogenCrystals"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HydrogenCrystals/Icon"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_tne6b")
+stretch_mode = 5
+
+[node name="HydrogenCrystalsAmount" type="Label" parent="MarginContainer/HBoxContainer/HydrogenCrystals"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="PlasmaFluids" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PlasmaFluids"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PlasmaFluids/Icon"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_r4rxh")
+stretch_mode = 5
+
+[node name="PlasmaFluidsAmount" type="Label" parent="MarginContainer/HBoxContainer/PlasmaFluids"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Iridium" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Iridium"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Iridium/Icon"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_sj1pd")
+stretch_mode = 5
+
+[node name="IridiumAmount" type="Label" parent="MarginContainer/HBoxContainer/Iridium"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"

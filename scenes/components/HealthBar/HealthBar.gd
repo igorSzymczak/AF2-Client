@@ -33,11 +33,11 @@ func _set_health(new_health: float) -> void:
 	
 func init_health(_health):
 	max_value = _health
-	health = _health
-	value = health
 	damage_bar.max_value = health
-	damage_bar.value = health
 	combo_start = max_value
+	
+	if value > max_value:
+		_set_health(_health)
 	
 	modulate.a = 0
 	smooth_health_bar_visibility()

@@ -40,6 +40,10 @@ engine = NodePath("Engine")
 ship_name = "Nexar Blade"
 health = 6
 shield_regen = 6
+base_health = 570
+base_armor = 18
+base_shield = 512
+base_shield_regen = 32
 
 [node name="Lights" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)

@@ -6,9 +6,9 @@ uniform float zoom;
 
 const int iterations = 3;
 const float formuparam2 = 0.79;
-const float volsteps = 3.0;
+const float volsteps = 8.0;
 const float stepsizeOrigin = 0.290;
-const float tile = 0.85;
+const float tile = 0.55;
 uniform float speed2 = 0.2;
 
 const float brightness = 0.0015;
@@ -44,7 +44,7 @@ float field(in vec3 p) {
 }
 
 void fragment() {
-	float stepsize = stepsizeOrigin + sin(TIME * 0.00002);
+	float stepsize = stepsizeOrigin + sin(TIME * 0.0001);
 	
     vec2 uv2 = 2. * FRAGCOORD.xy / vec2(512) - 1.;
 	vec2 uvs = uv2 * vec2(512)  / 512.;

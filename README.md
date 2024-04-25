@@ -40,10 +40,10 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 ### Third (Current) month
 - [x] debug current game release
 - [ ] simple graphics settings
-- [ ] Ship stats
-- [ ] Exp & Levels
-- [ ] stat multipliers
-- [ ] materials
+- [x] Ship stats
+- [x] Exp & Levels
+- [x] stat multipliers
+- [x] materials
 - [ ] currency (flux ^^)
 - [ ] cargo
 - [ ] armory

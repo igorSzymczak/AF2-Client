@@ -42,6 +42,16 @@ func _ready() -> void:
 	health_component.max_shield_changed.connect(set_max_shield)
 	health_component.shield_changed.connect(set_shield)
 
+func _process(delta):
+	if !AuthManager.is_logged_in: return
+	
+	shield_noise.position.x = lerpf(shield_noise.position.x, shield_pos, delta * 5)
+	health_noise.position.x = lerpf(health_noise.position.x, health_pos, delta * 5)
+	
+
+var health_pos: float = 0.0
+var shield_pos: float = 0.0
+
 func draw_bars() -> void:
 	health_amount_label.text = Functions.shorten_number(health)
 	shield_amount_label.text = Functions.shorten_number(shield) 
@@ -51,6 +61,6 @@ func draw_bars() -> void:
 	var hp_percentage: float = health / max_health
 	var sh_percentage: float = shield / max_shield
 	
-	health_noise.position.x = default_health_offset - bar_width * (1 - hp_percentage)
-	shield_noise.position.x = default_shield_offset - bar_width * (1 - sh_percentage)
+	health_pos = default_health_offset - bar_width * (1 - hp_percentage)
+	shield_pos = default_shield_offset - bar_width * (1 - sh_percentage)
 	

@@ -267,8 +267,8 @@ text = "dupa Romana#"
 
 [node name="WeaponTooltip" parent="." instance=ExtResource("4_j7qec")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 0
-anchors_preset = 0
 offset_left = -327.0
 offset_top = -276.0
 offset_right = -43.0

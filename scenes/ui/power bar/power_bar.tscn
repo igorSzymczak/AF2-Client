@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bs1m1idguikev"]
+[gd_scene load_steps=19 format=3 uid="uid://bs1m1idguikev"]
 
 [ext_resource type="Theme" uid="uid://dk1bu2y8w4psy" path="res://scenes/ui/main_theme.tres" id="1_8hfp8"]
 [ext_resource type="Script" path="res://scenes/ui/power bar/power_bar.gd" id="1_ob7kw"]
 [ext_resource type="Shader" path="res://scenes/ui/power bar/power_bar.gdshader" id="3_qfqpr"]
+[ext_resource type="PackedScene" uid="uid://cflxrtspib0eh" path="res://scenes/ui/Tooltip/weapon_tooltip.tscn" id="4_j7qec"]
 [ext_resource type="Texture2D" uid="uid://n47jub7diikx" path="res://assets/ui/energy bar/num 1.png" id="4_lvilq"]
 [ext_resource type="Texture2D" uid="uid://bdvr0a4x04leu" path="res://assets/ui/energy bar/num 2.png" id="5_ev24y"]
 [ext_resource type="Texture2D" uid="uid://dvyfi0byyc8qq" path="res://assets/ui/energy bar/num 3.png" id="6_3swax"]
@@ -50,6 +51,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_8hfp8")
 script = ExtResource("1_ob7kw")
+metadata/_edit_lock_ = true
 
 [node name="PowerBarFrame" type="Polygon2D" parent="."]
 z_index = 2
@@ -263,7 +265,26 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 text = "dupa Romana#"
 
-[node name="WeaponPanel1" type="Panel" parent="."]
+[node name="WeaponTooltip" parent="." instance=ExtResource("4_j7qec")]
+unique_name_in_owner = true
+layout_mode = 0
+anchors_preset = 0
+offset_left = -327.0
+offset_top = -276.0
+offset_right = -43.0
+offset_bottom = -138.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="WeaponPanels" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="WeaponPanel1" type="Panel" parent="WeaponPanels"]
+unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
 offset_left = -325.0
@@ -273,13 +294,14 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num1" type="Sprite2D" parent="WeaponPanel1"]
+[node name="Num1" type="Sprite2D" parent="WeaponPanels/WeaponPanel1"]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_lvilq")
 
-[node name="WeaponPanel2" type="Panel" parent="."]
+[node name="WeaponPanel2" type="Panel" parent="WeaponPanels"]
+unique_name_in_owner = true
 z_index = 2
 layout_mode = 1
 anchors_preset = -1
@@ -290,13 +312,14 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num2" type="Sprite2D" parent="WeaponPanel2"]
+[node name="Num2" type="Sprite2D" parent="WeaponPanels/WeaponPanel2"]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_ev24y")
 
-[node name="WeaponPanel3" type="Panel" parent="."]
+[node name="WeaponPanel3" type="Panel" parent="WeaponPanels"]
+unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
 offset_left = -210.2
@@ -306,13 +329,14 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num3" type="Sprite2D" parent="WeaponPanel3"]
+[node name="Num3" type="Sprite2D" parent="WeaponPanels/WeaponPanel3"]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_3swax")
 
-[node name="WeaponPanel4" type="Panel" parent="."]
+[node name="WeaponPanel4" type="Panel" parent="WeaponPanels"]
+unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
 offset_left = -152.8
@@ -322,13 +346,14 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num4" type="Sprite2D" parent="WeaponPanel4"]
+[node name="Num4" type="Sprite2D" parent="WeaponPanels/WeaponPanel4"]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7_l2mww")
 
-[node name="WeaponPanel5" type="Panel" parent="."]
+[node name="WeaponPanel5" type="Panel" parent="WeaponPanels"]
+unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
 offset_left = -95.4
@@ -338,7 +363,7 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num5" type="Sprite2D" parent="WeaponPanel5"]
+[node name="Num5" type="Sprite2D" parent="WeaponPanels/WeaponPanel5"]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)

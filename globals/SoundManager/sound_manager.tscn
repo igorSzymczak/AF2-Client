@@ -121,7 +121,7 @@ bus = &"Effects"
 
 [node name="HomerusDeath" type="AudioStreamPlayer2D" parent="Bosses"]
 stream = ExtResource("14_u0jht")
-volume_db = -2.5
+volume_db = -6.5
 max_distance = 9999.0
 
 [node name="UI" type="Node" parent="."]

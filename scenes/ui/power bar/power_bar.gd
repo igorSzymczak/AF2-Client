@@ -16,11 +16,13 @@ class_name PowerBar
 @onready var label_container = $LabelContainer
 @onready var label = $LabelContainer/MarginContainer/Label
 
-@onready var weapon_panel_1 = $WeaponPanel1
-@onready var weapon_panel_2 = $WeaponPanel2
-@onready var weapon_panel_3 = $WeaponPanel3
-@onready var weapon_panel_4 = $WeaponPanel4
-@onready var weapon_panel_5 = $WeaponPanel5
+@onready var weapon_panel_1 = %WeaponPanel1
+@onready var weapon_panel_2 = %WeaponPanel2
+@onready var weapon_panel_3 = %WeaponPanel3
+@onready var weapon_panel_4 = %WeaponPanel4
+@onready var weapon_panel_5 = %WeaponPanel5
+
+@onready var weapon_tooltip: WeaponTooltip = %WeaponTooltip
 
 @onready var weapon_frame = $WeaponFrame
 @onready var weapon_frame_shader = $WeaponFrame/Noise
@@ -28,6 +30,18 @@ var default_weapon_frame_shader_pos_y: float
 
 func _ready() -> void:
 	default_weapon_frame_shader_pos_y = weapon_frame_shader.position.y
+	
+	weapon_panel_1.mouse_entered.connect(show_weapon_tooltip.bind(1))
+	weapon_panel_2.mouse_entered.connect(show_weapon_tooltip.bind(2))
+	weapon_panel_3.mouse_entered.connect(show_weapon_tooltip.bind(3))
+	weapon_panel_4.mouse_entered.connect(show_weapon_tooltip.bind(4))
+	weapon_panel_5.mouse_entered.connect(show_weapon_tooltip.bind(5))
+	
+	weapon_panel_1.mouse_exited.connect(weapon_tooltip.hide)
+	weapon_panel_2.mouse_exited.connect(weapon_tooltip.hide)
+	weapon_panel_3.mouse_exited.connect(weapon_tooltip.hide)
+	weapon_panel_4.mouse_exited.connect(weapon_tooltip.hide)
+	weapon_panel_5.mouse_exited.connect(weapon_tooltip.hide)
 
 func _process(_delta) -> void:
 	if !GameManager.PlayerInfo.is_empty():
@@ -79,3 +93,24 @@ func _on_hover_area_mouse_entered(_body):
 	push_error("display power NOW")
 	label_container.position = get_local_mouse_position()
 	label.text = "Power: " + str(GameManager.PlayerInfo.current_power) + " / " + str(GameManager.PlayerInfo.max_power)
+
+func show_weapon_tooltip(index: int):
+	if index < 1 or index > 5: return
+	if GameManager.PlayerInfo.is_empty(): return
+	
+	var weapon: Dictionary = GameManager.PlayerInfo.weapons[index]
+	var weapon_name: String = weapon.name
+	var dmg: float = weapon.damage
+	
+	var bullet_range: Array = weapon.bullet_amount
+	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0
+	
+	var sps: float = 1000.0 / float(weapon.shoot_delay)
+	
+	var dps: float = sps * average_bullets * dmg
+	
+	weapon_tooltip.title.set_text(weapon_name)
+	weapon_tooltip.dmg.set_text(Functions.shorten_number(dmg))
+	weapon_tooltip.dps.set_text(Functions.shorten_number(dps))
+	
+	weapon_tooltip.show()

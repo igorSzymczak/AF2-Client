@@ -288,17 +288,18 @@ func handle_thrust() -> void:
 	if old_engine_active != engine_active:
 		GameManager.emit_signal("local_player_engine_active", engine_active)
 
-func handle_change_weapon() -> void:
+func handle_change_weapon(num_pressed: int = 0) -> void:
 	if !GameManager.can_perform_actions:
 		return
-	var num_pressed = null
-	if(Input.is_action_pressed("Weapon1")): num_pressed = 1
+	
+	if num_pressed != 0: pass
+	elif(Input.is_action_pressed("Weapon1")): num_pressed = 1
 	elif(Input.is_action_pressed("Weapon2")): num_pressed = 2
 	elif(Input.is_action_pressed("Weapon3")): num_pressed = 3
 	elif(Input.is_action_pressed("Weapon4")): num_pressed = 4
 	elif(Input.is_action_pressed("Weapon5")): num_pressed = 5
 	
-	if num_pressed != null:
+	if num_pressed != 0:
 		GameManager.PlayerInfo["current_weapon"] = num_pressed
 		
 		handle_shoot()

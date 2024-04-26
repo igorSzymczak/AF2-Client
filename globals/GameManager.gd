@@ -243,7 +243,9 @@ signal death_args(args: Dictionary)
 
 signal player_info(player_info: Dictionary)
 func set_player_info(new_player_info: Dictionary):
+	var current_weapon: int = PlayerInfo.current_weapon if PlayerInfo.has("current_weapon") else 1
 	PlayerInfo = new_player_info
+	PlayerInfo.current_weapon = current_weapon
 
 signal player_shoot(index: int)
 

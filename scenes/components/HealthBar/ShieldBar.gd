@@ -26,7 +26,6 @@ func _set_shield(new_shield: float) -> void:
 	if shield < combo_start:
 		damage_bar.value = combo_start
 		timer.start()
-		print(str(shield) + " < " + str(combo_start))
 	else:
 		damage_bar.value = 0
 		combo_start = shield

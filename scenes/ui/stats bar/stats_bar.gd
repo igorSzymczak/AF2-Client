@@ -3,8 +3,8 @@ extends Control
 @onready var health_noise: Sprite2D = $Background/HealthBar/Health
 @onready var shield_noise: Sprite2D = $Background/ShieldBar/Shield
 
-@onready var health_amount_label = $HealthAmountLabel
-@onready var shield_amount_label = $ShieldAmountLabel
+@onready var health_amount_label = %HealthAmount
+@onready var shield_amount_label = %ShieldAmount
 
 
 var max_health: float
@@ -28,7 +28,10 @@ func set_max_shield(value: float):
 func set_shield(value: float):
 	shield = value
 	draw_bars()
-
+func set_armor(value: float):
+	health_amount_label.tooltip_text = "Armor: " + Functions.shorten_number(value)
+func set_shield_regen(value: float):
+	shield_amount_label.tooltip_text = "Shield Regen: " + Functions.shorten_number(value)
 
 func _ready() -> void:
 	default_health_offset = health_noise.position.x
@@ -41,13 +44,14 @@ func _ready() -> void:
 	health_component.health_changed.connect(set_health)
 	health_component.max_shield_changed.connect(set_max_shield)
 	health_component.shield_changed.connect(set_shield)
+	health_component.armor_changed.connect(set_armor)
+	health_component.shield_regen_changed.connect(set_shield_regen)
 
 func _process(delta):
 	if !AuthManager.is_logged_in: return
 	
 	shield_noise.position.x = lerpf(shield_noise.position.x, shield_pos, delta * 5)
 	health_noise.position.x = lerpf(health_noise.position.x, health_pos, delta * 5)
-	
 
 var health_pos: float = 0.0
 var shield_pos: float = 0.0

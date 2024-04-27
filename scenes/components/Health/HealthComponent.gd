@@ -29,19 +29,25 @@ func _ready() -> void:
 	_set_health(max_health)
 	_set_shield(max_shield)
 
-var server_health: float
-var server_shield: float
 var server_max_health := 0.0
+var server_health := 0.0
+var server_armor := 0.0
+
 var server_max_shield := 0.0
+var server_shield := 0.0
+var server_shield_regen := 0.0
+
 func _process(_delta):
 	if !isBoss:
 		global_position = parent.global_position
 	
 	if isPlayer:
-		server_health = GameManager.get_player_health(parent.name)
-		server_shield = GameManager.get_player_shield(parent.name)
 		server_max_health = GameManager.get_player_max_health(parent.name)
+		server_health = GameManager.get_player_health(parent.name)
+		server_armor = GameManager.get_player_armor(parent.name)
 		server_max_shield = GameManager.get_player_max_shield(parent.name)
+		server_shield = GameManager.get_player_shield(parent.name)
+		server_shield_regen = GameManager.get_player_shield_regen(parent.name)
 	elif isSpawner:
 		server_health = GameManager.get_spawner_health(parent.name.to_int())
 		server_shield = GameManager.get_spawner_shield(parent.name.to_int())
@@ -62,10 +68,15 @@ func _process(_delta):
 		set_max_health(server_max_health)
 	if health != server_health:
 		_set_health(server_health)
+	if armor != server_armor:
+		set_armor(server_armor)
 	if max_shield != server_max_shield:
 		set_max_shield(server_max_shield)
 	if shield != server_shield:
 		_set_shield(server_shield)
+	if shield_regen != server_shield_regen:
+		set_shield_regen(server_shield_regen)
+	
 
 signal health_changed(value: float)
 func _set_health(_new_health: float):
@@ -102,3 +113,18 @@ func set_max_shield(value: float):
 	shieldbar.init_shield(value)
 	
 	max_shield_changed.emit(value)
+
+signal armor_changed(value: float)
+func set_armor(value: float):
+	if value == armor: return
+	
+	armor = value
+	armor_changed.emit(value)
+
+signal shield_regen_changed(value: float)
+func set_shield_regen(value: float):
+	if value == shield_regen: return
+	
+	shield_regen = value
+	shield_regen_changed.emit(value)
+

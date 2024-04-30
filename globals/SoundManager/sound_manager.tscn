@@ -43,7 +43,7 @@ max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
-[node name="PistolShoot" type="AudioStreamPlayer2D" parent="Weapons"]
+[node name="AcidBlasterShoot" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("5_ffbuk")
 volume_db = 5.0
 max_distance = 10000.0
@@ -72,7 +72,7 @@ max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
-[node name="ShotgunShoot" type="AudioStreamPlayer2D" parent="Weapons"]
+[node name="PlasmaGunShoot" type="AudioStreamPlayer2D" parent="Weapons"]
 stream = ExtResource("8_qwddl")
 volume_db = -5.0
 max_distance = 10000.0

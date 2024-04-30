@@ -32,12 +32,23 @@ var BulletScenes = {
 	"res://scenes/weapons/bullet_types/bullet_homing.tscn" = preload("res://scenes/bullets/bullet_types/bullet_homing.tscn"),
 	"res://scenes/weapons/weapons/ClusterMissiles/missile.tscn" = preload("res://scenes/bullets/bullets/ClusterMissiles/missile.tscn"),
 	"res://scenes/weapons/weapons/GatlingLaser/laser.tscn" = preload("res://scenes/bullets/bullets/GatlingLaser/gatling_laser.tscn"),
-	"res://scenes/weapons/weapons/Pistol/pistol_round.tscn" = preload("res://scenes/bullets/bullets/Pistol/pistol_round.tscn"),
+	"res://scenes/weapons/weapons/AcidBlaster/acid.tscn" = preload("res://scenes/bullets/bullets/AcidBlaster/acid.tscn"),
 	"res://scenes/weapons/weapons/Railgun/railgun_bullet.tscn" = preload("res://scenes/bullets/bullets/Railgun/railgun_bullet.tscn"),
 	"res://scenes/weapons/weapons/RocketLauncher/rocket.tscn" = preload("res://scenes/bullets/bullets/RocketLauncher/rocket.tscn"),
-	"res://scenes/weapons/weapons/Shotgun/shotgun_bullet.tscn" = preload("res://scenes/bullets/bullets/Shotgun/shotgun_bullet.tscn"),
-	"res://scenes/weapons/weapons/SniperRifle/high_calliber_round.tscn" = preload("res://scenes/bullets/bullets/SniperRifle/high_calliber_round.tscn"),
+	"res://scenes/weapons/weapons/PlasmaGun/plasma.tscn" = preload("res://scenes/bullets/bullets/PlasmaGun/plasma.tscn"),
+	"res://scenes/weapons/weapons/PiercingGun/piercing_bullet.tscn" = preload("res://scenes/bullets/bullets/PiercingGun/piercing_bullet.tscn"),
 	"res://scenes/weapons/weapons/SpawnerLaser/spawner_laser.tscn" = preload("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn")
+}
+
+var Weapons: Dictionary = {
+	"Cluster Missiles": preload("res://scenes/weapons/ClusterMissiles/cluster_missiles.tscn"),
+	"Gatling Laser": preload("res://scenes/weapons/GatlingLaser/gatling_laser.tscn"),
+	"Acid Blaster": preload("res://scenes/weapons/AcidBlaster/acid_blaster.tscn"),
+	"Railgun": preload("res://scenes/weapons/Railgun/railgun.tscn"),
+	"Rocket Launcher": preload("res://scenes/weapons/RocketLauncher/rocket_launcher.tscn"),
+	"Plasma Gun": preload("res://scenes/weapons/PlasmaGun/plasma_gun.tscn"),
+	"Piercing Gun": preload("res://scenes/weapons/PiercingGun/piercing_gun.tscn"),
+	"Spawner Laser": preload("res://scenes/weapons/SpawnerLaser/spawner_laser_gun.tscn"),
 }
 
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
@@ -249,6 +260,7 @@ func set_player_info(new_player_info: Dictionary):
 
 signal player_shoot(index: int)
 
+signal set_weapon_request(slot: int, weapon_name: String)
 
 ## WEAPONS & BULLETS
 

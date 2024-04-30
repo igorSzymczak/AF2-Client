@@ -106,7 +106,8 @@ func client_signals():
 	GameManager.connect("player_info", handle_update_player_info)
 	
 	GameManager.connect("player_shoot", handle_player_shoot)
-	
+	GameManager.set_weapon_request.connect(_on_set_weapon_request)
+
 
 ## PLAYERS
 
@@ -116,6 +117,9 @@ func handle_update_velocity(vel: Vector2): update_player_velocity.rpc_id(1, Auth
 func handle_update_engine_active(activity: bool): update_player_engine_active.rpc_id(1, AuthManager.my_username, activity)
 func handle_update_player_info(player_info: Dictionary): GameManager.set_player_info(player_info)
 func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_username, index)
+
+func _on_set_weapon_request(slot: int, weapon_name: String): request_set_weapon.rpc_id(1, slot, weapon_name)
+func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_name: String): pass # Only Server
 
 @rpc("any_peer", "call_local", "reliable")
 func update_player_nickname(username: String, nick: String): GameManager.update_player_nickname(username, nick)
@@ -177,6 +181,9 @@ func send_player_info(player_info: Dictionary):
 func player_shoot(player_name: String, index: int):
 	GameManager.handle_player_shoot(player_name, index)
 
+@rpc("any_peer", "call_remote", "reliable")
+func request_set_weapon(slot: int, weapon_name: String):
+	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_name)
 
 ## WEAPONS & BULLETS
 

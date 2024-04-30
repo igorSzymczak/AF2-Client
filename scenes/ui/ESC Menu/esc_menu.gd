@@ -34,6 +34,11 @@ func select_animation(animation_name: String):
 		if current_section != keybinds_section and animation_finished:
 			selected_animation = "keybinds"
 			animation_finished = false
+	elif animation_name == "weapons":
+		GlobalSignals.close_current_ui.emit()
+		GlobalSignals.open_ui.emit("weapon_change")
+		selected_animation = "close"
+		animation_finished = false
 	elif animation_name == "main":
 		if current_section != main_section and animation_finished:
 			selected_animation = "main"
@@ -116,5 +121,4 @@ func hide_current_and_show(delta, selected_section: Control):
 func _on_settings_button_button_down(): select_animation("settings")
 func _on_keybinds_button_pressed():select_animation("keybinds")
 func _on_return_to_main_button_pressed(): select_animation("main")
-
-
+func _on_weapons_button_pressed(): select_animation("weapons")

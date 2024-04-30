@@ -105,9 +105,11 @@ func show_weapon_tooltip(index: int):
 	var bullet_range: Array = weapon.bullet_amount
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0
 	
-	var sps: float = 1000.0 / float(weapon.shoot_delay)
+	var rps: float = 1000.0 / float(weapon.shoot_delay)
 	
-	var dps: float = sps * average_bullets * dmg
+	print(rps)
+	
+	var dps: float = rps * average_bullets * dmg
 	
 	weapon_tooltip.title.set_text(weapon_name)
 	weapon_tooltip.dmg.set_text(Functions.shorten_number(dmg))

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://btlynee6osxgd"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_3ha8j"]
+
+[node name="Railgun" type="Node"]
+script = ExtResource("1_3ha8j")
+weapon_name = "Railgun"
+damage = 90
+rps = 12.8
+power_cost = 22
+range = 7
+damage_points = 6
+rps_points = 8
+power_points = 7
+range_points = 7
+energy = true
+description_long = "The Railgun unleashes 4-6 beams of energy that initially remain nearly stationary before rapidly accelerating, steadily increasing in velocity. With an extensive range, these beams are notoriously inaccurate, requiring precise timing and skilled maneuvering to hit targets effectively. Despite their long-range capability, they excel at close quarters combat, making them formidable in tight spaces."
+description_short = "Unleashes accelerating energy beams, best for close-quarters combat."

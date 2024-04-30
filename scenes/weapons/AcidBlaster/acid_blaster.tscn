@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://g6kexyqeia8e"]
+
+[ext_resource type="Script" path="res://scenes/weapons/AcidBlaster/acid_blaster.gd" id="1_q4jjc"]
+
+[node name="AcidBlaster" type="Node"]
+script = ExtResource("1_q4jjc")
+weapon_name = "Acid Blaster"
+damage = 60
+rps = 15.0
+power_cost = 8
+range = 6
+damage_points = 4
+rps_points = 9
+power_points = 2
+range_points = 6
+corrosive = true
+description_long = "Acid Blaster is supposed to have DoT in the future. Currently It's just mid-distance weapon, shooting 3 projectiles with quite high rate of fire."
+description_short = "Shoots 3 projectiles at medium distance"

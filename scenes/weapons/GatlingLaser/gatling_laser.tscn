@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce33cjxfixdws"]
+
+[ext_resource type="Script" path="res://scenes/weapons/GatlingLaser/gatling_laser.gd" id="1_ua711"]
+
+[node name="GatlingLaser" type="Node"]
+script = ExtResource("1_ua711")
+weapon_name = "Gatling Laser"
+damage = 35
+rps = 45.0
+power_cost = 3
+range = 3
+damage_points = 2
+rps_points = 10
+power_points = 1
+range_points = 3
+kinetic = true
+description_long = "Gatling Laser shoots several, low damage projectiles at rapid fire. It burns through shields, but might not be the best choice for enemies with high armor."
+description_short = "Shoots several projectiles at rapid fire. Great against Shield, bad against health (not your health)"

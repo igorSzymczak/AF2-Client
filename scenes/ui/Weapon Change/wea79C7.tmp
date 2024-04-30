@@ -1,0 +1,890 @@
+[gd_scene load_steps=23 format=3 uid="uid://d3sbwh6x5ryko"]
+
+[ext_resource type="Script" path="res://scenes/ui/Weapon Change/weapon_change.gd" id="1_lfqe3"]
+[ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="2_eoedh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4p5cv"]
+bg_color = Color(0.0196078, 0.0392157, 0.0588235, 0.768627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hd2qq"]
+bg_color = Color(1, 1, 1, 0)
+border_width_right = 5
+border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tudjn"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l250n"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.290196, 0.290196, 0.290196, 1)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.498039, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3fix"]
+content_margin_left = 16.0
+content_margin_top = 4.0
+content_margin_right = 16.0
+content_margin_bottom = 4.0
+bg_color = Color(0.290196, 0.290196, 0.290196, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.596078, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wlqd"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r076f"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cu755"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abku8"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.498039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpnrq"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhpac"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+draw_center = false
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwcew"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnxwh"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+draw_center = false
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.498039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yavt0"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrteo"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+draw_center = false
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5c8a3"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3dj4"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 1)
+draw_center = false
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.498039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_421o0"]
+bg_color = Color(1, 1, 1, 0)
+border_width_right = 5
+border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jefry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um4ts"]
+bg_color = Color(1, 1, 1, 0)
+border_width_top = 5
+border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
+
+[node name="WeaponChange" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lfqe3")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4p5cv")
+
+[node name="H" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BorderRight" type="Panel" parent="PanelContainer/H"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hd2qq")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
+
+[node name="SortingSection" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SortingLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Sorting"
+horizontal_alignment = 1
+
+[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="SearchBar" type="LineEdit" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_tudjn")
+theme_override_styles/focus = SubResource("StyleBoxFlat_l250n")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_e3fix")
+placeholder_text = "Search..."
+max_length = 20
+
+[node name="DmgTypeButtons" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="EnergyButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_colors/font_hover_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_colors/font_focus_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_1wlqd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r076f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cu755")
+theme_override_styles/focus = SubResource("StyleBoxFlat_abku8")
+toggle_mode = true
+text = "Energy"
+
+[node name="KineticButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_colors/font_hover_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_colors/font_focus_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_rpnrq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mhpac")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bwcew")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hnxwh")
+toggle_mode = true
+text = "Kinetic"
+
+[node name="CorrosiveButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.407843, 0.407843, 0.407843, 1)
+theme_override_colors/font_hover_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_colors/font_focus_color = Color(0.45098, 0.45098, 0.45098, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_yavt0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rrteo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5c8a3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_n3dj4")
+toggle_mode = true
+text = "Corrosive"
+
+[node name="Separator2" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="SortByContainer" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SortByLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Sort by"
+
+[node name="SortingSwitch" type="OptionButton" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Name"
+popup/item_0/id = 0
+popup/item_1/text = "Upgrades"
+popup/item_1/id = 1
+
+[node name="V2" type="VBoxContainer" parent="PanelContainer/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="H2" type="HBoxContainer" parent="PanelContainer/H/V2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="BorderRight" type="Panel" parent="PanelContainer/H/V2/H2"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_421o0")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/BorderRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 21
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Arsenal"
+horizontal_alignment = 1
+
+[node name="WeaponsSection" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="Panel" parent="PanelContainer/H/V2/H2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jefry")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
+
+[node name="InfoSection" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Left" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 52
+
+[node name="Heading" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 24
+
+[node name="IconContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="WeaponElement" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" instance=ExtResource("2_eoedh")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading"]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="WeaponName" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Weapon Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Kinetic" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.745098, 0.956863, 1)
+theme_override_font_sizes/font_size = 18
+text = "Kinetic"
+
+[node name="Plus1" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "+"
+
+[node name="Energy" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.219608, 0.219608, 1)
+theme_override_font_sizes/font_size = 18
+text = "Energy"
+
+[node name="Plus2" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "+"
+
+[node name="Corrosive" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27451, 0.647059, 0.282353, 1)
+theme_override_font_sizes/font_size = 18
+text = "Corrosive"
+
+[node name="Stats" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="H" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Dmg" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Base damage :"
+
+[node name="DmgStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="DmgPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Rps" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rate of fire :"
+
+[node name="RpsStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1 RPS"
+horizontal_alignment = 1
+
+[node name="RpsPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Power" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Power cost :"
+
+[node name="PowerStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "30"
+horizontal_alignment = 1
+
+[node name="PowerPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Range" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Range :"
+
+[node name="RangeStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "80"
+horizontal_alignment = 1
+
+[node name="RangePoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Description" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Description"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="Description" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at leo suscipit, venenatis ex sed, pharetra magna. Donec lobortis porta purus, eget finibus lorem mattis ut. Cras tempus finibus libero. "
+autowrap_mode = 3
+
+[node name="BorderTop" type="Panel" parent="PanelContainer/H/V2"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_um4ts")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/BorderTop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HotbarSection" type="VBoxContainer" parent="PanelContainer/H/V2/BorderTop/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chcxaewbmb4p7"]
+[gd_scene load_steps=9 format=3 uid="uid://chcxaewbmb4p7"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_2c1t4"]
 [ext_resource type="PackedScene" uid="uid://co4eekalpp6kr" path="res://scenes/ui/game.tscn" id="2_nkdw5"]
@@ -7,20 +7,18 @@
 [ext_resource type="PackedScene" uid="uid://cctbruyrj1i8n" path="res://scenes/ui/Auth Screen/auth_screen.tscn" id="5_wjlru"]
 [ext_resource type="PackedScene" uid="uid://be4mwemfpshms" path="res://scenes/ui/Structure Menu/structure_menu.tscn" id="6_loyla"]
 [ext_resource type="PackedScene" uid="uid://b6qw4705uuu8l" path="res://scenes/ui/HangarMenu/hangar_menu.tscn" id="6_xr3hv"]
+[ext_resource type="PackedScene" uid="uid://d3sbwh6x5ryko" path="res://scenes/ui/Weapon Change/weapon_change.tscn" id="7_f758s"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_2c1t4")
-
-[node name="Game" parent="." instance=ExtResource("2_nkdw5")]
-visible = false
-z_index = 5
 
 [node name="DeathScreen" parent="." instance=ExtResource("3_xshnj")]
 visible = false
 z_index = 1
 
-[node name="ESCMenu" parent="." instance=ExtResource("4_4qyyq")]
+[node name="Game" parent="." instance=ExtResource("2_nkdw5")]
 visible = false
+z_index = 5
 
 [node name="HangarMenu" parent="." instance=ExtResource("6_xr3hv")]
 visible = false
@@ -29,5 +27,13 @@ z_index = 10
 [node name="StructureMenu" parent="." instance=ExtResource("6_loyla")]
 visible = false
 z_index = 10
+
+[node name="ESCMenu" parent="." instance=ExtResource("4_4qyyq")]
+visible = false
+offset_right = 350.0
+
+[node name="WeaponChange" parent="." instance=ExtResource("7_f758s")]
+visible = false
+z_index = 21
 
 [node name="AuthScreen" parent="." instance=ExtResource("5_wjlru")]

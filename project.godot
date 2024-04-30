@@ -32,7 +32,7 @@ Functions="*res://globals/Functions/functions.gd"
 
 [display]
 
-window/size/viewport_width=960
+window/size/viewport_width=1900
 window/size/viewport_height=1000
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"

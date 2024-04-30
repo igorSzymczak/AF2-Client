@@ -135,6 +135,12 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Shop"
 
+[node name="WeaponsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Weapons"
+
 [node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
 layout_mode = 1
 anchors_preset = 12
@@ -390,6 +396,7 @@ text = "Return"
 
 [connection signal="button_down" from="PanelContainer/MarginContainer/Main/Center/SettingsButton" to="." method="_on_settings_button_button_down"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/KeybindsButton" to="." method="_on_keybinds_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/WeaponsButton" to="." method="_on_weapons_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Bottom/QuitButton" to="PanelContainer/MarginContainer/Main" method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]

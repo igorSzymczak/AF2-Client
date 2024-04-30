@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0hl3q0mk7mc5"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_clm83"]
+
+[node name="RocketLauncher" type="Node"]
+script = ExtResource("1_clm83")
+weapon_name = "Rocket Launcher"
+damage = 120
+rps = 3.75
+power_cost = 28
+range = 10
+damage_points = 8
+rps_points = 6
+power_points = 9
+range_points = 10
+kinetic = true
+energy = true
+description_long = "The Rocket Launcher fires 3 slow-moving rockets that gradually gain speed, making them difficult to evade. With a substantial range and high AoE damage, they excel against groups of enemies. However, their slow firing rate and high energy consumption are drawbacks. Additionally, they detonate under the influence of the Energy Nova weapon."
+description_short = "Unleashes slow rockets with high AoE damage, effective against groups and on Long Range."

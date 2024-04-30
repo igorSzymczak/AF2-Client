@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp5bqv3xooum4"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_ei35b"]
+
+[node name="PlasmaGun" type="Node"]
+script = ExtResource("1_ei35b")
+weapon_name = "Plasma Gun"
+damage = 55
+rps = 12.2
+power_cost = 18
+range = 3
+damage_points = 3
+rps_points = 8
+power_points = 6
+range_points = 3
+energy = true
+description_long = "The Plasma Gun is akin to a Shotgun, firing multiple projectiles with moderate damage simultaneously. These projectiles are expelled at high velocity but quickly lose speed and dissipate. Additionally, the weapon boasts significant spread, making it effective only at close range."
+description_short = "Shotgun-style weapon with rapid projectiles, best for close combat."

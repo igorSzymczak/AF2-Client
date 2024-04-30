@@ -8,7 +8,6 @@ class_name WeaponTooltip extends PanelContainer
 
 func _on_visibility_changed():
 	if !AuthManager.is_logged_in: return
-	
 	if description.text.is_empty():
 		separator.hide()
 		description.hide()

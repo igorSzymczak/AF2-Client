@@ -1,5 +1,5 @@
 extends Bullet
-class_name HighCalliberRound
+class_name PiercingBullet
 
 func get_life_time() -> int: return 1000
 func get_life_time_rng() -> int: return 200

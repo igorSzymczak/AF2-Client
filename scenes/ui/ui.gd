@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var auth_screen = $AuthScreen
 @onready var hangar = $HangarMenu
 @onready var structure  = $StructureMenu
+@onready var weapon_change  = $WeaponChange
 
 
 func _ready():
@@ -42,6 +43,7 @@ func to_scene(ui: String):
 	if ui.to_lower() == "auth": return auth_screen
 	if ui.to_lower() == "hangar": return hangar
 	if ui.to_lower() == "structure": return structure
+	if ui.to_lower() == "weapon_change": return weapon_change
 
 func set_to(ui: String):
 	if to_scene(ui) != current_ui:

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdknvthn2rqk4"]
+
+[ext_resource type="Script" path="res://scenes/weapons/ClusterMissiles/cluster_missiles.gd" id="1_5aoly"]
+
+[node name="ClusterMissiles" type="Node"]
+script = ExtResource("1_5aoly")
+weapon_name = "Cluster Missiles"
+damage = 75
+rps = 13.2
+power_cost = 15
+range = 8
+damage_points = 5
+rps_points = 8
+power_points = 5
+range_points = 8
+kinetic = true
+energy = true
+description_long = "Cluster Missiles deal massive damage while being very fast. Their downside is they are quite easy to evade."
+description_short = "Deal high damage, but are inaccurate. Can be destroyed by Energy Nova."

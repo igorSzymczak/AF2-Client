@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ncjrhy1oc8x"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_gr3yd"]
+
+[node name="PiercingGun" type="Node"]
+script = ExtResource("1_gr3yd")
+weapon_name = "Piercing Gun"
+damage = 160
+rps = 6.6
+power_cost = 30
+range = 10
+damage_points = 10
+rps_points = 7
+power_points = 10
+range_points = 10
+kinetic = true
+energy = true
+description_long = "The Piercing Gun is a long-range weapon that fires 2 precise, high-speed projectiles capable of dealing massive piercing damage to enemies. It boasts relatively high rate of fire but consumes substantial amounts of power."
+description_short = "Long-range weapon with precise, high-speed projectiles for massive piercing damage."

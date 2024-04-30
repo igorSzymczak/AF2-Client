@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://wbgyko5lfiao"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_6oqan"]
+
+[node name="SpawnerLaserGun" type="Node"]
+script = ExtResource("1_6oqan")
+damage = 36
+rps = 10.0
+power_cost = 8
+range = 9
+damage_points = 2
+rps_points = 8
+power_points = 2
+range_points = 9
+kinetic = true
+description_long = "Mounted on enemy turrets, the Spawner Laser Gun is a rapid-firing weapon with high damage output, designed to keep players at a distance."
+description_short = "Mounted enemy turret with rapid fire and high damage to deter players."

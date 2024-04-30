@@ -47,7 +47,7 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 - [ ] currency (flux ^^)
 - [ ] cargo
 - [ ] armory
-- [ ] changing weapons
+- [x] changing weapons
 - [ ] __Buying__ ships
 - [ ] colorful chat
 - [ ] better rpc (server specific)

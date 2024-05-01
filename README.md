@@ -44,7 +44,7 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 - [x] Exp & Levels
 - [x] stat multipliers
 - [x] materials
-- [ ] currency (flux ^^)
+- [x] currency (flux ^^)
 - [ ] cargo
 - [ ] armory
 - [x] changing weapons

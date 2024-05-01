@@ -140,6 +140,11 @@ func handle_changing_menus():
 					chat_message_input.grab_focus.call_deferred()
 				else:
 					chat_message_input.release_focus.call_deferred()
+	if Input.is_action_just_pressed("WeaponChange"):
+		if current_ui == game:
+			open_ui("weapon_change")
+		elif current_ui == weapon_change:
+			close_current()
 	if Input.is_action_just_pressed("Fullscreen"):
 		swap_fullscreen_mode()
 

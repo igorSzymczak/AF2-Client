@@ -16,7 +16,8 @@ var input_actions : Dictionary = {
 	"Weapon4": "Weapon 4",
 	"Weapon5": "Weapon 5",
 	"SlowTurn": "Slow Turn",
-	"Land": "Land"
+	"Land": "Land",
+	"WeaponChange": "Weapons"
 }
 
 @onready var user_prefs := UserPreferences.load_or_create()

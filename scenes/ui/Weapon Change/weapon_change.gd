@@ -43,12 +43,6 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		GameManager.can_perform_actions = false
 		show()
-		modulate.a = 0
-		var alpha_tween := create_tween()
-		alpha_tween.tween_property(self, "modulate:a", 1, delta * 3)
-		
-		var weapons: Dictionary
-		
 		
 		load_weapons(GameManager.PlayerInfo.arsenal)
 		load_hotbar(GameManager.PlayerInfo.weapons)
@@ -58,11 +52,6 @@ func select_animation(animation_name: String):
 		if selecting and element_a:
 			handle_click(element_a, true)
 		
-		show()
-		modulate.a = 1
-		var alpha_tween := create_tween()
-		alpha_tween.tween_property(self, "modulate:a", 0, delta * 3)
-		await get_tree().create_timer(0.3).timeout
 		hide()
 
 func load_weapons(weapons: Dictionary):

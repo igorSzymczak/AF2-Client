@@ -1,9 +1,15 @@
 extends Node
 
+var flux: int = 0
 var steel: int = 0
 var hydrogen_crystals: int = 0
 var plasma_fluids: int = 0
 var iridium: int = 0
+
+signal flux_changed()
+func _handle_set_flux(amount: int):
+	flux = amount
+	flux_changed.emit()
 
 signal steel_changed()
 func _handle_set_steel(amount: int):
@@ -28,6 +34,10 @@ func _handle_set_iridium(amount: int):
 @rpc("authority", "call_remote", "reliable")
 func _set_steel(amount: int):
 	_handle_set_steel(amount)
+
+@rpc("authority", "call_remote", "reliable")
+func _set_flux(amount: int):
+	_handle_set_flux(amount)
 
 @rpc("authority", "call_remote", "reliable")
 func _set_hydrogen_crystals(amount: int):

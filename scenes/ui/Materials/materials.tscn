@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cykkh2wew6crk"]
+[gd_scene load_steps=7 format=3 uid="uid://cykkh2wew6crk"]
 
 [ext_resource type="Script" path="res://scenes/ui/Materials/materials.gd" id="1_g0ksg"]
 [ext_resource type="Texture2D" uid="uid://cpjj8oaj1f7pc" path="res://assets/ui/inventory/steel.png" id="1_o50fp"]
+[ext_resource type="Texture2D" uid="uid://bqvkdsw678u54" path="res://assets/ui/inventory/flux.png" id="2_jecv5"]
 [ext_resource type="Texture2D" uid="uid://wcdd1ygbse85" path="res://assets/ui/inventory/hydrogen_crystals.png" id="2_tne6b"]
 [ext_resource type="Texture2D" uid="uid://ddtwfkxlvu0bi" path="res://assets/ui/inventory/plasma_fluids.png" id="3_r4rxh"]
 [ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="4_sj1pd"]
@@ -33,6 +34,27 @@ metadata/_edit_lock_ = true
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 24
+
+[node name="Flux" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Flux"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Flux/Icon"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_jecv5")
+stretch_mode = 5
+
+[node name="FluxAmount" type="Label" parent="MarginContainer/HBoxContainer/Flux"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
 
 [node name="Steel" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

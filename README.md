@@ -49,6 +49,6 @@ Astroflux devs abononed their project, so i am here to continue it in a new game
 - [ ] armory
 - [x] changing weapons
 - [ ] __Buying__ ships
-- [ ] colorful chat
+- [x] colorful chat
 - [ ] better rpc (server specific)
 - [ ] server optimization

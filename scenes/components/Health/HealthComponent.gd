@@ -1,12 +1,12 @@
 extends Node2D
 class_name HealthComponent
 
-var max_health: float = 1.0
-var health: float = 1.0
-var armor: float = 1.0
-var max_shield: float = 1.0
-var shield: float = 1.0
-var shield_regen: float = 1.0
+var max_health: int = 1
+var health: int = 1
+var armor: int = 1
+var max_shield: int = 1
+var shield: int = 1
+var shield_regen: int = 1
 
 @onready var parent = get_parent()
 
@@ -29,13 +29,13 @@ func _ready() -> void:
 	_set_health(max_health)
 	_set_shield(max_shield)
 
-var server_max_health := 0.0
-var server_health := 0.0
-var server_armor := 0.0
+var server_max_health: int = 1
+var server_health: int = 1
+var server_armor: int = 1
 
-var server_max_shield := 0.0
-var server_shield := 0.0
-var server_shield_regen := 0.0
+var server_max_shield: int = 1
+var server_shield: int = 1
+var server_shield_regen: int = 1
 
 func _process(_delta):
 	if !isBoss:
@@ -78,8 +78,8 @@ func _process(_delta):
 		set_shield_regen(server_shield_regen)
 	
 
-signal health_changed(value: float)
-func _set_health(_new_health: float):
+signal health_changed(value: int)
+func _set_health(_new_health: int):
 	health = _new_health
 	if health <= 0:
 		call_deferred("emit_signal", "health_depleted")
@@ -88,16 +88,16 @@ func _set_health(_new_health: float):
 	
 	health_changed.emit(_new_health)
 
-signal shield_changed(value: float)
-func _set_shield(_new_shield: float):
+signal shield_changed(value: int)
+func _set_shield(_new_shield: int):
 	shield = _new_shield
 	if shieldbar and is_instance_valid(shieldbar):
 		shieldbar._set_shield(shield)
 	
 	shield_changed.emit(_new_shield)
 
-signal max_health_changed(value: float)
-func set_max_health(value: float):
+signal max_health_changed(value: int)
+func set_max_health(value: int):
 	if value == max_health: return
 	
 	max_health = value
@@ -105,8 +105,8 @@ func set_max_health(value: float):
 	
 	max_health_changed.emit(value)
 
-signal max_shield_changed(value: float)
-func set_max_shield(value: float):
+signal max_shield_changed(value: int)
+func set_max_shield(value: int):
 	if value == max_shield: return
 	
 	max_shield = value
@@ -114,15 +114,15 @@ func set_max_shield(value: float):
 	
 	max_shield_changed.emit(value)
 
-signal armor_changed(value: float)
-func set_armor(value: float):
+signal armor_changed(value: int)
+func set_armor(value: int):
 	if value == armor: return
 	
 	armor = value
 	armor_changed.emit(value)
 
-signal shield_regen_changed(value: float)
-func set_shield_regen(value: float):
+signal shield_regen_changed(value: int)
+func set_shield_regen(value: int):
 	if value == shield_regen: return
 	
 	shield_regen = value

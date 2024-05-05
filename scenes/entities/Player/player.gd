@@ -167,6 +167,7 @@ func emit_server_signals():
 
 func set_position_from_server(pos: Vector2):
 	global_position = pos
+	velocity = Vector2.ZERO
 	g.emit_signal("local_player_position", global_position)
 
 var server_position := Vector2.ZERO

@@ -38,6 +38,36 @@ func _ready():
 	corrosive_switch.toggled.connect(highlight_inventory)
 	search_bar.text_changed.connect(highlight_inventory)
 
+func _process(_delta):
+	if !visible or g.can_perform_actions:
+		return
+	if Input.is_action_just_pressed("Weapon1"):
+		var element: WeaponElement = hotbar_section.get_child(0)
+		handle_click(element, true)
+		element = hotbar_section.get_child(0)
+		element.button.grab_focus.call_deferred()
+	elif Input.is_action_just_pressed("Weapon2"):
+		var element: WeaponElement = hotbar_section.get_child(1)
+		handle_click(element, true)
+		element = hotbar_section.get_child(1)
+		element.button.grab_focus.call_deferred()
+	elif Input.is_action_just_pressed("Weapon3"):
+		var element: WeaponElement = hotbar_section.get_child(2)
+		handle_click(element, true)
+		element = hotbar_section.get_child(2)
+		element.button.grab_focus.call_deferred()
+	elif Input.is_action_just_pressed("Weapon4"):
+		var element: WeaponElement = hotbar_section.get_child(3)
+		handle_click(element, true)
+		element = hotbar_section.get_child(3)
+		element.button.grab_focus.call_deferred()
+	elif Input.is_action_just_pressed("Weapon5"):
+		var element: WeaponElement = hotbar_section.get_child(4)
+		handle_click(element, true)
+		element = hotbar_section.get_child(4)
+		element.button.grab_focus.call_deferred()
+		
+
 func select_animation(animation_name: String):
 	var delta = get_process_delta_time()
 	if animation_name == "open":

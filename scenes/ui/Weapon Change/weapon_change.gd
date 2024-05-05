@@ -41,14 +41,14 @@ func _ready():
 func select_animation(animation_name: String):
 	var delta = get_process_delta_time()
 	if animation_name == "open":
-		GameManager.can_perform_actions = false
+		g.can_perform_actions = false
 		show()
 		
-		load_weapons(GameManager.PlayerInfo.arsenal)
-		load_hotbar(GameManager.PlayerInfo.weapons)
+		load_weapons(g.PlayerInfo.arsenal)
+		load_hotbar(g.PlayerInfo.weapons)
 		
 	elif animation_name == "close":
-		GameManager.can_perform_actions = true
+		g.can_perform_actions = true
 		if selecting and element_a:
 			handle_click(element_a, true)
 		
@@ -62,9 +62,9 @@ func load_weapons(weapons: Dictionary):
 	
 	var found_first_proper := false
 	for weapon_name: String in weapons:
-		if !GameManager.Weapons.has(weapon_name): return
+		if !g.Weapons.has(weapon_name): return
 		
-		var weapon: Weapon = GameManager.Weapons[weapon_name].instantiate()
+		var weapon: Weapon = g.Weapons[weapon_name].instantiate()
 		
 		if !found_first_proper:
 			show_weapon(weapon)
@@ -91,9 +91,9 @@ func load_hotbar(weapons: Dictionary):
 	
 	for slot: int in weapons:
 		var weapon_name = weapons[slot].name
-		if !GameManager.Weapons.has(weapon_name): return
+		if !g.Weapons.has(weapon_name): return
 		
-		var weapon: Weapon = GameManager.Weapons[weapon_name].instantiate()
+		var weapon: Weapon = g.Weapons[weapon_name].instantiate()
 		var element: WeaponElement = weapon_ui_scene.instantiate()
 		
 		hotbar_section.add_child(element)
@@ -156,6 +156,8 @@ func show_weapon(weapon: Weapon):
 	icon_container.add_child(element)
 	element.weapon_name = weapon.weapon_name
 	element.info_shown = false
+	element.button.disabled = true
+	element.button.focus_mode = FOCUS_NONE
 	
 	description_label.set_text(weapon.description_long)
 	
@@ -256,5 +258,5 @@ func set_types(ene: bool, kin: bool, cor: bool):
 		corrosive_label.show()
 
 func request_change_weapon(slot: int, weapon_name: String):
-	if slot > 0 and slot < 6 and weapon_name in GameManager.Weapons:
-		GameManager.set_weapon_request.emit(slot, weapon_name)
+	if slot > 0 and slot < 6 and weapon_name in g.Weapons:
+		g.set_weapon_request.emit(slot, weapon_name)

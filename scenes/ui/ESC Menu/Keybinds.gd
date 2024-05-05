@@ -57,7 +57,7 @@ func _create_action_list():
 func _on_keybind_button_pressed(button, action):
 	if !is_remapping:
 		is_remapping = true
-		GameManager.can_perform_actions = false
+		g.can_perform_actions = false
 		action_to_remap = action
 		remapping_button = button
 		button.find_child("LabelInput").text = "Press key to bind..."
@@ -83,7 +83,7 @@ func _input(event):
 			action_to_remap = null
 			remapping_button = null
 			
-			GameManager.can_perform_actions = true
+			g.can_perform_actions = true
 			accept_event()
 
 func _update_action_list(button, event):

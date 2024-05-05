@@ -19,8 +19,8 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+g="*res://globals/GameManager.gd"
 GlobalSignals="*res://globals/GlobalSignals.gd"
-GameManager="*res://globals/GameManager.gd"
 SoundManager="*res://globals/SoundManager/sound_manager.tscn"
 ChatManager="*res://globals/ChatManager/ChatManager.gd"
 HomerusManager="*res://scenes/bosses/Homerus/HomerusManager.gd"

@@ -52,7 +52,7 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		selected_animation = "open"
 		animation_finished = false
-		land_ship_name = GameManager.local_player.ship.name
+		land_ship_name = g.me.ship.name
 		show()
 		current_section.hide()
 		current_section = main_section
@@ -215,8 +215,8 @@ func display_ship_info(ship: ShipComponent):
 				shield_regen += 1
 		
 		
-		GameManager.local_player.set_ship(ship.name)
-		GameManager.local_player.engine.activate_thruster()
+		g.me.set_ship(ship.name)
+		g.me.engine.activate_thruster()
 
 func _on_select_button_pressed():
 	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_name)
@@ -228,7 +228,7 @@ func _on_return_button_pressed():
 	select_animation("main")
 
 func _on_exit_button_pressed():
-	if GameManager.local_player.landed_structure != null:
-		GameManager.local_player.request_leave_structure.rpc_id(1, AuthManager.my_username)
+	if g.me.landed_structure != null:
+		g.me.request_leave_structure.rpc_id(1, AuthManager.my_username)
 		GlobalSignals.set_ui.emit("game")
 

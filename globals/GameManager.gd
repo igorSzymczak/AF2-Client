@@ -9,7 +9,7 @@ enum TIMESTEP {
 	FULL = 1000,     # 1  tps   (Planets)
 }
 
-var local_player: Player
+var me: Player
 
 var PlayerInfo: Dictionary = {}
 
@@ -170,51 +170,51 @@ func update_player_engine_active(username: String, activity: bool):
 	if Players.has(username):
 		Players[username]["engine_active"] = activity
 
-func get_player_max_health(username: String) -> int:
+func get_player_max_health(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["max_health"]
 	return 0
-func update_player_max_health(username: String, max_health: int):
+func update_player_max_health(username: String, max_health: float):
 	if Players.has(username):
 		Players[username]["max_health"] = max_health
 
-func get_player_health(username: String) -> int:
+func get_player_health(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["health"]
 	return 0
-func update_player_health(username: String, health: int):
+func update_player_health(username: String, health: float):
 	if Players.has(username):
 		Players[username]["health"] = health
 
-func get_player_armor(username: String) -> int:
+func get_player_armor(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["armor"]
 	return 0
-func update_player_armor(username: String, armor: int):
+func update_player_armor(username: String, armor: float):
 	if Players.has(username):
 		Players[username]["armor"] = armor
 
-func get_player_max_shield(username: String) -> int:
+func get_player_max_shield(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["max_shield"]
 	return 0
-func update_player_max_shield(username: String, max_shield: int):
+func update_player_max_shield(username: String, max_shield: float):
 	if Players.has(username):
 		Players[username]["max_shield"] = max_shield
 
-func get_player_shield(username: String) -> int:
+func get_player_shield(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["shield"]
 	return 0
-func update_player_shield(username: String, shield: int):
+func update_player_shield(username: String, shield: float):
 	if Players.has(username):
 		Players[username]["shield"] = shield
 
-func get_player_shield_regen(username: String) -> int:
+func get_player_shield_regen(username: String) -> float:
 	if Players.has(username):
 		return Players[username]["shield_regen"]
 	return 0
-func update_player_shield_regen(username: String, shield_regen: int):
+func update_player_shield_regen(username: String, shield_regen: float):
 	if Players.has(username):
 		Players[username]["shield_regen"] = shield_regen
 
@@ -346,35 +346,35 @@ func get_spawner_rotation(id: int) -> float:
 		return Spawners[id]["rotation"]
 	return 0
 
-func get_spawner_max_health(id: int) -> int:
+func get_spawner_max_health(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["max_health"]
 	return 0
-func update_spawner_max_health(id: int, max_health: int):
+func update_spawner_max_health(id: int, max_health: float):
 	if Spawners.has(id):
 		Spawners[id]["max_health"] = max_health
 
-func get_spawner_health(id: int) -> int:
+func get_spawner_health(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["health"]
 	return 0
-func update_spawner_health(id: int, health: int):
+func update_spawner_health(id: int, health: float):
 	if Spawners.has(id):
 		Spawners[id]["health"] = health
 
-func get_spawner_max_shield(id: int) -> int:
+func get_spawner_max_shield(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["max_shield"]
 	return 0
-func update_spawner_max_shield(id: int, max_shield: int):
+func update_spawner_max_shield(id: int, max_shield: float):
 	if Spawners.has(id):
 		Spawners[id]["max_shield"] = max_shield
 
-func get_spawner_shield(id: int) -> int:
+func get_spawner_shield(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["shield"]
 	return 0
-func update_spawner_shield(id: int, shield: int):
+func update_spawner_shield(id: int, shield: float):
 	if Spawners.has(id):
 		Spawners[id]["shield"] = shield
 
@@ -429,35 +429,35 @@ func get_turret_rotation(id: int) -> float:
 		return Turrets[id]["rotation"]
 	return 0
 
-func get_turret_max_health(id: int) -> int:
+func get_turret_max_health(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["max_health"]
 	return 0
-func update_turret_max_health(id: int, max_health: int):
+func update_turret_max_health(id: int, max_health: float):
 	if Turrets.has(id):
 		Turrets[id]["max_health"] = max_health
 
-func get_turret_health(id: int) -> int:
+func get_turret_health(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["health"]
 	return 0
-func update_turret_health(id: int, health: int):
+func update_turret_health(id: int, health: float):
 	if Turrets.has(id):
 		Turrets[id]["health"] = health
 
-func get_turret_max_shield(id: int) -> int:
+func get_turret_max_shield(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["max_shield"]
 	return 0
-func update_turret_max_shield(id: int, max_shield: int):
+func update_turret_max_shield(id: int, max_shield: float):
 	if Turrets.has(id):
 		Turrets[id]["max_shield"] = max_shield
 
-func get_turret_shield(id: int) -> int:
+func get_turret_shield(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["shield"]
 	return 0
-func update_turret_shield(id: int, shield: int):
+func update_turret_shield(id: int, shield: float):
 	if Turrets.has(id):
 		Turrets[id]["shield"] = shield
 
@@ -488,35 +488,35 @@ func get_enemy_rotation(id: int) -> float:
 		return Enemies[id]["rotation"]
 	return 0
 
-func get_enemy_max_health(id: int) -> int:
+func get_enemy_max_health(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["max_health"]
 	return 0
-func update_enemy_max_health(id: int, max_health: int):
+func update_enemy_max_health(id: int, max_health: float):
 	if Enemies.has(id):
 		Enemies[id]["max_health"] = max_health
 
-func get_enemy_health(id: int) -> int:
+func get_enemy_health(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["health"]
 	return 0
-func update_enemy_health(id: int, health: int):
+func update_enemy_health(id: int, health: float):
 	if Enemies.has(id):
 		Enemies[id]["health"] = health
 
-func get_enemy_max_shield(id: int) -> int:
+func get_enemy_max_shield(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["max_shield"]
 	return 0
-func update_enemy_max_shield(id: int, max_shield: int):
+func update_enemy_max_shield(id: int, max_shield: float):
 	if Enemies.has(id):
 		Enemies[id]["max_shield"] = max_shield
 
-func get_enemy_shield(id: int) -> int:
+func get_enemy_shield(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["shield"]
 	return 0
-func update_enemy_shield(id: int, shield: int):
+func update_enemy_shield(id: int, shield: float):
 	if Enemies.has(id):
 		Enemies[id]["shield"] = shield
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
-	GameManager.connect("bullet_spawned", handle_bullet_spawned)
+	g.connect("bullet_spawned", handle_bullet_spawned)
 
 func handle_bullet_spawned(
 	bullet_scene: PackedScene, bullet_name: String,

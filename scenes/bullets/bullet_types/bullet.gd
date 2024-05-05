@@ -48,16 +48,16 @@ func _ready():
 	
 	
 func _physics_process(delta: float) -> void:
-	if !GameManager.Bullets.has(name): crash_bullet()
+	if !g.Bullets.has(name): crash_bullet()
 	
 	update_position()
-	var server_is_deterministic = GameManager.get_bullet_is_deterministic(name)
+	var server_is_deterministic = g.get_bullet_is_deterministic(name)
 	if server_is_deterministic != is_deterministic:
 		is_deterministic = server_is_deterministic
 		if is_deterministic:
 			calculated_global_position = global_position
 	if !is_deterministic:
-		var temp_server_pos = GameManager.get_bullet_position(name)
+		var temp_server_pos = g.get_bullet_position(name)
 		
 		if temp_server_pos != server_pos:
 			server_pos = temp_server_pos if temp_server_pos != Vector2.ZERO else server_pos
@@ -98,7 +98,7 @@ func bullet_scale_out() -> void:
 	if current_time - shoot_time >= life_time:
 		#print("bullet destroyed")
 		# Bullet Ran out of Life Time
-		GameManager.remove_bullet(name)
+		g.remove_bullet(name)
 		queue_free()
 		#print(name + " " + str(vel))
 

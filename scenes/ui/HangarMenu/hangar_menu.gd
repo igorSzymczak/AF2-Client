@@ -136,8 +136,8 @@ func display_ship_info(ship: ShipComponent):
 				shield_regen += 1
 		
 		
-		GameManager.local_player.set_ship(ship.name)
-		GameManager.local_player.engine.activate_thruster()
+		g.me.set_ship(ship.name)
+		g.me.engine.activate_thruster()
 
 var animation_finished = true
 var selected_animation = null
@@ -145,8 +145,8 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		selected_animation = "open"
 		animation_finished = false
-		land_ship_name = GameManager.local_player.ship.name
-		display_ship_info(GameManager.local_player.ship)
+		land_ship_name = g.me.ship.name
+		display_ship_info(g.me.ship)
 		
 	elif animation_name == "close":
 		selected_animation = "close"

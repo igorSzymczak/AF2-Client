@@ -39,7 +39,7 @@ func _ready() -> void:
 	
 	await AuthManager.joined
 	
-	var health_component: HealthComponent = GameManager.local_player.health_component
+	var health_component: HealthComponent = g.me.health_component
 	health_component.max_health_changed.connect(set_max_health)
 	health_component.health_changed.connect(set_health)
 	health_component.max_shield_changed.connect(set_max_shield)

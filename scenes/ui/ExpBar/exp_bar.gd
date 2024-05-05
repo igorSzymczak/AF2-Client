@@ -6,9 +6,13 @@ var displayed_lvl := 0.0
 var displayed_exp := 0.0
 
 func _ready():
-	#EXP.goal_exp_set.connect(_on_goal_exp_set)
-	EXP.exp_added.connect(_on_exp_added)
 	AuthManager.joined.connect(_on_join)
+	
+	EXP.exp_added.connect(_on_exp_added)
+	
+	EXP.goal_exp_set.connect(_on_goal_exp_set)
+	EXP.exp_set.connect(_on_exp_set)
+	EXP.lvl_set.connect(_on_lvl_set)
 
 func _on_join():
 	displayed_lvl = EXP.lvl
@@ -16,15 +20,17 @@ func _on_join():
 	max_value = EXP.goal_exp
 	value = EXP.exp
 #
-#func _on_goal_exp_set(new_goal: int): 
-	#max_value = new_goal
 
 func _on_exp_added(exp_addition: int):
 	displayed_exp += exp_addition
 	
 
-#func _on_exp_set(): pass
-#func _on_lvl_set(): pass
+func _on_goal_exp_set(val: int): 
+	max_value = val
+func _on_exp_set(val: int):
+	displayed_exp = val
+func _on_lvl_set(val: int):
+	displayed_lvl = val
 
 
 func _process(delta):

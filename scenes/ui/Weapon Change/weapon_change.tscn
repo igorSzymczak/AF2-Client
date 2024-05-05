@@ -38,7 +38,7 @@ border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.407843, 0.407843, 0.498039, 1)
+border_color = Color(0.447059, 0.298039, 0.792157, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
 corner_radius_bottom_right = 100
@@ -83,11 +83,10 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abku8"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
-draw_center = false
 border_width_left = 3
 border_width_top = 3
 border_width_bottom = 3
-border_color = Color(0.407843, 0.407843, 0.498039, 1)
+border_color = Color(0.447059, 0.298039, 0.792157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpnrq"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -97,7 +96,6 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mhpac"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 1)
-draw_center = false
 border_width_top = 3
 border_width_bottom = 3
 border_color = Color(0.407843, 0.407843, 0.407843, 1)
@@ -110,10 +108,9 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnxwh"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 1)
-draw_center = false
 border_width_top = 3
 border_width_bottom = 3
-border_color = Color(0.407843, 0.407843, 0.498039, 1)
+border_color = Color(0.447059, 0.298039, 0.792157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yavt0"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -124,7 +121,6 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrteo"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 1)
-draw_center = false
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
@@ -139,11 +135,10 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3dj4"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 1)
-draw_center = false
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.407843, 0.407843, 0.498039, 1)
+border_color = Color(0.447059, 0.298039, 0.792157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_421o0"]
 bg_color = Color(1, 1, 1, 0)

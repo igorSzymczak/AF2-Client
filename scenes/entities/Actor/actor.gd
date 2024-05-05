@@ -13,15 +13,15 @@ var server_rot: float = 0
 var server_engine_active: bool
 var last_pos := Vector2.ZERO
 func _process(_delta):
-	if GameManager.Enemies.has(name.to_int()):
+	if g.Enemies.has(name.to_int()):
 		last_pos = global_position
-		server_pos = GameManager.get_enemy_position(name.to_int())
+		server_pos = g.get_enemy_position(name.to_int())
 		global_position = global_position.lerp(server_pos, 0.2)
 		
-		server_rot = GameManager.get_enemy_rotation(name.to_int())
+		server_rot = g.get_enemy_rotation(name.to_int())
 		rotation = lerp_angle(rotation, server_rot, 0.2)
 		
-		server_engine_active = GameManager.get_enemy_engine_active(name.to_int())
+		server_engine_active = g.get_enemy_engine_active(name.to_int())
 		var vel = global_position.direction_to(last_pos) * global_position.distance_to(last_pos)
 		if server_engine_active: engine.activate_thruster()
 		elif !server_engine_active: engine.deactivate_thruster(vel)

@@ -14,7 +14,7 @@ func process_message_by_server(username: String, message: String):
 
 signal received_message(message: String)
 @rpc("authority", "call_remote", "reliable")
-func broadcast_message(message: String):
+func display_message(message: String):
 	received_message.emit(message)
 
 signal nickname_changed(nickname: String)

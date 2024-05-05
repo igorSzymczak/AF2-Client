@@ -8,18 +8,18 @@ var selected_animation = null
 var animation_finished = true
 var next_animation: String
 func _process(_delta: float):
-	var local_player: Player = GameManager.local_player
+	var me: Player = g.me
 	if (
-		is_instance_valid(local_player) and 
-		local_player.alive and 
-		GameManager.get_player_monitorable(local_player.name) and 
-		local_player.landed_structure == null
+		is_instance_valid(me) and 
+		me.alive and 
+		g.get_player_monitorable(me.name) and 
+		me.landed_structure == null
 	):
 		safezone_label.hide()
 	else: safezone_label.show()
 	
 	if next_animation and animation_finished:
-		var player_landed = GameManager.local_player and GameManager.local_player.landed_structure != null
+		var player_landed = g.me and g.me.landed_structure != null
 		if (
 			(player_landed and next_animation == "open")
 			or (!player_landed and next_animation == "close")

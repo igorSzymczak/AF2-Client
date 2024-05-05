@@ -44,13 +44,13 @@ func _ready() -> void:
 	weapon_panel_5.mouse_exited.connect(weapon_tooltip.hide)
 
 func _process(_delta) -> void:
-	if !GameManager.PlayerInfo.is_empty():
+	if !g.PlayerInfo.is_empty():
 		draw_bars()
 		manage_weapon_change()
 		weapon_frame_load()
 	
 func draw_bars() -> void:
-	var total_percentage = (GameManager.PlayerInfo.current_power / GameManager.PlayerInfo.max_power) * 100
+	var total_percentage = (g.PlayerInfo.current_power / g.PlayerInfo.max_power) * 100
 	
 	var bars_filled = total_percentage / 10
 	
@@ -67,8 +67,8 @@ func draw_bars() -> void:
 
 var last_weapon_index = 1
 func manage_weapon_change() -> void:
-	if last_weapon_index != GameManager.PlayerInfo.current_weapon:
-		last_weapon_index = GameManager.PlayerInfo.current_weapon
+	if last_weapon_index != g.PlayerInfo.current_weapon:
+		last_weapon_index = g.PlayerInfo.current_weapon
 		var weapon_panel_size_halfed = weapon_panel_1.get_size() / 2.0
 		if(last_weapon_index == 1): weapon_frame.position = weapon_panel_1.position + weapon_panel_size_halfed
 		if(last_weapon_index == 2): weapon_frame.position = weapon_panel_2.position + weapon_panel_size_halfed
@@ -77,7 +77,7 @@ func manage_weapon_change() -> void:
 		if(last_weapon_index == 5): weapon_frame.position = weapon_panel_5.position + weapon_panel_size_halfed
 
 func weapon_frame_load() -> void:
-	var current_weapon = GameManager.PlayerInfo.weapons[GameManager.PlayerInfo.current_weapon]
+	var current_weapon = g.PlayerInfo.weapons[g.PlayerInfo.current_weapon]
 	if current_weapon.shoot_delay > 200:
 		var time_elapsed = float(Time.get_ticks_msec() - current_weapon.last_shot)
 		var percentage = min(1, time_elapsed / float(current_weapon.shoot_delay))
@@ -92,13 +92,13 @@ func weapon_frame_load() -> void:
 func _on_hover_area_mouse_entered(_body):
 	push_error("display power NOW")
 	label_container.position = get_local_mouse_position()
-	label.text = "Power: " + str(GameManager.PlayerInfo.current_power) + " / " + str(GameManager.PlayerInfo.max_power)
+	label.text = "Power: " + str(g.PlayerInfo.current_power) + " / " + str(g.PlayerInfo.max_power)
 
 func show_weapon_tooltip(index: int):
 	if index < 1 or index > 5: return
-	if GameManager.PlayerInfo.is_empty(): return
+	if g.PlayerInfo.is_empty(): return
 	
-	var weapon: Dictionary = GameManager.PlayerInfo.weapons[index]
+	var weapon: Dictionary = g.PlayerInfo.weapons[index]
 	var weapon_name: String = weapon.name
 	var dmg: float = weapon.damage
 	
@@ -106,8 +106,6 @@ func show_weapon_tooltip(index: int):
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0
 	
 	var rps: float = 1000.0 / float(weapon.shoot_delay)
-	
-	print(rps)
 	
 	var dps: float = rps * average_bullets * dmg
 	

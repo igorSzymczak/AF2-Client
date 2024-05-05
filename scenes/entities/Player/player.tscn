@@ -52,7 +52,8 @@ offset_top = 56.0
 offset_right = 48.0
 offset_bottom = 64.0
 
-[node name="Nickname" type="PanelContainer" parent="."]
+[node name="NicknameContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
 top_level = true
 custom_minimum_size = Vector2(200, 0)
 offset_left = -229.0
@@ -64,7 +65,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_uvxov")
 
-[node name="MarginContainer" type="MarginContainer" parent="Nickname"]
+[node name="MarginContainer" type="MarginContainer" parent="NicknameContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 3
@@ -72,14 +73,36 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Nickname/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NicknameContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="NicknameLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45098)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 30
 theme_override_font_sizes/font_size = 100
 text = "Nickname"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
+
+[node name="LvlLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.501961, 0.501961, 0.501961, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45098)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 30
+theme_override_font_sizes/font_size = 90
+text = "20 lvl"
+vertical_alignment = 1
 
 [node name="Reticle" type="Sprite2D" parent="."]
 z_index = 100

@@ -46,7 +46,7 @@ func set_player(emitted_player: Player):
 func _process(_delta):
 	if !player:
 		return
-	player = GameManager.local_player
+	player = g.me
 	
 	localization_label.text = str(round(player.global_position.x / 50.0)) + ", " + str(round(player.global_position.y / 50.0))
 	rotate_player()
@@ -66,7 +66,7 @@ func delete_element_with_poi(poi_to_remove):
 func create_element(poi) -> void:
 	if (poi.has_method("get_visibility") and poi.get_visibility()) or !poi.has_method("get_visibility"):
 		if !is_instance_valid(player):
-			player = GameManager.local_player
+			player = g.me
 		if !player: return
 		var minimap_position = (poi.global_position - player.global_position) * grid_scale
 		

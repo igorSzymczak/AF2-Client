@@ -25,7 +25,7 @@ func _process(_delta):
 	var t = Time.get_ticks_msec()
 	if t - 1000 > last_visibility_update:
 		last_visibility_update = t
-		var player_pos: Vector2 = GameManager.get_player_position(AuthManager.my_username)
+		var player_pos: Vector2 = g.get_player_position(AuthManager.my_username)
 		var boss_pos: Vector2 = HomerusManager.global_position
 		var distance = player_pos.distance_to(boss_pos)
 		var boss_alive = HomerusManager.left_segment_alive or HomerusManager.right_segment_alive or HomerusManager.main_segment_alive

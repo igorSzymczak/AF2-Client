@@ -105,9 +105,9 @@ func _open_current_ui():
 	else: current_ui.show()
 
 func _close_current_ui():
-	if GameManager.local_player and !current_ui in [game, death, esc_menu, auth_screen]:
-		if GameManager.local_player.landed_structure != null:
-			GameManager.local_player.request_leave_structure.rpc_id(1, AuthManager.my_username)
+	if g.me and !current_ui in [game, death, esc_menu, auth_screen]:
+		if g.me.landed_structure != null:
+			g.me.request_leave_structure.rpc_id(1, AuthManager.my_username)
 	
 	if current_ui.has_method("select_animation"):
 		current_ui.select_animation("close")
@@ -125,11 +125,11 @@ func handle_changing_menus():
 	if (
 		Input.is_action_just_pressed("Menu")
 		or (
-			GameManager.local_player and
-			GameManager.local_player.landed_structure != null and Input.is_action_just_pressed("Land")
+			g.me and
+			g.me.landed_structure != null and Input.is_action_just_pressed("Land")
 		)
 	):
-		if current_ui == game and GameManager.local_player.landed_structure == null:
+		if current_ui == game and g.me.landed_structure == null:
 			open_ui("esc")
 		elif current_ui != auth_screen and current_ui != death:
 			close_current()

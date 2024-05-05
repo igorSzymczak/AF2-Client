@@ -21,5 +21,5 @@ var mouse_in = false
 func _on_mouse_entered(): self.mouse_in = true
 func _on_mouse_exited(): self.mouse_in = false
 
-func _on_focus_entered(): GameManager.can_perform_actions = false
-func _on_focus_exited(): GameManager.can_perform_actions = true
+func _on_focus_entered(): g.can_perform_actions = false
+func _on_focus_exited(): g.can_perform_actions = true

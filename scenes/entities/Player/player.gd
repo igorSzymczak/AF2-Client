@@ -13,8 +13,9 @@ var landed_structure: Structure = null
 
 @onready var health_component: HealthComponent = $HealthComponent
 
-@onready var nickname_container: PanelContainer = $Nickname
-@onready var nickname_label: Label = $Nickname/MarginContainer/Label
+@onready var nickname_container: PanelContainer = %NicknameContainer
+@onready var nickname_label: Label = %NicknameLabel
+@onready var lvl_label: Label = %LvlLabel
 
 @onready var ship: ShipComponent = $ShipComponent
 @onready var engine: Thruster = $ShipComponent/Engine
@@ -42,11 +43,11 @@ func _ready() -> void:
 	
 	IS_MAIN_PLAYER = name == AuthManager.my_username
 	
-	health_component.connect("health_depleted", handle_death)
+	health_component.health_depleted.connect(handle_death)
 	
 	if IS_MAIN_PLAYER:
-		GameManager.connect("set_local_player_position", set_position_from_server)
-		GameManager.connect("death_args", set_death_args)
+		g.set_local_player_position.connect(set_position_from_server)
+		g.death_args.connect(set_death_args)
 		nickname_container.hide()
 		z_index = 1
 
@@ -65,10 +66,10 @@ func set_death_args(args):
 var last_server_ship_name := ""
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
-	var server_ship_name: String = GameManager.get_player_ship_name(name)
-	if lvl != GameManager.get_player_lvl(name):
-		lvl = GameManager.get_player_lvl(name)
-		nickname_label.set_text(str(lvl) + " " + nickname)
+	var server_ship_name: String = g.get_player_ship_name(name)
+	if lvl != g.get_player_lvl(name):
+		lvl = g.get_player_lvl(name)
+		lvl_label.set_text(str(lvl) + " lvl")
 	
 	if last_server_ship_name != server_ship_name:
 		last_server_ship_name = server_ship_name
@@ -88,7 +89,7 @@ func _physics_process(delta: float) -> void:
 		handle_movement(delta)
 		camera_zoom_out(delta)
 		
-		if !GameManager.PlayerInfo.is_empty():
+		if !g.PlayerInfo.is_empty():
 			handle_change_weapon()
 			if Input.is_action_pressed("Shoot"):
 				handle_shoot()
@@ -103,15 +104,15 @@ func _physics_process(delta: float) -> void:
 
 var last_update_pos = 0
 var last_pos = Vector2.ZERO
-@onready var update_time_pos = GameManager.TIMESTEP.LOW
+@onready var update_time_pos = g.TIMESTEP.LOW
 
 var last_update_rot = 0
 var last_rot = 0
-@onready var update_time_rot = GameManager.TIMESTEP.MEDIUM
+@onready var update_time_rot = g.TIMESTEP.MEDIUM
 
 var last_update_vel = 0
 var last_vel = Vector2.ZERO
-@onready var update_time_vel = GameManager.TIMESTEP.MEDIUM
+@onready var update_time_vel = g.TIMESTEP.MEDIUM
 
 var server_alive: bool = true
 var death_time: int = 0
@@ -119,29 +120,29 @@ var death_time: int = 0
 var server_nickname: String = ""
 
 func emit_server_signals():
-	if GameManager.Players.has(name):
-		server_nickname = GameManager.get_player_nickname(name)
+	if g.Players.has(name):
+		server_nickname = g.get_player_nickname(name)
 		if server_nickname != nickname:
 			nickname = server_nickname
 			nickname_label.set_text(str(lvl) + " " + nickname)
 		
-		server_alive = GameManager.get_player_alive(name)
+		server_alive = g.get_player_alive(name)
 		
 		var t = Time.get_ticks_msec()
 		if t - update_time_pos > last_update_pos && last_pos.distance_squared_to(global_position) >= 9:
 			last_update_pos = t
 			last_pos = global_position
-			GameManager.emit_signal("local_player_position", global_position)
+			g.emit_signal("local_player_position", global_position)
 		
 		if t - update_time_rot > last_update_rot && last_rot != rotation:
 			last_update_rot = t
 			last_rot = rotation
-			GameManager.emit_signal("local_player_rotation", rotation)
+			g.emit_signal("local_player_rotation", rotation)
 		
 		if t - update_time_vel > last_update_vel && last_vel.distance_squared_to(velocity) >= 1:
 			last_update_vel = t
 			last_vel = velocity
-			GameManager.emit_signal("local_player_velocity", velocity)
+			g.emit_signal("local_player_velocity", velocity)
 		
 		if alive and !server_alive:
 			alive = false
@@ -166,24 +167,24 @@ func emit_server_signals():
 
 func set_position_from_server(pos: Vector2):
 	global_position = pos
-	GameManager.emit_signal("local_player_position", global_position)
+	g.emit_signal("local_player_position", global_position)
 
 var server_position := Vector2.ZERO
 var server_rotation := 0.0
 var server_velocity := Vector2.ZERO
 var server_engine_active: bool = false
 func handle_other_player(delta) -> void:
-	if GameManager.Players.has(name):
-		alive = GameManager.get_player_alive(name)
-		server_nickname = GameManager.get_player_nickname(name)
+	if g.Players.has(name):
+		alive = g.get_player_alive(name)
+		server_nickname = g.get_player_nickname(name)
 		if server_nickname != nickname:
 			nickname = server_nickname
-			nickname_label.set_text(str(lvl) + " " + nickname)
+			nickname_label.set_text(nickname)
 		
-		server_position = GameManager.get_player_position(name)
-		server_rotation = GameManager.get_player_rotation(name)
-		server_velocity = GameManager.get_player_velocity(name)
-		server_engine_active = GameManager.get_player_engine_active(name)
+		server_position = g.get_player_position(name)
+		server_rotation = g.get_player_rotation(name)
+		server_velocity = g.get_player_velocity(name)
+		server_engine_active = g.get_player_engine_active(name)
 		
 		global_position = global_position.lerp(server_position, delta * 10)
 		rotation = lerp_angle(rotation, server_rotation,  delta * 10)
@@ -194,7 +195,7 @@ func handle_other_player(delta) -> void:
 		else:
 			engine.deactivate_thruster(velocity)
 		
-		var is_main_player_alive = GameManager.get_player_alive(str(AuthManager.my_username))
+		var is_main_player_alive = g.get_player_alive(str(AuthManager.my_username))
 		if landed_structure != null:
 			# Alpha being set in func land_on()
 			var _nothing = 0
@@ -241,10 +242,10 @@ func handle_movement(delta: float) -> void:
 	if landed_structure == null:
 		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 		direction = Vector2(cos(rotation), sin(rotation))
-		if Input.is_action_pressed("Accelerate") and GameManager.can_perform_actions:
+		if Input.is_action_pressed("Accelerate") and g.can_perform_actions:
 			velocity += direction * SPEED * delta * 1.5
 			velocity = velocity.limit_length(MAX_SPEED)
-		elif Input.is_action_pressed("Decelerate") and GameManager.can_perform_actions:
+		elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
 			velocity -= velocity.normalized() * DECELERATION_SPEED * delta
 
 		if !velocity.is_equal_approx(Vector2.ZERO):
@@ -267,7 +268,7 @@ func handle_reticle(delta: float):
 			
 		reticle.global_rotation += delta * power
 		reticle.scale = Vector2(reticle_scale, reticle_scale)
-		if !GameManager.get_player_monitorable(name):
+		if !g.get_player_monitorable(name):
 			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 0, delta * 5) 
 		else:
 			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 1, delta * 5) 
@@ -277,7 +278,7 @@ func handle_reticle(delta: float):
 var engine_active: bool
 func handle_thrust() -> void:
 	var old_engine_active = engine_active
-	if GameManager.can_perform_actions:
+	if g.can_perform_actions:
 		if Input.is_action_pressed("Accelerate"):
 			engine.activate_thruster()
 			engine_active = true
@@ -286,10 +287,10 @@ func handle_thrust() -> void:
 			engine_active = false
 	
 	if old_engine_active != engine_active:
-		GameManager.emit_signal("local_player_engine_active", engine_active)
+		g.emit_signal("local_player_engine_active", engine_active)
 
 func handle_change_weapon(num_pressed: int = 0) -> void:
-	if !GameManager.can_perform_actions:
+	if !g.can_perform_actions:
 		return
 	
 	if num_pressed != 0: pass
@@ -300,33 +301,33 @@ func handle_change_weapon(num_pressed: int = 0) -> void:
 	elif(Input.is_action_pressed("Weapon5")): num_pressed = 5
 	
 	if num_pressed != 0:
-		GameManager.PlayerInfo["current_weapon"] = num_pressed
+		g.PlayerInfo["current_weapon"] = num_pressed
 		
 		handle_shoot()
 
 func handle_shoot() -> void:
-	if alive and GameManager.can_perform_actions and not GameManager.is_mouse_over_menu() and GameManager.get_player_monitorable(name):
+	if alive and g.can_perform_actions and not g.is_mouse_over_menu() and g.get_player_monitorable(name):
 		
-		var index: int = GameManager.PlayerInfo.current_weapon
-		var power_usage: float = GameManager.PlayerInfo.weapons[index].power_usage
-		var current_power: float = GameManager.PlayerInfo.current_power
-		var shoot_delay: int = GameManager.PlayerInfo.weapons[index].shoot_delay
-		var last_shot: int = GameManager.PlayerInfo.weapons[index].last_shot
+		var index: int = g.PlayerInfo.current_weapon
+		var power_usage: float = g.PlayerInfo.weapons[index].power_usage
+		var current_power: float = g.PlayerInfo.current_power
+		var shoot_delay: int = g.PlayerInfo.weapons[index].shoot_delay
+		var last_shot: int = g.PlayerInfo.weapons[index].last_shot
 		
 		var t = Time.get_ticks_msec()
 		if current_power >= power_usage && t - shoot_delay > last_shot:
 			current_power -= power_usage
 			last_shot = t
 			
-			GameManager.PlayerInfo.current_power = current_power
-			GameManager.PlayerInfo.weapons[index].last_shot = last_shot
+			g.PlayerInfo.current_power = current_power
+			g.PlayerInfo.weapons[index].last_shot = last_shot
 			
-			GameManager.player_shoot.emit(index)
+			g.player_shoot.emit(index)
 
 func regen_power(delta) -> void:
-	var current_power = GameManager.PlayerInfo.current_power
-	var max_power = GameManager.PlayerInfo.max_power
-	var power_regen_rate = GameManager.PlayerInfo.power_regen_rate
+	var current_power = g.PlayerInfo.current_power
+	var max_power = g.PlayerInfo.max_power
+	var power_regen_rate = g.PlayerInfo.power_regen_rate
 	
 	if current_power < max_power:
 		var percentage_of_max = current_power / max_power
@@ -334,7 +335,7 @@ func regen_power(delta) -> void:
 		
 		current_power += (delta * pow(PI, 3)) * power_regen_multiplier * max(1, pow(power_regen_rate, 1.0/4.0))
 	current_power = min(current_power, max_power)
-	GameManager.PlayerInfo.current_power = current_power
+	g.PlayerInfo.current_power = current_power
 
 var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:
@@ -370,7 +371,7 @@ func land_on(structure: Structure):
 	landed_structure = structure
 	health_component.hide()
 	if IS_MAIN_PLAYER:
-		GameManager.can_perform_actions = false
+		g.can_perform_actions = false
 		velocity = Vector2.ZERO
 		
 		var rotation_tween: Tween = create_tween()
@@ -410,7 +411,7 @@ func animate_leave_structure(username: String):
 		landed_structure = null
 		health_component.show()
 		if IS_MAIN_PLAYER:
-			GameManager.can_perform_actions = true
+			g.can_perform_actions = true
 		elif !IS_MAIN_PLAYER:
 			nickname_container.show()
 			var scale_tween: Tween = create_tween()

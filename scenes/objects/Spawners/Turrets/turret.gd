@@ -30,11 +30,11 @@ func _ready() -> void:
 var server_pos: Vector2
 var server_rot: float
 func _process(delta):
-	if GameManager.Turrets.has(name.to_int()):
-		server_pos = GameManager.get_turret_position(name.to_int())
+	if g.Turrets.has(name.to_int()):
+		server_pos = g.get_turret_position(name.to_int())
 		global_position = global_position.lerp(server_pos, delta * 5)
 		
-		server_rot = GameManager.get_turret_rotation(name.to_int())
+		server_rot = g.get_turret_rotation(name.to_int())
 		rotation = lerp_angle(rotation, server_rot, delta * 5)
 	else:
 		handle_death()

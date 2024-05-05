@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bpal8b1ogmybs"]
+[gd_scene load_steps=8 format=3 uid="uid://bpal8b1ogmybs"]
 
 [ext_resource type="Script" path="res://scenes/ui/Weapon Element/weapon_element.gd" id="1_ep4nd"]
 
@@ -15,10 +15,25 @@ border_color = Color(0.407843, 0.407843, 0.407843, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0116"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_right = 3
-border_color = Color(0.407843, 0.407843, 0.407843, 1)
+border_color = Color(0.4, 0.4, 0.4, 1)
 expand_margin_right = 3.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hk3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c5n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.627451, 0.298039, 1, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mkaiw"]
 
 [node name="WeaponElement" type="BoxContainer"]
 custom_minimum_size = Vector2(64, 64)
@@ -127,3 +142,6 @@ modulate = Color(1, 1, 1, 0.6)
 z_index = 2
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_4hk3r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5c5n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mkaiw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_v5c5n")

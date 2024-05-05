@@ -47,5 +47,3 @@ func set_info_shown(shown: bool):
 		info_container.show()
 	else:
 		info_container.hide()
-		
-	

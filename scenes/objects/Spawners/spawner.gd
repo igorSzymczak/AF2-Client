@@ -46,20 +46,20 @@ var server_eye_trigger: bool
 var server_active: bool
 func _process(delta):
 	#rotation = 0
-	if GameManager.Spawners.has(name.to_int()):
-		server_pos = GameManager.get_spawner_position(name.to_int())
+	if g.Spawners.has(name.to_int()):
+		server_pos = g.get_spawner_position(name.to_int())
 		global_position = global_position.lerp(server_pos, delta * 5)
 		
-		server_rot = GameManager.get_spawner_rotation(name.to_int())
+		server_rot = g.get_spawner_rotation(name.to_int())
 		sprite.rotation = lerp_angle(sprite.rotation, server_rot, 0.2)
 		
-		server_eye_pos = GameManager.get_spawner_eye_position(name.to_int())
+		server_eye_pos = g.get_spawner_eye_position(name.to_int())
 		eye.position = eye.position.lerp(server_eye_pos, 0.1)
 		
-		server_eye_trigger = GameManager.get_spawner_eye_trigger(name.to_int())
+		server_eye_trigger = g.get_spawner_eye_trigger(name.to_int())
 		eye_trigger(server_eye_trigger)
 		
-		server_active = GameManager.get_spawner_active(name.to_int())
+		server_active = g.get_spawner_active(name.to_int())
 		if server_active and !active: activate()
 		elif !server_active and active: deactivate()
 

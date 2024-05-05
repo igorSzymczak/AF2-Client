@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 
 func set_safezone():
 	if !is_safezone:
-		is_safezone = GameManager.get_planet_is_safezone(name)
+		is_safezone = g.get_planet_is_safezone(name)
 		if !is_safezone: return
 	if is_instance_valid(safezone): return
 	
@@ -53,7 +53,7 @@ func set_safezone():
 	
 var server_pos := Vector2.ZERO
 func update_server_position():
-	var temp = GameManager.get_planet_position(name)
+	var temp = g.get_planet_position(name)
 	
 	if temp != server_pos:
 		server_pos = temp
@@ -61,7 +61,7 @@ func update_server_position():
 
 @onready var server_landable: bool = landable
 func update_landable():
-	server_landable = GameManager.get_planet_landable(name)
+	server_landable = g.get_planet_landable(name)
 	if server_landable != landable:
 		landable = server_landable
 		
@@ -170,23 +170,23 @@ var structure_data: Dictionary = { "name": name }
 func get_structure_data() -> Dictionary: return structure_data
 func set_structure_data(data: Dictionary):
 	structure_data = data
-	if GameManager.local_player.landed_structure != null:
+	if g.me.landed_structure != null:
 		GlobalSignals.set_ui_args.emit(data)
 
 func land_player_on(username: String, structure_name: String):
 	if structure_name == name:
-		var player: Player = GameManager.get_player(username)
+		var player: Player = g.get_player(username)
 		player.land_on(self)
 
 func handle_landing(_delta: float):
 	if !Input.is_action_just_pressed("Land"): return
-	if !GameManager.can_perform_actions: return
+	if !g.can_perform_actions: return
 	if !landable: return
-	if !GameManager.local_player: return
-	if GameManager.local_player.landed_structure != null: return
-	if !GameManager.local_player.alive: return
+	if !g.me: return
+	if g.me.landed_structure != null: return
+	if !g.me.alive: return
 	
-	if get_overlapping_bodies().has(GameManager.local_player):
+	if get_overlapping_bodies().has(g.me):
 		request_land.rpc_id(1, AuthManager.my_username, name)
 
 func try_to_land(_username: String, _structure_name: String): pass # Only Server

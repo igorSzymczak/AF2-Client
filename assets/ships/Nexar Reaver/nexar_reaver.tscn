@@ -38,12 +38,11 @@ script = ExtResource("2_6cr4w")
 engine = NodePath("Engine")
 ship_name = "Nexar Reaver"
 hangar_scale = Vector2(0.5, 0.5)
-health = 7
-armor = 8
+armor = 9
 shield = 8
 shield_regen = 7
-base_health = 690
-base_armor = 48
+base_health = 480
+base_armor = 26
 base_shield = 760
 base_shield_regen = 66
 

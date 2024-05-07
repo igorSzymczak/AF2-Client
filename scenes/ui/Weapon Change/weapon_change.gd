@@ -256,7 +256,7 @@ func handle_click(element: WeaponElement, in_hotbar: bool = false):
 			element_b = null
 			hotbar_label.set_text("Hotbar")
 
-func set_points(container: Control, amount: int):
+static func set_points(container: Control, amount: int):
 	for child: Polygon2D in container.get_children():
 		if amount > 0:
 			child.color = Color("33a837")

@@ -298,7 +298,7 @@ text = "Health"
 
 [node name="HealthAmount" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfoContainer/HealthStat/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "10"
 
@@ -415,7 +415,7 @@ text = "Armor"
 
 [node name="ArmorAmount" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfoContainer/ArmorStat/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "10"
 
@@ -532,7 +532,7 @@ text = "Shield"
 
 [node name="ShieldAmount" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldStat/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "10"
 
@@ -649,7 +649,7 @@ text = "Sh. Regen"
 
 [node name="ShieldRegenAmount" type="Label" parent="Right/MarginContainer/VBoxContainer/ShipInfoContainer/ShieldRegenStat/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(25, 0)
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "10"
 

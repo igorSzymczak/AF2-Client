@@ -57,7 +57,7 @@ func set_args(new_args: Dictionary):
 		
 		left_hangar_title.set_text(hangar_name)
 		right_hangar_title.set_text(hangar_name)
-
+		
 		if !ships_to_buy.is_empty():
 			for child in shop_container.get_children():
 				shop_container.remove_child(child)
@@ -115,26 +115,29 @@ func display_ship_info(ship: ShipComponent):
 		shield_amount.set_text(str(base_shield))
 		shield_regen_amount.set_text(str(base_shield_regen))
 		
-		for child in health_points.get_children():
-			if health < 10:
-				child.hide()
-				health += 1
-		
-		for child in armor_points.get_children():
-			if armor < 10:
-				child.hide()
-				armor += 1
-		
-		for child in shield_points.get_children():
-			if shield < 10:
-				child.hide()
-				shield += 1
-		
-		for child in shield_regen_points.get_children():
-			if shield_regen < 10:
-				child.hide()
-				shield_regen += 1
-		
+		#for child in health_points.get_children():
+			#if health < 10:
+				#child.hide()
+				#health += 1
+		#
+		#for child in armor_points.get_children():
+			#if armor < 10:
+				#child.hide()
+				#armor += 1
+		#
+		#for child in shield_points.get_children():
+			#if shield < 10:
+				#child.hide()
+				#shield += 1
+		#
+		#for child in shield_regen_points.get_children():
+			#if shield_regen < 10:
+				#child.hide()
+				#shield_regen += 1
+		set_points(health_points, health)
+		set_points(armor_points, armor)
+		set_points(shield_points, shield)
+		set_points(shield_regen_points, shield_regen)
 		
 		g.me.set_ship(ship.name)
 		g.me.engine.activate_thruster()
@@ -166,7 +169,7 @@ func select_animation(animation_name: String):
 			var tween2 := create_tween()
 			tween2.tween_property(my_ships_button_underline, "position:x", -my_ships_button.get_rect().size.x, 0.3)
 	elif animation_name == "my_ships":
-		if current_section !=my_ships_section and animation_finished:
+		if current_section != my_ships_section and animation_finished:
 			selected_animation = "my_ships"
 			animation_finished = false
 			
@@ -207,7 +210,7 @@ func play_current_animation(delta: float):
 			hide_current_and_show(delta, my_ships_section)
 
 var hide_show_finished = true
-func hide_current_and_show(delta, selected_section: Control):
+func hide_current_and_show(delta: float, selected_section: Control):
 	if selected_section.animation_index >= current_section.animation_index: 
 		# Swipe everything to Left
 		if hide_show_finished:
@@ -259,6 +262,14 @@ func hide_current_and_show(delta, selected_section: Control):
 func _on_shop_button_pressed(): select_animation("shop")
 func _on_my_ships_button_pressed(): select_animation("my_ships")
 
+static func set_points(container: Control, amount: int):
+	for child: Control in container.get_children():
+		var polygon: Polygon2D = child.get_child(0)
+		if amount > 0:
+			polygon.color = Color("33a837")
+		else:
+			polygon.color = Color("#444444")
+		amount -= 1
 
 func _on_buy_button_pressed():
 	if current_section == shop_section:

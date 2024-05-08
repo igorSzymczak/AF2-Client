@@ -5,12 +5,12 @@
 [node name="PlasmaGun" type="Node"]
 script = ExtResource("1_ei35b")
 weapon_name = "Plasma Gun"
-damage = 55
-rps = 12.2
+damage = 75
+rps = 20.4
 power_cost = 18
 range = 3
-damage_points = 3
-rps_points = 8
+damage_points = 5
+rps_points = 10
 power_points = 6
 range_points = 3
 energy = true

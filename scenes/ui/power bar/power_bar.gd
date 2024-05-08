@@ -28,6 +28,12 @@ class_name PowerBar
 @onready var weapon_frame_shader = $WeaponFrame/Noise
 var default_weapon_frame_shader_pos_y: float
 
+var weapon1: Weapon
+var weapon2: Weapon
+var weapon3: Weapon
+var weapon4: Weapon
+var weapon5: Weapon
+
 func _ready() -> void:
 	default_weapon_frame_shader_pos_y = weapon_frame_shader.position.y
 	
@@ -89,11 +95,6 @@ func weapon_frame_load() -> void:
 	else:
 		weapon_frame_shader.set_position(Vector2(weapon_frame_shader.position.x, default_weapon_frame_shader_pos_y))
 
-func _on_hover_area_mouse_entered(_body):
-	push_error("display power NOW")
-	label_container.position = get_local_mouse_position()
-	label.text = "Power: " + str(g.PlayerInfo.current_power) + " / " + str(g.PlayerInfo.max_power)
-
 func show_weapon_tooltip(index: int):
 	if index < 1 or index > 5: return
 	if g.PlayerInfo.is_empty(): return
@@ -101,6 +102,9 @@ func show_weapon_tooltip(index: int):
 	var weapon: Dictionary = g.PlayerInfo.weapons[index]
 	var weapon_name: String = weapon.name
 	var dmg: float = weapon.damage
+	
+	
+	var weapon_element: Weapon = g.Weapons[weapon_name].instantiate()
 	
 	var bullet_range: Array = weapon.bullet_amount
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0
@@ -112,5 +116,6 @@ func show_weapon_tooltip(index: int):
 	weapon_tooltip.title.set_text(weapon_name)
 	weapon_tooltip.dmg.set_text(Functions.shorten_number(dmg))
 	weapon_tooltip.dps.set_text(Functions.shorten_number(dps))
+	weapon_tooltip.description.set_text(weapon_element.description_short)
 	
 	weapon_tooltip.show()

@@ -94,11 +94,10 @@ func update_landable():
 func self_orbit(delta: float) -> void:
 	if !orbit:
 		return
-		
-	# angle for each frame to make full 360 degrees in orbit_time_ms which will pass in FPS
-	var angle: float = (360.0 / (1.0 / delta)) *  (1000.0 / (orbit_time_MS * time_multiplier))
 	
-	global_position = rotate_point_around_center(global_position, orbit.global_position, angle)
+	var angle: float = (2 * PI * delta) *  (1000.0 / (orbit_time_MS * time_multiplier))
+	
+	global_position = Functions.rotate_point_around_center(global_position, orbit.global_position, angle)
 
 func set_orbit() -> void:
 	var parent = get_parent()
@@ -139,26 +138,6 @@ func update_shader(delta: float) -> void:
 	sprite.material.set_shader_parameter("light_direction", light_direction)
 	sprite.material.set_shader_parameter("texture_offset", shader_offset)
 	#print()
-
-func rotate_point_around_center(point: Vector2, center: Vector2, angle_degrees: float) -> Vector2:
-	# Vector Difference
-	var difference = point - center
-
-	# deg to rad
-	var angle_radians = deg_to_rad(angle_degrees)
-
-	# sin & cos
-	var sin_theta = sin(angle_radians)
-	var cos_theta = cos(angle_radians)
-
-	# New Coordinates
-	var rotated_x = difference.x * cos_theta - difference.y * sin_theta
-	var rotated_y = difference.x * sin_theta + difference.y * cos_theta
-	
-	# Final Point
-	var rotated_point = Vector2(rotated_x, rotated_y) + center
-
-	return rotated_point
 
 
 

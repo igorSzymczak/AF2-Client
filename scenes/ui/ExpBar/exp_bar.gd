@@ -23,7 +23,6 @@ func _on_join():
 
 func _on_exp_added(exp_addition: int):
 	displayed_exp += exp_addition
-	
 
 func _on_goal_exp_set(val: int): 
 	max_value = val
@@ -41,13 +40,13 @@ func _process(delta):
 	value = lerp(value, displayed_exp, delta * 2)
 	lvl_label.set_text(str(displayed_lvl))
 	
-	tooltip_text = str(roundi(displayed_exp)) + " / " + str(roundi(max_value))
+	tooltip_text = Functions.shorten_number(displayed_exp) + " / " + Functions.shorten_number(max_value)
 	
 	if displayed_lvl < 150 and value >= max_value:
 		displayed_lvl += 1
 		value = 0
 		displayed_exp -= max_value
-		max_value = roundi(max_value * 1.0474522)
+		max_value = roundi(float(max_value) * 1.0474522)
 		
 		if displayed_lvl >= 149:
 			max_value = 1000000

@@ -253,10 +253,12 @@ func update_player_lvl(username: String, lvl: int):
 signal death_args(args: Dictionary)
 
 signal player_info(player_info: Dictionary)
+signal player_info_changed()
 func set_player_info(new_player_info: Dictionary):
 	var current_weapon: int = PlayerInfo.current_weapon if PlayerInfo.has("current_weapon") else 1
 	PlayerInfo = new_player_info
 	PlayerInfo.current_weapon = current_weapon
+	player_info_changed.emit()
 
 signal player_shoot(index: int)
 

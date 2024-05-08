@@ -6,8 +6,8 @@ class_name Game
 @export var current_world: Node2D
 
 const PORT: int = 7000
-const ADDRESS: String = "127.0.0.1"
-#const ADDRESS: String = "130.61.143.133"
+#const ADDRESS: String = "127.0.0.1"
+const ADDRESS: String = "130.61.143.133"
 
 var local_player_character: Player
 

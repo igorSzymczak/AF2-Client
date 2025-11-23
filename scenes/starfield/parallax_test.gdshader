@@ -4,9 +4,9 @@ uniform vec2 mouse;
 uniform float time;
 uniform float zoom;
 
-const int iterations = 3;
+const int iterations = 1;
 const float formuparam2 = 0.79;
-const float volsteps = 8.0;
+const float volsteps = 3.0;
 const float stepsizeOrigin = 0.290;
 const float tile = 0.55;
 uniform float speed2 = 0.2;

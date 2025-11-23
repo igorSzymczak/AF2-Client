@@ -32,4 +32,3 @@ func _on_plasma_fluids_changed():
 func _on_iridium_changed():
 	var amount := InventoryManager.iridium
 	iridium_label.set_text(Functions.shorten_number(amount))
-

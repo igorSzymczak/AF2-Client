@@ -1,30 +1,30 @@
-[gd_scene load_steps=44 format=3 uid="uid://2t5noopc2okk"]
+[gd_scene load_steps=43 format=3 uid="uid://2t5noopc2okk"]
 
-[ext_resource type="Script" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
-[ext_resource type="Shader" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
-[ext_resource type="Script" path="res://scenes/world/Testing/ImageBG.gd" id="2_q4866"]
-[ext_resource type="Script" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
+[ext_resource type="Script" uid="uid://c081k13bu4er2" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
+[ext_resource type="Shader" uid="uid://bre1admgpq3lq" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
+[ext_resource type="Script" uid="uid://btm6gi1uel6o3" path="res://scenes/world/Testing/ImageBG.gd" id="2_q4866"]
+[ext_resource type="Script" uid="uid://cmkjgrpsd0642" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
 [ext_resource type="AudioStream" uid="uid://da4t5kutoglbb" path="res://audio/music/Adelante.ogg" id="4_i1nhf"]
-[ext_resource type="Script" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
+[ext_resource type="Script" uid="uid://woltbir3fg30" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
 [ext_resource type="AudioStream" uid="uid://dq41yeii32aig" path="res://audio/music/Limit.ogg" id="5_sjcft"]
 [ext_resource type="AudioStream" uid="uid://biekh5d4blwxn" path="res://audio/music/Metal.ogg" id="6_76tyi"]
 [ext_resource type="AudioStream" uid="uid://dc3br4apparek" path="res://audio/music/Pendulum.ogg" id="7_grnjj"]
 [ext_resource type="PackedScene" uid="uid://6boohbiplenv" path="res://scenes/objects/Structures/structure.tscn" id="7_q3uef"]
-[ext_resource type="Script" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
+[ext_resource type="Script" uid="uid://fjtvlisdmalr" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
 [ext_resource type="Texture2D" uid="uid://d0dumkrrbhfn4" path="res://assets/structures/Sun.png" id="8_j6wtj"]
-[ext_resource type="Shader" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
+[ext_resource type="Shader" uid="uid://dhwrime62fp7n" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
 [ext_resource type="Texture2D" uid="uid://c83eeqogs1wdh" path="res://assets/structures/planets/eath_512.jpg" id="10_26elg"]
 [ext_resource type="PackedScene" uid="uid://uuy2hrkbxif3" path="res://scenes/objects/Structures/Hangar/hangar.tscn" id="12_uiqek"]
 [ext_resource type="Texture2D" uid="uid://c8yex6f1sds5l" path="res://assets/structures/InvertGlow.png" id="14_4cia3"]
 [ext_resource type="PackedScene" uid="uid://cu67f3v2dyl2k" path="res://scenes/bosses/Homerus/homerus.tscn" id="14_t01pc"]
 [ext_resource type="Texture2D" uid="uid://ds2tfqapyfhvw" path="res://assets/structures/Hangar.png" id="15_3expg"]
-[ext_resource type="Shader" path="res://scenes/ui/power bar/power_bar.gdshader" id="15_ry44w"]
-[ext_resource type="Shader" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="18_gmaqq"]
+[ext_resource type="Shader" uid="uid://r75rd7tjnhmj" path="res://scenes/ui/power bar/power_bar.gdshader" id="15_ry44w"]
+[ext_resource type="Shader" uid="uid://crl67472drqum" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="18_gmaqq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgsy"]
 shader = ExtResource("2_q65fh")
-shader_parameter/mouse = null
-shader_parameter/time = null
+shader_parameter/mouse = Vector2(0, 0)
+shader_parameter/time = 0.0
 shader_parameter/zoom = 0.6
 shader_parameter/speed2 = 0.2
 
@@ -33,13 +33,9 @@ shader_parameter/speed2 = 0.2
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mauus"]
 streams_count = 4
 stream_0/stream = ExtResource("4_i1nhf")
-stream_0/weight = 1.0
 stream_1/stream = ExtResource("5_sjcft")
-stream_1/weight = 1.0
 stream_2/stream = ExtResource("6_76tyi")
-stream_2/weight = 1.0
 stream_3/stream = ExtResource("7_grnjj")
-stream_3/weight = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lw624"]
 radius = 75.0
@@ -63,22 +59,22 @@ frequency = 0.0024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
 generate_mipmaps = false
-seamless = true
 noise = SubResource("FastNoiseLite_d828q")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4dtfb"]
 shader = ExtResource("18_gmaqq")
-shader_parameter/scroll1 = Vector2(-0.135, -0.01)
-shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
 shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+shader_parameter/scroll1 = Vector2(-0.135, -0.01)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_462n5"]
+noise = SubResource("FastNoiseLite_prjor")
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_prjor")
 
 [sub_resource type="Gradient" id="Gradient_4goaf"]
 offsets = PackedFloat32Array(0, 0.191824, 0.435, 0.68)
@@ -93,22 +89,22 @@ frequency = 0.0024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rk3le"]
 generate_mipmaps = false
-seamless = true
 noise = SubResource("FastNoiseLite_m8xj3")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n0kn8"]
 shader = ExtResource("15_ry44w")
-shader_parameter/scroll1 = Vector2(0.045, 0.11)
-shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 shader_parameter/texture2 = SubResource("NoiseTexture2D_rk3le")
 shader_parameter/colorTexture = SubResource("GradientTexture2D_n1ep3")
+shader_parameter/scroll1 = Vector2(0.045, 0.11)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8e34m"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_076eo"]
+noise = SubResource("FastNoiseLite_8e34m")
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_8e34m")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23ch"]
 radius = 225.0
@@ -129,11 +125,6 @@ shader_parameter/specular_shininess = 1.0
 shader_parameter/fade = 0.0
 shader_parameter/pixelize_enabled = false
 shader_parameter/pixelize_scale = 1.0
-
-[sub_resource type="Environment" id="Environment_f3gsn"]
-background_mode = 3
-tonemap_mode = 3
-glow_enabled = true
 
 [node name="TestingWorld" type="Node2D" node_paths=PackedStringArray("planets")]
 script = ExtResource("1_rvknj")
@@ -156,7 +147,6 @@ size_flags_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Background" type="Sprite2D" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_tbgsy")
 position = Vector2(0, 0.00012207)
 scale = Vector2(7811, 4135.23)
@@ -167,7 +157,7 @@ script = ExtResource("3_28mi7")
 stream = SubResource("AudioStreamRandomizer_mauus")
 volume_db = -5.0
 autoplay = true
-max_distance = 1e+06
+max_distance = 1000000.0
 bus = &"Music"
 script = ExtResource("8_64m46")
 
@@ -293,6 +283,5 @@ texture = SubResource("NoiseTexture2D_076eo")
 position = Vector2(-7, -3047)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_f3gsn")
 
 [connection signal="finished" from="Soundtrack" to="Soundtrack" method="_on_finished"]

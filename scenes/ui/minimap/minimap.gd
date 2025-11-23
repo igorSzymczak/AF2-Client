@@ -95,4 +95,3 @@ func update_elements() -> void:
 		element.point.position = minimap_position
 		if element.poi is Player:
 			element.point.rotation = element.poi.rotation + PI/2
-

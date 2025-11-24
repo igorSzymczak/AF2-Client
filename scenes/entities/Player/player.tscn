@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cu0u4mqhf2e0w"]
+[gd_scene load_steps=10 format=3 uid="uid://cu0u4mqhf2e0w"]
 
-[ext_resource type="Script" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
+[ext_resource type="Script" uid="uid://bjhcq0o1jdole" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_5ttqo"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
+[ext_resource type="PackedScene" uid="uid://c0bcb0dfhtema" path="res://scenes/components/Collector/Collector.tscn" id="6_o8fb4"]
 [ext_resource type="Texture2D" uid="uid://b1gyqxf8ompt1" path="res://assets/ui/other/Reticle.png" id="6_rarct"]
 [ext_resource type="PackedScene" uid="uid://y4hetgssvu6u" path="res://assets/ships/Nexar Reaver/nexar_reaver.tscn" id="7_ec8if"]
 
@@ -51,6 +52,8 @@ offset_left = -48.0
 offset_top = 56.0
 offset_right = 48.0
 offset_bottom = 64.0
+
+[node name="Collector" parent="." instance=ExtResource("6_o8fb4")]
 
 [node name="NicknameContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true

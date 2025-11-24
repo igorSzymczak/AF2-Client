@@ -27,6 +27,8 @@ var Turrets: Dictionary = {}
 
 var Enemies: Dictionary = {}
 
+var Items: Dictionary = {}
+
 var BulletScenes = {
 	"res://scenes/weapons/bullet_types/bullet.tscn" = preload("res://scenes/bullets/bullet_types/bullet.tscn"),
 	"res://scenes/weapons/bullet_types/bullet_homing.tscn" = preload("res://scenes/bullets/bullet_types/bullet_homing.tscn"),
@@ -529,3 +531,12 @@ func get_enemy_engine_active(id: int) -> bool:
 func update_enemy_engine_active(id: int, engine_active: bool):
 	if Enemies.has(id):
 		Enemies[id]["engine_active"] = engine_active
+
+# 			ITEMS
+
+func add_item(item: Dictionary):
+	var id: int = item.id
+	if !Items.has(id):
+		Items[id] = item
+
+func remove_item(id: int): if Items.has(id): Items.erase(id)

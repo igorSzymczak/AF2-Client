@@ -383,3 +383,38 @@ func update_enemy_shield(id: int, shield: float): g.update_enemy_shield(id, shie
 
 @rpc("authority", "call_local", "reliable")
 func update_enemy_engine_active(id: int, engine_active: bool): g.update_enemy_engine_active(id, engine_active)
+
+## ITEMS
+
+
+
+
+@rpc("authority", "call_local", "reliable")
+func add_item(item: Dictionary):
+	g.add_item(item)
+	
+	# Only on Client
+	create_item(item.id)
+
+@rpc
+func add_existing_items(Items: Dictionary):
+	handle_add_items(Items)
+
+# Client Functions
+func handle_add_items(Items: Dictionary):
+	for i in Items:
+		var item: Dictionary = Items[i]
+		g.add_item(item)
+		create_item(item.id)
+
+func create_item(id: int):
+	
+	var item_data: Dictionary = g.Items[id]
+	var item: Item = ItemManager.create_item_scene(
+		item_data.type, item_data.code, item_data.display_name,
+		item_data.start_position, item_data.target_position
+	)
+	
+	item.name = str(id)
+	current_world.add_child(item)
+	

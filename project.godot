@@ -29,6 +29,7 @@ ShipManager="*res://globals/ShipManager/ShipManager.gd"
 EXP="*res://globals/Experience/exp_manager.gd"
 InventoryManager="*res://globals/Inventory/inventory_manager.gd"
 Functions="*res://globals/Functions/functions.gd"
+ItemManager="*res://globals/ItemManager/item_manager.gd"
 
 [display]
 

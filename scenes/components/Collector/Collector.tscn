@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0bcb0dfhtema"]
+
+[ext_resource type="Script" uid="uid://bcx54bsgth0ql" path="res://scenes/components/Collector/collector.gd" id="1_4kfpd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4kfpd"]
+radius = 228.07893
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w0547"]
+radius = 30.016663
+
+[node name="Collector" type="Node2D"]
+script = ExtResource("1_4kfpd")
+
+[node name="SuckArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SuckArea"]
+shape = SubResource("CircleShape2D_4kfpd")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_w0547")

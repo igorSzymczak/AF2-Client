@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cfg683aeqn2dg"]
+
+[node name="Item_tscn" type="Node2D"]

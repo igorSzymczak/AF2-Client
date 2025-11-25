@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://u15b2ldn3i8g"]
+
+[ext_resource type="Script" uid="uid://btv1aevr31n4a" path="res://scenes/items/item.gd" id="1_17jnv"]
+[ext_resource type="Texture2D" uid="uid://d25aovbhhio0l" path="res://assets/items/i (2).png" id="2_f5ulk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_17jnv"]
+radius = 30.0
+
+[node name="PhaseCrystal" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+monitoring = false
+script = ExtResource("1_17jnv")
+code = 3
+display_name = "Phase Crystal"
+metadata/_custom_type_script = "uid://btv1aevr31n4a"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.67391306, 0.67391306)
+texture = ExtResource("2_f5ulk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_17jnv")

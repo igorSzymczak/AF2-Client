@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cude02rftdri2"]
+
+[ext_resource type="Script" uid="uid://btv1aevr31n4a" path="res://scenes/items/item.gd" id="1_lml6x"]
+[ext_resource type="Texture2D" uid="uid://boj5mmfd21ob4" path="res://assets/items/i (6).png" id="2_ugwvm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lml6x"]
+radius = 30.0
+
+[node name="BionicImplant" type="Area2D"]
+collision_layer = 32
+collision_mask = 16
+monitoring = false
+script = ExtResource("1_lml6x")
+code = 5
+display_name = "Bionic Implant"
+metadata/_custom_type_script = "uid://btv1aevr31n4a"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.66666657, 0.6666667)
+texture = ExtResource("2_ugwvm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lml6x")

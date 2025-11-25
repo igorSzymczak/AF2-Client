@@ -55,6 +55,8 @@ func _ready() -> void:
 		camera.set_enabled(false)
 		call_deferred("other_player_setup_poi")
 		reticle.hide()
+		
+		InventoryManager.cargo_changed.connect(func test(): print(InventoryManager.cargo))
 
 func other_player_setup_poi():
 	GlobalSignals.emit_signal("setup_poi", self)

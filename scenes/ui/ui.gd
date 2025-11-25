@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var hangar = $HangarMenu
 @onready var structure  = $StructureMenu
 @onready var weapon_change  = $WeaponChange
+@onready var cargo = $CargoPreview
 
 
 func _ready():
@@ -44,6 +45,7 @@ func to_scene(ui: String):
 	if ui.to_lower() == "hangar": return hangar
 	if ui.to_lower() == "structure": return structure
 	if ui.to_lower() == "weapon_change": return weapon_change
+	if ui.to_lower() == "cargo": return cargo
 
 func set_to(ui: String):
 	if to_scene(ui) != current_ui:
@@ -144,6 +146,11 @@ func handle_changing_menus():
 		if current_ui == game:
 			open_ui("weapon_change")
 		elif current_ui == weapon_change:
+			close_current()
+	if Input.is_action_just_pressed("CargoPreview"):
+		if current_ui != cargo and current_ui != auth_screen:
+			open_ui("cargo")
+		elif current_ui == cargo:
 			close_current()
 	if Input.is_action_just_pressed("Fullscreen"):
 		swap_fullscreen_mode()

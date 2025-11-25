@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://duauim31qmjgx"]
 
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/esc_menu.gd" id="1_uv064"]
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
+[ext_resource type="Script" uid="uid://r4y27slkx28s" path="res://scenes/ui/ESC Menu/esc_menu.gd" id="1_uv064"]
+[ext_resource type="Script" uid="uid://cmoyxgwcnrsb1" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
 [ext_resource type="PackedScene" uid="uid://dbwuqf2oql4bi" path="res://scenes/ui/elements/buttons/menu_button.tscn" id="2_lop0p"]
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/NicknameInput.gd" id="3_lsuid"]
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/sections/Settings.gd" id="5_72kll"]
+[ext_resource type="Script" uid="uid://cbj1n8hthueha" path="res://scenes/ui/ESC Menu/NicknameInput.gd" id="3_lsuid"]
+[ext_resource type="Script" uid="uid://bcbr2k4865676" path="res://scenes/ui/ESC Menu/sections/Settings.gd" id="5_72kll"]
 [ext_resource type="PackedScene" uid="uid://360b6gad5l5a" path="res://scenes/ui/elements/volume slider/volume_slider.tscn" id="6_77mv8"]
-[ext_resource type="Script" path="res://scenes/ui/ESC Menu/Keybinds.gd" id="7_d6wb6"]
+[ext_resource type="Script" uid="uid://cpjji533slqne" path="res://scenes/ui/ESC Menu/Keybinds.gd" id="7_d6wb6"]
 [ext_resource type="PackedScene" uid="uid://drgvryt6jud63" path="res://scenes/ui/elements/buttons/keybind_button.tscn" id="8_0ibdm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
@@ -140,6 +140,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Weapons"
+
+[node name="CargoButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Cargo"
 
 [node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
 layout_mode = 1
@@ -279,10 +285,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/h_separation = 16
-theme_override_constants/check_v_offset = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 16
 theme_override_font_sizes/font_size = 23
+theme_override_constants/check_v_offset = 0
 text = "Disable Mouse Aim"
 alignment = 1
 icon_alignment = 1
@@ -298,10 +304,10 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Shows which direction the player is aiming"
-theme_override_constants/h_separation = 16
-theme_override_constants/check_v_offset = 0
 theme_override_constants/outline_size = 0
+theme_override_constants/h_separation = 16
 theme_override_font_sizes/font_size = 23
+theme_override_constants/check_v_offset = 0
 text = "Show Reticle"
 alignment = 1
 icon_alignment = 1
@@ -397,6 +403,7 @@ text = "Return"
 [connection signal="button_down" from="PanelContainer/MarginContainer/Main/Center/SettingsButton" to="." method="_on_settings_button_button_down"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/KeybindsButton" to="." method="_on_keybinds_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/WeaponsButton" to="." method="_on_weapons_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Main/Center/CargoButton" to="." method="_on_cargo_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Main/Bottom/QuitButton" to="PanelContainer/MarginContainer/Main" method="_on_quit_button_pressed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/MusicVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound/SFXVolumeSlider" to="PanelContainer/MarginContainer/Settings" method="_on_sfx_volume_slider_value_changed"]

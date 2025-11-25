@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu0u4mqhf2e0w"]
+[gd_scene load_steps=12 format=3 uid="uid://cu0u4mqhf2e0w"]
 
 [ext_resource type="Script" uid="uid://bjhcq0o1jdole" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
@@ -11,6 +11,12 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
 radius = 12.0
 height = 74.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o8fb4"]
+radius = 228.07893
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tihqr"]
+radius = 30.016663
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvxov"]
 bg_color = Color(0.141176, 0.141176, 0.141176, 0.290196)
@@ -54,6 +60,24 @@ offset_right = 48.0
 offset_bottom = 64.0
 
 [node name="Collector" parent="." instance=ExtResource("6_o8fb4")]
+
+[node name="SuckArea" type="Area2D" parent="Collector"]
+collision_layer = 16
+collision_mask = 32
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/SuckArea"]
+shape = SubResource("CircleShape2D_o8fb4")
+
+[node name="CollectArea" type="Area2D" parent="Collector"]
+collision_layer = 16
+collision_mask = 32
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/CollectArea"]
+shape = SubResource("CircleShape2D_tihqr")
 
 [node name="NicknameContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true

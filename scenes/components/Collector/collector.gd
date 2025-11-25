@@ -17,10 +17,10 @@ func _process(delta: float) -> void:
 		item.global_position += direction * SUCK_SPEED * delta
 
 func _on_suck_area_area_entered(item: Area2D) -> void:
-	if item is Item and not sucked_items.has(item):
+	if item is Item and not sucked_items.has(item) and is_instance_valid(item):
 		sucked_items.append(item)
 		item.about_to_die.connect(func del(): sucked_items.erase(item))
 
 func _on_collect_area_area_entered(item: Area2D) -> void:
 	if item is Item:
-		item.destroy() ## TU ITEM ZOSTAL PODNIESIONY
+		item.destroy()

@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://cug2k55cvgsod"]
+
+[ext_resource type="Script" uid="uid://d17t825mil4wk" path="res://scenes/ui/Cargo Preview/cargo_preview.gd" id="1_1j86l"]
+[ext_resource type="PackedScene" uid="uid://dhg4e70xq1b5a" path="res://scenes/ui/Pickups/pickup.tscn" id="2_1ipfl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg6q7"]
+bg_color = Color(1, 1, 1, 0)
+border_width_right = 5
+border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
+
+[node name="CargoPreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.0
+offset_top = 3.0
+offset_right = -23.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1j86l")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="H" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+
+[node name="BorderRight" type="Panel" parent="PanelContainer/H"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eg6q7")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Cargo Preview" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CargoLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Cargo"
+horizontal_alignment = 1
+
+[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Items" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pickup" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+layout_mode = 2
+
+[node name="Pickup2" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+layout_mode = 2
+
+[node name="Pickup3" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+layout_mode = 2
+
+[node name="V2" type="VBoxContainer" parent="PanelContainer/H"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 2

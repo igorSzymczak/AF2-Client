@@ -43,6 +43,10 @@ func select_animation(animation_name: String):
 		if current_section != main_section and animation_finished:
 			selected_animation = "main"
 			animation_finished = false
+	elif animation_name == "cargo":
+		GlobalSignals.open_ui.emit("cargo")
+		selected_animation = "close"
+		animation_finished = false
 
 func play_current_animation(delta: float):
 	if !animation_finished:
@@ -122,3 +126,4 @@ func _on_settings_button_button_down(): select_animation("settings")
 func _on_keybinds_button_pressed():select_animation("keybinds")
 func _on_return_to_main_button_pressed(): select_animation("main")
 func _on_weapons_button_pressed(): select_animation("weapons")
+func _on_cargo_button_pressed(): select_animation("cargo")

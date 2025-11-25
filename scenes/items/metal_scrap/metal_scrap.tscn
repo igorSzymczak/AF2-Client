@@ -12,6 +12,7 @@ collision_mask = 16
 monitoring = false
 script = ExtResource("1_d467m")
 code = 1
+display_name = "Metal Scrap"
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.6896552, 0.6896552)

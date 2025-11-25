@@ -6,6 +6,8 @@ var hydrogen_crystals: int = 0
 var plasma_fluids: int = 0
 var iridium: int = 0
 
+var cargo: Dictionary[int, int] = {}
+
 signal flux_changed()
 func _handle_set_flux(amount: int):
 	flux = amount
@@ -31,6 +33,19 @@ func _handle_set_iridium(amount: int):
 	iridium = amount
 	iridium_changed.emit()
 
+signal cargo_changed()
+func _handle_set_cargo(new_cargo: Dictionary[int, int]):
+	cargo = new_cargo
+	cargo_changed.emit()
+
+signal item_changed(code: int, previous_amount, new_amount: int)
+func _handle_set_item(code: int, amount: int):
+	if !cargo.has(code):
+		cargo[code] = 0
+	var old_amount: int = cargo[code]
+	cargo[code] = amount
+	item_changed.emit(code, old_amount, amount)
+
 @rpc("authority", "call_remote", "reliable")
 func _set_steel(amount: int):
 	_handle_set_steel(amount)
@@ -53,7 +68,16 @@ func _set_iridium(amount: int):
 
 @rpc("authority", "call_remote", "reliable")
 func _load_inventory_on_client(inventory: Dictionary):
+	_handle_set_flux(inventory.flux)
 	_handle_set_steel(inventory.steel)
 	_handle_set_hydrogen_crystals(inventory.hydrogen_crystals)
 	_handle_set_plasma_fluids(inventory.plasma_fluids)
 	_handle_set_iridium(inventory.iridium)
+
+@rpc("authority", "call_remote", "reliable")
+func _set_cargo(cargo: Dictionary[int, int]):
+	_handle_set_cargo(cargo)
+
+@rpc("authority", "call_remote", "reliable")
+func _set_item(code: int, amount: int):
+	_handle_set_item(code, amount)

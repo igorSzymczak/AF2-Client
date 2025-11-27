@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp4p4pok6vef6"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_1322x"]
+
+[node name="EnergyBlast" type="Node"]
+script = ExtResource("1_1322x")
+weapon_name = "Energy Blast"
+damage = 450
+rps = 0.2
+power_cost = 90
+range = 7
+damage_points = 10
+power_points = 10
+range_points = 7
+energy = true
+description_long = "Compresses huge plasma into very dense, unstable blob and shoots it forward. It destabilizes on contact or after 5 seconds, which ends up with powerful and massive explosion. It uses most of your power tho."
+description_short = "Huge, exploding Plasma Blob. "
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

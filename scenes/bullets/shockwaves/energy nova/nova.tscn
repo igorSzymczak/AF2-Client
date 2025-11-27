@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkl7p7ed3gu3g"]
+
+[ext_resource type="Script" uid="uid://c5lc1mwjex8wi" path="res://scenes/bullets/shockwaves/energy nova/nova.gd" id="1_bof67"]
+[ext_resource type="Shader" uid="uid://cbrmfxpqlt4wa" path="res://scenes/bullets/shockwaves/shockwave/nova.gdshader" id="2_xqnt8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwcss"]
+shader = ExtResource("2_xqnt8")
+shader_parameter/radius_inner = 0.49200002337
+shader_parameter/radius_outer = 1.0
+shader_parameter/angle_from = -1.0
+shader_parameter/angle_to = 1.0
+shader_parameter/softness = 0.0310000014725
+shader_parameter/angle_smooth = 1.0
+shader_parameter/outer_to_inner = 0.0
+shader_parameter/alpha = 1.0
+
+[sub_resource type="Gradient" id="Gradient_bof67"]
+offsets = PackedFloat32Array(0.5822785, 0.8016878, 0.96202534)
+colors = PackedColorArray(0, 0.5137255, 1, 0, 0, 1, 1, 0.56078434, 0, 0.6039216, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5h04c"]
+gradient = SubResource("Gradient_bof67")
+width = 60
+height = 60
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Nova" type="Area2D"]
+script = ExtResource("1_bof67")
+metadata/_custom_type_script = "uid://i8qc0rs7ymqk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nwcss")
+scale = Vector2(0.67, 0.67)
+texture = SubResource("GradientTexture2D_5h04c")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-1, -32, -16, 0, 0, 32, 16, 0)

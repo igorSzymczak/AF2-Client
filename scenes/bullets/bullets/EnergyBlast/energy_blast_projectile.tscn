@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn66gid4sge4v"]
+
+[ext_resource type="Script" uid="uid://dtfp7es82qeat" path="res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.gd" id="1_20bys"]
+[ext_resource type="Shader" uid="uid://d2lw0r0sjk354" path="res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.gdshader" id="2_vwu74"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xu2go"]
+shader = ExtResource("2_vwu74")
+shader_parameter/radius_inner = 0.0
+shader_parameter/radius_outer = 1.0
+shader_parameter/angle_from = -1.0
+shader_parameter/angle_to = 1.0
+shader_parameter/softness = 0.10000000149012
+shader_parameter/angle_smooth = 1.0
+shader_parameter/outer_to_inner = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/wave_amp = 2.0
+shader_parameter/wave_freq = 1.0
+shader_parameter/wave_speed = 5.0
+
+[sub_resource type="Gradient" id="Gradient_qxeb7"]
+offsets = PackedFloat32Array(0, 0.24472573, 0.31223628, 0.43881857, 0.7004219)
+colors = PackedColorArray(0, 1, 1, 1, 0, 1, 1, 0.7294118, 0, 1, 1, 0.050980393, 0, 1, 1, 0.007843138, 0, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1aesf"]
+gradient = SubResource("Gradient_qxeb7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1aesf"]
+radius = 3.0
+
+[node name="EnergyBlastProjectile" type="Area2D"]
+monitorable = false
+script = ExtResource("1_20bys")
+metadata/_custom_type_script = "uid://712ngcx0fkeg"
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xu2go")
+position = Vector2(-1.9073486e-06, -7.2155615e-12)
+rotation = 1.5708
+scale = Vector2(2.7311323, 2.7311323)
+texture = SubResource("GradientTexture2D_1aesf")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+visible = false
+rotation = 1.5708
+shape = SubResource("CircleShape2D_1aesf")

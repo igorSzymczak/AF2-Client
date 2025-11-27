@@ -45,7 +45,12 @@ func _ready():
 	
 	#print(latency)
 	#print("if shoot_time + life_time - current_time <= time_to_vanish")
+	special_ready()
 	
+
+func special_ready() -> void:
+	pass
+
 	
 func _physics_process(delta: float) -> void:
 	if !g.Bullets.has(name): crash_bullet()

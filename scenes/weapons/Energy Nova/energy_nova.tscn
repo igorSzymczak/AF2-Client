@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdqlpngjnls4e"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_qw5db"]
+
+[node name="EnergyNova" type="Node"]
+script = ExtResource("1_qw5db")
+weapon_name = "Energy Nova"
+damage = 15
+rps = 1.33
+power_cost = 15
+range = 200
+damage_points = 2
+rps_points = 3
+power_points = 3
+range_points = 2
+energy = true
+description_long = "Creates a ShockWave that disturbs effects of weapons such as missiles, explosives. Funny DPS, but novas find their use in advanced strategies against specific enemies or players."
+description_short = "Destroys explosives and missiles"
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

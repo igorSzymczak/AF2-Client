@@ -50,3 +50,15 @@ func calculate_point_distanced_by_angle(A: Vector2, angle_B: float, distance_C: 
 		A.y + distance_C * sin(angle_B)
 	)
 	return D
+
+func make_arc(radius: float, angle: float, steps: int = 32) -> PackedVector2Array:
+	var pts: PackedVector2Array = []
+	var half = angle / 2.0
+	pts.append(Vector2.ZERO)
+
+	for i in range(steps + 1):
+		var t = i / float(steps)
+		var ang = -half + t * (2.0 * half)
+		pts.append(Vector2(cos(ang), sin(ang)) * radius)
+
+	return pts

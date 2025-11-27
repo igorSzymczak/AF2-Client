@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcjskcii1ohj0"]
+
+[ext_resource type="Script" uid="uid://bt5m4jimxh55n" path="res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.gd" id="1_70x2p"]
+[ext_resource type="Shader" uid="uid://bq3nupu6y4af2" path="res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.gdshader" id="2_vypqv"]
+
+[sub_resource type="Gradient" id="Gradient_70x2p"]
+offsets = PackedFloat32Array(0, 0.16585366, 0.702439, 1)
+colors = PackedColorArray(0, 1, 1, 0, 0, 0.96862745, 1, 0.13333334, 0, 0.9647059, 1, 0.7058824, 0, 0.2627451, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vypqv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7ep0r"]
+noise = SubResource("FastNoiseLite_vypqv")
+color_ramp = SubResource("Gradient_70x2p")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70x2p"]
+shader = ExtResource("2_vypqv")
+shader_parameter/radius_outer = 0.8
+shader_parameter/radius_inner = 0.40800001938
+shader_parameter/angle_from = -1.0
+shader_parameter/angle_to = 1.0
+shader_parameter/softness = 0.186000008835
+shader_parameter/angle_smooth = 1.0
+shader_parameter/outer_to_inner = 0.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_7ep0r")
+shader_parameter/alpha = 1.0
+shader_parameter/wave_amp = 2.0
+shader_parameter/wave_freq = 1.0
+shader_parameter/wave_speed = 5.0
+
+[sub_resource type="Gradient" id="Gradient_g32bb"]
+offsets = PackedFloat32Array(0, 0.4177215, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.4135021, 0.4135021, 0.4135021, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_70x2p"]
+gradient = SubResource("Gradient_g32bb")
+width = 60
+height = 60
+
+[node name="EnergyBlastExplosion" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_70x2p")
+metadata/_custom_type_script = "uid://i8qc0rs7ymqk"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_70x2p")
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_70x2p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -32, -16, 0, 0, 32, 16, 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bg67jrd1ong8i"]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullets/GatlingLaser/gatling_laser.gd" id="1_ohgnq"]
+[ext_resource type="Script" uid="uid://bvpr8ekusbkal" path="res://scenes/bullets/bullets/GatlingLaser/gatling_laser.gd" id="1_ohgnq"]
 [ext_resource type="Texture2D" uid="uid://bb8asqi5apbe5" path="res://assets/projectiles/Laser Long.png" id="2_7y1gm"]
 [ext_resource type="Texture2D" uid="uid://b77185in0njue" path="res://assets/projectiles/Bullet Dust.png" id="3_gwqwp"]
 

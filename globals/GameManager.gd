@@ -39,8 +39,16 @@ var BulletScenes = {
 	"res://scenes/weapons/weapons/RocketLauncher/rocket.tscn" = preload("res://scenes/bullets/bullets/RocketLauncher/rocket.tscn"),
 	"res://scenes/weapons/weapons/PlasmaGun/plasma.tscn" = preload("res://scenes/bullets/bullets/PlasmaGun/plasma.tscn"),
 	"res://scenes/weapons/weapons/PiercingGun/piercing_bullet.tscn" = preload("res://scenes/bullets/bullets/PiercingGun/piercing_bullet.tscn"),
-	"res://scenes/weapons/weapons/SpawnerLaser/spawner_laser.tscn" = preload("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn")
+	"res://scenes/weapons/weapons/SpawnerLaser/spawner_laser.tscn" = preload("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn"),
+	"res://scenes/weapons/weapons/EnergyBlast/energy_blast_projectile.tscn" = preload("res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.tscn")
 }
+
+var ShockwaveScenes = {
+	"res://scenes/weapons/weapons/ShockwaveGenerator/shockwave.tscn" = preload("res://scenes/bullets/shockwaves/shockwave/shockwave.tscn"),
+	"res://scenes/weapons/weapons/EnergyNova/nova.tscn" = preload("res://scenes/bullets/shockwaves/energy nova/nova.tscn"),
+	"res://scenes/weapons/weapons/EnergyBlast/energy_blast_explosion.tscn" = preload("res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.tscn")
+}
+
 
 var Weapons: Dictionary = {
 	"Cluster Missiles": preload("res://scenes/weapons/ClusterMissiles/cluster_missiles.tscn"),
@@ -51,6 +59,9 @@ var Weapons: Dictionary = {
 	"Plasma Gun": preload("res://scenes/weapons/PlasmaGun/plasma_gun.tscn"),
 	"Piercing Gun": preload("res://scenes/weapons/PiercingGun/piercing_gun.tscn"),
 	"Spawner Laser": preload("res://scenes/weapons/SpawnerLaser/spawner_laser_gun.tscn"),
+	"Shockwave Generator": preload("res://scenes/weapons/ShockwaveGenerator/shockwave_generator.tscn"),
+	"Energy Nova": preload("res://scenes/weapons/Energy Nova/energy_nova.tscn"),
+	"Energy Blast": preload("res://scenes/weapons/EnergyBlast/energy_blast.tscn")
 }
 
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
@@ -324,6 +335,14 @@ signal bullet_freed(bullet_name)
 func remove_bullet(bullet_name: String):
 	if Bullets.has(bullet_name):
 		Bullets.erase(bullet_name)
+
+signal shockwave_created(
+	_path: String, _name: String,
+	pos: Vector2, rot: float,
+	speed: float, angle: float,
+	time_to_vanish: int, current_time_of_living: int,
+	server_timestamp: int
+)
 
 
 ## Spawners

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqorti8kule7t"]
+
+[ext_resource type="Script" uid="uid://i8qc0rs7ymqk" path="res://scenes/bullets/shockwaves/shockwave/shockwave.gd" id="1_eckmc"]
+[ext_resource type="Shader" uid="uid://cbrmfxpqlt4wa" path="res://scenes/bullets/shockwaves/shockwave/nova.gdshader" id="2_iok5b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkgd1"]
+shader = ExtResource("2_iok5b")
+shader_parameter/radius_inner = 0.50000002375
+shader_parameter/radius_outer = 1.0
+shader_parameter/angle_from = -0.3329999683175
+shader_parameter/angle_to = 0.3330000633174999
+shader_parameter/softness = 0.03600000171
+shader_parameter/angle_smooth = 1.0
+shader_parameter/outer_to_inner = 0.0
+shader_parameter/alpha = 1.0
+
+[sub_resource type="Gradient" id="Gradient_iok5b"]
+offsets = PackedFloat32Array(0, 0.48945147)
+colors = PackedColorArray(1, 1, 0.61960787, 0.90588236, 1, 1, 0.7176471, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qgdc1"]
+gradient = SubResource("Gradient_iok5b")
+width = 10
+height = 10
+fill_from = Vector2(1, 0.53846157)
+fill_to = Vector2(0.2008547, 0.5555556)
+
+[node name="Shockwave" type="Area2D"]
+script = ExtResource("1_eckmc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vkgd1")
+scale = Vector2(2.05, 2.05)
+texture = SubResource("GradientTexture2D_qgdc1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-1, -32, -16, 0, 0, 32, 16, 0)

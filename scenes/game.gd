@@ -224,6 +224,25 @@ func update_bullet_is_deterministic(bullet_name: String, is_deterministic: bool)
 	g.update_bullet_is_deterministic(bullet_name, is_deterministic)
 
 
+
+## SHOCK WAVES
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func spawn_shockwave_on_client(
+	_path: String, _name: String,
+	pos: Vector2, rot: float,
+	speed: float, angle: float, 
+	time_to_vanish: int, current_time_of_living: int,
+	server_timestamp: int
+) -> void:
+	handle_create_shockwave(_path, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
+
+func handle_create_shockwave(_path: String, _name: String, pos: Vector2, rot:float, speed: float, angle: float, time_to_vanish: int, current_time_of_living: int,server_timestamp: int) -> void:
+		g.shockwave_created.emit(_path, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
+
+
+
 ## SPAWNERS
 
 

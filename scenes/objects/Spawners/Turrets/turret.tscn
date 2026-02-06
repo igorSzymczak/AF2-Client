@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://2twcrktxuv2s"]
 
-[ext_resource type="Script" path="res://scenes/objects/Spawners/Turrets/turret.gd" id="1_345vf"]
+[ext_resource type="Script" uid="uid://cw0o8737w5ujo" path="res://scenes/objects/Spawners/Turrets/turret.gd" id="1_345vf"]
 [ext_resource type="Texture2D" uid="uid://bsi3wjg85r870" path="res://assets/turrets/laser2.png" id="2_fdern"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_cla8p"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_177gw"]
@@ -28,10 +28,6 @@ texture = ExtResource("2_fdern")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_cla8p")]
 modulate = Color(1, 1, 1, 0.901961)
-MAX_SHIELD = 200.0
-SHIELD_REGEN_VALUE = 30.0
-SHIELD_REGEN_BOOST = 1.0
-MAX_HEALTH = 200.0
 
 [node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_177gw")]
 offset_left = -40.0

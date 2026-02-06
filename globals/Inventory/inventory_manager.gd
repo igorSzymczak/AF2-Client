@@ -6,7 +6,7 @@ var hydrogen_crystals: int = 0
 var plasma_fluids: int = 0
 var iridium: int = 0
 
-var cargo: Dictionary[int, int] = {}
+var cargo: Dictionary[Item.Code, int] = {}
 
 signal flux_changed()
 func _handle_set_flux(amount: int):
@@ -35,7 +35,7 @@ func _handle_set_iridium(amount: int):
 
 signal cargo_changed()
 func _handle_set_cargo(new_cargo: Dictionary[int, int]):
-	cargo = new_cargo
+	cargo = new_cargo as Dictionary[Item.Code, int]
 	cargo_changed.emit()
 
 signal item_changed(code: int, previous_amount, new_amount: int)
@@ -75,8 +75,8 @@ func _load_inventory_on_client(inventory: Dictionary):
 	_handle_set_iridium(inventory.iridium)
 
 @rpc("authority", "call_remote", "reliable")
-func _set_cargo(cargo: Dictionary[int, int]):
-	_handle_set_cargo(cargo)
+func _set_cargo(new_cargo: Dictionary[int, int]):
+	_handle_set_cargo(new_cargo)
 
 @rpc("authority", "call_remote", "reliable")
 func _set_item(code: int, amount: int):

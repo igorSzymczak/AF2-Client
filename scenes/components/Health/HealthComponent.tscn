@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bpun3plji8rds"]
 
-[ext_resource type="Script" path="res://scenes/components/Health/HealthComponent.gd" id="1_uhdvj"]
+[ext_resource type="Script" uid="uid://bcx167yucdvnx" path="res://scenes/components/Health/HealthComponent.gd" id="1_uhdvj"]
 
 [node name="HealthComponent" type="Node2D"]
 top_level = true

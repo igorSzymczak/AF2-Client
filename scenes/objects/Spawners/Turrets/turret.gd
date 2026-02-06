@@ -1,6 +1,9 @@
 extends Node2D
 class_name SpawnerTurret
 
+var gid: int # GameManager ID
+var stats: Stats = Stats.new()
+
 @export var turn_speed: float = 3.0
 @export var death_particle_gradient: GradientTexture1D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent 

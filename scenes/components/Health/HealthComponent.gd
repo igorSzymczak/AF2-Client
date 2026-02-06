@@ -24,10 +24,18 @@ signal health_depleted()
 func _ready() -> void:
 	if !isBoss:
 		global_position = parent.global_position
-	set_max_health(max_health)
-	set_max_shield(max_shield)
-	_set_health(max_health)
-	_set_shield(max_shield)
+	
+	var stats: Stats = parent.stats
+
+	stats.get_stat(Stats.TYPE.MAX_HEALTH).value_changed.connect(set_max_health)
+	stats.get_stat(Stats.TYPE.MAX_SHIELD).value_changed.connect(set_max_shield)
+	stats.get_stat(Stats.TYPE.ARMOR).value_changed.connect(set_armor)
+	stats.get_stat(Stats.TYPE.SHIELD_REGEN).value_changed.connect(set_shield_regen)
+	
+	set_max_health(stats.get_stat(Stats.TYPE.MAX_HEALTH).value)
+	set_max_shield(stats.get_stat(Stats.TYPE.MAX_SHIELD).value)
+	_set_health(stats.get_stat(Stats.TYPE.MAX_HEALTH).value)
+	_set_shield(stats.get_stat(Stats.TYPE.MAX_SHIELD).value)
 
 var server_max_health := 0.0
 var server_health := 0.0
@@ -42,40 +50,22 @@ func _process(_delta):
 		global_position = parent.global_position
 	
 	if isPlayer:
-		server_max_health = g.get_player_max_health(parent.name)
-		server_health = g.get_player_health(parent.name)
-		server_armor = g.get_player_armor(parent.name)
-		server_max_shield = g.get_player_max_shield(parent.name)
-		server_shield = g.get_player_shield(parent.name)
-		server_shield_regen = g.get_player_shield_regen(parent.name)
+		server_health = g.get_player_health(parent.gid)
+		server_shield = g.get_player_shield(parent.gid)
 	elif isSpawner:
-		server_health = g.get_spawner_health(parent.name.to_int())
-		server_shield = g.get_spawner_shield(parent.name.to_int())
-		server_max_health = g.get_spawner_max_health(parent.name.to_int())
-		server_max_shield = g.get_spawner_max_shield(parent.name.to_int())
+		server_health = g.get_spawner_health(parent.gid)
+		server_shield = g.get_spawner_shield(parent.gid)
 	elif isTurret:
-		server_health = g.get_turret_health(parent.name.to_int())
-		server_shield = g.get_turret_shield(parent.name.to_int())
-		server_max_health = g.get_turret_max_health(parent.name.to_int())
-		server_max_shield = g.get_turret_max_shield(parent.name.to_int())
+		server_health = g.get_turret_health(parent.gid)
+		server_shield = g.get_turret_shield(parent.gid)
 	elif isEnemy:
-		server_health = g.get_enemy_health(parent.name.to_int())
-		server_shield = g.get_enemy_shield(parent.name.to_int())
-		server_max_health = g.get_enemy_max_health(parent.name.to_int())
-		server_max_shield = g.get_enemy_max_shield(parent.name.to_int())
+		server_health = g.get_enemy_health(parent.gid)
+		server_shield = g.get_enemy_shield(parent.gid)
 	
-	if max_health != server_max_health:
-		set_max_health(server_max_health)
 	if health != server_health:
 		_set_health(server_health)
-	if armor != server_armor:
-		set_armor(server_armor)
-	if max_shield != server_max_shield:
-		set_max_shield(server_max_shield)
 	if shield != server_shield:
 		_set_shield(server_shield)
-	if shield_regen != server_shield_regen:
-		set_shield_regen(server_shield_regen)
 	
 
 signal health_changed(value: float)
@@ -98,6 +88,7 @@ func _set_shield(_new_shield: float):
 
 signal max_health_changed(value: float)
 func set_max_health(value: float):
+	print("my max health changed to ", value)
 	if value == max_health: return
 	
 	max_health = value
@@ -127,4 +118,3 @@ func set_shield_regen(value: float):
 	
 	shield_regen = value
 	shield_regen_changed.emit(value)
-

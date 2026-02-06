@@ -25,11 +25,11 @@ func shorten_number(number: float) -> String:
 		# Remove trailing zeros after dot
 		shortened_number_str = shortened_number_str.rstrip("0").rstrip(".")
 	
-	var sign = ""
+	var sign_symbol = ""
 	if number < 0:
-		sign = "-"
+		sign_symbol = "-"
 	
-	return sign + shortened_number_str + scale
+	return sign_symbol + shortened_number_str + scale
 
 func round_to_dec(number: float, digit: int) -> float:
 	return round(number * pow(10.0, digit)) / pow(10.0, digit)

@@ -1,6 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
+var gid: int # GameManager ID
+
+var stats: Stats = Stats.new()
+
 const TURN_SPEED := 3.0 
 const DECELERATION_SPEED := 400.0
 const MAX_SPEED := 500.0
@@ -36,16 +40,17 @@ func _ready() -> void:
 	nickname = name
 	nickname_label.set_text(str(lvl) + " " + nickname)
 	
-	if name == "zlattepl":
+	if nickname == "zlattepl":
 		nickname_label.add_theme_color_override("font_color", Color(1, 0.811, 0.25))
 	
 	default_label_pos = nickname_container.position
 	
-	IS_MAIN_PLAYER = name == AuthManager.my_username
+	IS_MAIN_PLAYER = gid == AuthManager.my_user_id
 	
 	health_component.health_depleted.connect(handle_death)
 	
 	if IS_MAIN_PLAYER:
+		stats = StatManager.my_stats
 		g.set_local_player_position.connect(set_position_from_server)
 		g.death_args.connect(set_death_args)
 		nickname_container.hide()
@@ -55,8 +60,6 @@ func _ready() -> void:
 		camera.set_enabled(false)
 		call_deferred("other_player_setup_poi")
 		reticle.hide()
-		
-		InventoryManager.cargo_changed.connect(func test(): print(InventoryManager.cargo))
 
 func other_player_setup_poi():
 	GlobalSignals.emit_signal("setup_poi", self)
@@ -68,9 +71,9 @@ func set_death_args(args):
 var last_server_ship_name := ""
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
-	var server_ship_name: String = g.get_player_ship_name(name)
-	if lvl != g.get_player_lvl(name):
-		lvl = g.get_player_lvl(name)
+	var server_ship_name: String = g.get_player_ship_name(gid)
+	if lvl != g.get_player_lvl(gid):
+		lvl = g.get_player_lvl(gid)
 		lvl_label.set_text(str(lvl) + " lvl")
 	
 	if last_server_ship_name != server_ship_name:
@@ -122,13 +125,13 @@ var death_time: int = 0
 var server_nickname: String = ""
 
 func emit_server_signals():
-	if g.Players.has(name):
-		server_nickname = g.get_player_nickname(name)
+	if g.Players.has(gid):
+		server_nickname = g.get_player_nickname(gid)
 		if server_nickname != nickname:
 			nickname = server_nickname
 			nickname_label.set_text(str(lvl) + " " + nickname)
 		
-		server_alive = g.get_player_alive(name)
+		server_alive = g.get_player_alive(gid)
 		
 		var t = Time.get_ticks_msec()
 		if t - update_time_pos > last_update_pos && last_pos.distance_squared_to(global_position) >= 9:
@@ -176,90 +179,145 @@ var server_position := Vector2.ZERO
 var server_rotation := 0.0
 var server_velocity := Vector2.ZERO
 var server_engine_active: bool = false
-func handle_other_player(delta) -> void:
-	if g.Players.has(name):
-		alive = g.get_player_alive(name)
-		server_nickname = g.get_player_nickname(name)
-		if server_nickname != nickname:
-			nickname = server_nickname
-			nickname_label.set_text(nickname)
-		
-		server_position = g.get_player_position(name)
-		server_rotation = g.get_player_rotation(name)
-		server_velocity = g.get_player_velocity(name)
-		server_engine_active = g.get_player_engine_active(name)
-		
-		global_position = global_position.lerp(server_position, delta * 10)
-		rotation = lerp_angle(rotation, server_rotation,  delta * 10)
-		velocity = velocity.lerp(server_velocity, delta * 20)
-		
-		if server_engine_active:
-			engine.activate_thruster()
-		else:
-			engine.deactivate_thruster(velocity)
-		
-		var is_main_player_alive = g.get_player_alive(str(AuthManager.my_username))
-		if landed_structure != null:
-			# Alpha being set in func land_on()
-			var _nothing = 0
-		elif is_main_player_alive and !alive:
-			hide()
-			modulate.a = 0
-		elif is_main_player_alive and alive: 
-			show()
-			set_modulate(Color(1, 1, 1, 1))
-			health_component.show()
-		elif !is_main_player_alive and !alive: 
-			show()
-			set_modulate(Color(3, 3, 3, 0.3))
-			health_component.hide()
-		elif !is_main_player_alive and alive: 
-			show()
-			set_modulate(Color(1, 1, 1, 1))
-			health_component.show()
-	else:
+var server_speed_boost: bool = false
+func handle_other_player(delta: float) -> void:
+	if !g.Players.has(gid):
 		GlobalSignals.emit_signal("delete_poi", self)
 		call_deferred("queue_free")
+		return
+	
+	alive = g.get_player_alive(gid)
+	server_nickname = g.get_player_nickname(gid)
+	if server_nickname != nickname:
+		nickname = server_nickname
+		nickname_label.set_text(nickname)
+	
+	server_position = g.get_player_position(gid)
+	server_rotation = g.get_player_rotation(gid)
+	server_velocity = g.get_player_velocity(gid)
+	server_engine_active = g.get_player_engine_active(gid)
+	server_speed_boost = g.get_player_speed_boost(gid)
+	
+	global_position = global_position.lerp(server_position, delta * 10)
+	rotation = lerp_angle(rotation, server_rotation,  delta * 10)
+	velocity = velocity.lerp(server_velocity, delta * 20)
+	
+	if server_engine_active: engine.activate_thruster()
+	else: engine.deactivate_thruster(velocity)
+	
+	if server_speed_boost and !speed_boost_active:
+		speed_boost_active = true
+		ship.apply_shader(ship.SHADER.SPEED_BOOST)
+	elif !server_speed_boost and speed_boost_active:
+		speed_boost_active = false
+		ship.remove_shader(ship.SHADER.SPEED_BOOST)
+	
+	var is_main_player_alive = g.me.alive
+	if landed_structure != null:
+		# Alpha being set in func land_on()
+		var _nothing = 0
+	elif is_main_player_alive and !alive:
+		hide()
+		modulate.a = 0
+	elif is_main_player_alive and alive: 
+		show()
+		set_modulate(Color(1, 1, 1, 1))
+		health_component.show()
+	elif !is_main_player_alive and !alive: 
+		show()
+		set_modulate(Color(3, 3, 3, 0.3))
+		health_component.hide()
+	elif !is_main_player_alive and alive: 
+		show()
+		set_modulate(Color(1, 1, 1, 1))
+		health_component.show()
+
+
+var momentum_speed_cap: float = MAX_SPEED
+var speed_boost_strength: float = 2.0
+var speed_boost_active: bool = false
+var speed_boost_duration: float = 1.5 #s
+var speed_boost_delay: float = 3.0 #s
+var speed_boost_turn_speed: float = 0.2
+var last_speed_boost_time: float = 0.0 # s
 
 var direction := Vector2.ZERO
 func handle_movement(delta: float) -> void:
-	# Rotate the player towards the mouse at a set turn speed
+	# SpeedBoost
+	manage_speed_boost(delta)
+	
+	
+	
+	# Rotation
+	var speed_boost_rotation_mult: float = speed_boost_turn_speed if speed_boost_active else 1.0
+	var mod_turn_speed: float = TURN_SPEED * delta * speed_boost_rotation_mult
+	
 	if !user_prefs.disable_mouse_aim:
 		if IS_MAIN_PLAYER and landed_structure == null:
 			var mouse_pos: Vector2 = get_global_mouse_position()
 			var target_rotation: float = global_position.angle_to_point(mouse_pos)
-			rotation = rotate_toward(rotation, target_rotation, TURN_SPEED * delta)
+			rotation = rotate_toward(rotation, target_rotation, mod_turn_speed)
 	
 	elif user_prefs.disable_mouse_aim:
-		var mod_turn_speed: float = TURN_SPEED
 		if Input.is_action_pressed("SlowTurn"):
 			mod_turn_speed *= 0.33
 		
 		if Input.is_action_pressed("TurnLeft") and Input.is_action_pressed("TurnRight"):
 			pass
 		elif Input.is_action_pressed("TurnLeft"):
-			rotation = rotate_toward(rotation, rotation + PI, mod_turn_speed * delta)
+			rotation = rotate_toward(rotation, rotation + PI, mod_turn_speed)
 		elif Input.is_action_pressed("TurnRight"):
-			rotation = rotate_toward(rotation, rotation - PI, mod_turn_speed * delta)
-	
+			rotation = rotate_toward(rotation, rotation - PI, mod_turn_speed)
+		
+		# Position
 	if landed_structure == null:
-		# Handle input. If nothing is pressed the player will slowly lose speed due to the drag coefficient
 		direction = Vector2(cos(rotation), sin(rotation))
-		if Input.is_action_pressed("Accelerate") and g.can_perform_actions:
-			velocity += direction * SPEED * delta * 1.5
-			velocity = velocity.limit_length(MAX_SPEED)
+
+		# jeśli boost trwa → aktualizujemy maksymalny osiągnięty "moment"
+		if speed_boost_active:
+			momentum_speed_cap = MAX_SPEED * speed_boost_strength
+
+		# przyspieszanie albo aktywny boost
+		if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
+			var boost_mul = speed_boost_strength if speed_boost_active else 1.0
+			velocity += direction * SPEED * delta * 1.5 * boost_mul
+
+			# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
+			velocity = velocity.limit_length(momentum_speed_cap)
+		# hamowanie
 		elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
 			velocity -= velocity.normalized() * DECELERATION_SPEED * delta
 
+		# naturalny opór
 		if !velocity.is_equal_approx(Vector2.ZERO):
 			velocity -= velocity.normalized() * DRAG_COEF * delta / 2.5
 		else:
 			velocity = Vector2.ZERO
+		
+		if momentum_speed_cap > MAX_SPEED:
+			momentum_speed_cap -= DRAG_COEF * delta / 2.5
+		elif momentum_speed_cap > velocity.length():
+			momentum_speed_cap = max(MAX_SPEED, velocity.length())
+
 		handle_thrust()
 		move_and_slide()
+
 	
 	elif landed_structure != null:
 		global_position = global_position.lerp(landed_structure.global_position, delta * 5)
+
+func manage_speed_boost(delta: float) -> void:
+	last_speed_boost_time += delta
+	if Input.is_action_just_pressed("SpeedBoost") and !speed_boost_active and last_speed_boost_time > speed_boost_delay:
+		speed_boost_active = true
+		last_speed_boost_time = 0.0
+		ship.apply_shader(ship.SHADER.SPEED_BOOST)
+		g.local_player_speed_boost.emit(speed_boost_active)
+	
+	if last_speed_boost_time > speed_boost_duration and speed_boost_active:
+		speed_boost_active = false
+		ship.remove_shader(ship.SHADER.SPEED_BOOST)
+		g.local_player_speed_boost.emit(speed_boost_active)
 
 func handle_death() -> void:
 	GlobalSignals.emit_signal("create_explosion", global_position, "explosion_large", 1, {})
@@ -271,7 +329,7 @@ func handle_reticle(delta: float):
 			
 		reticle.global_rotation += delta * power
 		reticle.scale = Vector2(reticle_scale, reticle_scale)
-		if !g.get_player_monitorable(name):
+		if !g.get_player_monitorable(gid):
 			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 0, delta * 5) 
 		else:
 			reticle.self_modulate.a = lerpf(reticle.self_modulate.a, 1, delta * 5) 
@@ -282,7 +340,7 @@ var engine_active: bool
 func handle_thrust() -> void:
 	var old_engine_active = engine_active
 	if g.can_perform_actions:
-		if Input.is_action_pressed("Accelerate"):
+		if Input.is_action_pressed("Accelerate") or speed_boost_active:
 			engine.activate_thruster()
 			engine_active = true
 		else:
@@ -309,7 +367,7 @@ func handle_change_weapon(num_pressed: int = 0) -> void:
 		handle_shoot()
 
 func handle_shoot() -> void:
-	if alive and g.can_perform_actions and not g.is_mouse_over_menu() and g.get_player_monitorable(name):
+	if alive and g.can_perform_actions and not g.is_mouse_over_menu() and g.get_player_monitorable(gid):
 		
 		var index: int = g.PlayerInfo.current_weapon
 		var power_usage: float = g.PlayerInfo.weapons[index].power_usage
@@ -407,10 +465,10 @@ func land_on(structure: Structure):
 			var alpha_tween: Tween = create_tween()
 			alpha_tween.tween_property(self, "modulate:a", 0.0, 0.3)
 
-func try_leave_structure(_username: String): pass # Only Server
+func try_leave_structure(_user_id: int): pass # Only Server
 
-func animate_leave_structure(username: String):
-	if name == username:
+func animate_leave_structure(user_id: int):
+	if gid == user_id:
 		landed_structure = null
 		health_component.show()
 		if IS_MAIN_PLAYER:
@@ -426,9 +484,9 @@ func animate_leave_structure(username: String):
 			await get_tree().create_timer(0.3).timeout
 
 @rpc("any_peer", "call_remote", "reliable")
-func request_leave_structure(username: String):
-	try_leave_structure(username)
+func request_leave_structure(user_id: int):
+	try_leave_structure(user_id)
 
 @rpc("authority", "call_local", "reliable")
-func leave_structure(username: String):
-	animate_leave_structure(username)
+func leave_structure(user_id: int):
+	animate_leave_structure(user_id)

@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://y4hetgssvu6u"]
+[gd_scene load_steps=13 format=3 uid="uid://y4hetgssvu6u"]
 
 [ext_resource type="Texture2D" uid="uid://dcn8s74a2sjyn" path="res://assets/ships/Nexar Reaver/Nexar Reaver.png" id="1_gctjj"]
 [ext_resource type="Texture2D" uid="uid://c468ylpm7rsda" path="res://assets/ships/Nexar Reaver/Nexar Reaver Lights.png" id="2_04ocu"]
-[ext_resource type="Script" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_6cr4w"]
-[ext_resource type="Script" path="res://assets/ships/Nexar Reaver/Animation.gd" id="3_50kql"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_6cr4w"]
+[ext_resource type="Script" uid="uid://b2nib5rbl1k1w" path="res://assets/ships/Nexar Reaver/Animation.gd" id="3_50kql"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_fr04d"]
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_m7hr6"]
 [ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="6_slaw8"]
 [ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="7_rpu0e"]
 [ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="8_p1sny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esedj"]
 
 [sub_resource type="Animation" id="Animation_dyips"]
 resource_name = "NexarReaverPulse"
@@ -28,12 +30,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dwjmk"]
 _data = {
-"NexarReaverPulse": SubResource("Animation_dyips")
+&"NexarReaverPulse": SubResource("Animation_dyips")
 }
 
 [node name="NexarReaver" type="Sprite2D" node_paths=PackedStringArray("engine")]
+material = SubResource("ShaderMaterial_esedj")
 rotation = 1.5708
 texture = ExtResource("1_gctjj")
+region_rect = Rect2(-32, -32, 200, 256)
 script = ExtResource("2_6cr4w")
 engine = NodePath("Engine")
 ship_name = "Nexar Reaver"
@@ -55,7 +59,7 @@ texture = ExtResource("2_04ocu")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dwjmk")
+&"": SubResource("AnimationLibrary_dwjmk")
 }
 speed_scale = 0.33
 script = ExtResource("3_50kql")

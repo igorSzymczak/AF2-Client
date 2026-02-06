@@ -1,8 +1,8 @@
 [gd_scene load_steps=21 format=3 uid="uid://cy26brtaxuquf"]
 
-[ext_resource type="Script" path="res://scenes/ui/stats bar/stats_bar.gd" id="1_0611j"]
-[ext_resource type="Shader" path="res://scenes/ui/stats bar/health_bar.gdshader" id="1_cinpn"]
-[ext_resource type="Shader" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="1_e6rxl"]
+[ext_resource type="Script" uid="uid://dqy0w8ty7nolh" path="res://scenes/ui/stats bar/stats_bar.gd" id="1_0611j"]
+[ext_resource type="Shader" uid="uid://cyd21c87n50p4" path="res://scenes/ui/stats bar/health_bar.gdshader" id="1_cinpn"]
+[ext_resource type="Shader" uid="uid://crl67472drqum" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="1_e6rxl"]
 [ext_resource type="Texture2D" uid="uid://bt2nlch0i14cl" path="res://assets/effects/Corrosive Down.png" id="1_ymr8q"]
 [ext_resource type="Texture2D" uid="uid://bw5ghbu7ek5dk" path="res://assets/effects/Kinetic Down.png" id="2_ufteg"]
 [ext_resource type="Texture2D" uid="uid://6af0cxxkq4oq" path="res://assets/effects/Energy Down.png" id="3_3g7xt"]
@@ -20,22 +20,22 @@ frequency = 0.0024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_22i11"]
 generate_mipmaps = false
-seamless = true
 noise = SubResource("FastNoiseLite_jkul4")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ypu7"]
 shader = ExtResource("1_e6rxl")
-shader_parameter/scroll1 = Vector2(-0.135, -0.01)
-shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 shader_parameter/texture2 = SubResource("NoiseTexture2D_22i11")
 shader_parameter/colorTexture = SubResource("GradientTexture2D_kqnwa")
+shader_parameter/scroll1 = Vector2(-0.135, -0.01)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0024y"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aiud2"]
+noise = SubResource("FastNoiseLite_0024y")
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_0024y")
 
 [sub_resource type="Gradient" id="Gradient_bpfx1"]
 offsets = PackedFloat32Array(0, 0.636816, 1)
@@ -50,26 +50,27 @@ frequency = 0.0024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kmv42"]
 generate_mipmaps = false
-seamless = true
 noise = SubResource("FastNoiseLite_j7ghs")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bb1kx"]
 shader = ExtResource("1_cinpn")
-shader_parameter/scroll1 = Vector2(0.035, 0.11)
-shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 shader_parameter/texture2 = SubResource("NoiseTexture2D_kmv42")
 shader_parameter/colorTexture = SubResource("GradientTexture2D_m6yum")
+shader_parameter/scroll1 = Vector2(0.035, 0.11)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3n4yo"]
 seed = -3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pjaes"]
+noise = SubResource("FastNoiseLite_3n4yo")
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_3n4yo")
 
 [node name="StatsBar" type="Control"]
 layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0611j")
 
 [node name="Background" type="Polygon2D" parent="."]

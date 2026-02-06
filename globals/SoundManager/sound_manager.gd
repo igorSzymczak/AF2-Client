@@ -46,5 +46,6 @@ func play_sound_from_name(sound_name: String, pos: Vector2) -> void:
 	
 
 func play_sound_from_name_locally(sound_name: String):
-	var pos = g.get_player_position(str(multiplayer.get_unique_id()))
+	if !g.me: return
+	var pos: Vector2 = g.me.global_position
 	play_sound_from_name(sound_name, pos)

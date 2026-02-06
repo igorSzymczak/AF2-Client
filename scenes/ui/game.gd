@@ -12,7 +12,7 @@ func _process(_delta: float):
 	if (
 		is_instance_valid(me) and 
 		me.alive and 
-		g.get_player_monitorable(me.name) and 
+		g.get_player_monitorable(AuthManager.my_user_id) and 
 		me.landed_structure == null
 	):
 		safezone_label.hide()

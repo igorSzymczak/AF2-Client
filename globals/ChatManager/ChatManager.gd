@@ -2,15 +2,15 @@ extends Node
 
 # Called when Client hits Enter to Send Message
 func send_message(message: String):
-	var username: String = AuthManager.my_username
-	process_message_by_server.rpc_id(1, username, message)
+	var user_id: int = AuthManager.my_user_id
+	process_message_by_server.rpc_id(1, user_id, message)
 
-func process_message(_username: String, _message: String):
+func process_message(_user_id: int, _message: String):
 	pass # Only server
 
 @rpc("any_peer", "call_remote", "reliable")
-func process_message_by_server(username: String, message: String):
-	process_message(username, message)
+func process_message_by_server(user_id: int, message: String):
+	process_message(user_id, message)
 
 signal received_message(message: String)
 @rpc("authority", "call_remote", "reliable")
@@ -19,9 +19,9 @@ func display_message(message: String):
 
 signal nickname_changed(nickname: String)
 @rpc("any_peer", "call_remote", "reliable")
-func request_nickname_change(username: String, nickname: String):
-	try_nickname_change(username, nickname)
+func request_nickname_change(user_id: int, nickname: String):
+	try_nickname_change(user_id, nickname)
 
 
-func try_nickname_change(_username: String, _nickname: String):
+func try_nickname_change(_user_id: int, _nickname: String):
 	pass # Only Server

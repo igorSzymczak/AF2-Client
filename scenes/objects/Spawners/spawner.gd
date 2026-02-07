@@ -1,6 +1,9 @@
 extends Node2D
 class_name Spawner
 
+var gid: int # GameManager ID
+var stats: Stats = Stats.new()
+
 @export var spawn_enemy_scene : PackedScene
 @export var max_enemies : int = 0
 @export var enemies_at_once : int = 0

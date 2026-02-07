@@ -69,7 +69,6 @@ func _process(_delta):
 		
 
 func select_animation(animation_name: String):
-	var delta = get_process_delta_time()
 	if animation_name == "open":
 		g.can_perform_actions = false
 		show()

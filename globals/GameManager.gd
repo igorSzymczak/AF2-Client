@@ -9,6 +9,14 @@ enum TIMESTEP {
 	FULL = 1000,     # 1  tps   (Planets)
 }
 
+enum ENTITY_TYPE {
+	PLAYER,
+	ENEMY,
+	SPAWNER,
+	TURRET,
+	BOSS
+}
+
 var me: Player
 
 var PlayerInfo: Dictionary = {}
@@ -17,15 +25,17 @@ var update_time = 50
 
 var Planets: Dictionary = {}
 
-var Players: Dictionary = {}
+var Players: Dictionary[int, Dictionary] = {}
 
 var Bullets: Dictionary = {}
 
-var Spawners: Dictionary = {}
+var Spawners: Dictionary[int, Dictionary] = {}
 
-var Turrets: Dictionary = {}
+var Turrets: Dictionary[int, Dictionary] = {}
 
-var Enemies: Dictionary = {}
+var Enemies: Dictionary[int, Dictionary] = {}
+
+var Bosses: Dictionary[int, Dictionary] = {}
 
 var Items: Dictionary = {}
 
@@ -104,164 +114,163 @@ func get_planet_is_safezone(planet_name: String) -> bool:
 ## Players
 
 
-func add_player(username: String):
-	if !Players.has(username):
-		var player: Player = get_node("/root/Game/World/" + username)
-		Players[username] = {
-			"username": username,
-			"nickname": "Player " + username.substr(0, 3),
+func add_player(user_id: int):
+	if !Players.has(user_id):
+		var player: Player = get_node("/root/Game/World/" + str(user_id))
+		Players[user_id] = {
+			"node": player,
+			"user_id": user_id,
+			"nickname": "Player " + str(user_id).substr(0, 3),
 			"global_position": player.global_position,
 			"rotation": player.rotation,
 			"velocity": player.velocity,
 			"engine_active": false,
-			"max_health": player.health_component.max_health,
 			"health": player.health_component.health,
-			"armor": player.health_component.armor,
-			"max_shield": player.health_component.max_shield,
 			"shield": player.health_component.shield,
-			"shield_regen": player.health_component.shield_regen,
 			"alive": player.alive,
 			"ship_name": "NexarCarrier",
 			"monitorable": false,
-			"lvl": 0
+			"lvl": 0,
+			"stats": {},
+			"speed_boost": false
 		}
 
-func remove_player(username: String):
-	if Players.has(username):
-		Players.erase(username)
+func remove_player(user_id: int):
+	if Players.has(user_id):
+		Players.erase(user_id)
 
-func get_player(username: String):
-	if Players.has(username):
-		return get_node("/root/Game/World/" + username) as Player
+func get_player(user_id: int) -> Player:
+	if Players.has(user_id):
+		return Players[user_id]["node"] as Player
 	else:
-		return false
+		return null
 
-signal weapon_fired(shooter_name: String, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
+signal weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
 
-func get_player_nickname(username: String) -> String:
-	if Players.has(username):
-		return Players[username]["nickname"]
+func get_player_nickname(user_id: int) -> String:
+	if Players.has(user_id):
+		return Players[user_id]["nickname"]
 	return "Player"
-func update_player_nickname(username: String, nick: String):
-	if Players.has(username):
-		Players[username]["nickname"] = nick
+func update_player_nickname(user_id: int, nick: String):
+	if Players.has(user_id):
+		Players[user_id]["nickname"] = nick
 
 signal local_player_position(pos: Vector2)
 signal set_local_player_position(pos: Vector2)
-func get_player_position(username: String) -> Vector2:
-	if Players.has(username):
-		return Players[username]["global_position"]
+func get_player_position(user_id: int) -> Vector2:
+	if Players.has(user_id):
+		return Players[user_id]["global_position"]
 	return Vector2.ZERO
-func update_player_position(username: String, pos: Vector2):
-	if Players.has(username):
-		Players[username]["global_position"] = pos
+func update_player_position(user_id: int, pos: Vector2):
+	if Players.has(user_id):
+		Players[user_id]["global_position"] = pos
 
 signal local_player_rotation(rot: float)
-func get_player_rotation(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["rotation"]
+func get_player_rotation(user_id: int) -> float:
+	if Players.has(user_id):
+		return Players[user_id]["rotation"]
 	return 0
-func update_player_rotation(username: String, rot: float):
-	if Players.has(username):
-		Players[username]["rotation"] = rot
+func update_player_rotation(user_id: int, rot: float):
+	if Players.has(user_id):
+		Players[user_id]["rotation"] = rot
 
 signal local_player_velocity(vel: Vector2)
-func get_player_velocity(username: String) -> Vector2:
-	if Players.has(username):
-		return Players[username]["velocity"]
+func get_player_velocity(user_id: int) -> Vector2:
+	if Players.has(user_id):
+		return Players[user_id]["velocity"]
 	return Vector2.ZERO
-func update_player_velocity(username: String, vel: Vector2):
-	if Players.has(username):
-		Players[username]["velocity"] = vel
+func update_player_velocity(user_id: int, vel: Vector2):
+	if Players.has(user_id):
+		Players[user_id]["velocity"] = vel
 
 signal local_player_engine_active(activity: bool)
-func get_player_engine_active(username: String) -> bool:
-	if Players.has(username):
-		return Players[username]["engine_active"]
+func get_player_engine_active(user_id: int) -> bool:
+	if Players.has(user_id):
+		return Players[user_id]["engine_active"]
 	return false
-func update_player_engine_active(username: String, activity: bool):
-	if Players.has(username):
-		Players[username]["engine_active"] = activity
+func update_player_engine_active(user_id: int, activity: bool):
+	if Players.has(user_id):
+		Players[user_id]["engine_active"] = activity
 
-func get_player_max_health(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["max_health"]
+func get_player_health(user_id: int) -> float:
+	if Players.has(user_id):
+		return Players[user_id]["health"]
 	return 0
-func update_player_max_health(username: String, max_health: float):
-	if Players.has(username):
-		Players[username]["max_health"] = max_health
+func update_player_health(user_id: int, health: float):
+	if Players.has(user_id):
+		Players[user_id]["health"] = health
 
-func get_player_health(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["health"]
+func get_player_shield(user_id: int) -> float:
+	if Players.has(user_id):
+		return Players[user_id]["shield"]
 	return 0
-func update_player_health(username: String, health: float):
-	if Players.has(username):
-		Players[username]["health"] = health
+func update_player_shield(user_id: int, shield: float):
+	if Players.has(user_id):
+		Players[user_id]["shield"] = shield
 
-func get_player_armor(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["armor"]
-	return 0
-func update_player_armor(username: String, armor: float):
-	if Players.has(username):
-		Players[username]["armor"] = armor
-
-func get_player_max_shield(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["max_shield"]
-	return 0
-func update_player_max_shield(username: String, max_shield: float):
-	if Players.has(username):
-		Players[username]["max_shield"] = max_shield
-
-func get_player_shield(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["shield"]
-	return 0
-func update_player_shield(username: String, shield: float):
-	if Players.has(username):
-		Players[username]["shield"] = shield
-
-func get_player_shield_regen(username: String) -> float:
-	if Players.has(username):
-		return Players[username]["shield_regen"]
-	return 0
-func update_player_shield_regen(username: String, shield_regen: float):
-	if Players.has(username):
-		Players[username]["shield_regen"] = shield_regen
-
-func get_player_alive(username: String) -> bool:
-	if Players.has(username):
-		return Players[username]["alive"]
+func get_player_alive(user_id: int) -> bool:
+	if Players.has(user_id):
+		return Players[user_id]["alive"]
 	return false
-func update_player_alive(username: String, alive: bool):
-	if Players.has(username):
-		Players[username]["alive"] = alive
+func update_player_alive(user_id: int, alive: bool):
+	if Players.has(user_id):
+		Players[user_id]["alive"] = alive
 
-func get_player_ship_name(username: String) -> String:
-	if Players.has(username):
-		return Players[username]["ship_name"]
+func get_player_ship_name(user_id: int) -> String:
+	if Players.has(user_id):
+		return Players[user_id]["ship_name"]
 	return "NexarCarrier"
-func update_player_ship_name(username: String, ship_name: String):
-	if Players.has(username):
-		Players[username]["ship_name"] = ship_name
+func update_player_ship_name(user_id: int, ship_name: String):
+	if Players.has(user_id):
+		Players[user_id]["ship_name"] = ship_name
 
-func get_player_monitorable(username: String) -> bool:
-	if Players.has(username):
-		return Players[username]["monitorable"]
+func get_player_monitorable(user_id: int) -> bool:
+	if Players.has(user_id):
+		return Players[user_id]["monitorable"]
 	return false
-func update_player_monitorable(username: String, monitorable: bool):
-	if Players.has(username):
-		Players[username]["monitorable"] = monitorable
+func update_player_monitorable(user_id: int, monitorable: bool):
+	if Players.has(user_id):
+		Players[user_id]["monitorable"] = monitorable
 
-func get_player_lvl(username: String) -> int:
-	if Players.has(username):
-		return Players[username]["lvl"]
+func get_player_lvl(user_id: int) -> int:
+	if Players.has(user_id):
+		return Players[user_id]["lvl"]
 	return 0
-func update_player_lvl(username: String, lvl: int):
-	if Players.has(username):
-		Players[username]["lvl"] = lvl
+func update_player_lvl(user_id: int, lvl: int):
+	if Players.has(user_id):
+		Players[user_id]["lvl"] = lvl
+
+func get_player_stats(user_id: int) -> Dictionary[Stats.TYPE, float]:
+	if Players.has(user_id):
+		return Players[user_id]["stats"]
+	return {}
+func update_player_stats(user_id: int, stats: Dictionary[Stats.TYPE, float]):
+	if Players.has(user_id):
+		Players[user_id]["stats"] = stats
+		
+		var player: Player = Players[user_id]["node"] as Player
+		for stat: Stats.TYPE in stats.keys():
+			player.stats.set_stat_value(stat, stats[stat])
+
+func get_player_stat(user_id: int, stat_type: Stats.TYPE) -> float:
+	if Players.has(user_id) and Players[user_id]["stats"].has(stat_type):
+		return Players[user_id]["stats"][stat_type]
+	return 0
+func update_player_stat(user_id: int, stat_type: Stats.TYPE, value: float):
+	if Players.has(user_id):
+		Players[user_id]["stats"][stat_type] = value
+		
+		var player: Player = Players[user_id]["node"] as Player
+		player.stats.set_stat_value(stat_type, value)
+
+signal local_player_speed_boost(activity: bool)
+func get_player_speed_boost(user_id: int) -> bool:
+	if Players.has(user_id):
+		return Players[user_id]["speed_boost"]
+	return 0
+func update_player_speed_boost(user_id: int, speed_boost: bool):
+	if Players.has(user_id):
+		Players[user_id]["speed_boost"] = speed_boost
 
 signal death_args(args: Dictionary)
 
@@ -369,14 +378,6 @@ func get_spawner_rotation(id: int) -> float:
 		return Spawners[id]["rotation"]
 	return 0
 
-func get_spawner_max_health(id: int) -> float:
-	if Spawners.has(id):
-		return Spawners[id]["max_health"]
-	return 0
-func update_spawner_max_health(id: int, max_health: float):
-	if Spawners.has(id):
-		Spawners[id]["max_health"] = max_health
-
 func get_spawner_health(id: int) -> float:
 	if Spawners.has(id):
 		return Spawners[id]["health"]
@@ -384,14 +385,6 @@ func get_spawner_health(id: int) -> float:
 func update_spawner_health(id: int, health: float):
 	if Spawners.has(id):
 		Spawners[id]["health"] = health
-
-func get_spawner_max_shield(id: int) -> float:
-	if Spawners.has(id):
-		return Spawners[id]["max_shield"]
-	return 0
-func update_spawner_max_shield(id: int, max_shield: float):
-	if Spawners.has(id):
-		Spawners[id]["max_shield"] = max_shield
 
 func get_spawner_shield(id: int) -> float:
 	if Spawners.has(id):
@@ -425,6 +418,29 @@ func get_spawner_active(id: int) -> bool:
 		return Spawners[id]["active"]
 	return false
 
+func get_spawner_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+	if Spawners.has(id):
+		return Spawners[id]["stats"]
+	return {}
+func update_spawner_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	if Spawners.has(id):
+		Spawners[id]["stats"] = stats
+		
+		var spawner: Spawner = Spawners[id]["node"] as Spawner
+		for stat: Stats.TYPE in stats.keys():
+			spawner.stats.set_stat_value(stat, stats[stat])
+
+func get_spawner_stat(id: int, stat_type: Stats.TYPE) -> float:
+	if Spawners.has(id) and Spawners[id]["stats"].has(stat_type):
+		return Spawners[id]["stats"][stat_type]
+	return 0
+func update_spawner_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Spawners.has(id):
+		Spawners[id]["stats"][stat_type] = value
+		
+		var spawner: Spawner = Spawners[id]["node"] as Spawner
+		spawner.stats.set_stat_value(stat_type, value)
+
 
 ## TURRETS
 
@@ -452,14 +468,6 @@ func get_turret_rotation(id: int) -> float:
 		return Turrets[id]["rotation"]
 	return 0
 
-func get_turret_max_health(id: int) -> float:
-	if Turrets.has(id):
-		return Turrets[id]["max_health"]
-	return 0
-func update_turret_max_health(id: int, max_health: float):
-	if Turrets.has(id):
-		Turrets[id]["max_health"] = max_health
-
 func get_turret_health(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["health"]
@@ -468,14 +476,6 @@ func update_turret_health(id: int, health: float):
 	if Turrets.has(id):
 		Turrets[id]["health"] = health
 
-func get_turret_max_shield(id: int) -> float:
-	if Turrets.has(id):
-		return Turrets[id]["max_shield"]
-	return 0
-func update_turret_max_shield(id: int, max_shield: float):
-	if Turrets.has(id):
-		Turrets[id]["max_shield"] = max_shield
-
 func get_turret_shield(id: int) -> float:
 	if Turrets.has(id):
 		return Turrets[id]["shield"]
@@ -483,6 +483,29 @@ func get_turret_shield(id: int) -> float:
 func update_turret_shield(id: int, shield: float):
 	if Turrets.has(id):
 		Turrets[id]["shield"] = shield
+
+func get_turret_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+	if Turrets.has(id):
+		return Turrets[id]["stats"]
+	return {}
+func update_turret_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	if Turrets.has(id):
+		Turrets[id]["stats"] = stats
+		
+		var turret: SpawnerTurret = Turrets[id]["node"] as SpawnerTurret
+		for stat: Stats.TYPE in stats.keys():
+			turret.stats.set_stat_value(stat, stats[stat])
+
+func get_turret_stat(id: int, stat_type: Stats.TYPE) -> float:
+	if Turrets.has(id) and Turrets[id]["stats"].has(stat_type):
+		return Turrets[id]["stats"][stat_type]
+	return 0
+func update_turret_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Turrets.has(id):
+		Turrets[id]["stats"][stat_type] = value
+		
+		var turret: SpawnerTurret = Turrets[id]["node"] as SpawnerTurret
+		turret.stats.set_stat_value(stat_type, value)
 
 
 ## ENEMIES
@@ -511,14 +534,6 @@ func get_enemy_rotation(id: int) -> float:
 		return Enemies[id]["rotation"]
 	return 0
 
-func get_enemy_max_health(id: int) -> float:
-	if Enemies.has(id):
-		return Enemies[id]["max_health"]
-	return 0
-func update_enemy_max_health(id: int, max_health: float):
-	if Enemies.has(id):
-		Enemies[id]["max_health"] = max_health
-
 func get_enemy_health(id: int) -> float:
 	if Enemies.has(id):
 		return Enemies[id]["health"]
@@ -526,14 +541,6 @@ func get_enemy_health(id: int) -> float:
 func update_enemy_health(id: int, health: float):
 	if Enemies.has(id):
 		Enemies[id]["health"] = health
-
-func get_enemy_max_shield(id: int) -> float:
-	if Enemies.has(id):
-		return Enemies[id]["max_shield"]
-	return 0
-func update_enemy_max_shield(id: int, max_shield: float):
-	if Enemies.has(id):
-		Enemies[id]["max_shield"] = max_shield
 
 func get_enemy_shield(id: int) -> float:
 	if Enemies.has(id):
@@ -550,6 +557,108 @@ func get_enemy_engine_active(id: int) -> bool:
 func update_enemy_engine_active(id: int, engine_active: bool):
 	if Enemies.has(id):
 		Enemies[id]["engine_active"] = engine_active
+
+func get_enemy_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+	if Enemies.has(id):
+		return Enemies[id]["stats"]
+	return {}
+func update_enemy_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	if Enemies.has(id):
+		Enemies[id]["stats"] = stats
+		
+		var enemy: Actor = Enemies[id]["node"] as Actor
+		for stat: Stats.TYPE in stats.keys():
+			enemy.stats.set_stat_value(stat, stats[stat])
+
+func get_enemy_stat(id: int, stat_type: Stats.TYPE) -> float:
+	if Enemies.has(id) and Enemies[id]["stats"].has(stat_type):
+		return Enemies[id]["stats"][stat_type]
+	return 0
+func update_enemy_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Enemies.has(id):
+		Enemies[id]["stats"][stat_type] = value
+		
+		var enemy: Actor = Enemies[id]["node"] as Actor
+		enemy.stats.set_stat_value(stat_type, value)
+
+
+
+#		BOSSESS
+
+
+
+func add_boss(boss: Dictionary):
+	var id: int = boss.id
+	if !Bosses.has(id):
+		Bosses[id] = boss
+
+func remove_boss(id: int): if Bosses.has(id): Bosses.erase(id)
+
+func update_boss_position(id: int, pos: Vector2):
+	if Bosses.has(id):
+		Bosses[id]["global_position"] = pos
+func get_boss_position(id: int) -> Vector2:
+	if Bosses.has(id):
+		return Bosses[id]["global_position"]
+	return Vector2.ZERO
+
+func update_boss_rotation(id: int, rot: float):
+	if Bosses.has(id):
+		Bosses[id]["rotation"] = rot
+func get_boss_rotation(id: int) -> float:
+	if Bosses.has(id):
+		return Bosses[id]["rotation"]
+	return 0
+
+func get_boss_health(id: int) -> float:
+	if Bosses.has(id):
+		return Bosses[id]["health"]
+	return 0
+func update_boss_health(id: int, health: float):
+	if Bosses.has(id):
+		Bosses[id]["health"] = health
+
+func get_boss_shield(id: int) -> float:
+	if Bosses.has(id):
+		return Bosses[id]["shield"]
+	return 0
+func update_boss_shield(id: int, shield: float):
+	if Bosses.has(id):
+		Bosses[id]["shield"] = shield
+
+func get_boss_engine_active(id: int) -> bool:
+	if Bosses.has(id):
+		return Bosses[id]["engine_active"]
+	return false
+func update_boss_engine_active(id: int, engine_active: bool):
+	if Bosses.has(id):
+		Bosses[id]["engine_active"] = engine_active
+
+func get_boss_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+	if Bosses.has(id):
+		return Bosses[id]["stats"]
+	return {}
+func update_boss_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	if Bosses.has(id):
+		Bosses[id]["stats"] = stats
+		
+		var boss = Bosses[id]["node"]
+		for stat: Stats.TYPE in stats.keys():
+			boss.stats.set_stat_value(stat, stats[stat])
+
+func get_boss_stat(id: int, stat_type: Stats.TYPE) -> float:
+	if Bosses.has(id) and Bosses[id]["stats"].has(stat_type):
+		return Bosses[id]["stats"][stat_type]
+	return 0
+func update_boss_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Bosses.has(id):
+		Bosses[id]["stats"][stat_type] = value
+		
+		var boss = Bosses[id]["node"]
+		boss.stats.set_stat_value(stat_type, value)
+
+
+
 
 # 			ITEMS
 

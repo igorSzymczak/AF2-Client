@@ -1,5 +1,7 @@
 class_name Homerus extends CharacterBody2D
 
+var gid: int # GameManager ID
+
 var poi_type = "boss"
 @onready var engine = $Engine
 @onready var left_segment = $LeftSegment

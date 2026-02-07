@@ -19,6 +19,7 @@ func _ready():
 	#print("loading client...")
 	start_client()
 	client_id = str(multiplayer.get_unique_id())
+	AuthManager.my_user_id = client_id
 	current_world.hide()
 	AuthManager.logged_in.connect(_on_logged_in)
 
@@ -35,7 +36,6 @@ func start_client() -> void:
 	multiplayer_peer.create_client(ADDRESS, PORT)
 	multiplayer_peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
 	multiplayer.multiplayer_peer = multiplayer_peer
-	
 	client_signals()
 
 func _on_logged_in():
@@ -50,32 +50,34 @@ func disconnected_from_server() -> void:
 	print("Disconnected from Server...")
 
 
-func add_player_character(username: String):
+func add_player_character(user_id: int):
 	var player_character = preload("res://scenes/entities/Player/player.tscn").instantiate()
-	player_character.name = username
+	player_character.name = str(user_id)
+	player_character.gid = user_id
 	current_world.add_child(player_character)
 	#print("Successfully added new player character: " + str(username) + "!")
-	g.add_player(username)
+	g.add_player(user_id)
+	g.Players[user_id]["node"] = player_character
 	
-	if username == AuthManager.my_username:
+	if user_id == AuthManager.my_user_id:
 		local_player_character = player_character
 		g.me = player_character
 		GlobalSignals.give_main_player.emit(local_player_character)
 		AuthManager.joined.emit()
 
 @rpc("authority", "call_local", "reliable")
-func remove_player(username: String):
-	g.remove_player(username)
+func remove_player(user_id: int):
+	g.remove_player(user_id)
 
 @rpc("any_peer", "call_local")
-func add_newly_connected_player_character(username):
-	add_player_character(username)
+func add_newly_connected_player_character(user_id: int):
+	add_player_character(user_id)
 
 @rpc("any_peer", "reliable")
-func add_previously_connected_player_characters(players: Dictionary):
-	for username in players:
-		add_player_character(username)
+func add_previously_connected_player_characters(players: Dictionary[int, Dictionary]):
 	g.Players = players
+	for user_id in players:
+		add_player_character(user_id)
 
 @rpc("authority", "call_local", "reliable")
 func update_planet_position(planet_name: String, pos: Vector2): g.update_planet_position(planet_name, pos)
@@ -103,6 +105,7 @@ func client_signals():
 	g.local_player_rotation.connect(handle_update_rotation)
 	g.local_player_velocity.connect(handle_update_velocity)
 	g.local_player_engine_active.connect(handle_update_engine_active)
+	g.local_player_speed_boost.connect(handle_update_speed_boost)
 	g.player_info.connect(handle_update_player_info)
 	
 	g.player_shoot.connect(handle_player_shoot)
@@ -111,65 +114,57 @@ func client_signals():
 
 ## PLAYERS
 
-func handle_update_position(pos: Vector2): update_player_position.rpc_id(1, AuthManager.my_username, pos)
-func handle_update_rotation(rot: float): update_player_rotation.rpc_id(1, AuthManager.my_username, rot)
-func handle_update_velocity(vel: Vector2): update_player_velocity.rpc_id(1, AuthManager.my_username, vel)
-func handle_update_engine_active(activity: bool): update_player_engine_active.rpc_id(1, AuthManager.my_username, activity)
+func handle_update_position(pos: Vector2): update_player_position.rpc_id(1, AuthManager.my_user_id, pos)
+func handle_update_rotation(rot: float): update_player_rotation.rpc_id(1, AuthManager.my_user_id, rot)
+func handle_update_velocity(vel: Vector2): update_player_velocity.rpc_id(1, AuthManager.my_user_id, vel)
+func handle_update_engine_active(activity: bool): update_player_engine_active.rpc_id(1, AuthManager.my_user_id, activity)
 func handle_update_player_info(player_info: Dictionary): g.set_player_info(player_info)
-func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_username, index)
+func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_user_id, index)
+func handle_update_speed_boost(activity: bool): update_player_speed_boost.rpc_id(1, AuthManager.my_user_id, activity)
 
 func _on_set_weapon_request(slot: int, weapon_name: String): request_set_weapon.rpc_id(1, slot, weapon_name)
 func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_name: String): pass # Only Server
 
 @rpc("any_peer", "call_local", "reliable")
-func update_player_nickname(username: String, nick: String): g.update_player_nickname(username, nick)
+func update_player_nickname(user_id: int, nick: String): g.update_player_nickname(user_id, nick)
 
 @rpc("authority", "reliable")
 func set_player_position(pos: Vector2): g.emit_signal("set_local_player_position", pos)
 
 @rpc("any_peer", "unreliable")
-func update_player_position(username: String, pos: Vector2): g.update_player_position(username, pos)
+func update_player_position(user_id: int, pos: Vector2): g.update_player_position(user_id, pos)
 
 @rpc("any_peer", "unreliable")
-func update_player_rotation(username: String, rot: float): g.update_player_rotation(username, rot)
+func update_player_rotation(user_id: int, rot: float): g.update_player_rotation(user_id, rot)
 
 @rpc("any_peer", "unreliable")
-func update_player_velocity(username: String, vel: Vector2): g.update_player_velocity(username, vel)
+func update_player_velocity(user_id: int, vel: Vector2): g.update_player_velocity(user_id, vel)
 
-@rpc("any_peer", "unreliable")
-func update_player_engine_active(username: String, activity: bool): g.update_player_engine_active(username, activity)
+@rpc("any_peer", "reliable")
+func update_player_engine_active(user_id: int, activity: bool): g.update_player_engine_active(user_id, activity)
 
-@rpc("authority", "call_local", "reliable")
-func update_player_lvl(username: String, lvl: int): g.update_player_lvl(username, lvl)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_max_health(username: String, max_health: float): g.update_player_max_health(username, max_health)
+@rpc("any_peer", "reliable")
+func update_player_speed_boost(user_id: int, speed_boost: bool): g.update_player_speed_boost(user_id, speed_boost)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_health(username: String, health: float): g.update_player_health(username, health)
+func update_player_lvl(user_id: int, lvl: int): g.update_player_lvl(user_id, lvl)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_armor(username: String, armor: float): g.update_player_armor(username, armor)
+func update_player_health(user_id: int, health: float): g.update_player_health(user_id, health)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_max_shield(username: String, max_shield: float): g.update_player_max_shield(username, max_shield)
+func update_player_shield(user_id: int, shield: float): g.update_player_shield(user_id, shield)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_shield(username: String, shield: float): g.update_player_shield(username, shield)
+func update_player_alive(user_id: int, alive: bool): g.update_player_alive(user_id, alive)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_shield_regen(username: String, shield_regen: float): g.update_player_shield_regen(username, shield_regen)
+func update_player_monitorable(user_id: int, monitorable: bool): g.update_player_monitorable(user_id, monitorable)
 
 @rpc("authority", "call_local", "reliable")
-func update_player_alive(username: String, alive: bool): g.update_player_alive(username, alive)
+func update_player_ship_name(user_id: int, ship_name: String): g.update_player_ship_name(user_id, ship_name)
 
-@rpc("authority", "call_local", "reliable")
-func update_player_monitorable(username: String, monitorable: bool): g.update_player_monitorable(username, monitorable)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_ship_name(username: String, ship_name: String): g.update_player_ship_name(username, ship_name)
-
-@rpc("authority", "call_local", "reliable")
+@rpc("authority", "call_remote", "reliable")
 func player_death_args(death_args: Dictionary):
 	g.emit_signal("death_args", death_args)
 
@@ -178,8 +173,8 @@ func send_player_info(player_info: Dictionary):
 	g.player_info.emit(player_info)
 
 @rpc("any_peer", "call_remote", "reliable")
-func player_shoot(player_name: String, index: int):
-	g.handle_player_shoot(player_name, index)
+func player_shoot(user_id: int, index: int):
+	g.handle_player_shoot(user_id, index)
 
 @rpc("any_peer", "call_remote", "reliable")
 func request_set_weapon(slot: int, weapon_name: String):
@@ -188,12 +183,12 @@ func request_set_weapon(slot: int, weapon_name: String):
 ## WEAPONS & BULLETS
 
 
-func handle_weapon_fired(shooter_name: String, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
-	fire_weapon.rpc_id(1, shooter_name, weapon_name, weapon_args, bullet_args)
+func handle_weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
+	fire_weapon.rpc_id(1, shooter_id, weapon_name, weapon_args, bullet_args)
 
 @rpc("any_peer", "reliable")
-func fire_weapon(shooter_name: String, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
-	g.fire_weapon(shooter_name, weapon_name, current_world, weapon_args, bullet_args)
+func fire_weapon(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
+	g.fire_weapon(shooter_id, weapon_name, current_world, weapon_args, bullet_args)
 
 @rpc("any_peer", "call_remote", "reliable")
 func spawn_bullet_on_client(
@@ -259,11 +254,16 @@ func handle_add_spawners(Spawners: Dictionary):
 func create_spawner(id: int):
 	var spawner = preload("res://scenes/objects/Spawners/spawner.tscn").instantiate()
 	spawner.name = str(id)
+	spawner.gid = id
 	
 	var spawner_data = g.Spawners[id]
 	current_world.add_child(spawner)
+	g.Spawners[id]["node"] = spawner
 	spawner.global_position = spawner_data["global_position"]
 	spawner.sprite.rotation = spawner_data["rotation"]
+	var spawner_stats: Dictionary = g.get_spawner_stats(id)
+	for stat: Stats.TYPE in spawner_stats.keys():
+		spawner.stats.set_stat_value(stat, spawner_stats[stat])
 
 @rpc("authority", "call_local", "unreliable")
 func update_spawner_position(id: int, pos: Vector2): g.update_spawner_position(id, pos)
@@ -272,13 +272,7 @@ func update_spawner_position(id: int, pos: Vector2): g.update_spawner_position(i
 func update_spawner_rotation(id: int, rot: float): g.update_spawner_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
-func update_spawner_max_health(id: int, max_health: float): g.update_spawner_max_health(id, max_health)
-
-@rpc("authority", "call_local", "reliable")
 func update_spawner_health(id: int, health: float): g.update_spawner_health(id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_spawner_max_shield(id: int, max_shield: float): g.update_spawner_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_spawner_shield(id: int, shield: float): g.update_spawner_shield(id, shield)
@@ -297,7 +291,7 @@ func update_spawner_active(id: int, active: bool): g.update_spawner_active(id, a
 
 
 @rpc
-func add_existing_turrets(Turrets: Dictionary):
+func add_existing_turrets(Turrets: Dictionary[int, Dictionary]):
 	handle_add_turrets(Turrets)
 
 func handle_add_turrets(Turrets: Dictionary):
@@ -321,12 +315,14 @@ func remove_turret(id: int):
 func create_turret(id: int):
 	var turret = preload("res://scenes/objects/Spawners/Turrets/turret.tscn").instantiate()
 	turret.name = str(id)
+	turret.gid = id
 	
 	var turret_data = g.Turrets[id]
 	turret.global_position = turret_data["global_position"]
 	turret.rotation = turret_data["rotation"]
 	
 	current_world.add_child(turret)
+	g.Turrets[id]["node"] = turret
 
 @rpc("authority", "call_local", "reliable")
 func update_turret_position(id: int, pos: Vector2): g.update_turret_position(id, pos)
@@ -335,13 +331,7 @@ func update_turret_position(id: int, pos: Vector2): g.update_turret_position(id,
 func update_turret_rotation(id: int, rot: float): g.update_turret_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
-func update_turret_max_health(id: int, max_health: float): g.update_turret_max_health(id, max_health)
-
-@rpc("authority", "call_local", "reliable")
 func update_turret_health(id: int, health: float): g.update_turret_health(id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_turret_max_shield(id: int, max_shield: float): g.update_turret_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_turret_shield(id: int, shield: float): g.update_turret_shield(id, shield)
@@ -351,7 +341,7 @@ func update_turret_shield(id: int, shield: float): g.update_turret_shield(id, sh
 
 
 @rpc
-func add_existing_enemies(Enemies: Dictionary):
+func add_existing_enemies(Enemies: Dictionary[int, Dictionary]):
 	handle_add_enemies(Enemies)
 
 func handle_add_enemies(Enemies: Dictionary):
@@ -375,12 +365,14 @@ func remove_enemy(id: int):
 func create_enemy(id: int):
 	var enemy: Actor = preload("res://scenes/entities/Actor/actor.tscn").instantiate()
 	enemy.name = str(id)
+	enemy.gid = id
 	
 	var enemy_data: Dictionary = g.Enemies[id]
 	enemy.global_position = enemy_data.global_position
 	enemy.rotation = enemy_data.rotation
 	
 	current_world.add_child(enemy)
+	g.Enemies[id]["node"] = enemy
 
 @rpc("authority", "call_local", "unreliable")
 func update_enemy_position(id: int, pos: Vector2): g.update_enemy_position(id, pos)
@@ -389,13 +381,7 @@ func update_enemy_position(id: int, pos: Vector2): g.update_enemy_position(id, p
 func update_enemy_rotation(id: int, rot: float): g.update_enemy_rotation(id, rot)
 
 @rpc("authority", "call_local", "reliable")
-func update_enemy_max_health(id: int, max_health: float): g.update_enemy_max_health(id, max_health)
-
-@rpc("authority", "call_local", "reliable")
 func update_enemy_health(id: int, health: float): g.update_enemy_health(id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_enemy_max_shield(id: int, max_shield: float): g.update_enemy_max_shield(id, max_shield)
 
 @rpc("authority", "call_local", "reliable")
 func update_enemy_shield(id: int, shield: float): g.update_enemy_shield(id, shield)

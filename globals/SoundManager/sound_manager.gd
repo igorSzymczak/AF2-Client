@@ -5,6 +5,8 @@ extends Node
 @onready var bosses = $Bosses
 @onready var ui = $UI
 
+const MAX_POLYPHONY: int = 3
+
 var sound_list: Array[AudioStreamPlayer2D] = []
 func _ready():
 	_build_sound_list()
@@ -18,6 +20,9 @@ func _build_sound_list():
 		sound_list.push_back(child)
 	for child: AudioStreamPlayer2D in ui.get_children():
 		sound_list.push_back(child)
+	
+	for sound:AudioStreamPlayer2D in sound_list:
+		sound.max_polyphony = MAX_POLYPHONY
 
 # Server only
 @rpc("authority", "call_remote", "reliable")
@@ -27,12 +32,12 @@ func _send_sound(index: int, pos: Vector2):
 func play_sound(index: int, pos: Vector2):
 	var sound_origin: AudioStreamPlayer2D = sound_list[index]
 	
-	var sound: AudioStreamPlayer2D = sound_origin.duplicate()
-	sound.global_position = pos
-	add_child(sound)
-	sound.play()
+	#var sound: AudioStreamPlayer2D = sound_origin.duplicate()
+	sound_origin.global_position = pos
+	#add_child(sound)
+	sound_origin.play()
 	
-	sound.connect("finished", Callable(sound, "queue_free"))
+	#sound.connect("finished", Callable(sound, "queue_free"))
 
 func play_sound_from_name(sound_name: String, pos: Vector2) -> void:
 	var filtered_sound_list = sound_list.filter(func(sound: AudioStreamPlayer2D): return sound.name == sound_name)
@@ -46,5 +51,6 @@ func play_sound_from_name(sound_name: String, pos: Vector2) -> void:
 	
 
 func play_sound_from_name_locally(sound_name: String):
-	var pos = g.get_player_position(str(multiplayer.get_unique_id()))
+	if !g.me: return
+	var pos: Vector2 = g.me.global_position
 	play_sound_from_name(sound_name, pos)

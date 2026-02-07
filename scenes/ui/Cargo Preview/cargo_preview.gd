@@ -10,11 +10,6 @@ func _ready() -> void:
 	InventoryManager.cargo_changed.connect(_handle_cargo_changed)
 	InventoryManager.item_changed.connect(_handle_item_changed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _handle_item_changed(code: int, _prev: int, new: int) -> void:
 	if !pickups.has(code):
 		var pickup: Pickup = preload("res://scenes/ui/Pickups/pickup.tscn").instantiate()
@@ -41,7 +36,6 @@ func _handle_cargo_changed() -> void:
 		_handle_item_changed(code, 0, amount)
 
 func select_animation(animation_name: String):
-	var delta = get_process_delta_time()
 	if animation_name == "open":
 		show()
 		g.can_perform_actions = true

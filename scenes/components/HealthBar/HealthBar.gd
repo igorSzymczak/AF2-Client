@@ -41,7 +41,7 @@ func init_health(_health):
 	damage_bar.max_value = _health
 	
 	if value > max_value:
-		_set_health(_health)
+		_set_health(max_value)
 	
 	modulate.a = 0
 	smooth_health_bar_visibility()

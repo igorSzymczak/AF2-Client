@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce33cjxfixdws"]
+[gd_scene format=3 uid="uid://ce33cjxfixdws"]
 
-[ext_resource type="Script" path="res://scenes/weapons/GatlingLaser/gatling_laser.gd" id="1_ua711"]
+[ext_resource type="Script" uid="uid://dc738nyjmi51r" path="res://scenes/weapons/GatlingLaser/gatling_laser.gd" id="1_ua711"]
 
-[node name="GatlingLaser" type="Node"]
+[node name="GatlingLaser" type="Node" unique_id=370674498]
 script = ExtResource("1_ua711")
 weapon_name = "Gatling Laser"
-damage = 35
-rps = 45.0
+damage = 25
+rps = 20.0
 power_cost = 3
 range = 3
 damage_points = 2

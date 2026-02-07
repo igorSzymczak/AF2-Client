@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu0u4mqhf2e0w"]
+[gd_scene format=3 uid="uid://cu0u4mqhf2e0w"]
 
 [ext_resource type="Script" uid="uid://bjhcq0o1jdole" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
@@ -25,61 +25,61 @@ corner_radius_top_right = 1024
 corner_radius_bottom_right = 1024
 corner_radius_bottom_left = 1024
 
-[node name="Player" type="CharacterBody2D" groups=["points_of_interest"]]
+[node name="Player" type="CharacterBody2D" unique_id=1561202494 groups=["points_of_interest"]]
 collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_q57er")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=2098361653]
 visible = false
 position = Vector2(13, -6.82121e-13)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_p8t61")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=610981819]
 zoom = Vector2(0.5, 0.5)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
-[node name="ShipComponent" parent="." instance=ExtResource("7_ec8if")]
+[node name="ShipComponent" parent="." unique_id=307033384 instance=ExtResource("7_ec8if")]
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_emusc")]
+[node name="HealthComponent" parent="." unique_id=1409147522 instance=ExtResource("4_emusc")]
 z_index = 1
 
-[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_5ttqo")]
+[node name="HealthBar" parent="HealthComponent" unique_id=1436623710 instance=ExtResource("5_5ttqo")]
 offset_left = -48.0
 offset_top = 67.0
 offset_right = 48.0
 offset_bottom = 75.0
 
-[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_c3jqm")]
+[node name="ShieldBar" parent="HealthComponent" unique_id=1100347954 instance=ExtResource("6_c3jqm")]
 offset_left = -48.0
 offset_top = 56.0
 offset_right = 48.0
 offset_bottom = 64.0
 
-[node name="Collector" parent="." instance=ExtResource("6_o8fb4")]
+[node name="Collector" parent="." unique_id=450149686 instance=ExtResource("6_o8fb4")]
 
-[node name="SuckArea" type="Area2D" parent="Collector"]
+[node name="SuckArea" type="Area2D" parent="Collector" unique_id=214190752]
 collision_layer = 16
 collision_mask = 32
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/SuckArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/SuckArea" unique_id=128980968]
 shape = SubResource("CircleShape2D_o8fb4")
 
-[node name="CollectArea" type="Area2D" parent="Collector"]
+[node name="CollectArea" type="Area2D" parent="Collector" unique_id=1711469050]
 collision_layer = 16
 collision_mask = 32
 input_pickable = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/CollectArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collector/CollectArea" unique_id=363466808]
 shape = SubResource("CircleShape2D_tihqr")
 
-[node name="NicknameContainer" type="PanelContainer" parent="."]
+[node name="NicknameContainer" type="PanelContainer" parent="." unique_id=934991692]
 unique_name_in_owner = true
 top_level = true
 custom_minimum_size = Vector2(200, 0)
@@ -92,7 +92,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_uvxov")
 
-[node name="MarginContainer" type="MarginContainer" parent="NicknameContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="NicknameContainer" unique_id=1617662505]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 3
@@ -100,12 +100,12 @@ theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="NicknameContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NicknameContainer/MarginContainer" unique_id=1185134368]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="NicknameLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer"]
+[node name="NicknameLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer" unique_id=846068370]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
@@ -117,7 +117,7 @@ text = "Nickname"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LvlLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer"]
+[node name="LvlLabel" type="Label" parent="NicknameContainer/MarginContainer/HBoxContainer" unique_id=481308381]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -131,7 +131,7 @@ theme_override_font_sizes/font_size = 90
 text = "20 lvl"
 vertical_alignment = 1
 
-[node name="Reticle" type="Sprite2D" parent="."]
+[node name="Reticle" type="Sprite2D" parent="." unique_id=1323049297]
 z_index = 100
 z_as_relative = false
 position = Vector2(900, 0)

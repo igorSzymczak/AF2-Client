@@ -1,5 +1,8 @@
 class_name Actor extends CharacterBody2D
 
+var gid: int # GameManager ID
+var stats: Stats = Stats.new()
+
 @onready var engine: Thruster = $Sprite/Engine
 @onready var health_component: HealthComponent = $HealthComponent
 @export var poi_type = "enemy"

@@ -118,13 +118,12 @@ func update_shader(delta: float) -> void:
 	var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
 	var t = (distance_to_sun_squared - 100000) / 100000
 	var light_z = atan(t) - 1
-
 	
 	
 	var angle_to_sun = sprite.global_position.direction_to(local_sun.global_position)
 	sprite.rotate(angle_to_rotate * -2)
 	
-	shader_offset += Vector2(angle_to_rotate, 0)
+	shader_offset += Vector2(angle_to_rotate, 0) * 10.0
 	
 	var planet_rotation = sprite.rotation
 	var cos_rot = cos(planet_rotation)
@@ -152,10 +151,14 @@ func set_structure_data(data: Dictionary):
 	if g.me.landed_structure != null:
 		GlobalSignals.set_ui_args.emit(data)
 
-func land_player_on(username: String, structure_name: String):
+func land_player_on(user_id: int, structure_name: String):
 	if structure_name == name:
-		var player: Player = g.get_player(username)
-		player.land_on(self)
+		var player: Player = g.get_player(user_id)
+		if is_instance_valid(player):
+			player.land_on(self)
+		else:
+			push_warning("Player ", user_id, " not found, playerlist: ")
+			push_warning(g.Players)
 
 func handle_landing(_delta: float):
 	if !Input.is_action_just_pressed("Land"): return
@@ -166,20 +169,36 @@ func handle_landing(_delta: float):
 	if !g.me.alive: return
 	
 	if get_overlapping_bodies().has(g.me):
-		request_land.rpc_id(1, AuthManager.my_username, name)
+		request_land.rpc_id(1, AuthManager.my_user_id, name)
 
-func try_to_land(_username: String, _structure_name: String): pass # Only Server
+func try_to_land(_user_id: int, _structure_name: String): pass # Only Server
 
 # from Client to Server
 @rpc("any_peer", "call_remote", "reliable")
-func request_land(username: String, structure_name: String):
-	try_to_land(username, structure_name)
+func request_land(user_id: int, structures_name: String):
+	try_to_land(user_id, structures_name)
 
-# from Server to Client
+# from Server to Clients
 @rpc("authority", "call_local", "reliable")
-func land_player(username: String, structure_name: String):
-	land_player_on(username, structure_name)
+func land_player(user_id: int, structures_name: String):
+	land_player_on(user_id, structures_name)
 
 @rpc("authority", "call_remote", "reliable")
 func update_structure_data(data: Dictionary):
 	set_structure_data(data)
+	
+@rpc("any_peer", "call_remote", "reliable")
+func request_leave_structure(user_id: int):
+	try_leave_structure(user_id)
+
+@rpc("authority", "call_local", "reliable")
+func leave_structure(user_id: int):
+	animate_leave_structure(user_id)
+
+func try_leave_structure(_user_id: int) -> void:
+	pass # only server
+
+func animate_leave_structure(user_id: int) -> void:
+	var player: Player = g.get_player(user_id)
+	if is_instance_valid(player):
+		player.animate_leave_structure()

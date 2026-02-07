@@ -109,7 +109,7 @@ func _open_current_ui():
 func _close_current_ui():
 	if g.me and !current_ui in [game, death, esc_menu, auth_screen]:
 		if g.me.landed_structure != null:
-			g.me.request_leave_structure.rpc_id(1, AuthManager.my_username)
+			g.me.landed_structure.request_leave_structure.rpc_id(1, AuthManager.my_user_id)
 	
 	if current_ui.has_method("select_animation"):
 		current_ui.select_animation("close")

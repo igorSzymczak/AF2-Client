@@ -182,3 +182,19 @@ func land_player(user_id: int, structures_name: String):
 @rpc("authority", "call_remote", "reliable")
 func update_structure_data(data: Dictionary):
 	set_structure_data(data)
+	
+@rpc("any_peer", "call_remote", "reliable")
+func request_leave_structure(user_id: int):
+	try_leave_structure(user_id)
+
+@rpc("authority", "call_local", "reliable")
+func leave_structure(user_id: int):
+	animate_leave_structure(user_id)
+
+func try_leave_structure(user_id: int) -> void:
+	pass
+
+func animate_leave_structure(user_id: int) -> void:
+	var player: Player = g.get_player(user_id)
+	if is_instance_valid(player):
+		player.animate_leave_structure()

@@ -429,6 +429,7 @@ func set_ship(new_ship_name: String):
 ## 		Landing
 
 func land_on(structure: Structure):
+	print("TRYING TO LAND")
 	landed_structure = structure
 	health_component.hide()
 	if IS_MAIN_PLAYER:
@@ -467,26 +468,18 @@ func land_on(structure: Structure):
 
 func try_leave_structure(_user_id: int): pass # Only Server
 
-func animate_leave_structure(user_id: int):
-	if gid == user_id:
-		landed_structure = null
-		health_component.show()
-		if IS_MAIN_PLAYER:
-			g.can_perform_actions = true
-		elif !IS_MAIN_PLAYER:
-			nickname_container.show()
-			var scale_tween: Tween = create_tween()
-			scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 1)
-			
-			var alpha_tween: Tween = create_tween()
-			alpha_tween.tween_property(self, "modulate:a", 1.0, 0.3)
-			
-			await get_tree().create_timer(0.3).timeout
-
-@rpc("any_peer", "call_remote", "reliable")
-func request_leave_structure(user_id: int):
-	try_leave_structure(user_id)
-
-@rpc("authority", "call_local", "reliable")
-func leave_structure(user_id: int):
-	animate_leave_structure(user_id)
+func animate_leave_structure():
+	print("Animating Leaving structure ")
+	landed_structure = null
+	health_component.show()
+	if IS_MAIN_PLAYER:
+		g.can_perform_actions = true
+	elif !IS_MAIN_PLAYER:
+		nickname_container.show()
+		var scale_tween: Tween = create_tween()
+		scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), 1)
+		
+		var alpha_tween: Tween = create_tween()
+		alpha_tween.tween_property(self, "modulate:a", 1.0, 0.3)
+		
+		await get_tree().create_timer(0.3).timeout

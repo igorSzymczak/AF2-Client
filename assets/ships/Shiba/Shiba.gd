@@ -1,7 +1,5 @@
 extends ShipComponent
 
-@onready var sprite: Sprite2D = $Sprite
-
 func _process(_delta):
 	if global_rotation < - PI/2 or global_rotation > PI/2:
 		scale = Vector2(1, -1)

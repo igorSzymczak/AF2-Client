@@ -1,16 +1,34 @@
-[gd_scene load_steps=16 format=3 uid="uid://csrclt5lr46qg"]
+[gd_scene format=3 uid="uid://csrclt5lr46qg"]
 
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_i22xs"]
 [ext_resource type="Script" uid="uid://ckslh7epd8uvc" path="res://assets/ships/Shiba/Shiba.gd" id="2_px2t7"]
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="3_38vm3"]
+[ext_resource type="Script" uid="uid://cmuay4cdtwyev" path="res://assets/ships/Shiba/animation_player.gd" id="3_j8ujh"]
+[ext_resource type="Texture2D" uid="uid://ck3visa4v1hd2" path="res://assets/projectiles/Small Glow White.png" id="3_qksch"]
 [ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="4_vi0yj"]
 [ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="5_xk78t"]
 [ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="6_r6wfv"]
 [ext_resource type="Texture2D" uid="uid://dri5b8g4akoh0" path="res://assets/ships/Shiba/Shiba.png" id="7_2dn40"]
 
+[sub_resource type="Animation" id="Animation_j8ujh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lights:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_r3s3s"]
 resource_name = "ShibaRainbowThruster"
 length = 3.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
@@ -23,9 +41,22 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0.737255, 1, 0, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Lights:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 1), Color(0, 1, 1, 1), Color(0, 1, 0, 1), Color(1, 0, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_belse"]
 _data = {
+&"RESET": SubResource("Animation_j8ujh"),
 &"ShibaRainbowThruster": SubResource("Animation_r3s3s")
 }
 
@@ -69,7 +100,7 @@ scale_min = 0.6
 color_ramp = SubResource("GradientTexture1D_ih4il")
 alpha_curve = SubResource("CurveTexture_13ome")
 
-[node name="Shiba" type="Sprite2D" node_paths=PackedStringArray("engine")]
+[node name="Shiba" type="Sprite2D" unique_id=1013261179 node_paths=PackedStringArray("engine")]
 texture = ExtResource("7_2dn40")
 script = ExtResource("2_px2t7")
 engine = NodePath("Engine")
@@ -77,25 +108,35 @@ ship_name = "Shiba"
 base_health = 500
 base_shield = 500
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_belse")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=904253726]
+libraries/ = SubResource("AnimationLibrary_belse")
+script = ExtResource("3_j8ujh")
 
-[node name="Engine" parent="." instance=ExtResource("2_i22xs")]
+[node name="Lights" type="Sprite2D" parent="." unique_id=693794700]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-30.00003, -30.00001)
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("3_qksch")
+
+[node name="right eye" type="Sprite2D" parent="Lights" unique_id=1389997225]
+position = Vector2(310.34448, -68.96573)
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("3_qksch")
+
+[node name="Engine" parent="." unique_id=577743972 instance=ExtResource("2_i22xs")]
 show_behind_parent = true
 position = Vector2(-49, 44.2726)
 
-[node name="Light" parent="Engine" instance=ExtResource("3_38vm3")]
+[node name="Light" parent="Engine" unique_id=103224321 instance=ExtResource("3_38vm3")]
 position = Vector2(-0.363627, 0)
 
-[node name="Idle" parent="Engine" instance=ExtResource("4_vi0yj")]
+[node name="Idle" parent="Engine" unique_id=588612992 instance=ExtResource("4_vi0yj")]
 position = Vector2(8.09091, 0)
 
-[node name="Speeding" parent="Engine" instance=ExtResource("5_xk78t")]
+[node name="Speeding" parent="Engine" unique_id=1748282676 instance=ExtResource("5_xk78t")]
 position = Vector2(-11, 0)
 
-[node name="Accelerate" parent="Engine" instance=ExtResource("6_r6wfv")]
+[node name="Accelerate" parent="Engine" unique_id=1615471982 instance=ExtResource("6_r6wfv")]
 position = Vector2(0.0909092, 0)
 texture = SubResource("CompressedTexture2D_x77jx")
 process_material = SubResource("ParticleProcessMaterial_7d7j0")

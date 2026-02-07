@@ -39,13 +39,21 @@ func _ready() -> void:
 	
 	await AuthManager.joined
 	
+	#health_component.max_health_changed.connect(set_max_health)
+	#health_component.health_changed.connect(set_health)
+	#health_component.max_shield_changed.connect(set_max_shield)
+	#health_component.shield_changed.connect(set_shield)
+	#health_component.armor_changed.connect(set_armor)
+	#health_component.shield_regen_changed.connect(set_shield_regen)
+	
 	var health_component: HealthComponent = g.me.health_component
-	health_component.max_health_changed.connect(set_max_health)
-	health_component.health_changed.connect(set_health)
-	health_component.max_shield_changed.connect(set_max_shield)
+	StatManager.my_stats.get_stat(Stats.TYPE.MAX_HEALTH).value_changed.connect(set_max_health)
+	StatManager.my_stats.get_stat(Stats.TYPE.MAX_SHIELD).value_changed.connect(set_max_shield)
+	StatManager.my_stats.get_stat(Stats.TYPE.ARMOR).value_changed.connect(set_armor)
+	StatManager.my_stats.get_stat(Stats.TYPE.SHIELD_REGEN).value_changed.connect(set_shield_regen)
 	health_component.shield_changed.connect(set_shield)
-	health_component.armor_changed.connect(set_armor)
-	health_component.shield_regen_changed.connect(set_shield_regen)
+	health_component.health_changed.connect(set_health)
+	
 
 func _process(delta):
 	if !AuthManager.is_logged_in: return

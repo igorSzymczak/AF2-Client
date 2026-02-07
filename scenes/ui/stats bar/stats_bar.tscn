@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cy26brtaxuquf"]
+[gd_scene format=3 uid="uid://cy26brtaxuquf"]
 
 [ext_resource type="Script" uid="uid://dqy0w8ty7nolh" path="res://scenes/ui/stats bar/stats_bar.gd" id="1_0611j"]
 [ext_resource type="Shader" uid="uid://cyd21c87n50p4" path="res://scenes/ui/stats bar/health_bar.gdshader" id="1_cinpn"]
@@ -68,12 +68,12 @@ noise = SubResource("FastNoiseLite_3n4yo")
 seamless = true
 seamless_blend_skirt = 0.3
 
-[node name="StatsBar" type="Control"]
+[node name="StatsBar" type="Control" unique_id=787227169]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_0611j")
 
-[node name="Background" type="Polygon2D" parent="."]
+[node name="Background" type="Polygon2D" parent="." unique_id=1706227601]
 position = Vector2(66, -66)
 skew = -0.523599
 color = Color(0.0941176, 0.0941176, 0.0941176, 0.792157)
@@ -81,14 +81,14 @@ antialiased = true
 polygon = PackedVector2Array(-10, -10, 271.732, -10, 271.732, 60, -10, 60)
 vertex_colors = PackedColorArray(0.145098, 0.0941176, 0.0941176, 0.792157, 0.0941176, 0.0941176, 0.0941176, 0.792157, 0.133333, 0.0941176, 0.0941176, 0.792157, 0.137255, 0, 0, 0.792157)
 
-[node name="ShieldBar" type="Polygon2D" parent="Background"]
+[node name="ShieldBar" type="Polygon2D" parent="Background" unique_id=1805097711]
 clip_children = 1
 position = Vector2(37.2679, 3.46407)
 scale = Vector2(1.09, 1)
 color = Color(0.360784, 0.584314, 1, 1)
 polygon = PackedVector2Array(0, 20, 200, 20, 200, 0, 0, 0)
 
-[node name="Shield" type="Sprite2D" parent="Background/ShieldBar"]
+[node name="Shield" type="Sprite2D" parent="Background/ShieldBar" unique_id=775905017]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_4ypu7")
 position = Vector2(110.889, -14.7283)
@@ -97,14 +97,14 @@ skew = 0.427606
 texture = SubResource("NoiseTexture2D_aiud2")
 metadata/_edit_lock_ = true
 
-[node name="HealthBar" type="Polygon2D" parent="Background"]
+[node name="HealthBar" type="Polygon2D" parent="Background" unique_id=533168308]
 clip_children = 1
 position = Vector2(37.1436, 27.7128)
 scale = Vector2(1.09093, 1)
 color = Color(0.129412, 0.698039, 0.54902, 1)
 polygon = PackedVector2Array(0, 20, 200, 20, 200, 0, 0, 0)
 
-[node name="Health" type="Sprite2D" parent="Background/HealthBar"]
+[node name="Health" type="Sprite2D" parent="Background/HealthBar" unique_id=249706140]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bb1kx")
 position = Vector2(136.597, -70.0308)
@@ -113,7 +113,7 @@ skew = 0.427606
 texture = SubResource("NoiseTexture2D_pjaes")
 metadata/_edit_lock_ = true
 
-[node name="EffectPanel1" type="Panel" parent="."]
+[node name="EffectPanel1" type="Panel" parent="." unique_id=301839034]
 visible = false
 layout_mode = 0
 offset_left = 50.0
@@ -123,12 +123,12 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="CorrosiveDown" type="Sprite2D" parent="EffectPanel1"]
+[node name="CorrosiveDown" type="Sprite2D" parent="EffectPanel1" unique_id=896683888]
 position = Vector2(26, 26)
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("1_ymr8q")
 
-[node name="EffectPanel2" type="Panel" parent="."]
+[node name="EffectPanel2" type="Panel" parent="." unique_id=506333845]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -143,12 +143,12 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="KineticDown" type="Sprite2D" parent="EffectPanel2"]
+[node name="KineticDown" type="Sprite2D" parent="EffectPanel2" unique_id=2118451139]
 position = Vector2(26.475, 25.875)
 scale = Vector2(0.646875, 0.646875)
 texture = ExtResource("2_ufteg")
 
-[node name="EffectPanel3" type="Panel" parent="."]
+[node name="EffectPanel3" type="Panel" parent="." unique_id=1670467219]
 visible = false
 layout_mode = 0
 offset_left = 164.8
@@ -158,12 +158,12 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="EnergyDown" type="Sprite2D" parent="EffectPanel3"]
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel3" unique_id=636073112]
 position = Vector2(25.825, 25.625)
 scale = Vector2(0.634375, 0.634375)
 texture = ExtResource("3_3g7xt")
 
-[node name="EffectPanel4" type="Panel" parent="."]
+[node name="EffectPanel4" type="Panel" parent="." unique_id=953335797]
 visible = false
 layout_mode = 0
 offset_left = 222.2
@@ -173,12 +173,12 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="EnergyDown" type="Sprite2D" parent="EffectPanel4"]
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel4" unique_id=217240228]
 position = Vector2(25.925, 26.125)
 scale = Vector2(0.621875, 0.621875)
 texture = ExtResource("3_3g7xt")
 
-[node name="EffectPanel5" type="Panel" parent="."]
+[node name="EffectPanel5" type="Panel" parent="." unique_id=1738953931]
 visible = false
 layout_mode = 0
 offset_left = 279.6
@@ -188,12 +188,12 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="EnergyDown" type="Sprite2D" parent="EffectPanel5"]
+[node name="EnergyDown" type="Sprite2D" parent="EffectPanel5" unique_id=2074403019]
 position = Vector2(27.4, 26)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_3g7xt")
 
-[node name="HealthLabel" type="Label" parent="."]
+[node name="HealthLabel" type="Label" parent="." unique_id=1836799991]
 layout_mode = 0
 offset_left = 91.0
 offset_top = -46.0
@@ -201,7 +201,7 @@ offset_right = 131.0
 offset_bottom = -23.0
 text = "HP"
 
-[node name="ShieldLabel" type="Label" parent="."]
+[node name="ShieldLabel" type="Label" parent="." unique_id=55144811]
 layout_mode = 0
 offset_left = 80.0
 offset_top = -67.0
@@ -209,7 +209,7 @@ offset_right = 120.0
 offset_bottom = -44.0
 text = "SH"
 
-[node name="ShieldAmount" type="Label" parent="."]
+[node name="ShieldAmount" type="Label" parent="." unique_id=2009248831]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 111.0
@@ -221,7 +221,7 @@ text = "10000
 "
 horizontal_alignment = 1
 
-[node name="HealthAmount" type="Label" parent="."]
+[node name="HealthAmount" type="Label" parent="." unique_id=960476539]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 111.0

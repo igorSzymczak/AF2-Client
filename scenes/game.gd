@@ -57,6 +57,7 @@ func add_player_character(user_id: int):
 	current_world.add_child(player_character)
 	#print("Successfully added new player character: " + str(username) + "!")
 	g.add_player(user_id)
+	g.Players[user_id]["node"] = player_character
 	
 	if user_id == AuthManager.my_user_id:
 		local_player_character = player_character
@@ -74,9 +75,9 @@ func add_newly_connected_player_character(user_id: int):
 
 @rpc("any_peer", "reliable")
 func add_previously_connected_player_characters(players: Dictionary[int, Dictionary]):
+	g.Players = players
 	for user_id in players:
 		add_player_character(user_id)
-	g.Players = players
 
 @rpc("authority", "call_local", "reliable")
 func update_planet_position(planet_name: String, pos: Vector2): g.update_planet_position(planet_name, pos)

@@ -172,7 +172,6 @@ SpeedBoost={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"
 viewport/glow/upscale_mode=1
 viewport/gi/use_half_resolution=false

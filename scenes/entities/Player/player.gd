@@ -212,6 +212,9 @@ func handle_other_player(delta: float) -> void:
 		speed_boost_active = false
 		ship.remove_shader(ship.SHADER.SPEED_BOOST)
 	
+	if !is_instance_valid(g.me):
+		return
+		
 	var is_main_player_alive = g.me.alive
 	if landed_structure != null:
 		# Alpha being set in func land_on()
@@ -308,7 +311,7 @@ func handle_movement(delta: float) -> void:
 
 func manage_speed_boost(delta: float) -> void:
 	last_speed_boost_time += delta
-	if Input.is_action_just_pressed("SpeedBoost") and !speed_boost_active and last_speed_boost_time > speed_boost_delay:
+	if Input.is_action_just_pressed("SpeedBoost") and !speed_boost_active and last_speed_boost_time > speed_boost_delay and g.can_perform_actions:
 		speed_boost_active = true
 		last_speed_boost_time = 0.0
 		ship.apply_shader(ship.SHADER.SPEED_BOOST)

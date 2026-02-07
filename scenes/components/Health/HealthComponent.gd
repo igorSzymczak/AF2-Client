@@ -70,6 +70,8 @@ func _process(_delta):
 
 signal health_changed(value: float)
 func _set_health(_new_health: float):
+	if health > max_health:
+		set_max_health(health)
 	health = _new_health
 	if health <= 0:
 		call_deferred("emit_signal", "health_depleted")
@@ -80,6 +82,8 @@ func _set_health(_new_health: float):
 
 signal shield_changed(value: float)
 func _set_shield(_new_shield: float):
+	if shield > max_shield:
+		set_max_shield(shield)
 	shield = _new_shield
 	if shieldbar and is_instance_valid(shieldbar):
 		shieldbar._set_shield(shield)

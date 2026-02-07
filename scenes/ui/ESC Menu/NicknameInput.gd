@@ -16,7 +16,7 @@ func _input_process():
 	if t - 1000 > last_time and text != last_text and text.length() > 0 and g.Players.size() > 0:
 		last_text = text
 		last_time = t
-		ChatManager.request_nickname_change.rpc_id(1, AuthManager.my_username, text)
+		ChatManager.request_nickname_change.rpc_id(1, AuthManager.my_user_id, text)
 
 
 func _on_focus_exited():

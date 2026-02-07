@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://beqp17tn4b47x"]
+[gd_scene format=3 uid="uid://beqp17tn4b47x"]
 
-[ext_resource type="Script" path="res://scenes/ui/Chat/chat.gd" id="1_oaqis"]
-[ext_resource type="Script" path="res://scenes/ui/Chat/MessageInput.gd" id="2_216dv"]
+[ext_resource type="Script" uid="uid://c6gecmyapla4p" path="res://scenes/ui/Chat/chat.gd" id="1_oaqis"]
+[ext_resource type="Script" uid="uid://cvyxix0xxywvo" path="res://scenes/ui/Chat/MessageInput.gd" id="2_216dv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q15iy"]
 bg_color = Color(0, 0, 0, 0.470588)
@@ -17,7 +17,7 @@ corner_radius_bottom_left = 6
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqf6w"]
 bg_color = Color(0, 0, 0, 0)
 
-[node name="Chat" type="VBoxContainer"]
+[node name="Chat" type="VBoxContainer" unique_id=1932581612]
 anchors_preset = -1
 anchor_left = 0.311
 anchor_right = 0.728
@@ -28,24 +28,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oaqis")
 
-[node name="MessagesPanel" type="PanelContainer" parent="."]
+[node name="MessagesPanel" type="PanelContainer" parent="." unique_id=2013696093]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_q15iy")
 
-[node name="MarginContainer" type="MarginContainer" parent="MessagesPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="MessagesPanel" unique_id=114796250]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MessagesPanel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MessagesPanel/MarginContainer" unique_id=708191973]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="MessagesContainer" type="VBoxContainer" parent="MessagesPanel/MarginContainer/ScrollContainer"]
+[node name="MessagesContainer" type="VBoxContainer" parent="MessagesPanel/MarginContainer/ScrollContainer" unique_id=722416279]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -53,32 +53,32 @@ size_flags_vertical = 3
 theme_override_constants/separation = 7
 alignment = 2
 
-[node name="InputPanel" type="PanelContainer" parent="."]
+[node name="InputPanel" type="PanelContainer" parent="." unique_id=793650774]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rcjyu")
 
-[node name="MarginContainer" type="MarginContainer" parent="InputPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="InputPanel" unique_id=1123246993]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="InputPanel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InputPanel/MarginContainer" unique_id=1091811032]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="InputPanel/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InputPanel/MarginContainer/HBoxContainer" unique_id=1615473417]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="MessageInput" type="LineEdit" parent="InputPanel/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="MessageInput" type="LineEdit" parent="InputPanel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=347911694]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_jqf6w")
-theme_override_styles/focus = SubResource("StyleBoxFlat_jqf6w")
 theme_override_styles/read_only = SubResource("StyleBoxFlat_jqf6w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jqf6w")
 placeholder_text = " Type Message..."
 max_length = 128
 script = ExtResource("2_216dv")

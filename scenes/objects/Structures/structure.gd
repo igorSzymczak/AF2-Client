@@ -154,7 +154,11 @@ func set_structure_data(data: Dictionary):
 func land_player_on(user_id: int, structure_name: String):
 	if structure_name == name:
 		var player: Player = g.get_player(user_id)
-		player.land_on(self)
+		if is_instance_valid(player):
+			player.land_on(self)
+		else:
+			push_warning("Player ", user_id, " not found, playerlist: ")
+			push_warning(g.Players)
 
 func handle_landing(_delta: float):
 	if !Input.is_action_just_pressed("Land"): return
@@ -191,8 +195,8 @@ func request_leave_structure(user_id: int):
 func leave_structure(user_id: int):
 	animate_leave_structure(user_id)
 
-func try_leave_structure(user_id: int) -> void:
-	pass
+func try_leave_structure(_user_id: int) -> void:
+	pass # only server
 
 func animate_leave_structure(user_id: int) -> void:
 	var player: Player = g.get_player(user_id)

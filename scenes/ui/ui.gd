@@ -142,12 +142,12 @@ func handle_changing_menus():
 					chat_message_input.grab_focus.call_deferred()
 				else:
 					chat_message_input.release_focus.call_deferred()
-	if Input.is_action_just_pressed("WeaponChange"):
+	if Input.is_action_just_pressed("WeaponChange") and g.can_perform_actions:
 		if current_ui == game:
 			open_ui("weapon_change")
 		elif current_ui == weapon_change:
 			close_current()
-	if Input.is_action_just_pressed("CargoPreview"):
+	if Input.is_action_just_pressed("CargoPreview") and g.can_perform_actions:
 		if current_ui != cargo and current_ui != auth_screen:
 			open_ui("cargo")
 		elif current_ui == cargo:

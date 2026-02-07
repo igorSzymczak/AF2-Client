@@ -88,7 +88,6 @@ func _set_shield(_new_shield: float):
 
 signal max_health_changed(value: float)
 func set_max_health(value: float):
-	print("my max health changed to ", value)
 	if value == max_health: return
 	
 	max_health = value

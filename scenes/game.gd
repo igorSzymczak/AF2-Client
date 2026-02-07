@@ -260,6 +260,9 @@ func create_spawner(id: int):
 	g.Spawners[id]["node"] = spawner
 	spawner.global_position = spawner_data["global_position"]
 	spawner.sprite.rotation = spawner_data["rotation"]
+	var spawner_stats: Dictionary = g.get_spawner_stats(id)
+	for stat: Stats.TYPE in spawner_stats.keys():
+		spawner.stats.set_stat_value(stat, spawner_stats[stat])
 
 @rpc("authority", "call_local", "unreliable")
 func update_spawner_position(id: int, pos: Vector2): g.update_spawner_position(id, pos)

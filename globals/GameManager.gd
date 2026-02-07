@@ -262,7 +262,6 @@ func update_player_stat(user_id: int, stat_type: Stats.TYPE, value: float):
 		
 		var player: Player = Players[user_id]["node"] as Player
 		player.stats.set_stat_value(stat_type, value)
-		print("Players ", stat_type, " is being set to ", player.stats.get_stat(stat_type).value)
 
 signal local_player_speed_boost(activity: bool)
 func get_player_speed_boost(user_id: int) -> bool:
@@ -577,7 +576,6 @@ func get_enemy_stat(id: int, stat_type: Stats.TYPE) -> float:
 	return 0
 func update_enemy_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Enemies.has(id):
-		print("updating enemy (", id, ") stat ", stat_type, " to ", value)
 		Enemies[id]["stats"][stat_type] = value
 		
 		var enemy: Actor = Enemies[id]["node"] as Actor

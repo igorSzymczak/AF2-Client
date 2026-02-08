@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6ncjrhy1oc8x"]
+[gd_scene format=3 uid="uid://b6ncjrhy1oc8x"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_gr3yd"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_gr3yd"]
 
-[node name="PiercingGun" type="Node"]
+[node name="PiercingGun" type="Node" unique_id=955316744]
 script = ExtResource("1_gr3yd")
 weapon_name = "Piercing Gun"
+weapon_type = 6
 damage = 160
 rps = 6.6
 power_cost = 30

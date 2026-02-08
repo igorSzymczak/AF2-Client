@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp4p4pok6vef6"]
+[gd_scene format=3 uid="uid://dp4p4pok6vef6"]
 
 [ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_1322x"]
 
-[node name="EnergyBlast" type="Node"]
+[node name="EnergyBlast" type="Node" unique_id=970515773]
 script = ExtResource("1_1322x")
 weapon_name = "Energy Blast"
+weapon_type = 10
 damage = 450
 rps = 0.2
 power_cost = 90

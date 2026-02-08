@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://wbgyko5lfiao"]
+[gd_scene format=3 uid="uid://wbgyko5lfiao"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_6oqan"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_6oqan"]
 
-[node name="SpawnerLaserGun" type="Node"]
+[node name="SpawnerLaserGun" type="Node" unique_id=255004559]
 script = ExtResource("1_6oqan")
+weapon_name = "Spawner Laser"
+weapon_type = 7
 damage = 36
 rps = 10.0
 power_cost = 8

@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdqlpngjnls4e"]
+[gd_scene format=3 uid="uid://cdqlpngjnls4e"]
 
 [ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_qw5db"]
 
-[node name="EnergyNova" type="Node"]
+[node name="EnergyNova" type="Node" unique_id=1083391656]
 script = ExtResource("1_qw5db")
 weapon_name = "Energy Nova"
+weapon_type = 9
 damage = 15
 rps = 1.33
 power_cost = 15

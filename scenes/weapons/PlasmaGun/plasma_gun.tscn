@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp5bqv3xooum4"]
+[gd_scene format=3 uid="uid://bp5bqv3xooum4"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_ei35b"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_ei35b"]
 
-[node name="PlasmaGun" type="Node"]
+[node name="PlasmaGun" type="Node" unique_id=380937927]
 script = ExtResource("1_ei35b")
 weapon_name = "Plasma Gun"
+weapon_type = 5
 damage = 75
 rps = 20.4
 power_cost = 18

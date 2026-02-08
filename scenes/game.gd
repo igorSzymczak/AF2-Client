@@ -122,8 +122,8 @@ func handle_update_player_info(player_info: Dictionary): g.set_player_info(playe
 func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_user_id, index)
 func handle_update_speed_boost(activity: bool): update_player_speed_boost.rpc_id(1, AuthManager.my_user_id, activity)
 
-func _on_set_weapon_request(slot: int, weapon_name: String): request_set_weapon.rpc_id(1, slot, weapon_name)
-func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_name: String): pass # Only Server
+func _on_set_weapon_request(slot: int, weapon_type: WeaponManager.Type): request_set_weapon.rpc_id(1, slot, weapon_type)
+func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_type: WeaponManager.Type): pass # Only Server
 
 @rpc("any_peer", "call_local", "reliable")
 func update_player_nickname(user_id: int, nick: String): g.update_player_nickname(user_id, nick)
@@ -177,18 +177,18 @@ func player_shoot(user_id: int, index: int):
 	g.handle_player_shoot(user_id, index)
 
 @rpc("any_peer", "call_remote", "reliable")
-func request_set_weapon(slot: int, weapon_name: String):
-	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_name)
+func request_set_weapon(slot: int, weapon_type: WeaponManager.Type):
+	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_type)
 
 ## WEAPONS & BULLETS
 
 
-func handle_weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
-	fire_weapon.rpc_id(1, shooter_id, weapon_name, weapon_args, bullet_args)
+func handle_weapon_fired(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: Dictionary, bullet_args: Dictionary):
+	fire_weapon.rpc_id(1, shooter_id, weapon_type, weapon_args, bullet_args)
 
 @rpc("any_peer", "reliable")
-func fire_weapon(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary):
-	g.fire_weapon(shooter_id, weapon_name, current_world, weapon_args, bullet_args)
+func fire_weapon(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: Dictionary, bullet_args: Dictionary):
+	g.fire_weapon(shooter_id, weapon_type, current_world, weapon_args, bullet_args)
 
 @rpc("any_peer", "call_remote", "reliable")
 func spawn_bullet_on_client(

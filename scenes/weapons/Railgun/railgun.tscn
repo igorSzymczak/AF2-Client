@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://btlynee6osxgd"]
+[gd_scene format=3 uid="uid://btlynee6osxgd"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_3ha8j"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_3ha8j"]
 
-[node name="Railgun" type="Node"]
+[node name="Railgun" type="Node" unique_id=806122040]
 script = ExtResource("1_3ha8j")
 weapon_name = "Railgun"
+weapon_type = 4
 damage = 90
 rps = 12.8
 power_cost = 22

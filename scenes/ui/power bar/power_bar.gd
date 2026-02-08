@@ -104,7 +104,7 @@ func show_weapon_tooltip(index: int):
 	var dmg: float = weapon.damage
 	
 	
-	var weapon_element: Weapon = g.Weapons[weapon_name].instantiate()
+	var weapon_element: Weapon = WeaponManager.get_weapon(weapon.weapon_type)
 	
 	var bullet_range: Array = weapon.bullet_amount
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0

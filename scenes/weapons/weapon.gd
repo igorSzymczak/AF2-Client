@@ -1,6 +1,7 @@
 class_name Weapon extends Node
 
 @export var weapon_name: String
+@export var weapon_type: WeaponManager.Type
 
 @export var damage: int
 @export var rps : float

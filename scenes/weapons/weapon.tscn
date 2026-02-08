@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://071mb8py0uqu"]
+[gd_scene format=3 uid="uid://071mb8py0uqu"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_vahxa"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_vahxa"]
 
-[node name="Weapon" type="Node"]
+[node name="Weapon" type="Node" unique_id=850768658]
 script = ExtResource("1_vahxa")
+weapon_name = "Default Weapon"
+weapon_type = 2

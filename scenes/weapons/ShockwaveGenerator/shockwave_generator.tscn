@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://2iuqm1ux1gcn"]
+[gd_scene format=3 uid="uid://2iuqm1ux1gcn"]
 
 [ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_55pc3"]
 
-[node name="ShockwaveGenerator" type="Node"]
+[node name="ShockwaveGenerator" type="Node" unique_id=2081798553]
 script = ExtResource("1_55pc3")
 weapon_name = "Shockwave Generator"
+weapon_type = 8
 damage = 10
 rps = 1.0
 power_cost = 15

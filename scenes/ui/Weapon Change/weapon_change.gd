@@ -90,10 +90,8 @@ func load_weapons(weapons: Dictionary):
 		child.queue_free()
 	
 	var found_first_proper := false
-	for weapon_name: String in weapons:
-		if !g.Weapons.has(weapon_name): return
-		
-		var weapon: Weapon = g.Weapons[weapon_name].instantiate()
+	for weapon_type: WeaponManager.Type in weapons:
+		var weapon: Weapon = WeaponManager.get_weapon(weapon_type)
 		
 		if !found_first_proper:
 			show_weapon(weapon)
@@ -105,7 +103,7 @@ func load_weapons(weapons: Dictionary):
 		element.weapon_name = weapon.weapon_name
 		element.info_shown = true
 		element.weapon = weapon
-		element.lvl = weapons[weapon_name].lvl
+		element.lvl = weapons[weapon_type].lvl
 		
 		inventory.push_back(element)
 		element.button.pressed.connect(handle_click.bind(element, false))
@@ -119,10 +117,9 @@ func load_hotbar(weapons: Dictionary):
 		child.queue_free()
 	
 	for slot: int in weapons:
-		var weapon_name = weapons[slot].name
-		if !g.Weapons.has(weapon_name): return
+		var weapon_type: WeaponManager.Type = weapons[slot].type
 		
-		var weapon: Weapon = g.Weapons[weapon_name].instantiate()
+		var weapon: Weapon = WeaponManager.get_weapon(weapon_type)
 		var element: WeaponElement = weapon_ui_scene.instantiate()
 		
 		hotbar_section.add_child(element)
@@ -230,8 +227,8 @@ func handle_click(element: WeaponElement, in_hotbar: bool = false):
 			hotbar_section.move_child(element_b, index_a)
 			
 			show_weapon(element_b.weapon)
-			request_change_weapon(index_a + 1, element_b.weapon.weapon_name)
-			request_change_weapon(index_b + 1, element_a.weapon.weapon_name)
+			request_change_weapon(index_a + 1, element_b.weapon.weapon_type)
+			request_change_weapon(index_b + 1, element_a.weapon.weapon_type)
 			
 			element_a = null
 			element_b = null
@@ -249,7 +246,7 @@ func handle_click(element: WeaponElement, in_hotbar: bool = false):
 			element_a.icon_color = element_b.icon_color
 			
 			show_weapon(element_b.weapon)
-			request_change_weapon(element_a.get_index() + 1, element_a.weapon.weapon_name)
+			request_change_weapon(element_a.get_index() + 1, element_a.weapon.weapon_type)
 			
 			element_a = null
 			element_b = null
@@ -286,6 +283,6 @@ func set_types(ene: bool, kin: bool, cor: bool):
 	if cor:
 		corrosive_label.show()
 
-func request_change_weapon(slot: int, weapon_name: String):
-	if slot > 0 and slot < 6 and weapon_name in g.Weapons:
-		g.set_weapon_request.emit(slot, weapon_name)
+func request_change_weapon(slot: int, weapon_type: WeaponManager.Type):
+	if slot > 0 and slot < 6:
+		g.set_weapon_request.emit(slot, weapon_type)

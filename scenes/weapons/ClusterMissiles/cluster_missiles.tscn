@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdknvthn2rqk4"]
+[gd_scene format=3 uid="uid://cdknvthn2rqk4"]
 
-[ext_resource type="Script" path="res://scenes/weapons/ClusterMissiles/cluster_missiles.gd" id="1_5aoly"]
+[ext_resource type="Script" uid="uid://kup2b2yu55lj" path="res://scenes/weapons/ClusterMissiles/cluster_missiles.gd" id="1_5aoly"]
 
-[node name="ClusterMissiles" type="Node"]
+[node name="ClusterMissiles" type="Node" unique_id=971829523]
 script = ExtResource("1_5aoly")
 weapon_name = "Cluster Missiles"
 damage = 75

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3sbwh6x5ryko"]
+[gd_scene format=3 uid="uid://d3sbwh6x5ryko"]
 
 [ext_resource type="Script" uid="uid://xs1jujgk5eed" path="res://scenes/ui/Weapon Change/weapon_change.gd" id="1_lfqe3"]
 [ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="2_eoedh"]
@@ -152,7 +152,7 @@ bg_color = Color(1, 1, 1, 0)
 border_width_top = 5
 border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
 
-[node name="WeaponChange" type="Control"]
+[node name="WeaponChange" type="Control" unique_id=1238441971]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,7 +161,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lfqe3")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1560717927]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,16 +170,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4p5cv")
 
-[node name="H" type="HBoxContainer" parent="PanelContainer"]
+[node name="H" type="HBoxContainer" parent="PanelContainer" unique_id=1578730443]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="BorderRight" type="Panel" parent="PanelContainer/H"]
+[node name="BorderRight" type="Panel" parent="PanelContainer/H" unique_id=1699286209]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hd2qq")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight" unique_id=1218923946]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,21 +191,21 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 32
 
-[node name="SortingSection" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer"]
+[node name="SortingSection" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer" unique_id=775224224]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SortingLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="SortingLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=1800982548]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Sorting"
 horizontal_alignment = 1
 
-[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=1683992467]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="SearchBar" type="LineEdit" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="SearchBar" type="LineEdit" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=808867974]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -217,13 +217,13 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_l250n")
 placeholder_text = "Search..."
 max_length = 20
 
-[node name="DmgTypeButtons" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="DmgTypeButtons" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=153675873]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="EnergyButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+[node name="EnergyButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons" unique_id=551300000]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
@@ -239,7 +239,7 @@ toggle_mode = true
 button_pressed = true
 text = "Energy"
 
-[node name="KineticButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+[node name="KineticButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons" unique_id=811440011]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
@@ -255,7 +255,7 @@ toggle_mode = true
 button_pressed = true
 text = "Kinetic"
 
-[node name="CorrosiveButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons"]
+[node name="CorrosiveButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/DmgTypeButtons" unique_id=1422975449]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
@@ -271,22 +271,22 @@ toggle_mode = true
 button_pressed = true
 text = "Corrosive"
 
-[node name="Separator2" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="Separator2" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=969984039]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="SortByContainer" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection"]
+[node name="SortByContainer" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection" unique_id=898598110]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="SortByLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer"]
+[node name="SortByLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer" unique_id=1209038210]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Sort by"
 
-[node name="SortingSwitch" type="OptionButton" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer"]
+[node name="SortingSwitch" type="OptionButton" parent="PanelContainer/H/BorderRight/MarginContainer/SortingSection/SortByContainer" unique_id=899834745]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -296,23 +296,23 @@ popup/item_0/id = 0
 popup/item_1/text = "Upgrades"
 popup/item_1/id = 1
 
-[node name="V2" type="VBoxContainer" parent="PanelContainer/H"]
+[node name="V2" type="VBoxContainer" parent="PanelContainer/H" unique_id=1691696459]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="H2" type="HBoxContainer" parent="PanelContainer/H/V2"]
+[node name="H2" type="HBoxContainer" parent="PanelContainer/H/V2" unique_id=353745185]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="BorderRight" type="Panel" parent="PanelContainer/H/V2/H2"]
+[node name="BorderRight" type="Panel" parent="PanelContainer/H/V2/H2" unique_id=912178941]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_421o0")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/BorderRight"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/BorderRight" unique_id=2097550377]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -324,35 +324,35 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 21
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer" unique_id=442719190]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer" unique_id=1369765702]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Arsenal"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer" unique_id=1783512214]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="WeaponsSection" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="WeaponsSection" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer/VBoxContainer/ScrollContainer" unique_id=105726398]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0
 theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="Panel" parent="PanelContainer/H/V2/H2"]
+[node name="VBoxContainer" type="Panel" parent="PanelContainer/H/V2/H2" unique_id=1963727080]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jefry")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer" unique_id=507436184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -364,98 +364,98 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 32
 
-[node name="InfoSection" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer"]
+[node name="InfoSection" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer" unique_id=756808653]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Left" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection"]
+[node name="Left" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection" unique_id=1084668762]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 52
 
-[node name="Heading" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+[node name="Heading" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left" unique_id=1879435974]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 24
 
-[node name="IconContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading"]
+[node name="IconContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading" unique_id=1324561440]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="WeaponElement" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" instance=ExtResource("2_eoedh")]
+[node name="WeaponElement" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" unique_id=1583273082 instance=ExtResource("2_eoedh")]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading" unique_id=1252337902]
 layout_mode = 2
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="WeaponName" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer"]
+[node name="WeaponName" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer" unique_id=1059411998]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Weapon Name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer" unique_id=294164634]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="Kinetic" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+[node name="Kinetic" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=706778151]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.317647, 0.745098, 0.956863, 1)
 theme_override_font_sizes/font_size = 18
 text = "Kinetic"
 
-[node name="Plus1" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+[node name="Plus1" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=825163181]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "+"
 
-[node name="Energy" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+[node name="Energy" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=1081502020]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.219608, 0.219608, 1)
 theme_override_font_sizes/font_size = 18
 text = "Energy"
 
-[node name="Plus2" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+[node name="Plus2" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=877032521]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "+"
 
-[node name="Corrosive" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer"]
+[node name="Corrosive" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=1389922250]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.27451, 0.647059, 0.282353, 1)
 theme_override_font_sizes/font_size = 18
 text = "Corrosive"
 
-[node name="Stats" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+[node name="Stats" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left" unique_id=1079894981]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 
-[node name="H" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats"]
+[node name="H" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats" unique_id=1930659304]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Dmg" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+[node name="Dmg" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1329266881]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1504561048]
 custom_minimum_size = Vector2(212, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Base damage :"
 
-[node name="DmgStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+[node name="DmgStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1661360151]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
@@ -463,12 +463,12 @@ theme_override_font_sizes/font_size = 20
 text = "120"
 horizontal_alignment = 1
 
-[node name="DmgPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg"]
+[node name="DmgPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1419900566]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=11973325]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -476,7 +476,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1452581377]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -484,7 +484,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1623740377]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -492,7 +492,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=955899999]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -500,7 +500,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1889253703]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -508,7 +508,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=574428685]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -516,7 +516,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1317354899]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -524,7 +524,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1745018540]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -532,7 +532,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=140412204]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -540,7 +540,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints"]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=61185148]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -548,16 +548,16 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Rps" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+[node name="Rps" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1786073247]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=438777174]
 custom_minimum_size = Vector2(212, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Rate of fire :"
 
-[node name="RpsStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+[node name="RpsStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=259630771]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
@@ -565,12 +565,12 @@ theme_override_font_sizes/font_size = 20
 text = "1 RPS"
 horizontal_alignment = 1
 
-[node name="RpsPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps"]
+[node name="RpsPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=482806272]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=163212700]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -578,7 +578,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=270457479]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -586,7 +586,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1153467599]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -594,7 +594,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1123119070]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -602,7 +602,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=809592008]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -610,7 +610,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=209085554]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -618,7 +618,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=887262514]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -626,7 +626,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1288500730]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -634,7 +634,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=2096315211]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -642,7 +642,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints"]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=42699942]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -650,16 +650,16 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Power" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+[node name="Power" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=53553565]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=838686936]
 custom_minimum_size = Vector2(212, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Power cost :"
 
-[node name="PowerStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+[node name="PowerStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1898941173]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
@@ -667,12 +667,12 @@ theme_override_font_sizes/font_size = 20
 text = "30"
 horizontal_alignment = 1
 
-[node name="PowerPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power"]
+[node name="PowerPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1331471463]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=728464478]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -680,7 +680,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=2079741249]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -688,7 +688,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1273598259]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -696,7 +696,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=511610865]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -704,7 +704,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1155615507]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -712,7 +712,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1922444798]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -720,7 +720,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=609777553]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -728,7 +728,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=901968150]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -736,7 +736,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=46867874]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -744,7 +744,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints"]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1916266070]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -752,16 +752,16 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Range" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H"]
+[node name="Range" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=698148254]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1371840932]
 custom_minimum_size = Vector2(212, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Range :"
 
-[node name="RangeStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+[node name="RangeStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1995082405]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 0)
 layout_mode = 2
@@ -769,12 +769,12 @@ theme_override_font_sizes/font_size = 20
 text = "80"
 horizontal_alignment = 1
 
-[node name="RangePoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range"]
+[node name="RangePoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1578244635]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1160799912]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -782,7 +782,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=538245292]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -790,7 +790,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=188585730]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -798,7 +798,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=2007893012]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -806,7 +806,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=380436355]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -814,7 +814,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1646174548]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -822,7 +822,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1689574374]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -830,7 +830,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1161208627]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -838,7 +838,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=194192805]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -846,7 +846,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints"]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1933014560]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -854,20 +854,20 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Description" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left"]
+[node name="Description" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left" unique_id=789363460]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description"]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description" unique_id=1429524662]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Description"
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description" unique_id=1412056345]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 
-[node name="Description" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description/MarginContainer"]
+[node name="Description" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Description/MarginContainer" unique_id=743768028]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -875,12 +875,12 @@ theme_override_font_sizes/font_size = 18
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at leo suscipit, venenatis ex sed, pharetra magna. Donec lobortis porta purus, eget finibus lorem mattis ut. Cras tempus finibus libero. "
 autowrap_mode = 3
 
-[node name="BorderTop" type="Panel" parent="PanelContainer/H/V2"]
+[node name="BorderTop" type="Panel" parent="PanelContainer/H/V2" unique_id=515610760]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_um4ts")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/BorderTop"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/V2/BorderTop" unique_id=913597671]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -892,30 +892,30 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/BorderTop/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/BorderTop/MarginContainer" unique_id=1832569545]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="HotbarLabel" type="Label" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer"]
+[node name="HotbarLabel" type="Label" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer" unique_id=220898669]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Hotbar"
 horizontal_alignment = 1
 
-[node name="HotbarSection" type="HBoxContainer" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer"]
+[node name="HotbarSection" type="HBoxContainer" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer" unique_id=684030655]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="WeaponElement" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" instance=ExtResource("2_eoedh")]
+[node name="WeaponElement" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" unique_id=1058535287 instance=ExtResource("2_eoedh")]
 layout_mode = 2
 
-[node name="WeaponElement2" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" instance=ExtResource("2_eoedh")]
+[node name="WeaponElement2" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" unique_id=1382207071 instance=ExtResource("2_eoedh")]
 layout_mode = 2
 
-[node name="WeaponElement3" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" instance=ExtResource("2_eoedh")]
+[node name="WeaponElement3" parent="PanelContainer/H/V2/BorderTop/MarginContainer/VBoxContainer/HotbarSection" unique_id=85332109 instance=ExtResource("2_eoedh")]
 layout_mode = 2

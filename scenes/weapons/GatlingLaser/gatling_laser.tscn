@@ -5,6 +5,7 @@
 [node name="GatlingLaser" type="Node" unique_id=370674498]
 script = ExtResource("1_ua711")
 weapon_name = "Gatling Laser"
+weapon_type = 1
 damage = 25
 rps = 20.0
 power_cost = 3

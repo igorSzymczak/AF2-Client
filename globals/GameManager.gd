@@ -59,21 +59,6 @@ var ShockwaveScenes = {
 	"res://scenes/weapons/weapons/EnergyBlast/energy_blast_explosion.tscn" = preload("res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.tscn")
 }
 
-
-var Weapons: Dictionary = {
-	"Cluster Missiles": preload("res://scenes/weapons/ClusterMissiles/cluster_missiles.tscn"),
-	"Gatling Laser": preload("res://scenes/weapons/GatlingLaser/gatling_laser.tscn"),
-	"Acid Blaster": preload("res://scenes/weapons/AcidBlaster/acid_blaster.tscn"),
-	"Railgun": preload("res://scenes/weapons/Railgun/railgun.tscn"),
-	"Rocket Launcher": preload("res://scenes/weapons/RocketLauncher/rocket_launcher.tscn"),
-	"Plasma Gun": preload("res://scenes/weapons/PlasmaGun/plasma_gun.tscn"),
-	"Piercing Gun": preload("res://scenes/weapons/PiercingGun/piercing_gun.tscn"),
-	"Spawner Laser": preload("res://scenes/weapons/SpawnerLaser/spawner_laser_gun.tscn"),
-	"Shockwave Generator": preload("res://scenes/weapons/ShockwaveGenerator/shockwave_generator.tscn"),
-	"Energy Nova": preload("res://scenes/weapons/Energy Nova/energy_nova.tscn"),
-	"Energy Blast": preload("res://scenes/weapons/EnergyBlast/energy_blast.tscn")
-}
-
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
 var can_perform_actions = true
 

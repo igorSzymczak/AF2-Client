@@ -35,6 +35,7 @@ func play_sound(index: int, pos: Vector2):
 	#var sound: AudioStreamPlayer2D = sound_origin.duplicate()
 	sound_origin.global_position = pos
 	#add_child(sound)
+	
 	sound_origin.play()
 	
 	#sound.connect("finished", Callable(sound, "queue_free"))
@@ -48,7 +49,6 @@ func play_sound_from_name(sound_name: String, pos: Vector2) -> void:
 		sound.global_position = pos
 		add_child(sound)
 		sound.play()
-	
 
 func play_sound_from_name_locally(sound_name: String):
 	if !g.me: return

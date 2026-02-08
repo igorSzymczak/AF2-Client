@@ -23,13 +23,13 @@ func handle_bullet_spawned(
 	add_child(bullet)
 
 func handle_shockwave_created(
-	_path: String, _name: String,
+	_type: WeaponManager.ShockwaveType, _name: String,
 	pos: Vector2, rot:float,
 	speed: float, angle: float,
 	time_to_vanish: int, current_time_of_living: int,
 	_server_timestamp: int
 ) -> void:
-	var shockwave: ShockWave = g.ShockwaveScenes[_path].instantiate()
+	var shockwave: ShockWave = WeaponManager.get_shockwave(_type)
 	shockwave.name = _name
 	shockwave.global_position = pos
 	shockwave.rotation = rot

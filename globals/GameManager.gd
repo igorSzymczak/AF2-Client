@@ -39,26 +39,6 @@ var Bosses: Dictionary[int, Dictionary] = {}
 
 var Items: Dictionary = {}
 
-var BulletScenes = {
-	"res://scenes/weapons/bullet_types/bullet.tscn" = preload("res://scenes/bullets/bullet_types/bullet.tscn"),
-	"res://scenes/weapons/bullet_types/bullet_homing.tscn" = preload("res://scenes/bullets/bullet_types/bullet_homing.tscn"),
-	"res://scenes/weapons/weapons/ClusterMissiles/missile.tscn" = preload("res://scenes/bullets/bullets/ClusterMissiles/missile.tscn"),
-	"res://scenes/weapons/weapons/GatlingLaser/laser.tscn" = preload("res://scenes/bullets/bullets/GatlingLaser/gatling_laser.tscn"),
-	"res://scenes/weapons/weapons/AcidBlaster/acid.tscn" = preload("res://scenes/bullets/bullets/AcidBlaster/acid.tscn"),
-	"res://scenes/weapons/weapons/Railgun/railgun_bullet.tscn" = preload("res://scenes/bullets/bullets/Railgun/railgun_bullet.tscn"),
-	"res://scenes/weapons/weapons/RocketLauncher/rocket.tscn" = preload("res://scenes/bullets/bullets/RocketLauncher/rocket.tscn"),
-	"res://scenes/weapons/weapons/PlasmaGun/plasma.tscn" = preload("res://scenes/bullets/bullets/PlasmaGun/plasma.tscn"),
-	"res://scenes/weapons/weapons/PiercingGun/piercing_bullet.tscn" = preload("res://scenes/bullets/bullets/PiercingGun/piercing_bullet.tscn"),
-	"res://scenes/weapons/weapons/SpawnerLaser/spawner_laser.tscn" = preload("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn"),
-	"res://scenes/weapons/weapons/EnergyBlast/energy_blast_projectile.tscn" = preload("res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.tscn")
-}
-
-var ShockwaveScenes = {
-	"res://scenes/weapons/weapons/ShockwaveGenerator/shockwave.tscn" = preload("res://scenes/bullets/shockwaves/shockwave/shockwave.tscn"),
-	"res://scenes/weapons/weapons/EnergyNova/nova.tscn" = preload("res://scenes/bullets/shockwaves/energy nova/nova.tscn"),
-	"res://scenes/weapons/weapons/EnergyBlast/energy_blast_explosion.tscn" = preload("res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.tscn")
-}
-
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
 var can_perform_actions = true
 
@@ -286,14 +266,14 @@ signal bullet_spawned(
 	server_timestamp: int
 )
 func add_bullet(
-	bullet_path: String, bullet_name: String,
+	bullet_type: WeaponManager.BulletType, bullet_name: String,
 	global_pos: Vector2, is_deterministic: bool,
 	direction_speed: Vector2, fall: float,
 	life_time: int, current_life_time: int,
 	server_timestamp: 
 ):
 	if !Bullets.has(bullet_name):
-		var bullet_scene: PackedScene = BulletScenes[bullet_path]
+		var bullet_scene: PackedScene = WeaponManager.get_bullet_scene(bullet_type)
 		Bullets[bullet_name] = {
 			"name": bullet_name,
 			"global_position": global_pos,
@@ -331,7 +311,7 @@ func remove_bullet(bullet_name: String):
 		Bullets.erase(bullet_name)
 
 signal shockwave_created(
-	_path: String, _name: String,
+	_type: WeaponManager.ShockwaveType, _name: String,
 	pos: Vector2, rot: float,
 	speed: float, angle: float,
 	time_to_vanish: int, current_time_of_living: int,

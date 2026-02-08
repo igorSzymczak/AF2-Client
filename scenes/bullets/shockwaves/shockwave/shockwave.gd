@@ -5,6 +5,7 @@ class_name ShockWave extends Area2D
 
 # operating Stuff
 var time_of_living: float = 0.0;
+@export var shockwave_type: WeaponManager.ShockwaveType
 @export var angle: float = 2 * PI
 @export var speed: float = 100
 @export var time_to_vanish: float = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcjskcii1ohj0"]
+[gd_scene format=3 uid="uid://bcjskcii1ohj0"]
 
 [ext_resource type="Script" uid="uid://bt5m4jimxh55n" path="res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.gd" id="1_70x2p"]
 [ext_resource type="Shader" uid="uid://bq3nupu6y4af2" path="res://scenes/bullets/shockwaves/EnergyBlast/energy_blast_explosion.gdshader" id="2_vypqv"]
@@ -38,16 +38,17 @@ gradient = SubResource("Gradient_g32bb")
 width = 60
 height = 60
 
-[node name="EnergyBlastExplosion" type="Area2D"]
+[node name="EnergyBlastExplosion" type="Area2D" unique_id=167765040]
 monitoring = false
 monitorable = false
 script = ExtResource("1_70x2p")
+shockwave_type = 2
 metadata/_custom_type_script = "uid://i8qc0rs7ymqk"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1616496607]
 material = SubResource("ShaderMaterial_70x2p")
 scale = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_70x2p")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=533874352]
 polygon = PackedVector2Array(-1, -32, -16, 0, 0, 32, 16, 0)

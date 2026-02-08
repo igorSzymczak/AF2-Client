@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqorti8kule7t"]
+[gd_scene format=3 uid="uid://bqorti8kule7t"]
 
 [ext_resource type="Script" uid="uid://i8qc0rs7ymqk" path="res://scenes/bullets/shockwaves/shockwave/shockwave.gd" id="1_eckmc"]
 [ext_resource type="Shader" uid="uid://cbrmfxpqlt4wa" path="res://scenes/bullets/shockwaves/shockwave/nova.gdshader" id="2_iok5b"]
@@ -25,14 +25,14 @@ height = 10
 fill_from = Vector2(1, 0.53846157)
 fill_to = Vector2(0.2008547, 0.5555556)
 
-[node name="Shockwave" type="Area2D"]
+[node name="Shockwave" type="Area2D" unique_id=1948322513]
 script = ExtResource("1_eckmc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=485265481]
 material = SubResource("ShaderMaterial_vkgd1")
 scale = Vector2(2.05, 2.05)
 texture = SubResource("GradientTexture2D_qgdc1")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=233289758]
 visible = false
 polygon = PackedVector2Array(-1, -32, -16, 0, 0, 32, 16, 0)

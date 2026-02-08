@@ -180,6 +180,7 @@ func player_shoot(user_id: int, index: int):
 func request_set_weapon(slot: int, weapon_type: WeaponManager.Type):
 	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_type)
 
+
 ## WEAPONS & BULLETS
 
 
@@ -192,14 +193,14 @@ func fire_weapon(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: 
 
 @rpc("any_peer", "call_remote", "reliable")
 func spawn_bullet_on_client(
-	bullet_path: String, bullet_name: String,
+	bullet_type: WeaponManager.BulletType, bullet_name: String,
 	global_pos: Vector2, is_deterministic: bool,
 	direction_speed: Vector2, fall: float,
 	life_time: int, current_life_time: int,
 	server_timestamp: int
 ):
 	g.add_bullet(
-		bullet_path, bullet_name,
+		bullet_type, bullet_name,
 		global_pos, is_deterministic,
 		direction_speed, fall,
 		life_time, current_life_time,
@@ -225,16 +226,16 @@ func update_bullet_is_deterministic(bullet_name: String, is_deterministic: bool)
 
 @rpc("any_peer", "call_remote", "reliable")
 func spawn_shockwave_on_client(
-	_path: String, _name: String,
+	shockwave_type: WeaponManager.ShockwaveType, _name: String,
 	pos: Vector2, rot: float,
 	speed: float, angle: float, 
 	time_to_vanish: int, current_time_of_living: int,
 	server_timestamp: int
 ) -> void:
-	handle_create_shockwave(_path, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
+	handle_create_shockwave(shockwave_type, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
 
-func handle_create_shockwave(_path: String, _name: String, pos: Vector2, rot:float, speed: float, angle: float, time_to_vanish: int, current_time_of_living: int,server_timestamp: int) -> void:
-		g.shockwave_created.emit(_path, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
+func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name: String, pos: Vector2, rot:float, speed: float, angle: float, time_to_vanish: int, current_time_of_living: int,server_timestamp: int) -> void:
+		g.shockwave_created.emit(shockwave_type, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
 
 
 

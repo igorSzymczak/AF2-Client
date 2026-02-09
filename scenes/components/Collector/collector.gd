@@ -12,7 +12,11 @@ func _ready() -> void:
 	collectArea.area_entered.connect(_on_collect_area_area_entered)
 
 func _process(delta: float) -> void:
-	for item in sucked_items:
+	for item: Item in sucked_items:
+		if !is_instance_valid(item):
+			g.remove_item(int(item.name))
+			sucked_items.erase(item)
+			return
 		var direction = item.global_position.direction_to(global_position)
 		item.global_position += direction * SUCK_SPEED * delta
 

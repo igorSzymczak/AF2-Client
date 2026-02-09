@@ -18,7 +18,7 @@ func _ready() -> void:
 	sprite.material.set("shader_parameter/angle_from", - angle/2.0)
 	sprite.material.set("shader_parameter/angle_to", angle/2.0)
 	
-	
+	print("shockwave timeToVanish: ", time_to_vanish)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	scale += Vector2(1.0, 1.0) * speed * delta

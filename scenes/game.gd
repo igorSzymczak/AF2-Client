@@ -7,6 +7,7 @@ class_name Game
 
 const PORT: int = 7000
 const ADDRESS: String = "127.0.0.1"
+#const ADDRESS: String = "83.29.89.59"
 #const ADDRESS: String = "130.61.143.133"
 
 var local_player_character: Player
@@ -229,12 +230,12 @@ func spawn_shockwave_on_client(
 	shockwave_type: WeaponManager.ShockwaveType, _name: String,
 	pos: Vector2, rot: float,
 	speed: float, angle: float, 
-	time_to_vanish: int, current_time_of_living: int,
+	time_to_vanish: float, current_time_of_living: int,
 	server_timestamp: int
 ) -> void:
 	handle_create_shockwave(shockwave_type, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
 
-func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name: String, pos: Vector2, rot:float, speed: float, angle: float, time_to_vanish: int, current_time_of_living: int,server_timestamp: int) -> void:
+func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name: String, pos: Vector2, rot:float, speed: float, angle: float, time_to_vanish: float, current_time_of_living: int,server_timestamp: int) -> void:
 		g.shockwave_created.emit(shockwave_type, _name, pos, rot, speed, angle, time_to_vanish, current_time_of_living, server_timestamp)
 
 

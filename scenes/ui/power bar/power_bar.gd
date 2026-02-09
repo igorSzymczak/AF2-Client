@@ -103,7 +103,6 @@ func show_weapon_tooltip(index: int):
 	var weapon_name: String = weapon.name
 	var dmg: float = weapon.damage
 	
-	
 	var weapon_element: Weapon = WeaponManager.get_weapon(weapon.type)
 	
 	var bullet_range: Array = weapon.bullet_amount

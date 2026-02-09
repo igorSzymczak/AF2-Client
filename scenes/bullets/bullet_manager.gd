@@ -26,7 +26,7 @@ func handle_shockwave_created(
 	_type: WeaponManager.ShockwaveType, _name: String,
 	pos: Vector2, rot:float,
 	speed: float, angle: float,
-	time_to_vanish: int, current_time_of_living: int,
+	time_to_vanish: float, current_time_of_living: int,
 	_server_timestamp: int
 ) -> void:
 	var shockwave: ShockWave = WeaponManager.get_shockwave(_type)

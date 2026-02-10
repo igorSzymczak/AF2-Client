@@ -17,6 +17,7 @@ var multiplayer_peer
 
 var client_id
 func _ready():
+	g.current_world = current_world
 	#print("loading client...")
 	start_client()
 	client_id = str(multiplayer.get_unique_id())
@@ -80,26 +81,6 @@ func add_previously_connected_player_characters(players: Dictionary[int, Diction
 	for user_id in players:
 		add_player_character(user_id)
 
-@rpc("authority", "call_local", "reliable")
-func update_planet_position(planet_name: String, pos: Vector2): g.update_planet_position(planet_name, pos)
-
-@rpc("authority", "call_local", "reliable")
-func update_planet_landable(planet_name: String, landable: bool): g.update_planet_landable(planet_name, landable)
-
-@rpc # Only Clients
-func add_existing_planets(Planets: Dictionary):
-	for i in Planets:
-		var planet_name: String = Planets[i]["name"]
-		var pos: Vector2 = Planets[i]["global_position"]
-		var landable: bool = Planets[i]["landable"]
-		var is_safezone: bool = Planets[i]["is_safezone"]
-		
-		g.add_planet(planet_name, pos, landable, is_safezone)
-
-@rpc
-func set_planets_positions(planets_positions: Array):
-	current_world.set_planets_positions(planets_positions)
-
 
 func client_signals():
 	g.local_player_position.connect(handle_update_position)
@@ -111,6 +92,28 @@ func client_signals():
 	
 	g.player_shoot.connect(handle_player_shoot)
 	g.set_weapon_request.connect(_on_set_weapon_request)
+
+## STRUCTURES
+
+@rpc("authority", "call_remote", "reliable")
+func update_structure_property(id: int, prop: int, value: Variant):
+	handle_client_structure_property_changed(id, prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_structures(structures: Array[Dictionary]):
+	for structure_data: Dictionary in structures:
+		handle_client_structure_added(structure_data)
+
+@rpc("authority", "call_remote", "reliable")
+func add_structure(structure_data: Dictionary):
+	handle_client_structure_added(structure_data)
+
+func handle_client_structure_added(_structure_data: Dictionary):
+	g.add_structure(_structure_data)
+
+func handle_client_structure_property_changed(_id: int, _prop: int, _value: Variant):
+	g.update_structure_property(_id, _prop, _value)
+
 
 
 ## PLAYERS

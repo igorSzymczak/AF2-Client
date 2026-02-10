@@ -143,9 +143,9 @@ volumetric_fog_density = 0.0
 adjustment_enabled = true
 adjustment_saturation = 1.11
 
-[node name="TestingWorld" type="Node2D" unique_id=1041454062 node_paths=PackedStringArray("planets")]
+[node name="TestingWorld" type="Node2D" unique_id=1041454062 node_paths=PackedStringArray("structures")]
 script = ExtResource("1_rvknj")
-planets = [NodePath("Planets/Sun"), NodePath("Planets/Sun/Aerth")]
+structures = [NodePath("Planets/Sun"), NodePath("Planets/Sun/TemporaryHangar"), NodePath("Planets/Sun/Aerth")]
 
 [node name="ImageBG" type="CanvasLayer" parent="." unique_id=2114575672]
 layer = -1
@@ -188,6 +188,7 @@ position = Vector2(-926, 543)
 [node name="Sun" parent="Planets" unique_id=1077003714 instance=ExtResource("7_q3uef")]
 self_modulate = Color(1.75, 1.75, 0, 1)
 position = Vector2(926, -543)
+structure_name = "Sun"
 is_shown = false
 is_sun = true
 poi_type = "sun"
@@ -202,6 +203,7 @@ texture = ExtResource("8_j6wtj")
 
 [node name="TemporaryHangar" parent="Planets/Sun" unique_id=1426511524 node_paths=PackedStringArray("aura_blue", "aura_red") instance=ExtResource("12_uiqek")]
 position = Vector2(-704, -440)
+structure_name = "Beta Hangar"
 landable = true
 orbit_time_MS = 5000.0
 aura_blue = NodePath("AuraBlue")
@@ -252,6 +254,7 @@ texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Aerth" parent="Planets/Sun" unique_id=858829538 node_paths=PackedStringArray("aura_blue", "aura_red", "local_sun") instance=ExtResource("7_q3uef")]
 position = Vector2(1462, 459)
+structure_name = "Aerth"
 landable = true
 orbit_time_MS = -12000.0
 aura_blue = NodePath("AuraBlue")

@@ -17,26 +17,17 @@ enum ENTITY_TYPE {
 	BOSS
 }
 
+var current_world: Node2D
 var me: Player
-
 var PlayerInfo: Dictionary = {}
-
 var update_time = 50
-
-var Planets: Dictionary = {}
-
+var Structures: Dictionary[int, Dictionary] = {}
 var Players: Dictionary[int, Dictionary] = {}
-
 var Bullets: Dictionary = {}
-
 var Spawners: Dictionary[int, Dictionary] = {}
-
 var Turrets: Dictionary[int, Dictionary] = {}
-
 var Enemies: Dictionary[int, Dictionary] = {}
-
 var Bosses: Dictionary[int, Dictionary] = {}
-
 var Items: Dictionary = {}
 
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
@@ -46,35 +37,82 @@ var can_perform_actions = true
 ## Planets
 
 
-func add_planet(planet_name: String, pos: Vector2, landable: bool, is_safezone: bool):
-	if !Planets.has(planet_name):
-		Planets[planet_name] = {
-			"name": planet_name,
-			"global_position": pos,
-			"landable": landable,
-			"is_safezone": is_safezone
-		}
+enum StructureProperty {
+	GID,
+	NAME,
+	GLOBAL_POSITION,
+	LANDABLE,
+	IS_SAFEZONE
+}
 
-func get_planet_position(planet_name: String) -> Vector2:
-	if Planets.has(planet_name):
-		return Planets[planet_name]["global_position"]
-	return Vector2.ZERO
-func update_planet_position(planet_name: String, pos: Vector2):
-	if Planets.has(planet_name):
-		Planets[planet_name]["global_position"] = pos
+const STRUCTURE_PROPERTY_SCHEMA: Dictionary[StructureProperty, Dictionary] = {
+	StructureProperty.GID: {
+		"type": TYPE_INT,
+		"default": 0
+	},
+	StructureProperty.NAME: {
+		"type": TYPE_STRING,
+		"default": "Unnamed Structure"
+	},
+	StructureProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	StructureProperty.LANDABLE: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	StructureProperty.IS_SAFEZONE: {
+		"type": TYPE_BOOL,
+		"default": false
+	}
+}
 
-func get_planet_landable(planet_name: String) -> bool:
-	if Planets.has(planet_name):
-		return Planets[planet_name]["landable"]
-	return false
-func update_planet_landable(planet_name: String, landable: bool):
-	if Planets.has(planet_name):
-		Planets[planet_name]["landable"] = landable
+signal structure_added(structure: Structure)
+signal structure_property_changed(structure_id: int, prop: StructureProperty, value: Variant)
+func add_structure(structure_data: Dictionary):
+	var gid: int = structure_data[StructureProperty.GID]
+	if Structures.has(gid):
+		return
+	
+	var structure: Structure =  current_world.get_structure(structure_data[StructureProperty.NAME])
+	if !is_instance_valid(structure):
+		return # Structure non existant on client 
+	
+	structure.props.from_dict(structure_data)
+	Structures[gid] = {
+		"node": structure,
+		"props": structure.props
+	}
+	structure_added.emit(structure)
+	structure.props.property_changed.connect(
+		func(prop: int, value: Variant):
+			structure_property_changed.emit(structure.gid, prop, value)
+	)
+	structure.props.from_dict(structure_data)
+signal structure_removed(structure_id: int)
+func remove_structure(structure_id: int) -> void:
+	if Structures.has(structure_id):
+		Structures.erase(structure_id)
+		structure_removed.emit(structure_id)
 
-func get_planet_is_safezone(planet_name: String) -> bool:
-	if Planets.has(planet_name):
-		return Planets[planet_name]["is_safezone"]
-	return false
+func get_structure_property(structure_id: int, prop: StructureProperty) -> Variant:
+	if Structures.has(structure_id):
+		var props: PropertyContainer = Structures[structure_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
+
+func get_structure_props(structure_id: int) -> PropertyContainer:
+	if Structures.has(structure_id):
+		return Structures[structure_id].props
+	return null
+
+func update_structure_property(structure_id: int, prop: StructureProperty, value: Variant) -> void:
+	if !Structures.has(structure_id):
+		return
+	
+	var props: PropertyContainer = Structures[structure_id]["props"]
+	props.set_property(prop, value)
 
 ## Players
 

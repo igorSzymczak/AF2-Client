@@ -41,9 +41,6 @@ func _ready():
 func _process(delta: float) -> void:
 	set_safezone()
 	
-	#update_server_position()
-	#update_landable()
-	
 	self_orbit(delta)
 	update_shader(delta)
 	handle_landing(delta)

@@ -33,6 +33,10 @@ var Items: Dictionary = {}
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
 var can_perform_actions = true
 
+@onready var ui = get_node("/root/Game/UI")
+func is_mouse_over_menu() -> bool:
+	return ui.is_mouse_over_menu()
+
 
 ## Planets
 
@@ -113,6 +117,7 @@ func update_structure_property(structure_id: int, prop: StructureProperty, value
 	
 	var props: PropertyContainer = Structures[structure_id]["props"]
 	props.set_property(prop, value)
+
 
 ## Players
 
@@ -289,64 +294,106 @@ signal player_shoot(index: int)
 
 signal set_weapon_request(slot: int, weapon_name: String)
 
+
 ## WEAPONS & BULLETS
 
 
-@onready var ui = get_node("/root/Game/UI")
-func is_mouse_over_menu() -> bool:
-	return ui.is_mouse_over_menu()
+enum BulletProperty {
+	GID,
+	BULLET_TYPE,
+	GLOBAL_POSITION,
+	IS_DETERMINISTIC,
+	DIRECTION_SPEED,
+	FALL,
+	LIFE_TIME,
+	CURRENT_LIFE_TIME,
+	SERVER_TIMESTAMP
+}
 
-signal bullet_spawned(
-	bullet_scene: PackedScene, bullet_name: String,
-	global_pos: Vector2, is_deterministic: bool,
-	direction_speed: Vector2, fall: float,
-	life_time: int, current_life_time: int,
-	server_timestamp: int
-)
-func add_bullet(
-	bullet_type: WeaponManager.BulletType, bullet_name: String,
-	global_pos: Vector2, is_deterministic: bool,
-	direction_speed: Vector2, fall: float,
-	life_time: int, current_life_time: int,
-	server_timestamp: 
-):
-	if !Bullets.has(bullet_name):
-		var bullet_scene: PackedScene = WeaponManager.get_bullet_scene(bullet_type)
-		Bullets[bullet_name] = {
-			"name": bullet_name,
-			"global_position": global_pos,
-			"is_deterministic": is_deterministic,
-		}
-		emit_signal("bullet_spawned",
-			bullet_scene, bullet_name,
-			global_pos, is_deterministic,
-			direction_speed, fall,
-			life_time, current_life_time,
-			server_timestamp
-		)
+const BULLET_PROPERTY_SCHEMA: Dictionary[BulletProperty, Dictionary] = {
+	BulletProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	BulletProperty.BULLET_TYPE: {
+		"type": TYPE_INT, # WeaponManager.BulletType (enum)
+		"default": WeaponManager.BulletType.DEFAULT
+	},
+	BulletProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	BulletProperty.IS_DETERMINISTIC: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	BulletProperty.DIRECTION_SPEED: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	BulletProperty.FALL: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	BulletProperty.LIFE_TIME: {
+		"type": TYPE_INT,
+		"default": 1000
+	},
+	BulletProperty.CURRENT_LIFE_TIME: {
+		"type": TYPE_INT,
+		"default": 0
+	},
+	BulletProperty.SERVER_TIMESTAMP: {
+		"type": TYPE_INT,
+		"default": 0
+	}
+}
 
-signal bullet_position(bullet_name: String, pos: Vector2)
-func update_bullet_position(bullet_name: String, pos: Vector2):
-	if Bullets.has(bullet_name):
-		Bullets[bullet_name]["global_position"] = pos
-func get_bullet_position(bullet_name: String) -> Vector2:
-	if Bullets.has(bullet_name):
-		return Bullets[bullet_name]["global_position"]
-	return Vector2.ZERO
+signal bullet_added(bullet: Bullet)
+signal bullet_property_changed(bullet_id: int, prop: BulletProperty, value: Variant)
+func add_bullet(bullet_data: Dictionary):
+	var gid: int = bullet_data[BulletProperty.GID]
+	if Bullets.has(gid):
+		return
+	
+	var type: WeaponManager.BulletType = bullet_data[BulletProperty.BULLET_TYPE]
+	var bullet: Bullet = WeaponManager.get_bullet(type)
+	if !is_instance_valid(bullet):
+		push_warning("Bullet of type ", type, " non existant!")
+		return
+	
+	Bullets[gid] = {
+		"node": bullet,
+		"props": bullet.props
+	}
+	bullet_added.emit(bullet)
+	bullet.props.property_changed.connect(func(prop: int, value: Variant):
+		bullet_property_changed.emit(bullet.gid, prop, value)
+	)
+	bullet.props.from_dict(bullet_data)
+signal bullet_removed(bullet_id: int)
+func remove_bullet(bullet_id: int) -> void:
+	if Bullets.has(bullet_id):
+		Bullets.erase(bullet_id)
+		bullet_removed.emit(bullet_id)
 
-signal bullet_is_deterministic(bullet_name: String, is_deterministic: bool)
-func update_bullet_is_deterministic(bullet_name: String, is_deterministic: bool):
-	if Bullets.has(bullet_name):
-		Bullets[bullet_name]["is_deterministic"] = is_deterministic
-func get_bullet_is_deterministic(bullet_name: String) -> bool:
-	if Bullets.has(bullet_name):
-		return Bullets[bullet_name]["is_deterministic"]
-	return true
+func get_bullet_property(bullet_id: int, prop: BulletProperty) -> Variant:
+	if Bullets.has(bullet_id):
+		var props: PropertyContainer = Bullets[bullet_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
 
-signal bullet_freed(bullet_name)
-func remove_bullet(bullet_name: String):
-	if Bullets.has(bullet_name):
-		Bullets.erase(bullet_name)
+func get_bullet_props(bullet_id: int) -> PropertyContainer:
+	if Bullets.has(bullet_id):
+		return Bullets[bullet_id].props
+	return null
+
+func update_bullet_property(bullet_id: int, prop: BulletProperty, value: Variant) -> void:
+	if !Bullets.has(bullet_id):
+		return
+	
+	var props: PropertyContainer = Bullets[bullet_id]["props"]
+	props.set_property(prop, value)
 
 signal shockwave_created(
 	_type: WeaponManager.ShockwaveType, _name: String,

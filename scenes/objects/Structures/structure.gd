@@ -50,7 +50,6 @@ func _process(delta: float) -> void:
 
 func set_safezone():
 	if !is_instance_valid(safezone): return
-	print("Changing is_safezone of ", structure_name, " to ", is_safezone )
 	
 	safezone = $SafeZone
 
@@ -82,8 +81,6 @@ func _handle_property_changed(prop: g.StructureProperty, value: Variant) -> void
 func update_landable():
 	if !is_instance_valid(aura_blue) or !is_instance_valid(aura_red):
 		return
-	
-	print("Changing landable of ", structure_name, " to ", landable )
 	
 	aura_blue.show()
 	aura_red.show()

@@ -195,34 +195,31 @@ func handle_weapon_fired(shooter_id: int, weapon_type: WeaponManager.Type, weapo
 func fire_weapon(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: Dictionary, bullet_args: Dictionary):
 	g.fire_weapon(shooter_id, weapon_type, current_world, weapon_args, bullet_args)
 
-@rpc("any_peer", "call_remote", "reliable")
-func spawn_bullet_on_client(
-	bullet_type: WeaponManager.BulletType, bullet_name: String,
-	global_pos: Vector2, is_deterministic: bool,
-	direction_speed: Vector2, fall: float,
-	life_time: int, current_life_time: int,
-	server_timestamp: int
-):
-	g.add_bullet(
-		bullet_type, bullet_name,
-		global_pos, is_deterministic,
-		direction_speed, fall,
-		life_time, current_life_time,
-		server_timestamp
-	)
-	
-@rpc("any_peer", "call_remote", "unreliable")
-func update_bullet_position(bullet_name: String, pos: Vector2):
-	g.update_bullet_position(bullet_name, pos)
+@rpc("authority", "call_remote", "reliable")
+func update_bullet_property(id: int, prop: int, value: Variant):
+	handle_client_bullet_property_changed(id, prop, value)
 
-@rpc("any_peer", "call_local", "unreliable")
-func bullet_freed(bullet_name: String):
-	g.remove_bullet(bullet_name)
+@rpc("authority", "call_remote", "reliable")
+func add_existing_bullets(bullets: Array[Dictionary]):
+	for bullet_data: Dictionary in bullets:
+		handle_client_bullet_added(bullet_data)
 
-@rpc("any_peer", "call_remote", "unreliable")
-func update_bullet_is_deterministic(bullet_name: String, is_deterministic: bool):
-	g.update_bullet_is_deterministic(bullet_name, is_deterministic)
+@rpc("authority", "call_remote", "reliable")
+func add_bullet(bullet_data: Dictionary):
+	handle_client_bullet_added(bullet_data)
 
+@rpc("authority", "call_remote", "reliable")
+func remove_bullet(id: int):
+	handle_client_bullet_removed(id)
+
+func handle_client_bullet_added(bullet_data: Dictionary):
+	g.add_bullet(bullet_data)
+
+func handle_client_bullet_property_changed(id: int, prop: int, value: Variant):
+	g.update_bullet_property(id, prop, value)
+
+func handle_client_bullet_removed(id: int):
+	g.remove_bullet(id)
 
 
 ## SHOCK WAVES

@@ -1,8 +1,10 @@
 extends Area2D
 class_name Bullet
 
+var gid: int
+var props: PropertyContainer = PropertyContainer.new(g.BULLET_PROPERTY_SCHEMA)
+
 # Default values
-var LIFE_TIME := 1975 # Milisecs to destroy Bullet
 var LIFE_TIME_RNG := 150 # additional 0-x to LIFE_TIME 
 
 var HIT_ANIMATION_TYPE := "bullet_regular"
@@ -20,7 +22,8 @@ var life_time: int
 var current_life_time: int
 var server_timestamp: int
 
-@onready var initial_scale: Vector2 = $BulletSprite.get_scale()
+@onready var sprite: Sprite2D = $BulletSprite
+@onready var initial_scale: Vector2 = sprite.get_scale() if is_instance_valid(sprite) else Vector2.ZERO
 @onready var shoot_time: int
 
 var server_pos: Vector2
@@ -31,92 +34,83 @@ func _ready():
 	calculated_global_position = global_position
 	rotation = direction_speed.angle()
 	
-	## Calculate the route bullet already did on server
-	#var t: int = roundi(Time.get_unix_time_from_system() * 100)
-	#var latency = t - server_timestamp
 	shoot_time = Time.get_ticks_msec()
-	#var delta_time: int = roundi(get_physics_process_delta_time() * 1000)
-	#var client_life_time := delta_time
-	#while client_life_time < latency:
-		#client_life_time += delta_time
-		#update_position()
-	#if is_deterministic:
-		#global_position = calculated_global_position
 	
-	#print(latency)
-	#print("if shoot_time + life_time - current_time <= time_to_vanish")
+	props.property_changed.connect(_handle_property_changed)
 	special_ready()
-	
 
 func special_ready() -> void:
-	pass
+	pass # For special effects :)
 
-	
-func _physics_process(delta: float) -> void:
-	if !g.Bullets.has(name): crash_bullet()
-	
-	update_position()
-	var server_is_deterministic = g.get_bullet_is_deterministic(name)
-	if server_is_deterministic != is_deterministic:
-		is_deterministic = server_is_deterministic
-		if is_deterministic:
-			calculated_global_position = global_position
-	if !is_deterministic:
-		var temp_server_pos = g.get_bullet_position(name)
-		
-		if temp_server_pos != server_pos:
-			server_pos = temp_server_pos if temp_server_pos != Vector2.ZERO else server_pos
+func _handle_property_changed(prop: g.BulletProperty, value: Variant) -> void:
+	match prop:
+		g.BulletProperty.GID:
+			gid = value
+		g.BulletProperty.BULLET_TYPE:
+			pass
+		g.BulletProperty.GLOBAL_POSITION:
+			#global_position = value
+			calculated_global_position = value
+			server_pos = value
 			velocity = server_pos - global_position
+		g.BulletProperty.IS_DETERMINISTIC:
+			is_deterministic = value
+		g.BulletProperty.DIRECTION_SPEED:
+			direction_speed = value
+			rotation = direction_speed.angle()
+		g.BulletProperty.FALL:
+			fall = value
+		g.BulletProperty.LIFE_TIME:
+			life_time = value
+		g.BulletProperty.CURRENT_LIFE_TIME:
+			current_life_time = value
+		g.BulletProperty.IS_DETERMINISTIC:
+			server_timestamp = value
 		
-		global_position = global_position.lerp(server_pos + velocity, delta * 10)
-		rotation = lerp_angle(rotation, velocity.angle(), delta * 10)
 		
-		#print("not deterministic")
-	elif is_deterministic:
-		global_position = calculated_global_position
-		rotation = lerp_angle(rotation, vel.angle(), delta * 10)
+
+func _physics_process(delta: float) -> void:
+	if !g.Bullets.has(gid): crash_bullet()
+	
+	update_position(delta)
 	
 	special_effects()
 	bullet_scale_out()
 
 var calculated_global_position: Vector2
 var vel: Vector2
-func update_position() -> void:
-	var delta: float = get_physics_process_delta_time()
-	
-	self.fall_vel *= (1.0 - fall * delta * 60.0)
-	vel = direction_speed * delta
-	calculated_global_position += vel * fall_vel
-	#print(fall_vel)
-	
+func update_position(delta: float) -> void:
+	if is_deterministic:
+		self.fall_vel *= (1.0 - fall * delta * 60.0)
+		vel = direction_speed * delta
+		calculated_global_position += vel * fall_vel
+		global_position = calculated_global_position
+		rotation = lerp_angle(rotation, vel.angle(), delta * 10)
+	else:
+		global_position = global_position.lerp(server_pos + velocity, delta * 10)
+		rotation = lerp_angle(rotation, velocity.angle(), delta * 10)
 
 func special_effects() -> void:
 	pass
 
 func bullet_scale_out() -> void:
 	var current_time: int = Time.get_ticks_msec()
-	#print("if " + str(shoot_time) + " + " + str(life_time) + " - " + str(current_time) + " <= " + str(time_to_vanish))
 	if shoot_time + life_time - current_time <= time_to_vanish:
 		var new_scale = (shoot_time + life_time - current_time) / time_to_vanish
-		$BulletSprite.set_scale(Vector2(initial_scale.x * new_scale, initial_scale.y * new_scale))
+		sprite.set_scale(Vector2(initial_scale.x * new_scale, initial_scale.y * new_scale))
 		
 	if current_time - shoot_time >= life_time:
-		#print("bullet destroyed")
 		# Bullet Ran out of Life Time
-		g.remove_bullet(name)
+		g.remove_bullet(gid)
 		queue_free()
-		#print(name + " " + str(vel))
 
 func crash_bullet() -> void:
-	GlobalSignals.emit_signal("create_explosion", global_position, get_hit_animation_type(), 
+	GlobalSignals.create_explosion.emit(global_position, get_hit_animation_type(), 
 						get_hit_animation_quantity(), get_bullet_hit_args())
 	queue_free()
 
-# Randomizing specs
-func calculate_random_life_time() -> int: return (get_life_time() + rng.randi_range(0, get_life_time_rng()))
-
 # Gets
-func get_life_time() -> int: return LIFE_TIME
+func get_life_time() -> int: return life_time
 func get_life_time_rng() -> int: return LIFE_TIME_RNG
 func get_hit_animation_type() -> String: return HIT_ANIMATION_TYPE
 func get_hit_animation_quantity() -> int: return HIT_ANIMATION_QUANTITY

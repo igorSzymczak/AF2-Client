@@ -1,5 +1,5 @@
 extends Node
-class_name BulletManager
+class_name ExplosionManager
 
 func _ready() -> void:
 	GlobalSignals.connect("create_explosion", create_explosion)

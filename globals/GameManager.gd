@@ -453,11 +453,14 @@ const SPAWNER_PROPERTY_SCHEMA: Dictionary[SpawnerProperty, Dictionary] = {
 signal spawner_added(spawner: Spawner)
 signal spawner_property_changed(spawner_id: int, prop: SpawnerProperty, value: Variant)
 func add_spawner(spawner_data: Dictionary):
-	var gid: int = spawner_data[SpawnerProperty.GID]
+	var props: Dictionary = spawner_data["props"]
+	var stats: Dictionary = spawner_data["stats"]
+	
+	var gid: int = props[SpawnerProperty.GID]
 	if Spawners.has(gid):
 		return
 	
-	var type: EntityManager.SpawnerType = spawner_data[SpawnerProperty.SPAWNER_TYPE]
+	var type: EntityManager.SpawnerType = props[SpawnerProperty.SPAWNER_TYPE]
 	var spawner: Spawner = EntityManager.get_spawner(type)
 	spawner_added.emit(spawner)
 	current_world.add_child(spawner)
@@ -472,7 +475,12 @@ func add_spawner(spawner_data: Dictionary):
 	spawner.props.property_changed.connect(func(prop: int, value: Variant):
 		spawner_property_changed.emit(gid, prop, value)
 	)
-	spawner.props.from_dict(spawner_data)
+	
+	spawner.global_position = props[SpawnerProperty.GLOBAL_POSITION]
+	
+	spawner.stats.from_dict(stats)
+	spawner.props.from_dict(props)
+
 signal spawner_removed(spawner_id: int)
 func remove_spawner(spawner_id: int) -> void:
 	if Spawners.has(spawner_id):
@@ -555,11 +563,14 @@ const TURRET_PROPERTY_SCHEMA: Dictionary[TurretProperty, Dictionary] = {
 signal turret_added(turret: Turret)
 signal turret_property_changed(turret_id: int, prop: TurretProperty, value: Variant)
 func add_turret(turret_data: Dictionary):
-	var gid: int = turret_data[TurretProperty.GID]
+	var props: Dictionary = turret_data["props"]
+	var stats: Dictionary = turret_data["stats"]
+	
+	var gid: int = props[TurretProperty.GID]
 	if Turrets.has(gid):
 		return
 	
-	var type: EntityManager.TurretType = turret_data[TurretProperty.TURRET_TYPE]
+	var type: EntityManager.TurretType = props[TurretProperty.TURRET_TYPE]
 	var turret: Turret = EntityManager.get_turret(type)
 	turret_added.emit(turret)
 	current_world.add_child(turret)
@@ -574,7 +585,12 @@ func add_turret(turret_data: Dictionary):
 	turret.props.property_changed.connect(func(prop: int, value: Variant):
 		turret_property_changed.emit(gid, prop, value)
 	)
-	turret.props.from_dict(turret_data)
+	
+	turret.global_position = props[TurretProperty.GLOBAL_POSITION]
+	
+	turret.stats.from_dict(stats)
+	turret.props.from_dict(props)
+
 signal turret_removed(turret_id: int)
 func remove_turret(turret_id: int) -> void:
 	if Turrets.has(turret_id):

@@ -2,21 +2,9 @@ extends Node
 
 var my_stats: Stats = Stats.new()
 
-func stats_to_dictionary(stats: Stats) -> Dictionary[int, float]:
-	var out: Dictionary[int, float] = {}
-	
-	for stat_type: int in stats.stats.keys():
-		var stat: Stat = stats.stats[stat_type]
-		out[stat_type] = stat.get_final(stats.lvl_multiplier)
-
-	return out
-
 func dictionary_to_stats(stats: Dictionary[int, float]):
 	for id in stats.keys():
-		var stat_type: Stats.TYPE = id as Stats.TYPE
-		var stat: Stat = Stat.create_stat(stat_type)
-		stat.value = stats[id]
-		stats[stat_type] = stat.value
+		my_stats.set_stat_value(id, stats[id])
 
 @rpc("call_remote", "authority", "reliable")
 func update_player_stats(stats: Dictionary[int, float]):

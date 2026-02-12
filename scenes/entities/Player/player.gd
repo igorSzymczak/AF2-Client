@@ -50,7 +50,7 @@ func _ready() -> void:
 	health_component.health_depleted.connect(handle_death)
 	
 	if IS_MAIN_PLAYER:
-		stats = StatManager.my_stats
+		StatManager.my_stats = stats
 		g.set_local_player_position.connect(set_position_from_server)
 		g.death_args.connect(set_death_args)
 		nickname_container.hide()

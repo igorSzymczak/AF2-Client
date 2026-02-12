@@ -404,53 +404,98 @@ signal shockwave_created(
 )
 
 
+
 ## Spawners
 
 
-func add_spawner(spawner: Dictionary):
-	var id = spawner.id
-	if !Spawners.has(id):
-		Spawners[id] = spawner
 
-func update_spawner_position(id: int, pos: Vector2):
-	if Spawners.has(id):
-		Spawners[id]["global_position"] = pos
-func get_spawner_position(id: int) -> Vector2:
-	if Spawners.has(id):
-		return Spawners[id]["global_position"]
-	return Vector2.ZERO
+enum SpawnerProperty {
+	GID,
+	SPAWNER_TYPE,
+	GLOBAL_POSITION,
+	ROTATION,
+	HEALTH,
+	SHIELD,
+	ACTIVE
+}
 
-func update_spawner_rotation(id: int, rot: float):
-	if Spawners.has(id):
-		Spawners[id]["rotation"] = rot
-func get_spawner_rotation(id: int) -> float:
-	if Spawners.has(id):
-		return Spawners[id]["rotation"]
-	return 0
+const SPAWNER_PROPERTY_SCHEMA: Dictionary[SpawnerProperty, Dictionary] = {
+	SpawnerProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	SpawnerProperty.SPAWNER_TYPE: {
+		"type": TYPE_INT, # enum SpawnerType
+		"default": 0
+	},
+	SpawnerProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	SpawnerProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	SpawnerProperty.HEALTH: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	SpawnerProperty.SHIELD: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	SpawnerProperty.ACTIVE: {
+		"type": TYPE_BOOL,
+		"default": false
+	}
+}
 
-func get_spawner_health(id: int) -> float:
-	if Spawners.has(id):
-		return Spawners[id]["health"]
-	return 0
-func update_spawner_health(id: int, health: float):
-	if Spawners.has(id):
-		Spawners[id]["health"] = health
+signal spawner_added(spawner: Spawner)
+signal spawner_property_changed(spawner_id: int, prop: SpawnerProperty, value: Variant)
+func add_spawner(spawner_data: Dictionary):
+	var gid: int = spawner_data[SpawnerProperty.GID]
+	if Spawners.has(gid):
+		return
+	
+	var type: EntityManager.SpawnerType = spawner_data[SpawnerProperty.SPAWNER_TYPE]
+	var spawner: Spawner = EntityManager.get_spawner(type)
+	spawner_added.emit(spawner)
+	current_world.add_child(spawner)
+	if !is_instance_valid(spawner):
+		push_warning("Spawner of type ", type, " non existant!")
+		return
+	Spawners[gid] = {
+		"node": spawner,
+		"props": spawner.props,
+		"stats": spawner.stats.stats
+	}
+	spawner.props.property_changed.connect(func(prop: int, value: Variant):
+		spawner_property_changed.emit(gid, prop, value)
+	)
+	spawner.props.from_dict(spawner_data)
+signal spawner_removed(spawner_id: int)
+func remove_spawner(spawner_id: int) -> void:
+	if Spawners.has(spawner_id):
+		Spawners.erase(spawner_id)
+		spawner_removed.emit(spawner_id)
 
-func get_spawner_shield(id: int) -> float:
-	if Spawners.has(id):
-		return Spawners[id]["shield"]
-	return 0
-func update_spawner_shield(id: int, shield: float):
-	if Spawners.has(id):
-		Spawners[id]["shield"] = shield
+func get_spawner_property(spawner_id: int, prop: SpawnerProperty) -> Variant:
+	if Spawners.has(spawner_id):
+		var props: PropertyContainer = Spawners[spawner_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
 
-func update_spawner_active(id: int, active: bool):
-	if Spawners.has(id):
-		Spawners[id]["active"] = active
-func get_spawner_active(id: int) -> bool:
-	if Spawners.has(id):
-		return Spawners[id]["active"]
-	return false
+func get_spawner_props(spawner_id: int) -> PropertyContainer:
+	if Spawners.has(spawner_id):
+		return Spawners[spawner_id].props
+	return null
+
+func update_spawner_property(spawner_id: int, prop: SpawnerProperty, value: Variant) -> void:
+	if !Spawners.has(spawner_id):
+		return
+	
+	var props: PropertyContainer = Spawners[spawner_id]["props"]
+	props.set_property(prop, value)
 
 func get_spawner_stats(id: int) -> Dictionary[Stats.TYPE, float]:
 	if Spawners.has(id):
@@ -459,10 +504,6 @@ func get_spawner_stats(id: int) -> Dictionary[Stats.TYPE, float]:
 func update_spawner_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
 	if Spawners.has(id):
 		Spawners[id]["stats"] = stats
-		
-		var spawner: Spawner = Spawners[id]["node"] as Spawner
-		for stat: Stats.TYPE in stats.keys():
-			spawner.stats.set_stat_value(stat, stats[stat])
 
 func get_spawner_stat(id: int, stat_type: Stats.TYPE) -> float:
 	if Spawners.has(id) and Spawners[id]["stats"].has(stat_type):
@@ -471,9 +512,6 @@ func get_spawner_stat(id: int, stat_type: Stats.TYPE) -> float:
 func update_spawner_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Spawners.has(id):
 		Spawners[id]["stats"][stat_type] = value
-		
-		var spawner: Spawner = Spawners[id]["node"] as Spawner
-		spawner.stats.set_stat_value(stat_type, value)
 
 
 ## TURRETS
@@ -578,7 +616,9 @@ func update_turret_stat(id: int, stat_type: Stats.TYPE, value: float):
 		Turrets[id]["stats"][stat_type] = value
 
 
+
 ## ENEMIES
+
 
 
 func add_enemy(enemy: Dictionary):

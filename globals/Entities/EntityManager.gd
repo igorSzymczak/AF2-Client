@@ -26,3 +26,21 @@ func get_turret(turret_type: TurretType) -> Turret:
 
 func get_turret_scene(turret_type: TurretType) -> PackedScene:
 	return Turrets[turret_type]
+
+
+enum SpawnerType {
+	DEFAULT,
+}
+
+var Spawners: Dictionary[SpawnerType, PackedScene] = {
+	SpawnerType.DEFAULT : preload("res://scenes/objects/Spawners/spawner.tscn")
+}
+
+func get_spawner_type(spawner: Spawner) -> SpawnerType:
+	return spawner.spawner_type
+
+func get_spawner(spawner_type: SpawnerType) -> Spawner:
+	return Spawners[spawner_type].instantiate()
+
+func get_spawner_scene(spawner_type: SpawnerType) -> PackedScene:
+	return Spawners[spawner_type]

@@ -6,6 +6,7 @@ var stats: Stats = Stats.new()
 var props: PropertyContainer = PropertyContainer.new(g.TURRET_PROPERTY_SCHEMA)
 
 @export var turn_speed: float = 3.0
+@export var turret_type = EntityManager.TurretType
 @export var death_particle_gradient: GradientTexture1D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent 
 @onready var health_component: HealthComponent = $HealthComponent
@@ -37,7 +38,7 @@ func _on_property_changed(prop: g.TurretProperty, value: Variant) -> void:
 		g.TurretProperty.GID:
 			gid = value
 		g.TurretProperty.TURRET_TYPE:
-			pass
+			turret_type = value
 		g.TurretProperty.GLOBAL_POSITION:
 			server_pos = value
 		g.TurretProperty.ROTATION:

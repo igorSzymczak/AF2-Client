@@ -2,8 +2,10 @@ extends Node2D
 class_name Spawner
 
 var gid: int # GameManager ID
+var props: PropertyContainer = PropertyContainer.new(g.SPAWNER_PROPERTY_SCHEMA)
 var stats: Stats = Stats.new()
 
+@export var spawner_type: EntityManager.SpawnerType
 @export var spawn_enemy_scene : PackedScene
 @export var max_enemies : int = 0
 @export var enemies_at_once : int = 0
@@ -31,11 +33,28 @@ var shoot_range: float
  
 var original_sprite_texture: Texture2D
 func _ready() -> void:
-	
 	GlobalSignals.emit_signal("setup_poi", self)
 	
-	
 	original_sprite_texture = sprite.get_texture()
+	props.property_changed.connect(_on_property_changed)
+
+func _on_property_changed(prop: g.SpawnerProperty, value: Variant) -> void:
+	match prop:
+		g.SpawnerProperty.GID:
+			gid = value
+		g.SpawnerProperty.SPAWNER_TYPE:
+			spawner_type = value
+		g.SpawnerProperty.GLOBAL_POSITION:
+			server_pos = value
+		g.SpawnerProperty.ROTATION:
+			server_rot = value
+		g.SpawnerProperty.HEALTH:
+			health_component.health = value
+		g.SpawnerProperty.SHIELD:
+			health_component.shield = value
+		g.SpawnerProperty.ACTIVE:
+			if value: activate()
+			else: deactivate()
 
 func set_team(new_team: int) -> void:
 	self.team = new_team
@@ -44,34 +63,25 @@ func set_team(new_team: int) -> void:
 
 var server_pos: Vector2
 var server_rot: float
-var server_eye_pos: Vector2
-var server_eye_trigger: bool
-var server_active: bool
+#var server_eye_pos: Vector2
+#var server_eye_trigger: bool
 func _process(delta):
+	global_position = global_position.lerp(server_pos, delta * 5)
+	sprite.rotation = lerp_angle(sprite.rotation, server_rot, 0.2)
+	pass
 	#rotation = 0
-	if g.Spawners.has(name.to_int()):
-		server_pos = g.get_spawner_position(name.to_int())
-		global_position = global_position.lerp(server_pos, delta * 5)
-		
-		server_rot = g.get_spawner_rotation(name.to_int())
-		sprite.rotation = lerp_angle(sprite.rotation, server_rot, 0.2)
 		
 		#server_eye_pos = g.get_spawner_eye_position(name.to_int())
 		#eye.position = eye.position.lerp(server_eye_pos, 0.1)
 		#
 		#server_eye_trigger = g.get_spawner_eye_trigger(name.to_int())
 		#eye_trigger(server_eye_trigger)
-		
-		server_active = g.get_spawner_active(name.to_int())
-		if server_active and !active: activate()
-		elif !server_active and active: deactivate()
 
 func eye_trigger(trigger: bool):
 	if trigger: eye.set_modulate(Color(255.0, 0, 0))
 	else: eye.set_modulate(Color(1, 1, 1))
 
-var active = true
-
+var active: bool = false
 func activate() -> void:
 	active = true
 	
@@ -91,7 +101,7 @@ func activate() -> void:
 
 func deactivate() -> void:
 	GlobalSignals.emit_signal("delete_poi", self)
-	GlobalSignals.emit_signal("create_explosion", global_position, "explosion_large", 1, {})
+	GlobalSignals.create_explosion.emit(global_position, "explosion_large", 1, {})
 	
 	active = false
 	reactivate_timer.start()

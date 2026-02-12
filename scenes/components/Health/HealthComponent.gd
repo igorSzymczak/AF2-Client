@@ -11,8 +11,6 @@ var shield_regen: float = 1.0
 @onready var parent = get_parent()
 
 @onready var isPlayer: bool = parent is Player
-@onready var isSpawner: bool = parent is Spawner
-@onready var isTurret: bool = parent is Turret
 @onready var isEnemy: bool = parent is Actor
 @onready var isBoss: bool = parent is CanvasLayer
 
@@ -52,9 +50,6 @@ func _process(_delta):
 	if isPlayer:
 		server_health = g.get_player_health(parent.gid)
 		server_shield = g.get_player_shield(parent.gid)
-	elif isSpawner:
-		server_health = g.get_spawner_health(parent.gid)
-		server_shield = g.get_spawner_shield(parent.gid)
 	elif isEnemy:
 		server_health = g.get_enemy_health(parent.gid)
 		server_shield = g.get_enemy_shield(parent.gid)

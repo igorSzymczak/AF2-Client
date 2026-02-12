@@ -243,50 +243,32 @@ func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name:
 ## SPAWNERS
 
 
-@rpc
-func add_existing_spawners(Spawners: Dictionary):
-	handle_add_spawners(Spawners)
+@rpc("authority", "call_remote", "reliable")
+func update_spawner_property(id: int, prop: int, value: Variant):
+	handle_client_spawner_property_changed(id, prop, value)
 
-func handle_add_spawners(Spawners: Dictionary):
-	for i in Spawners:
-		g.add_spawner(Spawners[i])
-		create_spawner(Spawners[i].id)
+@rpc("authority", "call_remote", "reliable")
+func add_existing_spawners(spawners: Array[Dictionary]):
+	for spawner_data: Dictionary in spawners:
+		handle_client_spawner_added(spawner_data)
 
-# Client
-func create_spawner(id: int):
-	var spawner = preload("res://scenes/objects/Spawners/spawner.tscn").instantiate()
-	spawner.name = str(id)
-	spawner.gid = id
-	
-	var spawner_data = g.Spawners[id]
-	current_world.add_child(spawner)
-	g.Spawners[id]["node"] = spawner
-	spawner.global_position = spawner_data["global_position"]
-	spawner.sprite.rotation = spawner_data["rotation"]
-	var spawner_stats: Dictionary = g.get_spawner_stats(id)
-	for stat: Stats.TYPE in spawner_stats.keys():
-		spawner.stats.set_stat_value(stat, spawner_stats[stat])
+@rpc("authority", "call_remote", "reliable")
+func add_spawner(spawner_data: Dictionary):
+	handle_client_spawner_added(spawner_data)
 
-@rpc("authority", "call_local", "unreliable")
-func update_spawner_position(id: int, pos: Vector2): g.update_spawner_position(id, pos)
+@rpc("authority", "call_remote", "reliable")
+func remove_spawner(id: int):
+	handle_client_spawner_removed(id)
 
-@rpc("authority", "call_local", "unreliable")
-func update_spawner_rotation(id: int, rot: float): g.update_spawner_rotation(id, rot)
 
-@rpc("authority", "call_local", "reliable")
-func update_spawner_health(id: int, health: float): g.update_spawner_health(id, health)
+func handle_client_spawner_added(spawner_data: Dictionary):
+	g.add_spawner(spawner_data)
 
-@rpc("authority", "call_local", "reliable")
-func update_spawner_shield(id: int, shield: float): g.update_spawner_shield(id, shield)
+func handle_client_spawner_property_changed(id: int, prop: int, value: Variant):
+	g.update_spawner_property(id, prop, value)
 
-@rpc("authority", "call_local", "unreliable")
-func update_spawner_eye_position(id: int, pos: Vector2): g.update_spawner_eye_position(id, pos)
-
-@rpc("authority", "call_local", "reliable")
-func update_spawner_eye_trigger(id: int, trigger: bool): g.update_spawner_eye_trigger(id, trigger)
-
-@rpc("authority", "call_local", "reliable")
-func update_spawner_active(id: int, active: bool): g.update_spawner_active(id, active)
+func handle_client_spawner_removed(id: int):
+	g.remove_spawner(id)
 
 
 
@@ -321,21 +303,10 @@ func handle_client_turret_property_changed(id: int, prop: int, value: Variant):
 func handle_client_turret_removed(id: int):
 	g.remove_turret(id)
 
-func create_turret(id: int):
-	var turret = preload("res://scenes/objects/Spawners/Turrets/turret.tscn").instantiate()
-	turret.name = str(id)
-	turret.gid = id
-	
-	var turret_data = g.Turrets[id]
-	turret.global_position = turret_data["global_position"]
-	turret.rotation = turret_data["rotation"]
-	
-	current_world.add_child(turret)
-	g.Turrets[id]["node"] = turret
-
 
 
 ## ENEMIES
+
 
 
 @rpc

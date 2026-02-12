@@ -494,45 +494,88 @@ func update_spawner_stat(id: int, stat_type: Stats.TYPE, value: float):
 
 ## TURRETS
 
+enum TurretProperty {
+	GID,
+	TURRET_TYPE,
+	GLOBAL_POSITION,
+	ROTATION,
+	HEALTH,
+	SHIELD,
+}
 
-func add_turret(turret: Dictionary):
-	var id: int = turret.id
-	if !Turrets.has(id):
-		Turrets[id] = turret
+const TURRET_PROPERTY_SCHEMA: Dictionary[TurretProperty, Dictionary] = {
+	TurretProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	TurretProperty.TURRET_TYPE: {
+		"type": TYPE_INT, # enum TurretType
+		"default": 0
+	},
+	TurretProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	TurretProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	TurretProperty.HEALTH: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	TurretProperty.SHIELD: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	}
+}
 
-func remove_turret(id: int): if Turrets.has(id): Turrets.erase(id)
+signal turret_added(turret: Turret)
+signal turret_property_changed(turret_id: int, prop: TurretProperty, value: Variant)
+func add_turret(turret_data: Dictionary):
+	var gid: int = turret_data[TurretProperty.GID]
+	if Turrets.has(gid):
+		return
+	
+	var type: EntityManager.TurretType = turret_data[TurretProperty.TURRET_TYPE]
+	var turret: Turret = EntityManager.get_turret(type)
+	turret_added.emit(turret)
+	current_world.add_child(turret)
+	if !is_instance_valid(turret):
+		push_warning("Turret of type ", type, " non existant!")
+		return
+	Turrets[gid] = {
+		"node": turret,
+		"props": turret.props,
+		"stats": turret.stats.stats
+	}
+	turret.props.property_changed.connect(func(prop: int, value: Variant):
+		turret_property_changed.emit(gid, prop, value)
+	)
+	turret.props.from_dict(turret_data)
+signal turret_removed(turret_id: int)
+func remove_turret(turret_id: int) -> void:
+	if Turrets.has(turret_id):
+		Turrets.erase(turret_id)
+		turret_removed.emit(turret_id)
 
-func update_turret_position(id: int, pos: Vector2):
-	if Turrets.has(id):
-		Turrets[id]["global_position"] = pos
-func get_turret_position(id: int) -> Vector2:
-	if Turrets.has(id):
-		return Turrets[id]["global_position"]
-	return Vector2.ZERO
+func get_turret_property(turret_id: int, prop: TurretProperty) -> Variant:
+	if Turrets.has(turret_id):
+		var props: PropertyContainer = Turrets[turret_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
 
-func update_turret_rotation(id: int, rot: float):
-	if Turrets.has(id):
-		Turrets[id]["rotation"] = rot
-func get_turret_rotation(id: int) -> float:
-	if Turrets.has(id):
-		return Turrets[id]["rotation"]
-	return 0
+func get_turret_props(turret_id: int) -> PropertyContainer:
+	if Turrets.has(turret_id):
+		return Turrets[turret_id].props
+	return null
 
-func get_turret_health(id: int) -> float:
-	if Turrets.has(id):
-		return Turrets[id]["health"]
-	return 0
-func update_turret_health(id: int, health: float):
-	if Turrets.has(id):
-		Turrets[id]["health"] = health
-
-func get_turret_shield(id: int) -> float:
-	if Turrets.has(id):
-		return Turrets[id]["shield"]
-	return 0
-func update_turret_shield(id: int, shield: float):
-	if Turrets.has(id):
-		Turrets[id]["shield"] = shield
+func update_turret_property(turret_id: int, prop: TurretProperty, value: Variant) -> void:
+	if !Turrets.has(turret_id):
+		return
+	
+	var props: PropertyContainer = Turrets[turret_id]["props"]
+	props.set_property(prop, value)
 
 func get_turret_stats(id: int) -> Dictionary[Stats.TYPE, float]:
 	if Turrets.has(id):
@@ -541,10 +584,6 @@ func get_turret_stats(id: int) -> Dictionary[Stats.TYPE, float]:
 func update_turret_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
 	if Turrets.has(id):
 		Turrets[id]["stats"] = stats
-		
-		var turret: SpawnerTurret = Turrets[id]["node"] as SpawnerTurret
-		for stat: Stats.TYPE in stats.keys():
-			turret.stats.set_stat_value(stat, stats[stat])
 
 func get_turret_stat(id: int, stat_type: Stats.TYPE) -> float:
 	if Turrets.has(id) and Turrets[id]["stats"].has(stat_type):
@@ -553,9 +592,6 @@ func get_turret_stat(id: int, stat_type: Stats.TYPE) -> float:
 func update_turret_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Turrets.has(id):
 		Turrets[id]["stats"][stat_type] = value
-		
-		var turret: SpawnerTurret = Turrets[id]["node"] as SpawnerTurret
-		turret.stats.set_stat_value(stat_type, value)
 
 
 ## ENEMIES

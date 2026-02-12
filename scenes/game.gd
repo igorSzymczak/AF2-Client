@@ -289,30 +289,37 @@ func update_spawner_eye_trigger(id: int, trigger: bool): g.update_spawner_eye_tr
 func update_spawner_active(id: int, active: bool): g.update_spawner_active(id, active)
 
 
+
 ## TURRETS
 
 
-@rpc
-func add_existing_turrets(Turrets: Dictionary[int, Dictionary]):
-	handle_add_turrets(Turrets)
 
-func handle_add_turrets(Turrets: Dictionary):
-	for i in Turrets:
-		var turret = Turrets[i]
-		g.add_turret(turret)
-		create_turret(turret.id)
+@rpc("authority", "call_remote", "reliable")
+func update_turret_property(id: int, prop: int, value: Variant):
+	handle_client_turret_property_changed(id, prop, value)
 
-@rpc("authority", "call_local", "reliable")
-func add_turret(turret: Dictionary):
-	g.add_turret(turret)
-	
-	# Only on Client
-	create_turret(turret.id)
+@rpc("authority", "call_remote", "reliable")
+func add_existing_turrets(turrets: Array[Dictionary]):
+	for turret_data: Dictionary in turrets:
+		handle_client_turret_added(turret_data)
 
-@rpc("authority", "call_local", "reliable")
+@rpc("authority", "call_remote", "reliable")
+func add_turret(turret_data: Dictionary):
+	handle_client_turret_added(turret_data)
+
+@rpc("authority", "call_remote", "reliable")
 func remove_turret(id: int):
-	g.remove_turret(id)
+	handle_client_turret_removed(id)
 
+
+func handle_client_turret_added(turret_data: Dictionary):
+	g.add_turret(turret_data)
+
+func handle_client_turret_property_changed(id: int, prop: int, value: Variant):
+	g.update_turret_property(id, prop, value)
+
+func handle_client_turret_removed(id: int):
+	g.remove_turret(id)
 
 func create_turret(id: int):
 	var turret = preload("res://scenes/objects/Spawners/Turrets/turret.tscn").instantiate()
@@ -326,17 +333,6 @@ func create_turret(id: int):
 	current_world.add_child(turret)
 	g.Turrets[id]["node"] = turret
 
-@rpc("authority", "call_local", "reliable")
-func update_turret_position(id: int, pos: Vector2): g.update_turret_position(id, pos)
-
-@rpc("authority", "call_local", "reliable")
-func update_turret_rotation(id: int, rot: float): g.update_turret_rotation(id, rot)
-
-@rpc("authority", "call_local", "reliable")
-func update_turret_health(id: int, health: float): g.update_turret_health(id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_turret_shield(id: int, shield: float): g.update_turret_shield(id, shield)
 
 
 ## ENEMIES

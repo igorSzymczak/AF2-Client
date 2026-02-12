@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://2twcrktxuv2s"]
+[gd_scene format=3 uid="uid://2twcrktxuv2s"]
 
 [ext_resource type="Script" uid="uid://cw0o8737w5ujo" path="res://scenes/objects/Spawners/Turrets/turret.gd" id="1_345vf"]
 [ext_resource type="Texture2D" uid="uid://bsi3wjg85r870" path="res://assets/turrets/laser2.png" id="2_fdern"]
@@ -18,18 +18,18 @@ gradient = SubResource("Gradient_kxjgn")
 radius = 70.0
 height = 140.0
 
-[node name="Turret" type="Node2D"]
+[node name="Turret" type="Node2D" unique_id=395673543]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_345vf")
 death_particle_gradient = SubResource("GradientTexture1D_enrc6")
 
-[node name="TurretSprite" type="Sprite2D" parent="."]
+[node name="TurretSprite" type="Sprite2D" parent="." unique_id=1789933830]
 texture = ExtResource("2_fdern")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_cla8p")]
+[node name="HealthComponent" parent="." unique_id=1161604600 instance=ExtResource("4_cla8p")]
 modulate = Color(1, 1, 1, 0.901961)
 
-[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_177gw")]
+[node name="HealthBar" parent="HealthComponent" unique_id=1399917431 instance=ExtResource("5_177gw")]
 offset_left = -40.0
 offset_top = 51.4286
 offset_right = 30.0
@@ -37,17 +37,17 @@ offset_bottom = 61.4286
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_7i8ty")]
+[node name="ShieldBar" parent="HealthComponent" unique_id=612851995 instance=ExtResource("6_7i8ty")]
 offset_left = -40.0
 offset_top = 35.4286
 offset_right = 30.0
 offset_bottom = 45.4286
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_v5ggs")]
+[node name="HitboxComponent" parent="." unique_id=1816530043 node_paths=PackedStringArray("health_component") instance=ExtResource("7_v5ggs")]
 visible = false
 health_component = NodePath("../HealthComponent")
 
-[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent" unique_id=281631573]
 position = Vector2(-7.14286, -1.31958e-14)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ndts7")

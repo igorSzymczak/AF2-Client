@@ -9,8 +9,8 @@ var stats: Stats = Stats.new()
 @export var enemies_at_once : int = 0
 @export var orbit_time_MS: float = -10000.0
 @export var team: int = 1
-var turrets: Array[SpawnerTurret] = []
-var start_turrets: Array[SpawnerTurret]
+var turrets: Array[Turret] = []
+var start_turrets: Array[Turret]
 
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var reactivate_timer = $ReactivateTimer

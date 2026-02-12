@@ -2,17 +2,17 @@ extends Node2D
 class_name HealthComponent
 
 var max_health: float = 1.0
-var health: float = 1.0
+var health: float = 1.0 : set = _set_health
 var armor: float = 1.0
 var max_shield: float = 1.0
-var shield: float = 1.0
+var shield: float = 1.0 : set = _set_shield
 var shield_regen: float = 1.0
 
 @onready var parent = get_parent()
 
 @onready var isPlayer: bool = parent is Player
 @onready var isSpawner: bool = parent is Spawner
-@onready var isTurret: bool = parent is SpawnerTurret
+@onready var isTurret: bool = parent is Turret
 @onready var isEnemy: bool = parent is Actor
 @onready var isBoss: bool = parent is CanvasLayer
 
@@ -34,8 +34,8 @@ func _ready() -> void:
 	
 	set_max_health(stats.get_stat(Stats.TYPE.MAX_HEALTH).value)
 	set_max_shield(stats.get_stat(Stats.TYPE.MAX_SHIELD).value)
-	_set_health(stats.get_stat(Stats.TYPE.MAX_HEALTH).value)
-	_set_shield(stats.get_stat(Stats.TYPE.MAX_SHIELD).value)
+	#_set_health(stats.get_stat(Stats.TYPE.MAX_HEALTH).value)
+	#_set_shield(stats.get_stat(Stats.TYPE.MAX_SHIELD).value)
 
 var server_max_health := 0.0
 var server_health := 0.0
@@ -55,21 +55,14 @@ func _process(_delta):
 	elif isSpawner:
 		server_health = g.get_spawner_health(parent.gid)
 		server_shield = g.get_spawner_shield(parent.gid)
-	elif isTurret:
-		server_health = g.get_turret_health(parent.gid)
-		server_shield = g.get_turret_shield(parent.gid)
 	elif isEnemy:
 		server_health = g.get_enemy_health(parent.gid)
 		server_shield = g.get_enemy_shield(parent.gid)
-	
-	if health != server_health:
-		_set_health(server_health)
-	if shield != server_shield:
-		_set_shield(server_shield)
-	
 
 signal health_changed(value: float)
 func _set_health(_new_health: float):
+	if isTurret:
+		print("Changing health to ", _new_health)
 	if health > max_health:
 		set_max_health(health)
 	health = _new_health

@@ -41,6 +41,7 @@ ItemManager="*res://globals/ItemManager/item_manager.gd"
 StatDefinitions="*res://globals/StatDefinitions/StatDefinitions.gd"
 StatManager="*res://globals/StatManager/StatManager.gd"
 WeaponManager="*uid://cr5pjrwhd04dh"
+EntityManager="*uid://blw11035gvxkt"
 
 [debug]
 

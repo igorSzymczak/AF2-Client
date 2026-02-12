@@ -2,34 +2,45 @@ class_name Actor extends CharacterBody2D
 
 var gid: int # GameManager ID
 var stats: Stats = Stats.new()
+var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
+@export var actor_type: EntityManager.ActorType
 
 @onready var engine: Thruster = $Sprite/Engine
 @onready var health_component: HealthComponent = $HealthComponent
 @export var poi_type = "enemy"
 
 func _ready() -> void:
-	health_component.connect("health_depleted", handle_death)
+	health_component.health_depleted.connect(handle_death)
 	GlobalSignals.emit_signal("setup_poi", self)
+	props.property_changed.connect(_on_property_changed)
 
 var server_pos: Vector2 = Vector2.ZERO
 var server_rot: float = 0
 var server_engine_active: bool
 var last_pos := Vector2.ZERO
-func _process(_delta):
-	if g.Enemies.has(name.to_int()):
-		last_pos = global_position
-		server_pos = g.get_enemy_position(name.to_int())
-		global_position = global_position.lerp(server_pos, 0.2)
-		
-		server_rot = g.get_enemy_rotation(name.to_int())
-		rotation = lerp_angle(rotation, server_rot, 0.2)
-		
-		server_engine_active = g.get_enemy_engine_active(name.to_int())
-		var vel = global_position.direction_to(last_pos) * global_position.distance_to(last_pos)
-		if server_engine_active: engine.activate_thruster()
-		elif !server_engine_active: engine.deactivate_thruster(vel)
-	else:
-		handle_death()
+func _process(delta: float):
+	global_position = global_position.lerp(server_pos, delta * 10)
+	rotation = lerp_angle(rotation, server_rot, 0.2)
+	
+	velocity = global_position.direction_to(last_pos) * global_position.distance_to(last_pos)
+
+func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
+	match prop:
+		g.ActorProperty.GID:
+			gid = value
+		g.ActorProperty.ACTOR_TYPE:
+			actor_type = value
+		g.ActorProperty.GLOBAL_POSITION:
+			server_pos = value
+		g.ActorProperty.ROTATION:
+			server_rot = value
+		g.ActorProperty.HEALTH:
+			health_component.health = value
+		g.ActorProperty.SHIELD:
+			health_component.shield = value
+		g.ActorProperty.ENGINE_ACTIVE:
+			if value: 	engine.activate_thruster()
+			else: 		engine.deactivate_thruster(velocity)
 
 func handle_death() -> void:
 	if !is_queued_for_deletion():

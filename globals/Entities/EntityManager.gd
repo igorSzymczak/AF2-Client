@@ -1,14 +1,24 @@
 extends Node
 
-enum Type {
+enum ActorType {
 	ZLATTE,
 	ELITE_LAUNCHER
 }
 
-var Enemies: Dictionary[Type, PackedScene] = {
-	Type.ZLATTE : preload("res://scenes/entities/Actor/actor.tscn"),
-	#Type.ELITE_LAUNCHER: 
+var Actors: Dictionary[ActorType, PackedScene] = {
+	ActorType.ZLATTE : preload("res://scenes/entities/Actor/actor.tscn"),
+	#ActorType.ELITE_LAUNCHER: 
 }
+
+func get_actor_type(actor: Actor) -> ActorType:
+	return actor.actor_type
+
+func get_actor(actor_type: ActorType) -> Actor:
+	return Actors[actor_type].instantiate()
+
+func get_actor_scene(actor_type: ActorType) -> PackedScene:
+	return Actors[actor_type]
+
 
 enum TurretType {
 	DEFAULT,

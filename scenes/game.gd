@@ -309,54 +309,32 @@ func handle_client_turret_removed(id: int):
 
 
 
-@rpc
-func add_existing_enemies(Enemies: Dictionary[int, Dictionary]):
-	handle_add_enemies(Enemies)
+@rpc("authority", "call_remote", "reliable")
+func update_actor_property(id: int, prop: int, value: Variant):
+	handle_client_actor_property_changed(id, prop, value)
 
-func handle_add_enemies(Enemies: Dictionary):
-	for i in Enemies:
-		var enemy: Dictionary = Enemies[i]
-		g.add_enemy(enemy)
-		create_enemy(enemy.id)
+@rpc("authority", "call_remote", "reliable")
+func add_existing_actors(actors: Array[Dictionary]):
+	for actor_data: Dictionary in actors:
+		handle_client_actor_added(actor_data)
 
-@rpc("authority", "call_local", "reliable")
-func add_enemy(enemy: Dictionary):
-	g.add_enemy(enemy)
-	
-	# Only on Client
-	create_enemy(enemy.id)
+@rpc("authority", "call_remote", "reliable")
+func add_actor(actor_data: Dictionary):
+	handle_client_actor_added(actor_data)
 
-@rpc("authority", "call_local", "reliable")
-func remove_enemy(id: int):
-	g.remove_enemy(id)
+@rpc("authority", "call_remote", "reliable")
+func remove_actor(id: int):
+	handle_client_actor_removed(id)
 
 
-func create_enemy(id: int):
-	var enemy: Actor = preload("res://scenes/entities/Actor/actor.tscn").instantiate()
-	enemy.name = str(id)
-	enemy.gid = id
-	
-	var enemy_data: Dictionary = g.Enemies[id]
-	enemy.global_position = enemy_data.global_position
-	enemy.rotation = enemy_data.rotation
-	
-	current_world.add_child(enemy)
-	g.Enemies[id]["node"] = enemy
+func handle_client_actor_added(actor_data: Dictionary):
+	g.add_actor(actor_data)
 
-@rpc("authority", "call_local", "unreliable")
-func update_enemy_position(id: int, pos: Vector2): g.update_enemy_position(id, pos)
+func handle_client_actor_property_changed(id: int, prop: int, value: Variant):
+	g.update_actor_property(id, prop, value)
 
-@rpc("authority", "call_local", "unreliable")
-func update_enemy_rotation(id: int, rot: float): g.update_enemy_rotation(id, rot)
-
-@rpc("authority", "call_local", "reliable")
-func update_enemy_health(id: int, health: float): g.update_enemy_health(id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_enemy_shield(id: int, shield: float): g.update_enemy_shield(id, shield)
-
-@rpc("authority", "call_local", "reliable")
-func update_enemy_engine_active(id: int, engine_active: bool): g.update_enemy_engine_active(id, engine_active)
+func handle_client_actor_removed(id: int):
+	g.remove_turret(id)
 
 ## ITEMS
 

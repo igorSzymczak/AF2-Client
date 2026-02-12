@@ -25,7 +25,7 @@ func _update_entity_stat(entity_type: int, gid: int, stat: int, value: float):
 func _handle_update_entity_stats(entity_type: int, gid: int, stats: Dictionary[int, float]):
 	match entity_type as g.ENTITY_TYPE:
 		g.ENTITY_TYPE.PLAYER:	g.update_player_stats(gid, stats as Dictionary[Stats.TYPE, float])
-		g.ENTITY_TYPE.ENEMY:	g.update_enemy_stats(gid, stats as Dictionary[Stats.TYPE, float])
+		g.ENTITY_TYPE.ACTOR:	g.update_actor_stats(gid, stats as Dictionary[Stats.TYPE, float])
 		g.ENTITY_TYPE.SPAWNER:	g.update_spawner_stats(gid, stats as Dictionary[Stats.TYPE, float])
 		g.ENTITY_TYPE.TURRET:	g.update_turret_stats(gid, stats as Dictionary[Stats.TYPE, float])
 		g.ENTITY_TYPE.BOSS:		g.update_boss_stats(gid, stats as Dictionary[Stats.TYPE, float])
@@ -33,7 +33,7 @@ func _handle_update_entity_stats(entity_type: int, gid: int, stats: Dictionary[i
 func _handle_update_entity_stat(entity_type: int, gid: int, stat: int, value: float):
 	match entity_type as g.ENTITY_TYPE:
 		g.ENTITY_TYPE.PLAYER:	g.update_player_stat(gid, stat as Stats.TYPE, value)
-		g.ENTITY_TYPE.ENEMY:	g.update_enemy_stat(gid, stat as Stats.TYPE, value)
+		g.ENTITY_TYPE.ACTOR:	g.update_actor_stat(gid, stat as Stats.TYPE, value)
 		g.ENTITY_TYPE.SPAWNER:	g.update_spawner_stat(gid, stat as Stats.TYPE, value)
 		g.ENTITY_TYPE.TURRET:	g.update_turret_stat(gid, stat as Stats.TYPE, value)
 		g.ENTITY_TYPE.BOSS:		g.update_boss_stat(gid, stat as Stats.TYPE, value)

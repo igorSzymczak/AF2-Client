@@ -50,9 +50,6 @@ func _process(_delta):
 	if isPlayer:
 		server_health = g.get_player_health(parent.gid)
 		server_shield = g.get_player_shield(parent.gid)
-	elif isEnemy:
-		server_health = g.get_enemy_health(parent.gid)
-		server_shield = g.get_enemy_shield(parent.gid)
 
 signal health_changed(value: float)
 func _set_health(_new_health: float):

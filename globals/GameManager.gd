@@ -11,7 +11,7 @@ enum TIMESTEP {
 
 enum ENTITY_TYPE {
 	PLAYER,
-	ENEMY,
+	ACTOR,
 	SPAWNER,
 	TURRET,
 	BOSS
@@ -26,7 +26,7 @@ var Players: Dictionary[int, Dictionary] = {}
 var Bullets: Dictionary = {}
 var Spawners: Dictionary[int, Dictionary] = {}
 var Turrets: Dictionary[int, Dictionary] = {}
-var Enemies: Dictionary[int, Dictionary] = {}
+var Actors: Dictionary[int, Dictionary] = {}
 var Bosses: Dictionary[int, Dictionary] = {}
 var Items: Dictionary = {}
 
@@ -470,7 +470,7 @@ func add_spawner(spawner_data: Dictionary):
 	Spawners[gid] = {
 		"node": spawner,
 		"props": spawner.props,
-		"stats": spawner.stats.stats
+		"stats": spawner.stats
 	}
 	spawner.props.property_changed.connect(func(prop: int, value: Variant):
 		spawner_property_changed.emit(gid, prop, value)
@@ -505,21 +505,23 @@ func update_spawner_property(spawner_id: int, prop: SpawnerProperty, value: Vari
 	var props: PropertyContainer = Spawners[spawner_id]["props"]
 	props.set_property(prop, value)
 
-func get_spawner_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+func get_spawner_stats(id: int) -> Stats:
 	if Spawners.has(id):
 		return Spawners[id]["stats"]
-	return {}
-func update_spawner_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	return null
+func update_spawner_stats(id: int, new_stats: Dictionary[Stats.TYPE, float]):
 	if Spawners.has(id):
-		Spawners[id]["stats"] = stats
+		var stats: Stats = Actors[id]["stats"]
+		stats.from_dict(new_stats)
 
-func get_spawner_stat(id: int, stat_type: Stats.TYPE) -> float:
+func get_spawner_stat(id: int, stat_type: Stats.TYPE) -> Stat:
 	if Spawners.has(id) and Spawners[id]["stats"].has(stat_type):
 		return Spawners[id]["stats"][stat_type]
-	return 0
+	return null
 func update_spawner_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Spawners.has(id):
-		Spawners[id]["stats"][stat_type] = value
+		var stats: Stats = Actors[id]["stats"]
+		stats.set_stat_value(stat_type, value)
 
 
 ## TURRETS
@@ -580,7 +582,7 @@ func add_turret(turret_data: Dictionary):
 	Turrets[gid] = {
 		"node": turret,
 		"props": turret.props,
-		"stats": turret.stats.stats
+		"stats": turret.stats
 	}
 	turret.props.property_changed.connect(func(prop: int, value: Variant):
 		turret_property_changed.emit(gid, prop, value)
@@ -615,97 +617,143 @@ func update_turret_property(turret_id: int, prop: TurretProperty, value: Variant
 	var props: PropertyContainer = Turrets[turret_id]["props"]
 	props.set_property(prop, value)
 
-func get_turret_stats(id: int) -> Dictionary[Stats.TYPE, float]:
+func get_turret_stats(id: int) -> Stats:
 	if Turrets.has(id):
 		return Turrets[id]["stats"]
-	return {}
-func update_turret_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
+	return null
+func update_turret_stats(id: int, new_stats: Dictionary[Stats.TYPE, float]):
 	if Turrets.has(id):
-		Turrets[id]["stats"] = stats
+		var stats: Stats = Actors[id]["stats"]
+		stats.from_dict(new_stats)
 
-func get_turret_stat(id: int, stat_type: Stats.TYPE) -> float:
+func get_turret_stat(id: int, stat_type: Stats.TYPE) -> Stat:
 	if Turrets.has(id) and Turrets[id]["stats"].has(stat_type):
 		return Turrets[id]["stats"][stat_type]
-	return 0
+	return null
 func update_turret_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Turrets.has(id):
-		Turrets[id]["stats"][stat_type] = value
+		var stats: Stats = Turrets[id]["stats"]
+		stats.set_stat_value(stat_type, value)
 
 
 
-## ENEMIES
+## Actors
 
 
 
-func add_enemy(enemy: Dictionary):
-	var id: int = enemy.id
-	if !Enemies.has(id):
-		Enemies[id] = enemy
+enum ActorProperty {
+	GID,
+	ACTOR_TYPE,
+	GLOBAL_POSITION,
+	ROTATION,
+	HEALTH,
+	SHIELD,
+	ENGINE_ACTIVE
+}
 
-func remove_enemy(id: int): if Enemies.has(id): Enemies.erase(id)
+const ACTOR_PROPERTY_SCHEMA: Dictionary[ActorProperty, Dictionary] = {
+	ActorProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	ActorProperty.ACTOR_TYPE: {
+		"type": TYPE_INT,
+		"default": 0
+	},
+	ActorProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	ActorProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	ActorProperty.HEALTH: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	ActorProperty.SHIELD: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	ActorProperty.ENGINE_ACTIVE: {
+		"type": TYPE_BOOL,
+		"default": false
+	}
+}
 
-func update_enemy_position(id: int, pos: Vector2):
-	if Enemies.has(id):
-		Enemies[id]["global_position"] = pos
-func get_enemy_position(id: int) -> Vector2:
-	if Enemies.has(id):
-		return Enemies[id]["global_position"]
-	return Vector2.ZERO
+signal actor_added(actor: Actor)
+signal actor_property_changed(actor_id: int, prop: ActorProperty, value: Variant)
+func add_actor(actor_data: Dictionary):
+	var props: Dictionary = actor_data["props"]
+	var stats: Dictionary = actor_data["stats"]
+	
+	var gid: int = props[ActorProperty.GID]
+	if Actors.has(gid):
+		return
+	
+	var type: EntityManager.ActorType = props[ActorProperty.ACTOR_TYPE]
+	var actor: Actor = EntityManager.get_actor(type)
+	actor_added.emit(actor)
+	current_world.add_child(actor)
+	if !is_instance_valid(actor):
+		push_warning("Actor of type ", type, " non existant!")
+		return
+	Actors[gid] = {
+		"node": actor,
+		"props": actor.props,
+		"stats": actor.stats
+	}
+	actor.props.property_changed.connect(func(prop: int, value: Variant):
+		actor_property_changed.emit(gid, prop, value)
+	)
+	
+	actor.global_position = props[ActorProperty.GLOBAL_POSITION]
+	
+	actor.stats.from_dict(stats)
+	actor.props.from_dict(props)
 
-func update_enemy_rotation(id: int, rot: float):
-	if Enemies.has(id):
-		Enemies[id]["rotation"] = rot
-func get_enemy_rotation(id: int) -> float:
-	if Enemies.has(id):
-		return Enemies[id]["rotation"]
-	return 0
+signal actor_removed(actor_id: int)
+func remove_actor(actor_id: int) -> void:
+	if Actors.has(actor_id):
+		Actors.erase(actor_id)
+		actor_removed.emit(actor_id)
 
-func get_enemy_health(id: int) -> float:
-	if Enemies.has(id):
-		return Enemies[id]["health"]
-	return 0
-func update_enemy_health(id: int, health: float):
-	if Enemies.has(id):
-		Enemies[id]["health"] = health
+func get_actor_property(actor_id: int, prop: ActorProperty) -> Variant:
+	if Actors.has(actor_id):
+		var props: PropertyContainer = Actors[actor_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
 
-func get_enemy_shield(id: int) -> float:
-	if Enemies.has(id):
-		return Enemies[id]["shield"]
-	return 0
-func update_enemy_shield(id: int, shield: float):
-	if Enemies.has(id):
-		Enemies[id]["shield"] = shield
+func get_actor_props(actor_id: int) -> PropertyContainer:
+	if Actors.has(actor_id):
+		return Actors[actor_id].props
+	return null
 
-func get_enemy_engine_active(id: int) -> bool:
-	if Enemies.has(id):
-		return Enemies[id]["engine_active"]
-	return false
-func update_enemy_engine_active(id: int, engine_active: bool):
-	if Enemies.has(id):
-		Enemies[id]["engine_active"] = engine_active
+func update_actor_property(actor_id: int, prop: ActorProperty, value: Variant) -> void:
+	if !Actors.has(actor_id):
+		return
+	
+	var props: PropertyContainer = Actors[actor_id]["props"]
+	props.set_property(prop, value)
 
-func get_enemy_stats(id: int) -> Dictionary[Stats.TYPE, float]:
-	if Enemies.has(id):
-		return Enemies[id]["stats"]
-	return {}
-func update_enemy_stats(id: int, stats: Dictionary[Stats.TYPE, float]):
-	if Enemies.has(id):
-		Enemies[id]["stats"] = stats
-		
-		var enemy: Actor = Enemies[id]["node"] as Actor
-		for stat: Stats.TYPE in stats.keys():
-			enemy.stats.set_stat_value(stat, stats[stat])
+func get_actor_stats(id: int) -> Stats:
+	if Actors.has(id):
+		return Actors[id]["stats"]
+	return null
+func update_actor_stats(id: int, new_stats: Dictionary[Stats.TYPE, float]):
+	if Actors.has(id):
+		var stats: Stats = Actors[id]["stats"]
+		stats.from_dict(new_stats)
 
-func get_enemy_stat(id: int, stat_type: Stats.TYPE) -> float:
-	if Enemies.has(id) and Enemies[id]["stats"].has(stat_type):
-		return Enemies[id]["stats"][stat_type]
-	return 0
-func update_enemy_stat(id: int, stat_type: Stats.TYPE, value: float):
-	if Enemies.has(id):
-		Enemies[id]["stats"][stat_type] = value
-		
-		var enemy: Actor = Enemies[id]["node"] as Actor
-		enemy.stats.set_stat_value(stat_type, value)
+func get_actor_stat(id: int, stat_type: Stats.TYPE) -> Stat:
+	if Actors.has(id) and Actors[id]["stats"].has(stat_type):
+		return Actors[id]["stats"][stat_type]
+	return null
+func update_actor_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Actors.has(id):
+		var stats: Stats = Actors[id]["stats"]
+		stats.set_stat_value(stat_type, value)
 
 
 

@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://c0rt7qn77lrxv"]
+[gd_scene format=3 uid="uid://c0rt7qn77lrxv"]
 
 [ext_resource type="Texture2D" uid="uid://b0y3t5j6dgqn6" path="res://assets/ships/Nexar Zlatte/Nexar Zlatte.png" id="1_3utq7"]
 [ext_resource type="Texture2D" uid="uid://nfei0q7uc6c1" path="res://assets/ships/Nexar Zlatte/Nexar Zlatte Lights.png" id="2_apj08"]
-[ext_resource type="Script" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_pohn7"]
-[ext_resource type="Script" path="res://assets/ships/Nexar Zlatte/Animation.gd" id="3_veqcq"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_pohn7"]
+[ext_resource type="Script" uid="uid://8lld7wovf1f6" path="res://assets/ships/Nexar Zlatte/Animation.gd" id="3_veqcq"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_vtk6o"]
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_hscbo"]
 [ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="6_tv4b5"]
@@ -28,7 +28,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2r02p"]
 _data = {
-"NexarZlattePulse": SubResource("Animation_y3hnq")
+&"NexarZlattePulse": SubResource("Animation_y3hnq")
 }
 
 [sub_resource type="Curve" id="Curve_73dro"]
@@ -53,6 +53,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 8.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 angle_max = 360.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -89,6 +90,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 8.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 angle_max = 360.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -124,6 +126,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 6.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 direction = Vector3(-1, 0, 0)
 spread = 60.0
 initial_velocity_min = 30.0
@@ -163,6 +166,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 3.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 angle_max = 360.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -179,7 +183,7 @@ scale_over_velocity_curve = SubResource("CurveTexture_bldat")
 color_ramp = SubResource("GradientTexture1D_pi8j6")
 alpha_curve = SubResource("CurveTexture_dalwd")
 
-[node name="NexarZlatte" type="Sprite2D" node_paths=PackedStringArray("engine")]
+[node name="NexarZlatte" type="Sprite2D" unique_id=1260652566 node_paths=PackedStringArray("engine")]
 rotation = 1.5708
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_3utq7")
@@ -195,37 +199,35 @@ base_armor = 3
 base_shield = 320
 base_shield_regen = 22
 
-[node name="Lights" type="Sprite2D" parent="."]
+[node name="Lights" type="Sprite2D" parent="." unique_id=2078345222]
 modulate = Color(1, 1, 0, 1)
 self_modulate = Color(1, 1, 1, 0.760929)
 position = Vector2(0, -5.96046e-08)
 texture = ExtResource("2_apj08")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_2r02p")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=5676817]
+libraries/ = SubResource("AnimationLibrary_2r02p")
 speed_scale = 0.33
 script = ExtResource("3_veqcq")
 
-[node name="Engine" parent="." instance=ExtResource("4_vtk6o")]
+[node name="Engine" parent="." unique_id=259495811 instance=ExtResource("4_vtk6o")]
 modulate = Color(1, 1, 0, 0.360784)
 show_behind_parent = true
 position = Vector2(0, 29.2727)
 rotation = -1.5708
 
-[node name="Light" parent="Engine" instance=ExtResource("5_hscbo")]
+[node name="Light" parent="Engine" unique_id=135419838 instance=ExtResource("5_hscbo")]
 position = Vector2(-0.363627, 0)
 process_material = SubResource("ParticleProcessMaterial_3v1vo")
 
-[node name="Idle" parent="Engine" instance=ExtResource("6_tv4b5")]
+[node name="Idle" parent="Engine" unique_id=1664130069 instance=ExtResource("6_tv4b5")]
 position = Vector2(0.0909091, 0)
 process_material = SubResource("ParticleProcessMaterial_bnu2w")
 
-[node name="Speeding" parent="Engine" instance=ExtResource("7_ivw0j")]
+[node name="Speeding" parent="Engine" unique_id=233683017 instance=ExtResource("7_ivw0j")]
 position = Vector2(-20.3333, 2.00272e-05)
 process_material = SubResource("ParticleProcessMaterial_ltrud")
 
-[node name="Accelerate" parent="Engine" instance=ExtResource("8_nuge5")]
+[node name="Accelerate" parent="Engine" unique_id=1542309596 instance=ExtResource("8_nuge5")]
 position = Vector2(0.0909092, 0)
 process_material = SubResource("ParticleProcessMaterial_2cmvw")

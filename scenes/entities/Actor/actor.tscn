@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://7mnl8wn3hw2e"]
+[gd_scene format=3 uid="uid://7mnl8wn3hw2e"]
 
 [ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_1smpc"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_naiqk"]
@@ -9,31 +9,31 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vmuxc"]
 radius = 0.01
 
-[node name="Actor" type="CharacterBody2D" groups=["points_of_interest"]]
+[node name="Actor" type="CharacterBody2D" unique_id=1476088542 groups=["points_of_interest"]]
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 slide_on_ceiling = false
 script = ExtResource("1_1smpc")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=778418637]
 visible = false
 position = Vector2(-27, 0)
 rotation = -1.57079
 shape = SubResource("CircleShape2D_vmuxc")
 
-[node name="Sprite" parent="." instance=ExtResource("7_bfsjr")]
+[node name="Sprite" parent="." unique_id=1561884898 instance=ExtResource("7_bfsjr")]
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_naiqk")]
+[node name="HealthComponent" parent="." unique_id=1067525726 instance=ExtResource("4_naiqk")]
 
-[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_jjsg6")]
+[node name="HealthBar" parent="HealthComponent" unique_id=625372650 instance=ExtResource("5_jjsg6")]
 offset_left = -48.0
 offset_top = 41.0
 offset_right = 48.0
 offset_bottom = 49.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_0ew5j")]
+[node name="ShieldBar" parent="HealthComponent" unique_id=336468658 instance=ExtResource("6_0ew5j")]
 offset_left = -48.0
 offset_top = 29.0
 offset_right = 48.0

@@ -444,22 +444,6 @@ func update_spawner_shield(id: int, shield: float):
 	if Spawners.has(id):
 		Spawners[id]["shield"] = shield
 
-func update_spawner_eye_position(id: int, pos: Vector2):
-	if Spawners.has(id):
-		Spawners[id]["eye_position"] = pos
-func get_spawner_eye_position(id: int) -> Vector2:
-	if Spawners.has(id):
-		return Spawners[id]["eye_position"]
-	return Vector2.ZERO
-
-func update_spawner_eye_trigger(id: int, trigger: bool):
-	if Spawners.has(id):
-		Spawners[id]["eye_trigger"] = trigger
-func get_spawner_eye_trigger(id: int) -> bool:
-	if Spawners.has(id):
-		return Spawners[id]["eye_trigger"]
-	return false
-
 func update_spawner_active(id: int, active: bool):
 	if Spawners.has(id):
 		Spawners[id]["active"] = active

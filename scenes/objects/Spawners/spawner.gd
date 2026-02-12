@@ -56,11 +56,11 @@ func _process(delta):
 		server_rot = g.get_spawner_rotation(name.to_int())
 		sprite.rotation = lerp_angle(sprite.rotation, server_rot, 0.2)
 		
-		server_eye_pos = g.get_spawner_eye_position(name.to_int())
-		eye.position = eye.position.lerp(server_eye_pos, 0.1)
-		
-		server_eye_trigger = g.get_spawner_eye_trigger(name.to_int())
-		eye_trigger(server_eye_trigger)
+		#server_eye_pos = g.get_spawner_eye_position(name.to_int())
+		#eye.position = eye.position.lerp(server_eye_pos, 0.1)
+		#
+		#server_eye_trigger = g.get_spawner_eye_trigger(name.to_int())
+		#eye_trigger(server_eye_trigger)
 		
 		server_active = g.get_spawner_active(name.to_int())
 		if server_active and !active: activate()

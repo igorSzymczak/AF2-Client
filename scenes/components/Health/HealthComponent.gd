@@ -61,8 +61,6 @@ func _process(_delta):
 
 signal health_changed(value: float)
 func _set_health(_new_health: float):
-	if isTurret:
-		print("Changing health to ", _new_health)
 	if health > max_health:
 		set_max_health(health)
 	health = _new_health

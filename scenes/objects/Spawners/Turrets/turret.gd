@@ -44,10 +44,8 @@ func _on_property_changed(prop: g.TurretProperty, value: Variant) -> void:
 			server_rot = value
 		g.TurretProperty.HEALTH:
 			health_component.health = value
-			print("Setting Turrets health to ", value)
 		g.TurretProperty.SHIELD:
 			health_component.shield = value
-			print("Setting Turrets shield to ", value)
 
 var server_pos: Vector2
 var server_rot: float
@@ -57,5 +55,5 @@ func _process(delta):
 		call_deferred("queue_free")
 		return
 	
-	global_position = global_position.lerp(server_pos, delta * 5)
-	rotation = lerp_angle(rotation, server_rot, delta * 5)
+	global_position = global_position.lerp(server_pos, delta * 4)
+	rotation = lerp_angle(rotation, server_rot, delta * 4)

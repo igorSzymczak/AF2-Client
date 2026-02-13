@@ -1,7 +1,5 @@
 extends Bullet
 
-@onready var sprite: Sprite2D = $BulletSprite
-
 func get_life_time() -> int: return 3000
 func get_life_time_rng() -> int: return 50
 

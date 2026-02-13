@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://g8rhoyo4hnsq"]
+[gd_scene format=3 uid="uid://g8rhoyo4hnsq"]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullets/RocketLauncher/rocket.gd" id="1_1hj3a"]
+[ext_resource type="Script" uid="uid://xkfnn7dih2w2" path="res://scenes/bullets/bullets/RocketLauncher/rocket.gd" id="1_1hj3a"]
 [ext_resource type="Texture2D" uid="uid://crn4vd1bsktxn" path="res://assets/projectiles/missile red.png" id="2_1j8j5"]
 
 [sub_resource type="Curve" id="Curve_1dnbw"]
@@ -14,27 +14,27 @@ colors = PackedColorArray(1.5, 0, 0, 0.373, 1, 0, 0, 0)
 radius = 3.0
 height = 34.0
 
-[node name="Rocket" type="Area2D"]
+[node name="Rocket" type="Area2D" unique_id=1147772283]
 top_level = true
 visibility_layer = 2
 monitorable = false
 script = ExtResource("1_1hj3a")
 
-[node name="Trail" type="Line2D" parent="."]
+[node name="Trail" type="Line2D" parent="." unique_id=905189496]
 modulate = Color(1.75, 0.2, 0.2, 1)
 top_level = true
 width_curve = SubResource("Curve_1dnbw")
 gradient = SubResource("Gradient_co1ty")
 
-[node name="TrailPosition" type="Marker2D" parent="."]
+[node name="TrailPosition" type="Marker2D" parent="." unique_id=1545840890]
 position = Vector2(-18, 0)
 
-[node name="BulletSprite" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=1953137117]
 position = Vector2(-4, 0)
 scale = Vector2(0.636364, 0.636364)
 texture = ExtResource("2_1j8j5")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=919977056]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_m2n86")
 

@@ -1,6 +1,10 @@
 extends Area2D
 class_name Structure
 
+var gid: int
+@export var structure_name: String
+var props: PropertyContainer = PropertyContainer.new(g.STRUCTURE_PROPERTY_SCHEMA)
+
 @export var landable: bool
 @export var orbit_time_MS: float
 @export var is_shown: bool = true
@@ -13,7 +17,7 @@ const time_multiplier: float = 30
 @export var is_sun: bool = false
 @export var is_shadered: bool = false
 @export var local_sun: Structure
-@onready var orbit: Structure
+var orbit: Structure
 @onready var sprite: Sprite2D = $Sprite
 @onready var land_area: CollisionShape2D = $LandArea
 
@@ -29,6 +33,7 @@ func _ready():
 	GlobalSignals.emit_signal("setup_poi", self)
 	
 	set_orbit()
+	props.property_changed.connect(_handle_property_changed)
 	
 	if !is_shown:
 		$Sprite.visible = false
@@ -36,60 +41,66 @@ func _ready():
 func _process(delta: float) -> void:
 	set_safezone()
 	
-	update_server_position()
-	update_landable()
-	
 	self_orbit(delta)
 	update_shader(delta)
 	handle_landing(delta)
 
 func set_safezone():
-	if !is_safezone:
-		is_safezone = g.get_planet_is_safezone(name)
-		if !is_safezone: return
-	if is_instance_valid(safezone): return
+	if !is_instance_valid(safezone): return
 	
 	safezone = $SafeZone
-	
-var server_pos := Vector2.ZERO
-func update_server_position():
-	var temp = g.get_planet_position(name)
-	
-	if temp != server_pos:
-		server_pos = temp
-		global_position = server_pos
 
-@onready var server_landable: bool = landable
+func _handle_property_changed(prop: g.StructureProperty, value: Variant) -> void:
+	match prop:
+		g.StructureProperty.GID:
+			gid = value
+		g.StructureProperty.GLOBAL_POSITION:
+			global_position = value
+		g.StructureProperty.LANDABLE:
+			if landable == value:
+				return
+			landable = value
+			update_landable()
+		g.StructureProperty.IS_SAFEZONE:
+			if is_safezone == value:
+				return
+			is_safezone = value
+			set_safezone()
+
+#var server_pos := Vector2.ZERO
+#func update_server_position():
+	#var temp = g.get_planet_position(name)
+	#
+	#if temp != server_pos:
+		#server_pos = temp
+		#global_position = server_pos
+
 func update_landable():
-	server_landable = g.get_planet_landable(name)
-	if server_landable != landable:
-		landable = server_landable
+	if !is_instance_valid(aura_blue) or !is_instance_valid(aura_red):
+		return
+	
+	aura_blue.show()
+	aura_red.show()
+	
+	if landable:
+		var blue_tween := create_tween()
+		blue_tween.tween_property(aura_blue, "modulate:a", 1, 2)
 		
-		if !is_instance_valid(aura_blue) or !is_instance_valid(aura_red):
-			return
+		var red_tween := create_tween()
+		red_tween.tween_property(aura_red, "modulate:a", 0, 2)
 		
-		aura_blue.show()
-		aura_red.show()
+		await get_tree().create_timer(2).timeout
+		if landable: aura_red.hide()
 		
-		if landable:
-			var blue_tween := create_tween()
-			blue_tween.tween_property(aura_blue, "modulate:a", 1, 2)
-			
-			var red_tween := create_tween()
-			red_tween.tween_property(aura_red, "modulate:a", 0, 2)
-			
-			await get_tree().create_timer(2).timeout
-			if landable: aura_red.hide()
-			
-		elif !landable:
-			var blue_tween := create_tween()
-			blue_tween.tween_property(aura_blue, "modulate:a", 0, 2)
-			
-			var red_tween := create_tween()
-			red_tween.tween_property(aura_red, "modulate:a", 1, 2)
-			
-			await get_tree().create_timer(2).timeout
-			if landable: aura_blue.hide()
+	elif !landable:
+		var blue_tween := create_tween()
+		blue_tween.tween_property(aura_blue, "modulate:a", 0, 2)
+		
+		var red_tween := create_tween()
+		red_tween.tween_property(aura_red, "modulate:a", 1, 2)
+		
+		await get_tree().create_timer(2).timeout
+		if landable: aura_blue.hide()
 
 func self_orbit(delta: float) -> void:
 	if !orbit:
@@ -151,8 +162,8 @@ func set_structure_data(data: Dictionary):
 	if g.me.landed_structure != null:
 		GlobalSignals.set_ui_args.emit(data)
 
-func land_player_on(user_id: int, structure_name: String):
-	if structure_name == name:
+func land_player_on(user_id: int, land_structure_name: String):
+	if land_structure_name == name:
 		var player: Player = g.get_player(user_id)
 		if is_instance_valid(player):
 			player.land_on(self)

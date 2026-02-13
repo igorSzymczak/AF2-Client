@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4801adrniots"]
+[gd_scene format=3 uid="uid://b4801adrniots"]
 
 [ext_resource type="Script" uid="uid://605l4cv3mr6l" path="res://scenes/objects/Spawners/spawner.gd" id="1_micgo"]
 [ext_resource type="PackedScene" uid="uid://7mnl8wn3hw2e" path="res://scenes/entities/Actor/actor.tscn" id="2_wrdwt"]
@@ -13,52 +13,52 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j0h6w"]
 radius = 62.2013
 
-[node name="Spawner" type="Node2D" groups=["points_of_interest"]]
+[node name="Spawner" type="Node2D" unique_id=248401012 groups=["points_of_interest"]]
 script = ExtResource("1_micgo")
 spawn_enemy_scene = ExtResource("2_wrdwt")
 max_enemies = 2
 enemies_at_once = 1
 
-[node name="DestroyedSpawnerSprite" type="Sprite2D" parent="."]
+[node name="DestroyedSpawnerSprite" type="Sprite2D" parent="." unique_id=1238524588]
 visible = false
 scale = Vector2(0.46875, 0.46875)
 texture = ExtResource("10_81m4b")
 
-[node name="SpawnerSprite" type="Sprite2D" parent="."]
+[node name="SpawnerSprite" type="Sprite2D" parent="." unique_id=1689873952]
 scale = Vector2(0.53125, 0.53125)
 texture = ExtResource("3_d3guo")
 
-[node name="Eye" type="Sprite2D" parent="."]
+[node name="Eye" type="Sprite2D" parent="." unique_id=2081520054]
 scale = Vector2(0.538462, 0.538462)
 texture = ExtResource("4_sg5c5")
 
-[node name="TurretHolder" type="Node2D" parent="."]
+[node name="TurretHolder" type="Node2D" parent="." unique_id=1162012129]
 
-[node name="SpawnTimer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=2112511017]
 wait_time = 0.4
 autostart = true
 
-[node name="ReactivateTimer" type="Timer" parent="."]
+[node name="ReactivateTimer" type="Timer" parent="." unique_id=1354288483]
 wait_time = 10.0
 one_shot = true
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_bbd3e")]
+[node name="HitboxComponent" parent="." unique_id=1352899619 node_paths=PackedStringArray("health_component") instance=ExtResource("5_bbd3e")]
 visible = false
 health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1844279027]
 shape = SubResource("CircleShape2D_j0h6w")
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_ppvbk")]
+[node name="HealthComponent" parent="." unique_id=1856524418 instance=ExtResource("6_ppvbk")]
 
-[node name="HealthBar" parent="HealthComponent" instance=ExtResource("7_l7wyj")]
+[node name="HealthBar" parent="HealthComponent" unique_id=1783807769 instance=ExtResource("7_l7wyj")]
 offset_left = -45.0
 offset_top = 42.0
 offset_right = 44.0
 offset_bottom = 48.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("8_f848a")]
+[node name="ShieldBar" parent="HealthComponent" unique_id=1190755509 instance=ExtResource("8_f848a")]
 offset_left = -45.0
 offset_top = 31.0
 offset_right = 44.0

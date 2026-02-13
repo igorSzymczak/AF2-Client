@@ -61,3 +61,7 @@ func set_stat_value(stat_type: TYPE, value: float) -> void:
 	_create_stat_if_nonexistant(stat_type)
 	stats[stat_type].value = value
 	stats[stat_type].value_changed.emit(value)
+
+func from_dict(data: Dictionary[Stats.TYPE, float]) -> void:
+	for stat_type: int in data.keys():
+		set_stat_value(stat_type, data[stat_type])

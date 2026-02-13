@@ -5,18 +5,37 @@ extends Control
 @onready var killed_by = $PanelContainer/Bottom/MarginContainer/VBoxContainer/KilledBy
 @onready var killer_label = $PanelContainer/Bottom/MarginContainer/VBoxContainer/Killer
 
-func set_args(args: Dictionary):
-	if args.has("respawn_time"):
-		var respawn_time = args["respawn_time"]
-		_set_respawn_timer(respawn_time)
+var time_to_respawn_sec: float = 0.0
+
+func _ready() -> void:
+	await AuthManager.joined
+	g.me.props.property_changed.connect(_on_player_property_changed)
+
+func _process(delta: float) -> void:
+	if time_to_respawn_sec <= 0.0:
+		return
 	
-	if args.has("killer"):
-		var killer = args["killer"]
+	time_to_respawn_sec -= delta
+	_set_respawn_timer()
+	
+
+func _on_player_property_changed(prop: int, value: Variant):
+	if prop != g.PlayerProperty.DEATH_ARGS:
+		return
+	
+	var death_args: Dictionary = value
+	
+	if death_args.has("respawn_time"):
+		time_to_respawn_sec = death_args["respawn_time"]
+		_set_respawn_timer()
+	
+	if death_args.has("killer"):
+		var killer = death_args["killer"]
 		_set_killer_label(killer)
 		
 
-func _set_respawn_timer(respawn_time: int):
-	respawn_timer.set_text("Respawn in " + str(respawn_time) + "...")
+func _set_respawn_timer():
+	respawn_timer.set_text("Respawn in " + str(int(ceil(time_to_respawn_sec))) + "...")
 
 func _set_killer_label(killer: String):
 	killer_label.set_text(killer)

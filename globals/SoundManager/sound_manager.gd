@@ -32,13 +32,9 @@ func _send_sound(index: int, pos: Vector2):
 func play_sound(index: int, pos: Vector2):
 	var sound_origin: AudioStreamPlayer2D = sound_list[index]
 	
-	#var sound: AudioStreamPlayer2D = sound_origin.duplicate()
 	sound_origin.global_position = pos
-	#add_child(sound)
 	
 	sound_origin.play()
-	
-	#sound.connect("finished", Callable(sound, "queue_free"))
 
 func play_sound_from_name(sound_name: String, pos: Vector2) -> void:
 	var filtered_sound_list = sound_list.filter(func(sound: AudioStreamPlayer2D): return sound.name == sound_name)

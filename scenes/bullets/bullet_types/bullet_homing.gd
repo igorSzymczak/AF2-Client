@@ -11,13 +11,15 @@ var queue: Array
 var MAX_LENGTH: int = 10
 
 func draw_trail() -> void:
-	if is_instance_valid(trail):
-		var pos = trail_position.global_position
-		queue.push_front(pos)
+	if !is_instance_valid(trail):
+		return
+	
+	var pos = trail_position.global_position
+	queue.push_front(pos)
 
-		if queue.size() > MAX_LENGTH:
-			queue.pop_back()
+	if queue.size() > MAX_LENGTH:
+		queue.pop_back()
 
-		trail.clear_points()
-		for point in queue:
-			trail.add_point(point)
+	trail.clear_points()
+	for point in queue:
+		trail.add_point(point)

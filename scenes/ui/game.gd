@@ -9,24 +9,24 @@ var animation_finished = true
 var next_animation: String
 func _process(_delta: float):
 	var me: Player = g.me
+	if !is_instance_valid(me): return
+	
 	if (
-		is_instance_valid(me) and 
-		me.alive and 
-		g.get_player_monitorable(AuthManager.my_user_id) and 
+		me.alive and
 		me.landed_structure == null
 	):
 		safezone_label.hide()
 	else: safezone_label.show()
 	
 	if next_animation and animation_finished:
-		var player_landed = g.me and g.me.landed_structure != null
+		var player_landed: bool = g.me.landed_structure != null
 		if (
 			(player_landed and next_animation == "open")
 			or (!player_landed and next_animation == "close")
 		):
 			next_animation = ""
 			return
-		var anim_to_play = next_animation
+		var anim_to_play: String = next_animation
 		next_animation = ""
 		print("executing next_animation: " + anim_to_play)
 		select_animation(anim_to_play)

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://7a1vpvim62n8"]
+
+[ext_resource type="Script" uid="uid://chc0myeimvmdb" path="res://scenes/game.gd" id="1_taihp"]
+[ext_resource type="PackedScene" uid="uid://2t5noopc2okk" path="res://scenes/world/Testing/testing_world.tscn" id="2_6dosr"]
+[ext_resource type="PackedScene" uid="uid://chcxaewbmb4p7" path="res://scenes/ui/ui.tscn" id="4_olkx2"]
+[ext_resource type="PackedScene" uid="uid://dmtkhiurs0qve" path="res://globals/ExplosionManager/explosion_manager.tscn" id="4_ts5ok"]
+
+[node name="Game" type="Node2D" unique_id=293778105 node_paths=PackedStringArray("current_world")]
+light_mask = 3
+script = ExtResource("1_taihp")
+current_world = NodePath("World")
+
+[node name="World" parent="." unique_id=443666343 instance=ExtResource("2_6dosr")]
+
+[node name="ExplosionManager" parent="." unique_id=1141244933 instance=ExtResource("4_ts5ok")]
+
+[node name="UI" parent="." unique_id=582090733 instance=ExtResource("4_olkx2")]

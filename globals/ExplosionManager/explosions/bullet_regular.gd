@@ -20,11 +20,9 @@ func set_args(args: Dictionary):
 	var animation_scale = 1
 	if args.has("color"):
 		color = args["color"]
-	else: push_warning("No color specified")
 	
 	if args.has("scale"):
 		animation_scale = args["scale"]
-	else: push_warning("No scale specified")
 	
 		
 	set_scale(Vector2(animation_scale, animation_scale))

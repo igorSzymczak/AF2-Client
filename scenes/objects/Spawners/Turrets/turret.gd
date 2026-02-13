@@ -1,10 +1,12 @@
 extends Node2D
-class_name SpawnerTurret
+class_name Turret
 
 var gid: int # GameManager ID
 var stats: Stats = Stats.new()
+var props: PropertyContainer = PropertyContainer.new(g.TURRET_PROPERTY_SCHEMA)
 
 @export var turn_speed: float = 3.0
+@export var turret_type = EntityManager.TurretType
 @export var death_particle_gradient: GradientTexture1D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent 
 @onready var health_component: HealthComponent = $HealthComponent
@@ -28,17 +30,31 @@ func handle_death() -> void:
 
 func _ready() -> void:
 	hitbox_component.set_health_component(health_component)
-	health_component.connect("health_depleted", handle_death)
+	health_component.health_depleted.connect(handle_death)
+	props.property_changed.connect(_on_property_changed)
+
+func _on_property_changed(prop: g.TurretProperty, value: Variant) -> void:
+	match prop:
+		g.TurretProperty.GID:
+			gid = value
+		g.TurretProperty.TURRET_TYPE:
+			turret_type = value
+		g.TurretProperty.GLOBAL_POSITION:
+			server_pos = value
+		g.TurretProperty.ROTATION:
+			server_rot = value
+		g.TurretProperty.HEALTH:
+			health_component.health = value
+		g.TurretProperty.SHIELD:
+			health_component.shield = value
 
 var server_pos: Vector2
 var server_rot: float
 func _process(delta):
-	if g.Turrets.has(name.to_int()):
-		server_pos = g.get_turret_position(name.to_int())
-		global_position = global_position.lerp(server_pos, delta * 5)
-		
-		server_rot = g.get_turret_rotation(name.to_int())
-		rotation = lerp_angle(rotation, server_rot, delta * 5)
-	else:
+	if !g.Turrets.has(gid):
 		handle_death()
 		call_deferred("queue_free")
+		return
+	
+	global_position = global_position.lerp(server_pos, delta * 4)
+	rotation = lerp_angle(rotation, server_rot, delta * 4)

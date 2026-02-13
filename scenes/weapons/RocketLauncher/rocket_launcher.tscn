@@ -1,10 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0hl3q0mk7mc5"]
+[gd_scene format=3 uid="uid://c0hl3q0mk7mc5"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_clm83"]
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_clm83"]
 
-[node name="RocketLauncher" type="Node"]
+[node name="RocketLauncher" type="Node" unique_id=238031912]
 script = ExtResource("1_clm83")
 weapon_name = "Rocket Launcher"
+weapon_type = 4
 damage = 120
 rps = 3.75
 power_cost = 28

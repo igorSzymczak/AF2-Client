@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cu67f3v2dyl2k"]
+[gd_scene format=3 uid="uid://cu67f3v2dyl2k"]
 
 [ext_resource type="Script" uid="uid://dctwpvpk3btu6" path="res://scenes/bosses/Homerus/homerus.gd" id="1_k1i05"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_yyd6w"]
@@ -169,61 +169,61 @@ height = 560.0
 radius = 0.005
 height = 0.01
 
-[node name="Homerus" type="CharacterBody2D" groups=["points_of_interest"]]
+[node name="Homerus" type="CharacterBody2D" unique_id=451697933 groups=["points_of_interest"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_k1i05")
 
-[node name="Engine" parent="." instance=ExtResource("2_yyd6w")]
+[node name="Engine" parent="." unique_id=1772747923 instance=ExtResource("2_yyd6w")]
 modulate = Color(0, 0.462745, 1, 1)
 show_behind_parent = true
 position = Vector2(-227, -1.52588e-05)
 
-[node name="Idle" parent="Engine" instance=ExtResource("4_8qvkk")]
+[node name="Idle" parent="Engine" unique_id=223990898 instance=ExtResource("4_8qvkk")]
 process_material = SubResource("ParticleProcessMaterial_b0cto")
 
-[node name="Light" parent="Engine" instance=ExtResource("5_sjj4b")]
+[node name="Light" parent="Engine" unique_id=1501703768 instance=ExtResource("5_sjj4b")]
 process_material = SubResource("ParticleProcessMaterial_dl0a4")
 
-[node name="Speeding" parent="Engine" instance=ExtResource("7_gd3jw")]
+[node name="Speeding" parent="Engine" unique_id=344550547 instance=ExtResource("7_gd3jw")]
 process_material = SubResource("ParticleProcessMaterial_raewd")
 
-[node name="Accelerate" parent="Engine" instance=ExtResource("3_e47wp")]
+[node name="Accelerate" parent="Engine" unique_id=208265322 instance=ExtResource("3_e47wp")]
 process_material = SubResource("ParticleProcessMaterial_rxvrl")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1531801395]
 position = Vector2(49, 3.05176e-05)
 rotation = 1.5708
 scale = Vector2(1.35, 1.35)
 texture = ExtResource("3_3whro")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049190458]
 visible = false
 shape = SubResource("CapsuleShape2D_55uv0")
 
-[node name="LeftSegment" type="Area2D" parent="."]
+[node name="LeftSegment" type="Area2D" parent="." unique_id=887647858]
 position = Vector2(-130, -248)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSegment"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSegment" unique_id=1307139255]
 visible = false
 position = Vector2(1, -72)
 shape = SubResource("CapsuleShape2D_3bwjw")
 
-[node name="Sprite" type="Sprite2D" parent="LeftSegment"]
+[node name="Sprite" type="Sprite2D" parent="LeftSegment" unique_id=685671572]
 position = Vector2(113, 0)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("4_kgne3")
 
-[node name="RightSegment" type="Area2D" parent="."]
+[node name="RightSegment" type="Area2D" parent="." unique_id=941988057]
 position = Vector2(-130, 248)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSegment"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSegment" unique_id=1050572259]
 visible = false
 position = Vector2(1, -72)
 shape = SubResource("CapsuleShape2D_3bwjw")
 
-[node name="Sprite" type="Sprite2D" parent="RightSegment"]
+[node name="Sprite" type="Sprite2D" parent="RightSegment" unique_id=1727585314]
 position = Vector2(113, 0)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://st5ybq8q76yl"]
+[gd_scene format=3 uid="uid://st5ybq8q76yl"]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullet_types/bullet_homing.gd" id="1_xpfrf"]
+[ext_resource type="Script" uid="uid://jpfdovgoc6wt" path="res://scenes/bullets/bullet_types/bullet_homing.gd" id="1_xpfrf"]
 
-[node name="BulletHoming" type="Node2D"]
+[node name="BulletHoming" type="Node2D" unique_id=1285756421]
 script = ExtResource("1_xpfrf")

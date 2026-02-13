@@ -2,8 +2,8 @@ extends ProgressBar
 
 @onready var lvl_label = %LvlLabel
 
-var displayed_lvl := 0.0
-var displayed_exp := 0.0
+var displayed_lvl: int = 0
+var displayed_exp: float= 0.0
 
 func _ready():
 	AuthManager.joined.connect(_on_join)

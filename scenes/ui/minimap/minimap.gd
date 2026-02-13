@@ -16,9 +16,9 @@ extends BoxContainer
 @onready var boss_icon = $Grid/Screen/BossIcon
 @onready var hangar_icon = $Grid/Screen/HangarIcon
 
-@onready var localization_label = $Grid/PanelContainer/MarginContainer/LocalizationLabel
+@onready var localization_label: Label = $Grid/PanelContainer/MarginContainer/LocalizationLabel
 
-@onready var icons = {
+@onready var icons: Dictionary[String, Sprite2D] = {
 	"enemy": dot_enemy,
 	"spawner": dot_spawner,
 	"planet": dot_planet,
@@ -48,7 +48,7 @@ func _process(_delta):
 		return
 	player = g.me
 	
-	localization_label.text = str(round(player.global_position.x / 50.0)) + ", " + str(round(player.global_position.y / 50.0))
+	localization_label.text = str(int(round(player.global_position.x / 50.0)), ", ", int((round(player.global_position.y / 50.0))))
 	rotate_player()
 	update_elements()
 	

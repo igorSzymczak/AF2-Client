@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dybovpqmckd4v"
+path="res://.godot/imported/moon song in f.ogg-ad14cb5b6052b60c642908399ba0e39f.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/moon song in f.ogg"
+dest_files=["res://.godot/imported/moon song in f.ogg-ad14cb5b6052b60c642908399ba0e39f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -31,16 +31,19 @@ var server_pos: Vector2
 var fall_vel = 1.0
 var velocity: Vector2
 func _ready():
-	calculated_global_position = global_position
 	rotation = direction_speed.angle()
 	
 	shoot_time = Time.get_ticks_msec()
 	
 	props.property_changed.connect(_handle_property_changed)
+	
 	special_ready()
 
+var opacity: float = 0.0
 func special_ready() -> void:
-	pass # For special effects :)
+	# For special effects :)
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "opacity", 1.0, 0.1)
 
 func _handle_property_changed(prop: g.BulletProperty, value: Variant) -> void:
 	match prop:
@@ -91,7 +94,8 @@ func update_position(delta: float) -> void:
 		rotation = lerp_angle(rotation, velocity.angle(), delta * 10)
 
 func special_effects() -> void:
-	pass
+	# special effects every frame
+	modulate.a = opacity
 
 func bullet_scale_out() -> void:
 	var current_time: int = Time.get_ticks_msec()

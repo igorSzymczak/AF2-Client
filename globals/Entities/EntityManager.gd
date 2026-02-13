@@ -1,5 +1,7 @@
 extends Node
 
+const player_scene: PackedScene = preload("res://scenes/entities/Player/player.tscn")
+
 enum ActorType {
 	ZLATTE,
 	ELITE_LAUNCHER

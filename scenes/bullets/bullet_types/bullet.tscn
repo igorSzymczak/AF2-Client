@@ -1,21 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf1rus3yscyy5"]
+[gd_scene format=3 uid="uid://bf1rus3yscyy5"]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullet_types/bullet.gd" id="1_1c45f"]
+[ext_resource type="Script" uid="uid://712ngcx0fkeg" path="res://scenes/bullets/bullet_types/bullet.gd" id="1_1c45f"]
 [ext_resource type="Texture2D" uid="uid://dbogx2v0fvtbb" path="res://assets/projectiles/Short Projectile Lime.png" id="2_0rh0v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_do8ta"]
 radius = 7.07107
 
-[node name="BulletBase" type="Area2D"]
+[node name="BulletBase" type="Area2D" unique_id=1693939266]
 monitoring = false
 monitorable = false
 script = ExtResource("1_1c45f")
 
-[node name="BulletSprite" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=374776963]
 position = Vector2(-5, 0)
 texture = ExtResource("2_0rh0v")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1860293976]
 shape = SubResource("CircleShape2D_do8ta")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

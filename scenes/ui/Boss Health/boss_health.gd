@@ -22,17 +22,22 @@ func _ready():
 
 var last_visibility_update := 0
 func _process(_delta):
-	var t = Time.get_ticks_msec()
+	var local_player: Player = g.me
+	if !is_instance_valid(local_player):
+		return
+	
+	var t: int = Time.get_ticks_msec()
 	if t - 1000 > last_visibility_update:
 		last_visibility_update = t
-		var player_pos: Vector2 = g.get_player_position(AuthManager.my_user_id)
+		var player_pos: Vector2 = local_player.global_position
 		var boss_pos: Vector2 = HomerusManager.global_position
-		var distance = player_pos.distance_to(boss_pos)
-		var boss_alive = HomerusManager.left_segment_alive or HomerusManager.right_segment_alive or HomerusManager.main_segment_alive
+		var distance: float = player_pos.distance_to(boss_pos)
+		var boss_alive: bool = HomerusManager.left_segment_alive or HomerusManager.right_segment_alive or HomerusManager.main_segment_alive
 		if distance < 2500 and boss_alive:
 			set_visibility(true)
 		else: 
 			set_visibility(false)
+
 func set_max_health(new_max_health: int):
 	MAX_HEALTH = new_max_health
 	healthbar.init_health(new_max_health)

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://6boohbiplenv" path="res://scenes/objects/Structures/structure.tscn" id="7_q3uef"]
 [ext_resource type="Script" uid="uid://fjtvlisdmalr" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
 [ext_resource type="Texture2D" uid="uid://d0dumkrrbhfn4" path="res://assets/structures/Sun.png" id="8_j6wtj"]
+[ext_resource type="AudioStream" uid="uid://dybovpqmckd4v" path="res://audio/music/moon song in f.ogg" id="9_gouh0"]
 [ext_resource type="Shader" uid="uid://dhwrime62fp7n" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
 [ext_resource type="Texture2D" uid="uid://c83eeqogs1wdh" path="res://assets/structures/planets/eath_512.jpg" id="10_26elg"]
 [ext_resource type="PackedScene" uid="uid://uuy2hrkbxif3" path="res://scenes/objects/Structures/Hangar/hangar.tscn" id="12_uiqek"]
@@ -31,11 +32,12 @@ shader_parameter/speed2 = 0.2
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ngnn3"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mauus"]
-streams_count = 4
+streams_count = 5
 stream_0/stream = ExtResource("4_i1nhf")
 stream_1/stream = ExtResource("5_sjcft")
 stream_2/stream = ExtResource("6_76tyi")
 stream_3/stream = ExtResource("7_grnjj")
+stream_4/stream = ExtResource("9_gouh0")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lw624"]
 radius = 75.0

@@ -17,10 +17,20 @@ enum ENTITY_TYPE {
 	BOSS
 }
 
+signal update()
+const player_update_delay_msec: int = 50
+var update_time: int = 0
+func _process(delta: float) -> void:
+	update_time += round(delta * 1000)
+	
+	if update_time > player_update_delay_msec:
+		update_time -= player_update_delay_msec
+		update.emit()
+
 var current_world: Node2D
 var me: Player
 var PlayerInfo: Dictionary = {}
-var update_time = 50
+
 var Structures: Dictionary[int, Dictionary] = {}
 var Players: Dictionary[int, Dictionary] = {}
 var Bullets: Dictionary = {}
@@ -119,33 +129,175 @@ func update_structure_property(structure_id: int, prop: StructureProperty, value
 	props.set_property(prop, value)
 
 
+
 ## Players
 
 
-func add_player(user_id: int):
-	if !Players.has(user_id):
-		var player: Player = get_node("/root/Game/World/" + str(user_id))
-		Players[user_id] = {
-			"node": player,
-			"user_id": user_id,
-			"nickname": "Player " + str(user_id).substr(0, 3),
-			"global_position": player.global_position,
-			"rotation": player.rotation,
-			"velocity": player.velocity,
-			"engine_active": false,
-			"health": player.health_component.health,
-			"shield": player.health_component.shield,
-			"alive": player.alive,
-			"ship_name": "NexarCarrier",
-			"monitorable": false,
-			"lvl": 0,
-			"stats": {},
-			"speed_boost": false
-		}
 
-func remove_player(user_id: int):
-	if Players.has(user_id):
-		Players.erase(user_id)
+
+enum PlayerProperty {
+	GID,
+	USERNAME,
+	NICKNAME,
+	GLOBAL_POSITION,
+	ROTATION,
+	VELOCITY,
+	ENGINE_ACTIVE,
+	HEALTH,
+	SHIELD,
+	ALIVE,
+	SHIP_NAME,
+	MONITORABLE,
+	LVL,
+	SPEED_BOOST,
+	DEATH_ARGS
+}
+
+const PLAYER_PROPERTY_SCHEMA: Dictionary[PlayerProperty, Dictionary] = {
+	PlayerProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	PlayerProperty.USERNAME: {
+		"type": TYPE_STRING,
+		"default": ""
+	},
+	PlayerProperty.NICKNAME: {
+		"type": TYPE_STRING,
+		"default": "Player"
+	},
+	PlayerProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	PlayerProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	PlayerProperty.VELOCITY: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	PlayerProperty.ENGINE_ACTIVE: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	PlayerProperty.HEALTH: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	PlayerProperty.SHIELD: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	PlayerProperty.ALIVE: {
+		"type": TYPE_BOOL,
+		"default": true
+	},
+	PlayerProperty.SHIP_NAME: {
+		"type": TYPE_STRING,
+		"default": "UnknownShip"
+	},
+	PlayerProperty.MONITORABLE: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	PlayerProperty.LVL: {
+		"type": TYPE_INT,
+		"default": 1
+	},
+	PlayerProperty.SPEED_BOOST: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	PlayerProperty.DEATH_ARGS: {
+		"type": TYPE_DICTIONARY,
+		"default": {}
+	}
+}
+
+signal local_player_property_changed(prop: int, value: Variant)
+signal player_added(player: Player)
+signal player_property_changed(player_id: int, prop: PlayerProperty, value: Variant)
+func add_player(player_data: Dictionary):
+	var props: Dictionary = player_data["props"]
+	var stats: Dictionary = player_data["stats"]
+	
+	var gid: int = props[PlayerProperty.GID]
+	if Players.has(gid):
+		return
+	
+	print("Creating player...")
+	var player: Player = EntityManager.player_scene.instantiate()
+	player.gid = gid
+	print("adding player to world...")
+	current_world.add_child(player)
+	print("checking if gid is my id...")
+	if gid == AuthManager.my_user_id:
+		me = player
+		print("It is my id!")
+		GlobalSignals.give_main_player.emit(me)
+		AuthManager.joined.emit()
+	
+	
+	Players[gid] = {
+		"node": player,
+		"props": player.props,
+		"stats": player.stats
+	}
+	
+	player.props.property_changed.connect(func(prop: int, value: Variant):
+		player_property_changed.emit(gid, prop, value)
+	)
+	
+	player.global_position = props[PlayerProperty.GLOBAL_POSITION]
+	
+	player.stats.from_dict(stats)
+	player.props.from_dict(props)
+	player_added.emit(player)
+	print("everything done!!!")
+
+signal player_removed(player_id: int)
+func remove_player(player_id: int) -> void:
+	if Players.has(player_id):
+		Players.erase(player_id)
+		player_removed.emit(player_id)
+
+func get_player_property(player_id: int, prop: PlayerProperty) -> Variant:
+	if Players.has(player_id):
+		var props: PropertyContainer = Players[player_id].props
+		return props.get_property(prop)
+	return STRUCTURE_PROPERTY_SCHEMA[prop].default
+
+func get_player_props(player_id: int) -> PropertyContainer:
+	if Players.has(player_id):
+		return Players[player_id].props
+	return null
+
+func update_player_property(player_id: int, prop: PlayerProperty, value: Variant) -> void:
+	if !Players.has(player_id):
+		return
+	
+	var props: PropertyContainer = Players[player_id]["props"]
+	props.set_property(prop, value)
+
+func get_player_stats(id: int) -> Stats:
+	if Players.has(id):
+		return Players[id]["stats"]
+	return null
+func update_player_stats(id: int, new_stats: Dictionary[Stats.TYPE, float]):
+	if Players.has(id):
+		var stats: Stats = Actors[id]["stats"]
+		stats.from_dict(new_stats)
+
+func get_player_stat(id: int, stat_type: Stats.TYPE) -> Stat:
+	if Players.has(id) and Players[id]["stats"].has(stat_type):
+		return Players[id]["stats"][stat_type]
+	return null
+func update_player_stat(id: int, stat_type: Stats.TYPE, value: float):
+	if Players.has(id):
+		var stats: Stats = Players[id]["stats"]
+		stats.set_stat_value(stat_type, value)
 
 func get_player(user_id: int) -> Player:
 	if Players.has(user_id):
@@ -154,133 +306,6 @@ func get_player(user_id: int) -> Player:
 		return null
 
 signal weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
-
-func get_player_nickname(user_id: int) -> String:
-	if Players.has(user_id):
-		return Players[user_id]["nickname"]
-	return "Player"
-func update_player_nickname(user_id: int, nick: String):
-	if Players.has(user_id):
-		Players[user_id]["nickname"] = nick
-
-signal local_player_position(pos: Vector2)
-signal set_local_player_position(pos: Vector2)
-func get_player_position(user_id: int) -> Vector2:
-	if Players.has(user_id):
-		return Players[user_id]["global_position"]
-	return Vector2.ZERO
-func update_player_position(user_id: int, pos: Vector2):
-	if Players.has(user_id):
-		Players[user_id]["global_position"] = pos
-
-signal local_player_rotation(rot: float)
-func get_player_rotation(user_id: int) -> float:
-	if Players.has(user_id):
-		return Players[user_id]["rotation"]
-	return 0
-func update_player_rotation(user_id: int, rot: float):
-	if Players.has(user_id):
-		Players[user_id]["rotation"] = rot
-
-signal local_player_velocity(vel: Vector2)
-func get_player_velocity(user_id: int) -> Vector2:
-	if Players.has(user_id):
-		return Players[user_id]["velocity"]
-	return Vector2.ZERO
-func update_player_velocity(user_id: int, vel: Vector2):
-	if Players.has(user_id):
-		Players[user_id]["velocity"] = vel
-
-signal local_player_engine_active(activity: bool)
-func get_player_engine_active(user_id: int) -> bool:
-	if Players.has(user_id):
-		return Players[user_id]["engine_active"]
-	return false
-func update_player_engine_active(user_id: int, activity: bool):
-	if Players.has(user_id):
-		Players[user_id]["engine_active"] = activity
-
-func get_player_health(user_id: int) -> float:
-	if Players.has(user_id):
-		return Players[user_id]["health"]
-	return 0
-func update_player_health(user_id: int, health: float):
-	if Players.has(user_id):
-		Players[user_id]["health"] = health
-
-func get_player_shield(user_id: int) -> float:
-	if Players.has(user_id):
-		return Players[user_id]["shield"]
-	return 0
-func update_player_shield(user_id: int, shield: float):
-	if Players.has(user_id):
-		Players[user_id]["shield"] = shield
-
-func get_player_alive(user_id: int) -> bool:
-	if Players.has(user_id):
-		return Players[user_id]["alive"]
-	return false
-func update_player_alive(user_id: int, alive: bool):
-	if Players.has(user_id):
-		Players[user_id]["alive"] = alive
-
-func get_player_ship_name(user_id: int) -> String:
-	if Players.has(user_id):
-		return Players[user_id]["ship_name"]
-	return "NexarCarrier"
-func update_player_ship_name(user_id: int, ship_name: String):
-	if Players.has(user_id):
-		Players[user_id]["ship_name"] = ship_name
-
-func get_player_monitorable(user_id: int) -> bool:
-	if Players.has(user_id):
-		return Players[user_id]["monitorable"]
-	return false
-func update_player_monitorable(user_id: int, monitorable: bool):
-	if Players.has(user_id):
-		Players[user_id]["monitorable"] = monitorable
-
-func get_player_lvl(user_id: int) -> int:
-	if Players.has(user_id):
-		return Players[user_id]["lvl"]
-	return 0
-func update_player_lvl(user_id: int, lvl: int):
-	if Players.has(user_id):
-		Players[user_id]["lvl"] = lvl
-
-func get_player_stats(user_id: int) -> Dictionary[Stats.TYPE, float]:
-	if Players.has(user_id):
-		return Players[user_id]["stats"]
-	return {}
-func update_player_stats(user_id: int, stats: Dictionary[Stats.TYPE, float]):
-	if Players.has(user_id):
-		Players[user_id]["stats"] = stats
-		
-		var player: Player = Players[user_id]["node"] as Player
-		for stat: Stats.TYPE in stats.keys():
-			player.stats.set_stat_value(stat, stats[stat])
-
-func get_player_stat(user_id: int, stat_type: Stats.TYPE) -> float:
-	if Players.has(user_id) and Players[user_id]["stats"].has(stat_type):
-		return Players[user_id]["stats"][stat_type]
-	return 0
-func update_player_stat(user_id: int, stat_type: Stats.TYPE, value: float):
-	if Players.has(user_id):
-		Players[user_id]["stats"][stat_type] = value
-		
-		var player: Player = Players[user_id]["node"] as Player
-		player.stats.set_stat_value(stat_type, value)
-
-signal local_player_speed_boost(activity: bool)
-func get_player_speed_boost(user_id: int) -> bool:
-	if Players.has(user_id):
-		return Players[user_id]["speed_boost"]
-	return 0
-func update_player_speed_boost(user_id: int, speed_boost: bool):
-	if Players.has(user_id):
-		Players[user_id]["speed_boost"] = speed_boost
-
-signal death_args(args: Dictionary)
 
 signal player_info(player_info: Dictionary)
 signal player_info_changed()
@@ -362,6 +387,9 @@ func add_bullet(bullet_data: Dictionary):
 		push_warning("Bullet of type ", type, " non existant!")
 		return
 	
+	bullet.global_position = bullet_data[g.BulletProperty.GLOBAL_POSITION]
+	bullet.server_pos = bullet.global_position
+	bullet.calculated_global_position = bullet.global_position
 	Bullets[gid] = {
 		"node": bullet,
 		"props": bullet.props

@@ -51,43 +51,8 @@ func connected_to_server() -> void:
 func disconnected_from_server() -> void:
 	print("Disconnected from Server...")
 
-
-func add_player_character(user_id: int):
-	var player_character = preload("res://scenes/entities/Player/player.tscn").instantiate()
-	player_character.name = str(user_id)
-	player_character.gid = user_id
-	current_world.add_child(player_character)
-	#print("Successfully added new player character: " + str(username) + "!")
-	g.add_player(user_id)
-	g.Players[user_id]["node"] = player_character
-	
-	if user_id == AuthManager.my_user_id:
-		local_player_character = player_character
-		g.me = player_character
-		GlobalSignals.give_main_player.emit(local_player_character)
-		AuthManager.joined.emit()
-
-@rpc("authority", "call_local", "reliable")
-func remove_player(user_id: int):
-	g.remove_player(user_id)
-
-@rpc("any_peer", "call_local")
-func add_newly_connected_player_character(user_id: int):
-	add_player_character(user_id)
-
-@rpc("any_peer", "reliable")
-func add_previously_connected_player_characters(players: Dictionary[int, Dictionary]):
-	g.Players = players
-	for user_id in players:
-		add_player_character(user_id)
-
-
 func client_signals():
-	g.local_player_position.connect(handle_update_position)
-	g.local_player_rotation.connect(handle_update_rotation)
-	g.local_player_velocity.connect(handle_update_velocity)
-	g.local_player_engine_active.connect(handle_update_engine_active)
-	g.local_player_speed_boost.connect(handle_update_speed_boost)
+	g.local_player_property_changed.connect(handle_local_player_property_changed)
 	g.player_info.connect(handle_update_player_info)
 	
 	g.player_shoot.connect(handle_player_shoot)
@@ -118,59 +83,50 @@ func handle_client_structure_property_changed(_id: int, _prop: int, _value: Vari
 
 ## PLAYERS
 
-func handle_update_position(pos: Vector2): update_player_position.rpc_id(1, AuthManager.my_user_id, pos)
-func handle_update_rotation(rot: float): update_player_rotation.rpc_id(1, AuthManager.my_user_id, rot)
-func handle_update_velocity(vel: Vector2): update_player_velocity.rpc_id(1, AuthManager.my_user_id, vel)
-func handle_update_engine_active(activity: bool): update_player_engine_active.rpc_id(1, AuthManager.my_user_id, activity)
+func handle_local_player_property_changed(prop: int, value: Variant):
+	update_local_player_property.rpc_id(1, prop, value)
+
+@rpc("any_peer", "call_remote", "reliable")
+func update_local_player_property(prop: int, value: Variant):
+	server_handle_local_player_property(multiplayer.get_remote_sender_id(), prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func update_player_property(id: int, prop: int, value: Variant):
+	handle_client_player_property_changed(id, prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_players(players: Array[Dictionary]):
+	for player_data: Dictionary in players:
+		handle_client_player_added(player_data)
+
+@rpc("authority", "call_remote", "reliable")
+func add_player(player_data: Dictionary):
+	handle_client_player_added(player_data)
+
+@rpc("authority", "call_remote", "reliable")
+func remove_player(id: int):
+	handle_client_player_removed(id)
+
+func handle_client_player_added(player_data: Dictionary):
+	g.add_player(player_data)
+
+func handle_client_player_property_changed(id: int, prop: int, value: Variant):
+	g.update_player_property(id, prop, value)
+
+func handle_client_player_removed(id: int):
+	g.remove_player(id)
+
 func handle_update_player_info(player_info: Dictionary): g.set_player_info(player_info)
 func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_user_id, index)
-func handle_update_speed_boost(activity: bool): update_player_speed_boost.rpc_id(1, AuthManager.my_user_id, activity)
 
 func _on_set_weapon_request(slot: int, weapon_type: WeaponManager.Type): request_set_weapon.rpc_id(1, slot, weapon_type)
 func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_type: WeaponManager.Type): pass # Only Server
 
-@rpc("any_peer", "call_local", "reliable")
-func update_player_nickname(user_id: int, nick: String): g.update_player_nickname(user_id, nick)
-
-@rpc("authority", "reliable")
-func set_player_position(pos: Vector2): g.emit_signal("set_local_player_position", pos)
-
-@rpc("any_peer", "unreliable")
-func update_player_position(user_id: int, pos: Vector2): g.update_player_position(user_id, pos)
-
-@rpc("any_peer", "unreliable")
-func update_player_rotation(user_id: int, rot: float): g.update_player_rotation(user_id, rot)
-
-@rpc("any_peer", "unreliable")
-func update_player_velocity(user_id: int, vel: Vector2): g.update_player_velocity(user_id, vel)
-
-@rpc("any_peer", "reliable")
-func update_player_engine_active(user_id: int, activity: bool): g.update_player_engine_active(user_id, activity)
-
-@rpc("any_peer", "reliable")
-func update_player_speed_boost(user_id: int, speed_boost: bool): g.update_player_speed_boost(user_id, speed_boost)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_lvl(user_id: int, lvl: int): g.update_player_lvl(user_id, lvl)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_health(user_id: int, health: float): g.update_player_health(user_id, health)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_shield(user_id: int, shield: float): g.update_player_shield(user_id, shield)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_alive(user_id: int, alive: bool): g.update_player_alive(user_id, alive)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_monitorable(user_id: int, monitorable: bool): g.update_player_monitorable(user_id, monitorable)
-
-@rpc("authority", "call_local", "reliable")
-func update_player_ship_name(user_id: int, ship_name: String): g.update_player_ship_name(user_id, ship_name)
 
 @rpc("authority", "call_remote", "reliable")
-func player_death_args(death_args: Dictionary):
-	g.emit_signal("death_args", death_args)
+func set_player_position(pos: Vector2):
+	g.me.global_position = pos
+	g.me.velocity = Vector2.ZERO
 
 @rpc("authority", "call_remote", "reliable")
 func send_player_info(player_info: Dictionary):
@@ -184,16 +140,12 @@ func player_shoot(user_id: int, index: int):
 func request_set_weapon(slot: int, weapon_type: WeaponManager.Type):
 	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_type)
 
+func server_handle_local_player_property(_user_id: int, _prop: int, _value: Variant):
+	pass # Only Server
 
 ## WEAPONS & BULLETS
 
 
-func handle_weapon_fired(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: Dictionary, bullet_args: Dictionary):
-	fire_weapon.rpc_id(1, shooter_id, weapon_type, weapon_args, bullet_args)
-
-@rpc("any_peer", "reliable")
-func fire_weapon(shooter_id: int, weapon_type: WeaponManager.Type, weapon_args: Dictionary, bullet_args: Dictionary):
-	g.fire_weapon(shooter_id, weapon_type, current_world, weapon_args, bullet_args)
 
 @rpc("authority", "call_remote", "reliable")
 func update_bullet_property(id: int, prop: int, value: Variant):

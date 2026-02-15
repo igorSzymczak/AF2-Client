@@ -25,6 +25,6 @@ func _process(delta):
 	if is_instance_valid(player) and visible:
 		position = player.position
 		material.set_shader_parameter("time", elapsed_time)
-		material.set_shader_parameter("mouse", player.position/10000.0 * zoom_scale + camera_offset/10000)
-		material.set_shader_parameter("zoom", zoom_scale)
+		material.set_shader_parameter("mouse", player.position/10000.0 + camera_offset/10000)
+		material.set_shader_parameter("zoom", zoom_scale * 1.5)
 		elapsed_time += delta

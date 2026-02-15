@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://deno2xs3t5wm7"]
+
+[ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_4tkoo"]
+[ext_resource type="PackedScene" uid="uid://27lgxn1viqta" path="res://assets/ships/Nexar Blade/nexar_blade.tscn" id="2_bd0eg"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="3_xr05u"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="4_h815f"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="5_ucilr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o8x3n"]
+radius = 0.01
+
+[node name="Launcher" type="CharacterBody2D" unique_id=524734028]
+script = ExtResource("1_4tkoo")
+metadata/_custom_type_script = "uid://cf0pk0erui87j"
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1199323708]
+visible = false
+position = Vector2(-27, 0)
+rotation = -1.57079
+shape = SubResource("CircleShape2D_o8x3n")
+
+[node name="Sprite" parent="." unique_id=91668658 instance=ExtResource("2_bd0eg")]
+
+[node name="HealthComponent" parent="." unique_id=525729869 instance=ExtResource("3_xr05u")]
+
+[node name="HealthBar" parent="HealthComponent" unique_id=402247006 instance=ExtResource("4_h815f")]
+offset_left = -48.0
+offset_top = 41.0
+offset_right = 48.0
+offset_bottom = 49.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" parent="HealthComponent" unique_id=1509767096 instance=ExtResource("5_ucilr")]
+offset_left = -48.0
+offset_top = 29.0
+offset_right = 48.0
+offset_bottom = 37.0
+metadata/_edit_use_anchors_ = true

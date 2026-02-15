@@ -169,7 +169,10 @@ SpeedBoost={
 [layer_names]
 
 2d_physics/layer_1="Player"
-2d_physics/layer_5="Item Collectors"
+2d_physics/layer_2="Projectiles"
+2d_physics/layer_3="Rockets"
+2d_physics/layer_4="Structures"
+2d_physics/layer_5="Entities"
 2d_physics/layer_6="Items"
 
 [rendering]

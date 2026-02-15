@@ -3,4 +3,6 @@
 [ext_resource type="Script" uid="uid://b6b0p8wsg0wxg" path="res://scenes/objects/Structures/structure.gd" id="1_aljvs"]
 
 [node name="Structure" type="Area2D" unique_id=593225580 groups=["points_of_interest"]]
+collision_layer = 8
+monitorable = false
 script = ExtResource("1_aljvs")

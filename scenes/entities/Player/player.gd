@@ -394,6 +394,8 @@ func set_ship(new_ship_name: String):
 	add_child(new_ship)
 	ship = new_ship
 	engine = ship.engine
+	if landed_structure:
+		landed_structure.request_leave_structure(gid)
 
 ## 		Landing
 

@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://y4hetgssvu6u" path="res://assets/ships/Nexar Reaver/nexar_reaver.tscn" id="7_ec8if"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
-radius = 12.0
-height = 74.0
+radius = 54.99998
+height = 166.00003
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o8fb4"]
 radius = 228.07893
@@ -26,13 +26,13 @@ corner_radius_bottom_right = 1024
 corner_radius_bottom_left = 1024
 
 [node name="Player" type="CharacterBody2D" unique_id=1561202494 groups=["points_of_interest"]]
-collision_mask = 2
+collision_layer = 17
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_q57er")
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=2098361653]
-visible = false
-position = Vector2(13, -6.82121e-13)
+position = Vector2(13, 0)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_p8t61")
 

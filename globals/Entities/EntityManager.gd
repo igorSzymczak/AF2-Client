@@ -8,8 +8,8 @@ enum ActorType {
 }
 
 var Actors: Dictionary[ActorType, PackedScene] = {
-	ActorType.ZLATTE : preload("res://scenes/entities/Actor/actor.tscn"),
-	#ActorType.ELITE_LAUNCHER: 
+	ActorType.ZLATTE : preload("res://scenes/entities/Actor/Zlatte/Zlatte.tscn"),
+	ActorType.ELITE_LAUNCHER: preload("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn")
 }
 
 func get_actor_type(actor: Actor) -> ActorType:

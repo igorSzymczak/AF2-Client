@@ -4,14 +4,14 @@ uniform vec2 mouse;
 uniform float time;
 uniform float zoom;
 
-const int iterations = 1;
+const int iterations = 3;
 const float formuparam2 = 0.79;
 const float volsteps = 3.0;
 const float stepsizeOrigin = 0.290;
-const float tile = 0.55;
+const float tile = 0.35;
 uniform float speed2 = 0.2;
 
-const float brightness = 0.0015;
+const float brightness = 0.2015;
 const float darkmatter = 0.100;
 const float distfading = 0.560;
 const float saturation = 0.90;
@@ -117,7 +117,7 @@ void fragment() {
 		for (int i=0; i<iterations; i++) {
 			p2=abs(p2)/dot(p2,p2)-formuparam; // the magic formula
 			//p=abs(p)/max(dot(p,p),0.005)-formuparam; // another interesting way to reduce noise
-			float D = abs(length(p2)-pa); // absolute sum of average change
+			float D = abs(length(p2)-pa * 0.4); // absolute sum of average change
 			a += i > 7 ? min( 12., D) : D;
 			pa=length(p2);
 		}

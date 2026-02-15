@@ -55,6 +55,7 @@ enum StructureProperty {
 	GID,
 	NAME,
 	GLOBAL_POSITION,
+	ORBIT_TIME_MS,
 	LANDABLE,
 	IS_SAFEZONE
 }
@@ -71,6 +72,10 @@ const STRUCTURE_PROPERTY_SCHEMA: Dictionary[StructureProperty, Dictionary] = {
 	StructureProperty.GLOBAL_POSITION: {
 		"type": TYPE_VECTOR2I,
 		"default": Vector2i.ZERO
+	},
+	StructureProperty.ORBIT_TIME_MS: {
+		"type": TYPE_INT,
+		"default": 10000
 	},
 	StructureProperty.LANDABLE: {
 		"type": TYPE_BOOL,

@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var bullet_manager: Node2D = $BulletManager
-@export var structures: Array[Structure]
+var structures: Array[Structure]
 
 func get_structure(structure_name: String) -> Structure:
 	for structure: Structure in structures:

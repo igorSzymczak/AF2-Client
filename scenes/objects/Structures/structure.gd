@@ -37,6 +37,9 @@ func _ready():
 	
 	if !is_shown:
 		$Sprite.visible = false
+	
+	await AuthManager.logged_in
+	g.current_world.structures.append(self)
 
 func _process(delta: float) -> void:
 	set_safezone()
@@ -56,6 +59,8 @@ func _handle_property_changed(prop: g.StructureProperty, value: Variant) -> void
 			gid = value
 		g.StructureProperty.GLOBAL_POSITION:
 			global_position = value
+		g.StructureProperty.ORBIT_TIME_MS:
+			orbit_time_MS = value
 		g.StructureProperty.LANDABLE:
 			if landable == value:
 				return
@@ -147,7 +152,6 @@ func update_shader(delta: float) -> void:
 
 	sprite.material.set_shader_parameter("light_direction", light_direction)
 	sprite.material.set_shader_parameter("texture_offset", shader_offset)
-	#print()
 
 
 
@@ -163,7 +167,7 @@ func set_structure_data(data: Dictionary):
 		GlobalSignals.set_ui_args.emit(data)
 
 func land_player_on(user_id: int, land_structure_name: String):
-	if land_structure_name == name:
+	if land_structure_name == structure_name:
 		var player: Player = g.get_player(user_id)
 		if is_instance_valid(player):
 			player.land_on(self)
@@ -180,7 +184,8 @@ func handle_landing(_delta: float):
 	if !g.me.alive: return
 	
 	if get_overlapping_bodies().has(g.me):
-		request_land.rpc_id(1, AuthManager.my_user_id, name)
+		print("Landing!")
+		request_land.rpc_id(1, AuthManager.my_user_id, structure_name)
 
 func try_to_land(_user_id: int, _structure_name: String): pass # Only Server
 

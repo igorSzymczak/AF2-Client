@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://uuy2hrkbxif3"]
+[gd_scene format=3 uid="uid://uuy2hrkbxif3"]
 
-[ext_resource type="Script" path="res://scenes/objects/Structures/Hangar/hangar.gd" id="1_7gavh"]
+[ext_resource type="Script" uid="uid://jf6vbo2enp1u" path="res://scenes/objects/Structures/Hangar/hangar.gd" id="1_7gavh"]
 
-[node name="Hangar" type="Area2D" groups=["points_of_interest"]]
+[node name="Hangar" type="Area2D" unique_id=2121239204 groups=["points_of_interest"]]
 script = ExtResource("1_7gavh")

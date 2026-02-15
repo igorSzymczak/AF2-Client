@@ -6,22 +6,13 @@ var props: PropertyContainer = PropertyContainer.new(g.SPAWNER_PROPERTY_SCHEMA)
 var stats: Stats = Stats.new()
 
 @export var spawner_type: EntityManager.SpawnerType
-@export var spawn_enemy_scene : PackedScene
-@export var max_enemies : int = 0
-@export var enemies_at_once : int = 0
-@export var orbit_time_MS: float = -10000.0
 @export var team: int = 1
-var turrets: Array[Turret] = []
-var start_turrets: Array[Turret]
 
-@onready var spawn_timer: Timer = $SpawnTimer
-@onready var reactivate_timer = $ReactivateTimer
 @onready var sprite = $SpawnerSprite
-@onready var turret_holder = $TurretHolder
 @onready var eye = $Eye
 @onready var destroyed_sprite = $DestroyedSpawnerSprite
-@onready var health_component = $HealthComponent
-@onready var hitbox_component = $HitboxComponent
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
 
 var poi_type = "spawner"
 
@@ -104,13 +95,9 @@ func deactivate() -> void:
 	GlobalSignals.create_explosion.emit(global_position, "explosion_large", 1, {})
 	
 	active = false
-	reactivate_timer.start()
 	
 	eye.set_visible(false)
 	sprite.set_texture(destroyed_sprite.get_texture())
-	
-	for turret in turrets:
-		turret.handle_death()
 	
 	health_component.set_visible(false)
 	hitbox_component.set_deferred("monitorable", false)

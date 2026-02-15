@@ -229,6 +229,5 @@ func _on_return_button_pressed():
 
 func _on_exit_button_pressed():
 	if g.me.landed_structure != null:
-		g.me.request_leave_structure.rpc_id(1, AuthManager.my_username)
+		g.me.landed_structure.request_leave_structure.rpc_id(1, g.me.gid)
 		GlobalSignals.set_ui.emit("game")
-

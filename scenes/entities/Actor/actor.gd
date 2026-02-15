@@ -5,7 +5,8 @@ var stats: Stats = Stats.new()
 var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
 @export var actor_type: EntityManager.ActorType
 
-@onready var engine: Thruster = $Sprite/Engine
+@onready var sprite: Sprite2D = $Sprite
+@onready var engine: Thruster = sprite.find_child("Engine")
 @onready var health_component: HealthComponent = $HealthComponent
 @export var poi_type = "enemy"
 
@@ -39,6 +40,9 @@ func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
 		g.ActorProperty.SHIELD:
 			health_component.shield = value
 		g.ActorProperty.ENGINE_ACTIVE:
+			if !is_instance_valid(engine):
+				return
+			
 			if value: 	engine.activate_thruster()
 			else: 		engine.deactivate_thruster(velocity)
 

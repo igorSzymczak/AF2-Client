@@ -4,6 +4,8 @@ render_mode unshaded;
 const float PI2 = PI / 2.0;
 const vec3 UP = vec3(0.0, 0.0, 1.0);
 
+uniform float opacity = 1.0;
+
 uniform vec2 texture_scale = vec2(0.5, 0.5);
 uniform vec2 texture_offset = vec2(0.0, 0.0);
 
@@ -104,5 +106,5 @@ void fragment() {
 	
 	float fade_texels = length(TEXTURE_PIXEL_SIZE) * fade;
 	float alpha = 1.0 - smoothstep(1.0 - fade_texels, 1.0, radius);
-	COLOR.a = alpha * input_color.a;
+	COLOR.a = alpha * input_color.a * opacity;
 }

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://doomtdi6hcjji"]
+
+[ext_resource type="Script" uid="uid://bkjcpe07p6xja" path="res://scenes/ui/Map/map.gd" id="1_uw0j8"]
+
+[node name="Map" type="PanelContainer" unique_id=1446763498]
+clip_children = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -736.0
+offset_top = -339.0
+offset_right = 736.0
+offset_bottom = 339.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uw0j8")
+
+[node name="SystemLabel" type="Label" parent="." unique_id=1443369475]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Solar System"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Screen" type="Control" parent="." unique_id=1920558444]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

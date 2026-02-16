@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://pes3cyiv5fg5"]
+
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="1_udptl"]
+
+[node name="SpawnerIcon" type="Node2D" unique_id=557564095]
+modulate = Color(0.77254903, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1898811426]
+scale = Vector2(0.333, 0.333)
+texture = ExtResource("1_udptl")

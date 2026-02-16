@@ -1,18 +1,11 @@
 [gd_scene format=3 uid="uid://jxppw8syh3ni"]
 
 [ext_resource type="Script" uid="uid://1iax2rm1bg5i" path="res://scenes/ui/minimap/minimap.gd" id="1_qrkje"]
-[ext_resource type="PackedScene" uid="uid://dy7eq70olddga" path="res://scenes/ui/POI Manager/poi_manager.tscn" id="2_vktws"]
 [ext_resource type="Texture2D" uid="uid://b716678pi8f2c" path="res://assets/ui/radar/radar.png" id="2_wptqw"]
 [ext_resource type="Texture2D" uid="uid://iybr46mjrovs" path="res://assets/ui/radar/radar bg.png" id="3_d8p0r"]
-[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="4_uuq8y"]
-[ext_resource type="Texture2D" uid="uid://c2vtyajjv1ov8" path="res://assets/ui/radar/Player Arrow.png" id="5_n520u"]
-[ext_resource type="Texture2D" uid="uid://cv3v3brtmmlli" path="res://assets/ui/radar/boss icon.png" id="7_mnhki"]
-[ext_resource type="Texture2D" uid="uid://du3t67lb6w8bl" path="res://assets/ui/radar/HangarIcon.png" id="8_2norb"]
 
 [node name="Minimap" type="BoxContainer" unique_id=1486817812]
 script = ExtResource("1_qrkje")
-
-[node name="PoiManager" parent="." unique_id=305679619 instance=ExtResource("2_vktws")]
 
 [node name="Grid" type="Sprite2D" parent="." unique_id=1361271100]
 position = Vector2(96, -96)
@@ -20,6 +13,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_wptqw")
 
 [node name="Screen" type="Sprite2D" parent="Grid" unique_id=167790192]
+unique_name_in_owner = true
 self_modulate = Color(0, 0, 0, 1)
 show_behind_parent = true
 clip_children = 2
@@ -27,63 +21,10 @@ z_index = 5
 position = Vector2(-1.5, 1)
 texture = ExtResource("3_d8p0r")
 
-[node name="DotPlanet" type="Sprite2D" parent="Grid/Screen" unique_id=1764066551]
-modulate = Color(0, 0.533333, 0, 1)
-show_behind_parent = true
-position = Vector2(196.5, -178.5)
-scale = Vector2(0.3125, 0.3125)
-texture = ExtResource("4_uuq8y")
-
-[node name="DotEnemy" type="Sprite2D" parent="Grid/Screen" unique_id=971132425]
-self_modulate = Color(0.843137, 0, 0, 1)
-show_behind_parent = true
-position = Vector2(204, -148.5)
-scale = Vector2(0.135417, 0.135417)
-texture = ExtResource("4_uuq8y")
-
-[node name="DotSpawner" type="Sprite2D" parent="Grid/Screen" unique_id=426876855]
-self_modulate = Color(0.843137, 0, 0, 1)
-show_behind_parent = true
-position = Vector2(184, -161)
-scale = Vector2(0.229167, 0.229167)
-texture = ExtResource("4_uuq8y")
-
-[node name="PlayerArrow" type="Sprite2D" parent="Grid/Screen" unique_id=147295767]
-show_behind_parent = true
-z_index = 1
-position = Vector2(-1, -1)
-scale = Vector2(0.533334, 0.533334)
-texture = ExtResource("5_n520u")
-
-[node name="DotSun" type="Sprite2D" parent="Grid/Screen" unique_id=910005860]
-modulate = Color(0.819608, 0.803922, 0, 1)
-position = Vector2(189, -181)
-scale = Vector2(0.266927, 0.266927)
-texture = ExtResource("4_uuq8y")
-
-[node name="OtherPlayerArrow" type="Sprite2D" parent="Grid/Screen" unique_id=117333185]
-self_modulate = Color(1, 0.101961, 0, 1)
-show_behind_parent = true
-position = Vector2(219, -136)
-scale = Vector2(0.555557, 0.555557)
-texture = ExtResource("5_n520u")
-
-[node name="BossIcon" type="Sprite2D" parent="Grid/Screen" unique_id=662942862]
-show_behind_parent = true
-position = Vector2(219, -166)
-scale = Vector2(1.5625, 1.5625)
-texture = ExtResource("7_mnhki")
-
-[node name="HangarIcon" type="Sprite2D" parent="Grid/Screen" unique_id=602524668]
-show_behind_parent = true
-position = Vector2(186.5, -188.5)
-scale = Vector2(0.694444, 0.694444)
-texture = ExtResource("8_2norb")
-
 [node name="PanelContainer" type="PanelContainer" parent="Grid" unique_id=209503047]
-offset_left = -183.5
+offset_left = -215.0
 offset_top = -344.5
-offset_right = -59.5
+offset_right = -70.0
 offset_bottom = -311.5
 scale = Vector2(3, 3)
 
@@ -95,8 +36,28 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 metadata/_edit_lock_ = true
 
-[node name="LocalizationLabel" type="Label" parent="Grid/PanelContainer/MarginContainer" unique_id=124973343]
+[node name="HBoxContainer" type="HBoxContainer" parent="Grid/PanelContainer/MarginContainer" unique_id=68249461]
 layout_mode = 2
-text = "120, 1337"
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="PositionX" type="Label" parent="Grid/PanelContainer/MarginContainer/HBoxContainer" unique_id=124973343]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "120"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Comma" type="Label" parent="Grid/PanelContainer/MarginContainer/HBoxContainer" unique_id=1995902612]
+layout_mode = 2
+text = ","
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PositionY" type="Label" parent="Grid/PanelContainer/MarginContainer/HBoxContainer" unique_id=97774807]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "2137"
 vertical_alignment = 1

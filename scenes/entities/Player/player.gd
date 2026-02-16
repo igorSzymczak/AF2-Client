@@ -12,8 +12,6 @@ const MAX_SPEED := 500.0
 const DRAG_COEF := 100.0
 const SPEED := 500.0 # ship stat
 
-var poi_type = "player"
-
 var landed_structure: Structure = null
 
 @onready var health_component: HealthComponent = $HealthComponent
@@ -59,8 +57,6 @@ func _ready() -> void:
 		camera.set_enabled(false)
 		call_deferred("other_player_setup_poi")
 		reticle.hide()
-	
-	print("HEY IM PLAYER AND IM CREATED YAY, \tmy id is ", gid)
 
 func other_player_setup_poi():
 	GlobalSignals.emit_signal("setup_poi", self)
@@ -400,7 +396,6 @@ func set_ship(new_ship_name: String):
 ## 		Landing
 
 func land_on(structure: Structure):
-	print("TRYING TO LAND")
 	landed_structure = structure
 	health_component.hide()
 	if IS_MAIN_PLAYER:
@@ -440,7 +435,6 @@ func land_on(structure: Structure):
 func try_leave_structure(_user_id: int): pass # Only Server
 
 func animate_leave_structure():
-	print("Animating Leaving structure ")
 	landed_structure = null
 	health_component.show()
 	if IS_MAIN_PLAYER:

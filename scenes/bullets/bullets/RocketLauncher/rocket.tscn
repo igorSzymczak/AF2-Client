@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xkfnn7dih2w2" path="res://scenes/bullets/bullets/RocketLauncher/rocket.gd" id="1_1hj3a"]
 [ext_resource type="Texture2D" uid="uid://crn4vd1bsktxn" path="res://assets/projectiles/missile red.png" id="2_1j8j5"]
+[ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="2_vjn7u"]
 
 [sub_resource type="Curve" id="Curve_1dnbw"]
 _data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -33,6 +34,10 @@ position = Vector2(-18, 0)
 position = Vector2(-4, 0)
 scale = Vector2(0.636364, 0.636364)
 texture = ExtResource("2_1j8j5")
+
+[node name="Shadow" parent="BulletSprite" unique_id=495161807 instance=ExtResource("2_vjn7u")]
+position = Vector2(6.2857113, 0)
+scale = Vector2(1.5714278, 1.5714278)
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=919977056]
 rotation = 1.5708

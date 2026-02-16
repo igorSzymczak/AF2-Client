@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://djmx74kegobdt"]
 
 [ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_0y6no"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_3s7vm"]
 [ext_resource type="PackedScene" uid="uid://c0rt7qn77lrxv" path="res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn" id="2_fskpq"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="3_3s7vm"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="4_tcday"]
@@ -12,6 +13,9 @@ radius = 0.01
 [node name="Zlatte" type="CharacterBody2D" unique_id=2017227604]
 script = ExtResource("1_0y6no")
 metadata/_custom_type_script = "uid://cf0pk0erui87j"
+
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_3s7vm")]
+type = 2
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1640793511]
 visible = false

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dkgjieqnxsdn4"]
+
+[ext_resource type="Texture2D" uid="uid://cv3v3brtmmlli" path="res://assets/ui/radar/boss icon.png" id="1_yrjow"]
+
+[node name="BossIcon" type="Node2D" unique_id=2113063313]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1798670206]
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("1_yrjow")

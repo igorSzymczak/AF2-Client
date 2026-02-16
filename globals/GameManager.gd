@@ -232,15 +232,11 @@ func add_player(player_data: Dictionary):
 	if Players.has(gid):
 		return
 	
-	print("Creating player...")
 	var player: Player = EntityManager.player_scene.instantiate()
 	player.gid = gid
-	print("adding player to world...")
 	current_world.add_child(player)
-	print("checking if gid is my id...")
 	if gid == AuthManager.my_user_id:
 		me = player
-		print("It is my id!")
 		GlobalSignals.give_main_player.emit(me)
 		AuthManager.joined.emit()
 	
@@ -260,7 +256,6 @@ func add_player(player_data: Dictionary):
 	player.stats.from_dict(stats)
 	player.props.from_dict(props)
 	player_added.emit(player)
-	print("everything done!!!")
 
 signal player_removed(player_id: int)
 func remove_player(player_id: int) -> void:

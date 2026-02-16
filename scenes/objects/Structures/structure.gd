@@ -21,17 +21,15 @@ var orbit: Structure
 @onready var sprite: Sprite2D = $Sprite
 @onready var land_area: CollisionShape2D = $LandArea
 
+@onready var poi: POI = $PoiComponent
+
 var is_safezone: bool = false
 var safezone: Area2D
-
-@export var poi_type: String = "planet"
 	
 func get_visibility() -> bool:
 	return is_shown
 	
 func _ready():
-	GlobalSignals.emit_signal("setup_poi", self)
-	
 	set_orbit()
 	props.property_changed.connect(_handle_property_changed)
 	
@@ -40,6 +38,7 @@ func _ready():
 	
 	await AuthManager.logged_in
 	g.current_world.structures.append(self)
+	poi.label = structure_name
 
 func _process(delta: float) -> void:
 	set_safezone()

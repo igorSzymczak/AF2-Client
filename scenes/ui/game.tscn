@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://co4eekalpp6kr"]
+[gd_scene format=3 uid="uid://co4eekalpp6kr"]
 
 [ext_resource type="Theme" uid="uid://dk1bu2y8w4psy" path="res://scenes/ui/main_theme.tres" id="1_g2o6o"]
 [ext_resource type="Script" uid="uid://cu230txobmkbi" path="res://scenes/ui/game.gd" id="2_1c0im"]
@@ -8,11 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cykkh2wew6crk" path="res://scenes/ui/Materials/materials.tscn" id="3_ym21q"]
 [ext_resource type="PackedScene" uid="uid://jxppw8syh3ni" path="res://scenes/ui/minimap/minimap.tscn" id="4_y376n"]
 [ext_resource type="PackedScene" uid="uid://dkfidcf3py1w5" path="res://scenes/ui/Boss Health/boss_health.tscn" id="5_6age8"]
+[ext_resource type="PackedScene" uid="uid://doomtdi6hcjji" path="res://scenes/ui/Map/map.tscn" id="5_kywqo"]
 [ext_resource type="PackedScene" uid="uid://beqp17tn4b47x" path="res://scenes/ui/Chat/chat.tscn" id="5_p0jm6"]
 [ext_resource type="PackedScene" uid="uid://cewmldm7kb3dj" path="res://scenes/ui/ExpNotification/exp_notification.tscn" id="9_x5xxw"]
 [ext_resource type="PackedScene" uid="uid://c7f4wgrci2wsa" path="res://scenes/ui/Pickups/Pickups.tscn" id="11_icr1w"]
 
-[node name="Game" type="Control"]
+[node name="Game" type="Control" unique_id=407947626]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,83 +24,7 @@ theme = ExtResource("1_g2o6o")
 script = ExtResource("2_1c0im")
 metadata/_edit_lock_ = true
 
-[node name="Materials" parent="." instance=ExtResource("3_ym21q")]
-layout_mode = 1
-anchor_top = 0.056
-anchor_bottom = 0.056
-offset_left = -225.0
-offset_right = -15.0
-grow_vertical = 1
-
-[node name="Top" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-metadata/_edit_lock_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Top"]
-layout_mode = 2
-theme_override_constants/separation = 4
-metadata/_edit_lock_ = true
-
-[node name="ExpBar" parent="Top/VBoxContainer" instance=ExtResource("3_mqabc")]
-layout_mode = 2
-
-[node name="Chat" parent="Top/VBoxContainer" instance=ExtResource("5_p0jm6")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(450, 230)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-
-[node name="PanelBottom" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 3
-
-[node name="Center" type="VBoxContainer" parent="PanelBottom"]
-layout_mode = 2
-size_flags_horizontal = 4
-metadata/_edit_lock_ = true
-
-[node name="Filler" type="Polygon2D" parent="PanelBottom/Center"]
-visible = false
-z_index = 1
-position = Vector2(-63, -50.2857)
-scale = Vector2(1, 0.971429)
-color = Color(0.0941176, 0.0941176, 0.0941176, 1)
-antialiased = true
-polygon = PackedVector2Array(-10, -9.7, 271.732, -9.7, 271.732, 60, 130.921, 60, -10, 60)
-
-[node name="Power Bar" parent="PanelBottom/Center" instance=ExtResource("2_3clpu")]
-layout_mode = 2
-
-[node name="StatsBar" parent="PanelBottom/Center" instance=ExtResource("3_yit8b")]
-layout_mode = 2
-
-[node name="BossHealth" parent="PanelBottom/Center" instance=ExtResource("5_6age8")]
-layout_mode = 2
-
-[node name="Minimap" parent="PanelBottom" instance=ExtResource("4_y376n")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="Center" type="Control" parent="."]
+[node name="Center" type="Control" parent="." unique_id=1952185302]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
@@ -109,7 +34,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SafezoneLabel" type="Label" parent="Center"]
+[node name="SafezoneLabel" type="Label" parent="Center" unique_id=1667729114]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -124,13 +49,13 @@ theme_override_colors/font_color = Color(0, 0.678431, 1, 0.572549)
 text = "You are in safezone"
 horizontal_alignment = 1
 
-[node name="ExpNotification" parent="Center" instance=ExtResource("9_x5xxw")]
+[node name="ExpNotification" parent="Center" unique_id=1060766608 instance=ExtResource("9_x5xxw")]
 unique_name_in_owner = true
 layout_mode = 1
 offset_top = 85.0
 offset_bottom = 113.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Center"]
+[node name="MarginContainer" type="MarginContainer" parent="Center" unique_id=563459397]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -145,6 +70,86 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 384
 
-[node name="Pickups" parent="Center/MarginContainer" instance=ExtResource("11_icr1w")]
+[node name="Pickups" parent="Center/MarginContainer" unique_id=2142234251 instance=ExtResource("11_icr1w")]
 modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 2
+
+[node name="Map" parent="Center" unique_id=1446763498 instance=ExtResource("5_kywqo")]
+visible = false
+layout_mode = 1
+
+[node name="Materials" parent="." unique_id=515303426 instance=ExtResource("3_ym21q")]
+layout_mode = 1
+anchor_top = 0.056
+anchor_bottom = 0.056
+offset_left = -225.0
+offset_right = -15.0
+grow_vertical = 1
+
+[node name="Top" type="MarginContainer" parent="." unique_id=1960243260]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Top" unique_id=717868251]
+layout_mode = 2
+theme_override_constants/separation = 4
+metadata/_edit_lock_ = true
+
+[node name="ExpBar" parent="Top/VBoxContainer" unique_id=1681750958 instance=ExtResource("3_mqabc")]
+layout_mode = 2
+
+[node name="Chat" parent="Top/VBoxContainer" unique_id=64958055 instance=ExtResource("5_p0jm6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 230)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="PanelBottom" type="PanelContainer" parent="." unique_id=482211727]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+
+[node name="Center" type="VBoxContainer" parent="PanelBottom" unique_id=1816592377]
+layout_mode = 2
+size_flags_horizontal = 4
+metadata/_edit_lock_ = true
+
+[node name="Filler" type="Polygon2D" parent="PanelBottom/Center" unique_id=1288461941]
+visible = false
+z_index = 1
+position = Vector2(-63, -50.2857)
+scale = Vector2(1, 0.971429)
+color = Color(0.0941176, 0.0941176, 0.0941176, 1)
+antialiased = true
+polygon = PackedVector2Array(-10, -9.7, 271.732, -9.7, 271.732, 60, 130.921, 60, -10, 60)
+
+[node name="Power Bar" parent="PanelBottom/Center" unique_id=1968042248 instance=ExtResource("2_3clpu")]
+layout_mode = 2
+
+[node name="StatsBar" parent="PanelBottom/Center" unique_id=1545952062 instance=ExtResource("3_yit8b")]
+layout_mode = 2
+
+[node name="BossHealth" parent="PanelBottom/Center" unique_id=949662562 instance=ExtResource("5_6age8")]
+layout_mode = 2
+
+[node name="Minimap" parent="PanelBottom" unique_id=157176177 instance=ExtResource("4_y376n")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4

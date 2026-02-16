@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn66gid4sge4v"]
+[gd_scene format=3 uid="uid://dn66gid4sge4v"]
 
 [ext_resource type="Script" uid="uid://dtfp7es82qeat" path="res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.gd" id="1_20bys"]
 [ext_resource type="Shader" uid="uid://d2lw0r0sjk354" path="res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.gdshader" id="2_vwu74"]
+[ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_xu2go"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xu2go"]
 shader = ExtResource("2_vwu74")
@@ -29,19 +30,24 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_1aesf"]
 radius = 3.0
 
-[node name="EnergyBlastProjectile" type="Area2D"]
+[node name="EnergyBlastProjectile" type="Area2D" unique_id=1974469412]
+collision_layer = 0
+collision_mask = 0
 monitorable = false
 script = ExtResource("1_20bys")
 metadata/_custom_type_script = "uid://712ngcx0fkeg"
 
-[node name="BulletSprite" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=1493994353]
 material = SubResource("ShaderMaterial_xu2go")
 position = Vector2(-1.9073486e-06, -7.2155615e-12)
 rotation = 1.5708
 scale = Vector2(2.7311323, 2.7311323)
 texture = SubResource("GradientTexture2D_1aesf")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="Shadow" parent="BulletSprite" unique_id=495161807 instance=ExtResource("3_xu2go")]
+position = Vector2(31.736307, -101.178)
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=127377127]
 visible = false
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1aesf")

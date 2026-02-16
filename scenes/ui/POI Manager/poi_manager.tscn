@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy7eq70olddga"]
-
-[ext_resource type="Script" path="res://scenes/ui/POI Manager/poi_manager.gd" id="1_emkfj"]
-
-[node name="PoiManager" type="Node2D"]
-script = ExtResource("1_emkfj")

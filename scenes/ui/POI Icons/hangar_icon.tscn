@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dttet5fn28bnm"]
+
+[ext_resource type="Texture2D" uid="uid://du3t67lb6w8bl" path="res://assets/ui/radar/HangarIcon.png" id="1_ajy4x"]
+
+[node name="HangarIcon" type="Node2D" unique_id=606932849]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=940300743]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_ajy4x")

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://jjlspeqr8hrn"]
+
+[ext_resource type="Texture2D" uid="uid://c2vtyajjv1ov8" path="res://assets/ui/radar/Player Arrow.png" id="1_xul5j"]
+
+[node name="PlayerIcon" type="Node2D" unique_id=1329018789]
+modulate = Color(1, 1, 0.34901962, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=80358495]
+rotation = 1.5707964
+scale = Vector2(0.6888889, 0.6888891)
+texture = ExtResource("1_xul5j")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b1u1aqjb0soe7"]
+
+[ext_resource type="Script" uid="uid://cnpqcmwolryj" path="res://scenes/components/POI/poi.gd" id="1_6avr8"]
+
+[node name="PoiComponent" type="Node" unique_id=990252157]
+script = ExtResource("1_6avr8")

@@ -13,8 +13,7 @@ var stats: Stats = Stats.new()
 @onready var destroyed_sprite = $DestroyedSpawnerSprite
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
-
-var poi_type = "spawner"
+@onready var poi: POI = $PoiComponent
 
 #var player: Player = null
 #func set_player(emitted_player: Player) -> void:
@@ -24,8 +23,6 @@ var shoot_range: float
  
 var original_sprite_texture: Texture2D
 func _ready() -> void:
-	GlobalSignals.emit_signal("setup_poi", self)
-	
 	original_sprite_texture = sprite.get_texture()
 	props.property_changed.connect(_on_property_changed)
 
@@ -75,6 +72,7 @@ func eye_trigger(trigger: bool):
 var active: bool = false
 func activate() -> void:
 	active = true
+	poi.visible = true
 	
 	# Bring back Look
 	eye.set_visible(true)
@@ -88,13 +86,12 @@ func activate() -> void:
 	
 	health_component.set_visible(true)
 	hitbox_component.set_monitorable(true)
-	GlobalSignals.emit_signal("setup_poi", self)
 
 func deactivate() -> void:
-	GlobalSignals.emit_signal("delete_poi", self)
 	GlobalSignals.create_explosion.emit(global_position, "explosion_large", 1, {})
 	
 	active = false
+	poi.visible = false
 	
 	eye.set_visible(false)
 	sprite.set_texture(destroyed_sprite.get_texture())

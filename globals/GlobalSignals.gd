@@ -6,8 +6,6 @@ signal bullet_fired(bullet: Bullet, position: Vector2, direction: Vector2, team,
 
 # Minimap
 signal give_main_player(main_player: Player)
-signal setup_poi(poi)
-signal delete_poi(poi)
 
 # Camera zooming stuff
 signal camera_zoom(scale: float)

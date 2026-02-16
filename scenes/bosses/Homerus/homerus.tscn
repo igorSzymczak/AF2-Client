@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cu67f3v2dyl2k"]
 
 [ext_resource type="Script" uid="uid://dctwpvpk3btu6" path="res://scenes/bosses/Homerus/homerus.gd" id="1_k1i05"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_kkvbj"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_yyd6w"]
 [ext_resource type="Texture2D" uid="uid://d36ebqohp8sny" path="res://assets/bosses/Homerus/homerus_main.png" id="3_3whro"]
 [ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="3_e47wp"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_sjj4b"]
 [ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="7_gd3jw"]
 [ext_resource type="Texture2D" uid="uid://7bvxgvns6go3" path="res://assets/bosses/Homerus/homerus_side_right.png" id="8_j0tg7"]
+[ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="9_6g4rd"]
 
 [sub_resource type="Curve" id="Curve_sthmy"]
 _data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
@@ -174,6 +176,9 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_k1i05")
 
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_kkvbj")]
+type = 4
+
 [node name="Engine" parent="." unique_id=1772747923 instance=ExtResource("2_yyd6w")]
 modulate = Color(0, 0.462745, 1, 1)
 show_behind_parent = true
@@ -197,6 +202,8 @@ rotation = 1.5708
 scale = Vector2(1.35, 1.35)
 texture = ExtResource("3_3whro")
 
+[node name="Shadow" parent="Sprite" unique_id=495161807 instance=ExtResource("9_6g4rd")]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2049190458]
 visible = false
 shape = SubResource("CapsuleShape2D_55uv0")
@@ -215,6 +222,8 @@ rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("4_kgne3")
 
+[node name="Shadow" parent="LeftSegment/Sprite" unique_id=1322644680 instance=ExtResource("9_6g4rd")]
+
 [node name="RightSegment" type="Area2D" parent="." unique_id=941988057]
 position = Vector2(-130, 248)
 
@@ -228,3 +237,5 @@ position = Vector2(113, 0)
 rotation = 1.5708
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("8_j0tg7")
+
+[node name="Shadow" parent="RightSegment/Sprite" unique_id=817585411 instance=ExtResource("9_6g4rd")]

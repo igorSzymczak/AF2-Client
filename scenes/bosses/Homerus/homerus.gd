@@ -2,7 +2,6 @@ class_name Homerus extends CharacterBody2D
 
 var gid: int # GameManager ID
 
-var poi_type = "boss"
 @onready var engine = $Engine
 @onready var left_segment = $LeftSegment
 @onready var right_segment = $RightSegment
@@ -10,9 +9,7 @@ var poi_type = "boss"
 @onready var main_sprite = $Sprite
 @onready var left_sprite = $LeftSegment/Sprite
 @onready var right_sprite = $RightSegment/Sprite
-
-func _ready():
-	GlobalSignals.emit_signal("setup_poi", self)
+@onready var poi: POI = $PoiComponent
 
 var server_pos := Vector2.ZERO
 var server_rot := 0.0
@@ -33,7 +30,6 @@ var right_segment_alive := true
 var server_main_alive := true
 var server_left_alive := true
 var server_right_alive := true
-
 
 func _process(delta):
 	if HomerusManager.global_position != Vector2.ZERO:
@@ -108,13 +104,14 @@ func handle_right_segment_death():
 
 
 func handle_death():
+	poi.visible = false
 	GlobalSignals.create_explosion.emit(global_position, "explosion_huge", 1, {})
 	await get_tree().create_timer(2).timeout
-	GlobalSignals.emit_signal("delete_poi", self)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(0.4 ,0.4 ,0.4 , 0), 0.3)
 
 func handle_revoke():
+	poi.visible = true
 	main_segment_alive = true
 	left_segment_alive = true
 	right_segment_alive = true
@@ -127,5 +124,3 @@ func handle_revoke():
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.3)
 	
 	await get_tree().create_timer(0.5).timeout
-	
-	GlobalSignals.emit_signal("setup_poi", self)

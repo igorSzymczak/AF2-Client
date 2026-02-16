@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://drn35vnvol17p"]
+
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="1_2xqo6"]
+
+[node name="EnemyIcon" type="Node2D" unique_id=989427846]
+modulate = Color(0.77254903, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=987310203]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_2xqo6")

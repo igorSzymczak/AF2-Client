@@ -30,7 +30,6 @@ func _ready():
 func _load_keybinds():
 	for action in user_prefs.keybinds:
 		var event: InputEventKey = user_prefs.keybinds[action]
-		print("Loading: " + action + " binded to " + event.as_text())
 		InputMap.action_erase_events(action)
 		InputMap.action_add_event(action, event)
 

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbn75ixlqyrgh"]
+
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="1_scevr"]
+
+[node name="SunIcon" type="Node2D" unique_id=396355855]
+modulate = Color(1, 1, 0.34901962, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1028045882]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_scevr")

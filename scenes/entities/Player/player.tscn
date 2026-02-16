@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cu0u4mqhf2e0w"]
 
 [ext_resource type="Script" uid="uid://bjhcq0o1jdole" path="res://scenes/entities/Player/player.gd" id="1_q57er"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_tihqr"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_emusc"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_5ttqo"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
@@ -30,6 +31,9 @@ collision_layer = 17
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_q57er")
+
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_tihqr")]
+should_update_rotation = true
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=2098361653]
 position = Vector2(13, 0)

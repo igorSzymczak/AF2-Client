@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://y4hetgssvu6u"]
+[gd_scene format=3 uid="uid://y4hetgssvu6u"]
 
 [ext_resource type="Texture2D" uid="uid://dcn8s74a2sjyn" path="res://assets/ships/Nexar Reaver/Nexar Reaver.png" id="1_gctjj"]
 [ext_resource type="Texture2D" uid="uid://c468ylpm7rsda" path="res://assets/ships/Nexar Reaver/Nexar Reaver Lights.png" id="2_04ocu"]
 [ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_6cr4w"]
+[ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_0ginr"]
 [ext_resource type="Script" uid="uid://b2nib5rbl1k1w" path="res://assets/ships/Nexar Reaver/Animation.gd" id="3_50kql"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_fr04d"]
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_m7hr6"]
@@ -33,7 +34,7 @@ _data = {
 &"NexarReaverPulse": SubResource("Animation_dyips")
 }
 
-[node name="NexarReaver" type="Sprite2D" node_paths=PackedStringArray("engine")]
+[node name="NexarReaver" type="Sprite2D" unique_id=113914337 node_paths=PackedStringArray("engine")]
 material = SubResource("ShaderMaterial_esedj")
 rotation = 1.5708
 texture = ExtResource("1_gctjj")
@@ -50,34 +51,34 @@ base_armor = 26
 base_shield = 760
 base_shield_regen = 66
 
-[node name="Lights" type="Sprite2D" parent="."]
+[node name="Shadow" parent="." unique_id=495161807 instance=ExtResource("3_0ginr")]
+
+[node name="Lights" type="Sprite2D" parent="." unique_id=987979394]
 modulate = Color(1, 0.27451, 0, 1)
 self_modulate = Color(1, 1, 1, 0.951642)
 position = Vector2(-0.445443, 0)
 scale = Vector2(1.06012, 0.943242)
 texture = ExtResource("2_04ocu")
 
-[node name="Animation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_dwjmk")
-}
+[node name="Animation" type="AnimationPlayer" parent="." unique_id=431068146]
+libraries/ = SubResource("AnimationLibrary_dwjmk")
 speed_scale = 0.33
 script = ExtResource("3_50kql")
 
-[node name="Engine" parent="." instance=ExtResource("4_fr04d")]
+[node name="Engine" parent="." unique_id=985158302 instance=ExtResource("4_fr04d")]
 modulate = Color(1, 0.470588, 0.145098, 1)
 show_behind_parent = true
 position = Vector2(0, 91.2726)
 rotation = -1.5708
 
-[node name="Light" parent="Engine" instance=ExtResource("5_m7hr6")]
+[node name="Light" parent="Engine" unique_id=1329727325 instance=ExtResource("5_m7hr6")]
 position = Vector2(-0.363627, 0)
 
-[node name="Idle" parent="Engine" instance=ExtResource("6_slaw8")]
+[node name="Idle" parent="Engine" unique_id=2014158751 instance=ExtResource("6_slaw8")]
 position = Vector2(0.0909091, 0)
 
-[node name="Speeding" parent="Engine" instance=ExtResource("7_rpu0e")]
+[node name="Speeding" parent="Engine" unique_id=1492620873 instance=ExtResource("7_rpu0e")]
 position = Vector2(-11, 0)
 
-[node name="Accelerate" parent="Engine" instance=ExtResource("8_p1sny")]
+[node name="Accelerate" parent="Engine" unique_id=1702383966 instance=ExtResource("8_p1sny")]
 position = Vector2(0.0909092, 0)

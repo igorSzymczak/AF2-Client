@@ -8,11 +8,10 @@ var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
 @onready var sprite: Sprite2D = $Sprite
 @onready var engine: Thruster = sprite.find_child("Engine")
 @onready var health_component: HealthComponent = $HealthComponent
-@export var poi_type = "enemy"
+@onready var poi: POI = $PoiComponent
 
 func _ready() -> void:
 	health_component.health_depleted.connect(handle_death)
-	GlobalSignals.emit_signal("setup_poi", self)
 	props.property_changed.connect(_on_property_changed)
 
 var server_pos: Vector2 = Vector2.ZERO
@@ -48,6 +47,6 @@ func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
 
 func handle_death() -> void:
 	if !is_queued_for_deletion():
-		GlobalSignals.emit_signal("delete_poi", self)
 		GlobalSignals.emit_signal("create_explosion", global_position, "explosion_medium", 1, {})
+		poi.remove()
 		queue_free()

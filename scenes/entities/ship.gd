@@ -50,8 +50,3 @@ func get_power_regen_rate() -> float: return POWER_REGEN_RATE
 func get_turn_speed() -> float: return TURN_SPEED
 func get_deceleration_speed() -> float: return DECELERATION_SPEED
 func get_drag_coef() -> float: return DRAG_COEF
-
-
-
-
-

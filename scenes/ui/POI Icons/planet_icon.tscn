@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b8d8yko0275tf"]
+
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="1_jdnkg"]
+
+[node name="PlanetIcon" type="Node2D" unique_id=647398285]
+modulate = Color(0, 0.6627451, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2014353702]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_jdnkg")

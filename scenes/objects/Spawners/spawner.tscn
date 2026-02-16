@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b4801adrniots"]
 
 [ext_resource type="Script" uid="uid://605l4cv3mr6l" path="res://scenes/objects/Spawners/spawner.gd" id="1_micgo"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_1axel"]
 [ext_resource type="Texture2D" uid="uid://msajke14wda1" path="res://assets/spawners/spawner.png" id="3_d3guo"]
 [ext_resource type="Texture2D" uid="uid://c23exqcv5bo8p" path="res://assets/spawners/eye.png" id="4_sg5c5"]
 [ext_resource type="PackedScene" uid="uid://bhkpp6iw15tmm" path="res://scenes/components/Hitbox/HitboxComponent.tscn" id="5_bbd3e"]
@@ -14,6 +15,9 @@ radius = 62.2013
 
 [node name="Spawner" type="Node2D" unique_id=248401012 groups=["points_of_interest"]]
 script = ExtResource("1_micgo")
+
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_1axel")]
+type = 1
 
 [node name="DestroyedSpawnerSprite" type="Sprite2D" parent="." unique_id=1238524588]
 visible = false

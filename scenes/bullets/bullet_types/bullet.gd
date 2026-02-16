@@ -46,8 +46,6 @@ func special_ready() -> void:
 	tween.tween_property(self, "opacity", 1.0, 0.1)
 
 func _handle_property_changed(prop: g.BulletProperty, value: Variant) -> void:
-	if self is EnergyBlastProjectile:
-		print("setting ", prop, " to ", value)
 	match prop:
 		g.BulletProperty.GID:
 			gid = value
@@ -60,7 +58,6 @@ func _handle_property_changed(prop: g.BulletProperty, value: Variant) -> void:
 			velocity = server_pos - global_position
 		g.BulletProperty.IS_DETERMINISTIC:
 			is_deterministic = value
-			print(value)
 		g.BulletProperty.DIRECTION_SPEED:
 			direction_speed = value
 			rotation = direction_speed.angle()
@@ -72,8 +69,6 @@ func _handle_property_changed(prop: g.BulletProperty, value: Variant) -> void:
 			current_life_time = value
 		g.BulletProperty.IS_DETERMINISTIC:
 			server_timestamp = value
-		
-		
 
 func _physics_process(delta: float) -> void:
 	if !g.Bullets.has(gid): crash_bullet()

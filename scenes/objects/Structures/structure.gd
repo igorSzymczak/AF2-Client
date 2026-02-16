@@ -183,7 +183,6 @@ func handle_landing(_delta: float):
 	if !g.me.alive: return
 	
 	if get_overlapping_bodies().has(g.me):
-		print("Landing!")
 		request_land.rpc_id(1, AuthManager.my_user_id, structure_name)
 
 func try_to_land(_user_id: int, _structure_name: String): pass # Only Server

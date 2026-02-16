@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	shadow.top_level = true
 	shadow.global_position = parent.global_position + Vector2(20.0, 20.0)
-	shadow.z_index = 0
+	shadow.show_behind_parent = true
 	shadow.modulate = Color(0, 0, 0, 0.333)
 	add_child(shadow)
 	

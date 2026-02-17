@@ -1,14 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://cug2k55cvgsod"]
+[gd_scene format=3 uid="uid://cug2k55cvgsod"]
 
 [ext_resource type="Script" uid="uid://d17t825mil4wk" path="res://scenes/ui/Cargo Preview/cargo_preview.gd" id="1_1j86l"]
 [ext_resource type="PackedScene" uid="uid://dhg4e70xq1b5a" path="res://scenes/ui/Pickups/pickup.tscn" id="2_1ipfl"]
+[ext_resource type="Script" uid="uid://dkrfatcxwvxnq" path="res://scenes/ui/elements/buttons/menu_button.gd" id="3_1ipfl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg6q7"]
 bg_color = Color(1, 1, 1, 0)
 border_width_right = 5
 border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
 
-[node name="CargoPreview" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_121kw"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.3372549, 0.101960786, 0.101960786, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.654902, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ipfl"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.5411765, 0.11372549, 0.11372549, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.654902, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="CargoPreview" type="Control" unique_id=731421471]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1j86l")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=927341567]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -31,17 +66,17 @@ offset_left = -360.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="H" type="HBoxContainer" parent="PanelContainer"]
+[node name="H" type="HBoxContainer" parent="PanelContainer" unique_id=1823259584]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 0
 
-[node name="BorderRight" type="Panel" parent="PanelContainer/H"]
+[node name="BorderRight" type="Panel" parent="PanelContainer/H" unique_id=1707124678]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eg6q7")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/H/BorderRight" unique_id=420957734]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,35 +90,53 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Cargo Preview" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer"]
+[node name="Cargo Preview" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer" unique_id=613583173]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="CargoLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+[node name="CargoLabel" type="Label" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview" unique_id=1998505849]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Cargo"
 horizontal_alignment = 1
 
-[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+[node name="Separator" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview" unique_id=208509972]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Items" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview"]
+[node name="Items" type="VBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview" unique_id=332742572]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Pickup" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+[node name="Pickup" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" unique_id=854154769 instance=ExtResource("2_1ipfl")]
 layout_mode = 2
 
-[node name="Pickup2" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+[node name="Pickup2" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" unique_id=157897842 instance=ExtResource("2_1ipfl")]
 layout_mode = 2
 
-[node name="Pickup3" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" instance=ExtResource("2_1ipfl")]
+[node name="Pickup3" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/Items" unique_id=115835678 instance=ExtResource("2_1ipfl")]
 layout_mode = 2
 
-[node name="V2" type="VBoxContainer" parent="PanelContainer/H"]
+[node name="Separator2" type="Control" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview" unique_id=2084622650]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview" unique_id=934255809]
+layout_mode = 2
+alignment = 1
+
+[node name="EjectButton" type="Button" parent="PanelContainer/H/BorderRight/MarginContainer/Cargo Preview/HBoxContainer" unique_id=224517126]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_121kw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1ipfl")
+text = "Eject"
+script = ExtResource("3_1ipfl")
+metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
+
+[node name="V2" type="VBoxContainer" parent="PanelContainer/H" unique_id=397484941]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0

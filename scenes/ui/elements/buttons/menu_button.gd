@@ -35,5 +35,3 @@ func handle_hover(delta: float):
 				underline.size.x = 0
 				currently_underlined = false
 	
-
-

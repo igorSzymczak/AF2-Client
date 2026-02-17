@@ -9,6 +9,7 @@ enum TYPE {
 	PLANET,
 	HANGAR,
 	SUN,
+	ITEM,
 }
 
 var id: int

@@ -8,6 +8,9 @@ var iridium: int = 0
 
 var cargo: Dictionary[Item.Code, int] = {}
 
+func try_eject_cargo(_user_id: int) -> void:
+	pass # Only Server
+
 signal flux_changed()
 func _handle_set_flux(amount: int):
 	flux = amount
@@ -81,3 +84,7 @@ func _set_cargo(new_cargo: Dictionary[int, int]):
 @rpc("authority", "call_remote", "reliable")
 func _set_item(code: int, amount: int):
 	_handle_set_item(code, amount)
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_eject_cargo():
+	try_eject_cargo(multiplayer.get_remote_sender_id())

@@ -19,6 +19,7 @@ func create_poi_icon(type: POI.TYPE) -> Node2D:
 		POI.TYPE.PLANET: return preload("res://scenes/ui/POI Icons/planet_icon.tscn").instantiate()
 		POI.TYPE.HANGAR: return preload("res://scenes/ui/POI Icons/hangar_icon.tscn").instantiate()
 		POI.TYPE.SUN: return preload("res://scenes/ui/POI Icons/sun_icon.tscn").instantiate()
+		POI.TYPE.ITEM: return preload("res://scenes/ui/POI Icons/item_icon.tscn").instantiate()
 	return null
 
 func get_related_position(initial_position: Vector2, relative_position: Vector2, zoom: float = 1.0) -> Vector2:

@@ -2,6 +2,8 @@ extends Control
 
 @onready var items: VBoxContainer = %Items
 var pickups: Dictionary[int, Dictionary] = {}
+@onready var eject_button: BetterButton = %EjectButton
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -9,6 +11,7 @@ func _ready() -> void:
 		child.queue_free()
 	InventoryManager.cargo_changed.connect(_handle_cargo_changed)
 	InventoryManager.item_changed.connect(_handle_item_changed)
+	eject_button.pressed.connect(eject_cargo)
 
 func _handle_item_changed(code: int, _prev: int, new: int) -> void:
 	if !pickups.has(code):
@@ -42,3 +45,6 @@ func select_animation(animation_name: String):
 		
 	elif animation_name == "close":
 		hide()
+
+func eject_cargo() -> void:
+	InventoryManager.request_eject_cargo.rpc_id(1)

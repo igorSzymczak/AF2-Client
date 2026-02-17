@@ -25,6 +25,13 @@ func _ready():
 	tween.tween_property(self, "global_position", Vector2(target_position), 1)\
 		.set_trans(Tween.TRANS_EXPO)\
 		.set_ease(Tween.EASE_OUT)
+	
+	var poi: POI = POI.new()
+	poi.label = display_name
+	poi.type = POI.TYPE.ITEM
+	add_child(poi)
+	about_to_die.connect(poi.remove)
+
 
 signal about_to_die()
 func destroy():

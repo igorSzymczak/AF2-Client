@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://biqwxonxaqcjf"]
+
+[ext_resource type="Texture2D" uid="uid://c8daasvxqwr8m" path="res://assets/ui/radar/Dot White.png" id="1_lkhjh"]
+
+[node name="ItemIcon" type="Node2D" unique_id=396355855]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1028045882]
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_lkhjh")

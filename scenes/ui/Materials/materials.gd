@@ -7,28 +7,28 @@ extends PanelContainer
 @onready var iridium_label: Label = %IridiumAmount
 
 func _ready():
-	InventoryManager.flux_changed.connect(_on_flux_changed)
-	InventoryManager.steel_changed.connect(_on_steel_changed)
-	InventoryManager.hydrogen_crystals_changed.connect(_on_hydrogen_crystals_changed)
-	InventoryManager.plasma_fluids_changed.connect(_on_plasma_fluids_changed)
-	InventoryManager.iridium_changed.connect(_on_iridium_changed)
+	InventoryManager.currency_changed.connect(_on_currency_changed)
 
-func _on_flux_changed():
-	var amount := InventoryManager.flux
-	flux_label.set_text(Functions.shorten_number(amount))
+func _on_currency_changed(currency: InventoryManager.Currency, value: int) -> void:
+	match currency:
+		InventoryManager.Currency.FLUX: set_flux(value)
+		InventoryManager.Currency.STEEL: set_steel(value)
+		InventoryManager.Currency.HYDROGEN_CRYSTALS: set_hydrogen_crystals(value)
+		InventoryManager.Currency.PLASMA_FLUIDS: set_plasma_fluids(value)
+		InventoryManager.Currency.IRIDIUM: set_iridium(value)
+		
 
-func _on_steel_changed():
-	var amount := InventoryManager.steel
-	steel_label.set_text(Functions.shorten_number(amount))
+func set_flux(value: int):
+	flux_label.set_text(Functions.shorten_number(value))
 
-func _on_hydrogen_crystals_changed():
-	var amount := InventoryManager.hydrogen_crystals
-	hydrogen_crystals_label.set_text(Functions.shorten_number(amount))
+func set_steel(value: int):
+	steel_label.set_text(Functions.shorten_number(value))
 
-func _on_plasma_fluids_changed():
-	var amount := InventoryManager.plasma_fluids
-	plasma_fluids_label.set_text(Functions.shorten_number(amount))
+func set_hydrogen_crystals(value: int):
+	hydrogen_crystals_label.set_text(Functions.shorten_number(value))
 
-func _on_iridium_changed():
-	var amount := InventoryManager.iridium
-	iridium_label.set_text(Functions.shorten_number(amount))
+func set_plasma_fluids(value: int):
+	plasma_fluids_label.set_text(Functions.shorten_number(value))
+
+func set_iridium(value: int):
+	iridium_label.set_text(Functions.shorten_number(value))

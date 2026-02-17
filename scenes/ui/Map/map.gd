@@ -47,7 +47,6 @@ func create_point(poi: POI) -> void:
 	var label: Label = Label.new()
 	label.text = poi.label
 	point.add_child(label)
-	var label_size: Vector2 = label.get_rect().size
 	label.add_theme_font_size_override("font_size", 22)
 	label.custom_minimum_size = Vector2(200.0, 0.0)
 	label.position = Vector2(-100, 10)

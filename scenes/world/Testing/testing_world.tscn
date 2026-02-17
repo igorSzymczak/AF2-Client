@@ -11,7 +11,6 @@
 [ext_resource type="AudioStream" uid="uid://dc3br4apparek" path="res://audio/music/Pendulum.ogg" id="7_grnjj"]
 [ext_resource type="PackedScene" uid="uid://6boohbiplenv" path="res://scenes/objects/Structures/structure.tscn" id="7_q3uef"]
 [ext_resource type="Script" uid="uid://fjtvlisdmalr" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
-[ext_resource type="Texture2D" uid="uid://d0dumkrrbhfn4" path="res://assets/structures/Sun.png" id="8_j6wtj"]
 [ext_resource type="AudioStream" uid="uid://dybovpqmckd4v" path="res://audio/music/moon song in f.ogg" id="9_gouh0"]
 [ext_resource type="Shader" uid="uid://dhwrime62fp7n" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
 [ext_resource type="Script" uid="uid://cv4qqpdoxikwn" path="res://scenes/objects/Structures/Recycle Station/recycle_station.gd" id="12_678x6"]
@@ -32,7 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://dimbe0ofc3b13" path="res://assets/structures/planets/2k_mars.jpg" id="23_csfw6"]
 [ext_resource type="Texture2D" uid="uid://cefm7yi7k75y0" path="res://assets/structures/planets/2k_jupiter.jpg" id="24_xrk2u"]
 [ext_resource type="Texture2D" uid="uid://b4km1ne8ihhja" path="res://assets/structures/planets/2k_saturn.jpg" id="25_daj6h"]
+[ext_resource type="Texture2D" uid="uid://csg7ql2cr76ni" path="res://assets/structures/planets/2k_sun.jpg" id="25_s3fht"]
 [ext_resource type="Texture2D" uid="uid://dr2mukx7r5jok" path="res://assets/structures/planets/Saturn Ring Upper.png" id="26_ba8t5"]
+[ext_resource type="Texture2D" uid="uid://cwqnt5jwqotl8" path="res://assets/Glow.png" id="26_cp65u"]
 [ext_resource type="Texture2D" uid="uid://d32tuv34is0m0" path="res://assets/structures/planets/Saturn Ring.png" id="27_ti3ut"]
 [ext_resource type="Texture2D" uid="uid://dnqth1jon5q5c" path="res://assets/structures/planets/2k_uranus.jpg" id="28_ba8t5"]
 [ext_resource type="Texture2D" uid="uid://d1xiscfe5cqss" path="res://assets/structures/planets/Saturn Ring Bottom.png" id="28_nfcpv"]
@@ -43,6 +44,7 @@ shader = ExtResource("2_q65fh")
 shader_parameter/mouse = Vector2(0, 0)
 shader_parameter/time = 0.0
 shader_parameter/zoom = 0.6
+shader_parameter/alpha = 0.930000044175
 shader_parameter/speed2 = 0.2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ngnn3"]
@@ -51,15 +53,21 @@ size = Vector2(1000, 1000)
 [sub_resource type="Environment" id="Environment_55vx4"]
 background_mode = 3
 background_energy_multiplier = 2.07
+ambient_light_source = 1
+reflected_light_source = 1
 tonemap_mode = 3
 tonemap_exposure = 0.7
+ssao_intensity = 4.96
+ssao_light_affect = 0.28
+ssao_ao_channel_affect = 0.6
 ssil_radius = 16.0
 ssil_intensity = 11.31
 glow_enabled = true
-glow_levels/1 = 0.87
-glow_levels/2 = 0.99
-glow_levels/3 = 0.0
-glow_levels/4 = 0.0
+glow_levels/1 = 1.12
+glow_levels/2 = 0.61
+glow_levels/3 = 0.25
+glow_levels/4 = 0.62
+glow_levels/6 = 0.25
 glow_bloom = 0.6
 volumetric_fog_density = 0.0
 adjustment_enabled = true
@@ -153,13 +161,31 @@ radius = 500.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lw624"]
 radius = 75.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mow7c"]
+shader = ExtResource("9_ockqu")
+shader_parameter/opacity = 1.0
+shader_parameter/texture_scale = Vector2(0.5, 0.5)
+shader_parameter/texture_offset = Vector2(0, 0)
+shader_parameter/atmosphere_color = Vector3(1, 1, 1)
+shader_parameter/atmosphere_intensity = 0.0
+shader_parameter/light_color = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(-0.855, -0.545, 1)
+shader_parameter/light_minimum = 1.0
+shader_parameter/light_maximum = 1.0
+shader_parameter/specular_color = Vector3(1, 1, 1)
+shader_parameter/specular_intensity = 0.1
+shader_parameter/specular_shininess = 1.0
+shader_parameter/fade = 0.0
+shader_parameter/pixelize_enabled = false
+shader_parameter/pixelize_scale = 1.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrk2u"]
 radius = 95.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4jygj"]
 shader = ExtResource("9_ockqu")
 shader_parameter/opacity = 1.0
-shader_parameter/texture_scale = Vector2(0.5, 0.535)
+shader_parameter/texture_scale = Vector2(0.5, 0.5)
 shader_parameter/texture_offset = Vector2(-6.705, 0.885)
 shader_parameter/atmosphere_color = Vector3(41.175, 25.005, 143.395)
 shader_parameter/atmosphere_intensity = 61.96
@@ -380,6 +406,7 @@ self_modulate = Color(1.75, 1.75, 0, 1)
 position = Vector2(926, -543)
 structure_name = "Sun"
 is_sun = true
+is_shadered = true
 
 [node name="PoiComponent" parent="Planets/Sun" unique_id=1320065383 instance=ExtResource("13_nfcpv")]
 type = 7
@@ -388,9 +415,53 @@ type = 7
 visible = false
 shape = SubResource("CircleShape2D_lw624")
 
-[node name="Sprite" type="Sprite2D" parent="Planets/Sun" unique_id=622541967]
-self_modulate = Color(1.3, 1.2, 1.1, 1)
-texture = ExtResource("8_j6wtj")
+[node name="Sprite" type="Sprite2D" parent="Planets/Sun" unique_id=1489980527]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_mow7c")
+scale = Vector2(0.10878625, 0.21875)
+texture = ExtResource("25_s3fht")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=1946257256]
+modulate = Color(0.99607843, 0.43137255, 0.17254902, 0.5647059)
+show_behind_parent = true
+scale = Vector2(16.638645, 8.319324)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=1276120866]
+modulate = Color(0.99607843, 0.43137255, 0.17254902, 0.5647059)
+show_behind_parent = true
+scale = Vector2(9.9626465, 4.981324)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=1261644319]
+modulate = Color(0.99607843, 0.43137255, 0.17254902, 1)
+show_behind_parent = true
+scale = Vector2(7.42919, 3.7145958)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=1144200247]
+modulate = Color(0.99607843, 0.43137255, 0.17254902, 1)
+show_behind_parent = true
+scale = Vector2(6.8814154, 3.4407084)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=624410172]
+modulate = Color(0.99607843, 0.47058824, 0, 1)
+show_behind_parent = true
+scale = Vector2(6.5732923, 3.2866468)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=1309489364]
+modulate = Color(0.99607843, 0.27450982, 0, 1)
+show_behind_parent = true
+scale = Vector2(6.4705844, 3.235293)
+texture = ExtResource("26_cp65u")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Planets/Sun/Sprite" unique_id=597240598]
+modulate = Color(0.99607843, 0.24313726, 0, 1)
+show_behind_parent = true
+scale = Vector2(6.7787075, 3.3893547)
+texture = ExtResource("26_cp65u")
 
 [node name="Mercury" parent="Planets/Sun" unique_id=593225580 node_paths=PackedStringArray("aura_blue", "aura_red", "local_sun") instance=ExtResource("7_q3uef")]
 position = Vector2(1000, 0)

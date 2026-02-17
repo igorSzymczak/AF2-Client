@@ -4,16 +4,18 @@ uniform vec2 mouse;
 uniform float time;
 uniform float zoom;
 
-const int iterations = 3;
+uniform float alpha: hint_range(0.0, 1.0);
+
+const int iterations = 4;
 const float formuparam2 = 0.79;
 const float volsteps = 3.0;
 const float stepsizeOrigin = 0.290;
 const float tile = 0.35;
 uniform float speed2 = 0.2;
 
-const float brightness = 0.2015;
-const float darkmatter = 0.100;
-const float distfading = 0.560;
+const float brightness = 0.0915;
+const float darkmatter = 0.200;
+const float distfading = 0.260;
 const float saturation = 0.90;
 
 
@@ -160,4 +162,5 @@ void fragment() {
 	backCol2.g = 0.0;
 	backCol2.bg = mix(backCol2.gb, backCol2.bg, 0.5*(cos(time*0.01) + 1.0));
 	COLOR = forCol2 + vec4(backCol2, 1.0);
+	COLOR.a *= (alpha / 2.0);
 }

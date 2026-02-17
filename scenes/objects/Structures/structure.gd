@@ -122,7 +122,7 @@ func set_orbit() -> void:
 var shader_offset = null
 var angle_to_rotate = null
 func update_shader(delta: float) -> void:
-	if !is_shadered or !local_sun:
+	if !is_shadered:
 		return
 	
 	if angle_to_rotate == null:
@@ -130,27 +130,34 @@ func update_shader(delta: float) -> void:
 	if shader_offset == null:
 		shader_offset = sprite.material.get_shader_parameter("texture_offset")
 	
+	
+	
+	if is_sun:
+		sprite.rotate(delta * 0.1)
+		shader_offset += Vector2(delta, delta) * 0.1
+	else:
+		sprite.rotate(angle_to_rotate * -2)
+		shader_offset += Vector2(angle_to_rotate, 0) * 10.0
+	
+	sprite.material.set_shader_parameter("texture_offset", shader_offset)
+	
+	if !local_sun:
+		return
 	var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
 	var t = (distance_to_sun_squared - 100000) / 100000
 	var light_z = atan(t) - 1
 	
 	
 	var angle_to_sun = sprite.global_position.direction_to(local_sun.global_position)
-	sprite.rotate(angle_to_rotate * -2)
-	
-	shader_offset += Vector2(angle_to_rotate, 0) * 10.0
 	
 	var planet_rotation = sprite.rotation
 	var cos_rot = cos(planet_rotation)
 	var sin_rot = sin(planet_rotation)
-
+	
 	var rotated_angle_to_sun = Vector2(angle_to_sun.x * cos_rot + angle_to_sun.y * sin_rot,
 									-angle_to_sun.x * sin_rot + angle_to_sun.y * cos_rot)
-
 	var light_direction = Vector3(rotated_angle_to_sun.x, rotated_angle_to_sun.y, light_z)
-
 	sprite.material.set_shader_parameter("light_direction", light_direction)
-	sprite.material.set_shader_parameter("texture_offset", shader_offset)
 
 
 

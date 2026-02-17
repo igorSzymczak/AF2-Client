@@ -55,5 +55,3 @@ static func get_texture_path_by_code(given_code: Code) -> String:
 		Code.FUSION_CORE: return "res://assets/items/i (3).png"
 		Code.BIONIC_IMPLANT: return "res://assets/items/i (6).png"
 	return "res://assets/items/i (1).png"
-		
-	

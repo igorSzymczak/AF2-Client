@@ -10,6 +10,7 @@ enum TYPE {
 	HANGAR,
 	SUN,
 	ITEM,
+	RECYCLE_STATION,
 }
 
 var id: int

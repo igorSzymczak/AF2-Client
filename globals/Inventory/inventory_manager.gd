@@ -8,6 +8,24 @@ enum Currency {
 	IRIDIUM,
 }
 
+func get_currency_texture_path(currency: Currency) -> String:
+	match currency:
+		Currency.FLUX: return "res://assets/ui/inventory/flux.png"
+		Currency.STEEL: return "res://assets/ui/inventory/steel.png"
+		Currency.HYDROGEN_CRYSTALS: return "res://assets/ui/inventory/hydrogen_crystals.png"
+		Currency.PLASMA_FLUIDS: return "res://assets/ui/inventory/plasma_fluids.png"
+		Currency.IRIDIUM: return "res://assets/ui/inventory/iridium.png"
+	return "res://assets/ui/inventory/flux.png"
+
+func get_currency_display_name(currency: Currency) -> String:
+	match currency:
+		Currency.FLUX: return "Flux"
+		Currency.STEEL: return "Steel"
+		Currency.HYDROGEN_CRYSTALS: return "Hydrogen Crystals"
+		Currency.PLASMA_FLUIDS: return "Plasma Fluids"
+		Currency.IRIDIUM: return "Iridium"
+	return "Flux"
+
 var currencies: Dictionary[Currency, int] = {
 	Currency.FLUX: 0,
 	Currency.STEEL: 0,
@@ -25,6 +43,8 @@ var iridium: int = 0
 var cargo: Dictionary[Item.Code, int] = {}
 
 func try_eject_cargo(_user_id: int) -> void:
+	pass # Only Server
+func try_recycle_cargo(_user_id: int, _cargo_to_recycle: Dictionary[int, int]) -> void:
 	pass # Only Server
 
 func get_currency(currency: Currency) -> int:
@@ -50,6 +70,10 @@ func _handle_set_item(code: int, amount: int):
 	cargo[code] = amount
 	item_changed.emit(code, old_amount, amount)
 
+signal recycled_currencies(recycled_currencies: Dictionary[Currency, int])
+func _handle_curriencies_recycled_gained(currencies_gained: Dictionary[int, int]):
+	recycled_currencies.emit(currencies_gained as Dictionary[Currency, int])
+
 @rpc("authority", "call_remote", "reliable")
 func _set_currency(currency: int, value: int):
 	_handle_set_currency(currency, value)
@@ -70,3 +94,11 @@ func _set_item(code: int, value: int):
 @rpc("any_peer", "call_remote", "reliable")
 func request_eject_cargo():
 	try_eject_cargo(multiplayer.get_remote_sender_id())
+
+@rpc("any_peer", "call_remote", "reliable")
+func request_recycle_cargo(cargo_to_recycle: Dictionary[int, int]):
+	try_recycle_cargo(multiplayer.get_remote_sender_id(), cargo_to_recycle)
+
+@rpc("authority", "call_remote", "reliable")
+func send_recycled_currency(currencies_gained: Dictionary[int, int]):
+	_handle_curriencies_recycled_gained(currencies_gained)

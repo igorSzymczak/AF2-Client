@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bgn3ciqqjpo32"]
+
+[sub_resource type="Gradient" id="Gradient_8iue2"]
+offsets = PackedFloat32Array(0.8271605, 1)
+colors = PackedColorArray(0.4392157, 0, 0.49019608, 1, 0.6745098, 0, 0.85490197, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pev0h"]
+gradient = SubResource("Gradient_8iue2")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[node name="RecycleStationIcon" type="Node2D" unique_id=396355855]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1028045882]
+scale = Vector2(0.46875003, 0.46875003)
+texture = SubResource("GradientTexture2D_pev0h")

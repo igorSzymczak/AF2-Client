@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://s585jv085vx1"]
+
+[ext_resource type="Script" uid="uid://cv4qqpdoxikwn" path="res://scenes/objects/Structures/Recycle Station/recycle_station.gd" id="1_dnypq"]
+
+[node name="RecycleStation" type="Area2D" unique_id=1865433984]
+script = ExtResource("1_dnypq")
+structure_name = "Recycle Station"
+landable = true
+metadata/_custom_type_script = "uid://b6b0p8wsg0wxg"

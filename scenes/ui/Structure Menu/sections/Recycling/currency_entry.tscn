@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b86rd6w2t3ms3"]
+
+[ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="1_7y1fj"]
+[ext_resource type="Script" uid="uid://c5q2a3gyyp7c2" path="res://scenes/ui/Structure Menu/sections/Recycling/currency_entry.gd" id="1_yafer"]
+
+[node name="CurrencyEntry" type="MarginContainer" unique_id=260682394]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+script = ExtResource("1_yafer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2041988945]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1885273725]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_7y1fj")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="CurrencyName" type="Label" parent="HBoxContainer" unique_id=2139244571]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Iridium"
+
+[node name="Value" type="Label" parent="HBoxContainer" unique_id=1367362138]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "+ 1.52 k"

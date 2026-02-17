@@ -4,6 +4,7 @@ extends Control
 @onready var left_panel = %Left
 @onready var main_section = %Main
 @onready var ships_section = %Ships
+@onready var recycling_section = %Recycling
 @onready var main_structure_title = %MainStructureTitle
 
 @onready var ships_right_panel = %ShipsRight
@@ -21,6 +22,8 @@ extends Control
 @onready var shield_regen_amount: Label = %ShieldRegenAmount
 @onready var shield_regen_points: HBoxContainer = %ShieldRegenPoints
 @onready var select_button: BetterButton = %SelectButton
+
+@onready var recycling_button: BetterButton = %RecyclingButton
 
 @onready var default_right_panel_pos_x: float = get_viewport_rect().size.x - menu_width
 @onready var current_section: Control = main_section
@@ -57,6 +60,7 @@ func select_animation(animation_name: String):
 		current_section.hide()
 		current_section = main_section
 		current_section.show()
+		hide_or_show_recycling_button()
 	elif animation_name == "close":
 		selected_animation = "close"
 		animation_finished = false
@@ -65,7 +69,12 @@ func select_animation(animation_name: String):
 			selected_animation = "ships"
 			animation_finished = false
 			ships_right_panel.show()
-			
+	elif animation_name == "recycling":
+		if current_section != recycling_section and animation_finished:
+			selected_animation = "recycling"
+			animation_finished = false
+			recycling_section.load_cargo()
+	
 	elif animation_name == "main":
 		if current_section != main_section and animation_finished:
 			selected_animation = "main"
@@ -93,10 +102,12 @@ func play_current_animation(delta: float):
 			hide_current_and_show(delta, ships_section)
 			if ships_right_panel.position.x <= default_right_panel_pos_x + 1 or hide_show_finished == true:
 				ships_right_panel.position.x = default_right_panel_pos_x
+		elif selected_animation == "recycling":
+			hide_current_and_show(delta, recycling_section)
 		elif selected_animation == "main":
+			hide_current_and_show(delta, main_section)
 			if ships_right_panel.visible:
 				ships_right_panel.position.x = lerpf(ships_right_panel.position.x, default_right_panel_pos_x + menu_width, delta * 10)
-			hide_current_and_show(delta, main_section)
 			if ships_right_panel.position.x >= default_right_panel_pos_x + menu_width - 1 or hide_show_finished == true:
 				ships_right_panel.position.x = default_right_panel_pos_x + menu_width
 
@@ -218,11 +229,21 @@ func display_ship_info(ship: ShipComponent):
 		g.me.set_ship(ship.name)
 		g.me.engine.activate_thruster()
 
+
+func hide_or_show_recycling_button() -> void:
+	if g.me.landed_structure is RecycleStation:
+		recycling_button.show()
+	else:
+		recycling_button.hide()
+
 func _on_select_button_pressed():
 	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_name)
 
 func _on_ships_button_pressed():
 	select_animation("ships")
+
+func _on_recycling_button_pressed():
+	select_animation("recycling")
 
 func _on_return_button_pressed():
 	select_animation("main")

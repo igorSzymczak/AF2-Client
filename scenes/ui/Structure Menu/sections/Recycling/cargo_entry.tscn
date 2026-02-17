@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dlhdfn70pp7ui"]
+
+[ext_resource type="Script" uid="uid://c51k31bfaexsv" path="res://scenes/ui/Structure Menu/sections/Recycling/cargo_entry.gd" id="1_adcv4"]
+[ext_resource type="Texture2D" uid="uid://dtbxrgxf43tpx" path="res://assets/items/i (7).png" id="1_uwn5i"]
+
+[sub_resource type="Gradient" id="Gradient_adcv4"]
+colors = PackedColorArray(1, 1, 1, 0.11764706, 1, 1, 1, 0.11764706)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wob72"]
+gradient = SubResource("Gradient_adcv4")
+
+[node name="CargoEntry" type="MarginContainer" unique_id=798173658]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 8
+script = ExtResource("1_adcv4")
+
+[node name="CheckBox" type="CheckBox" parent="." unique_id=1706192894]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CheckBox" unique_id=313036368]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="Separator" type="Control" parent="CheckBox/HBoxContainer" unique_id=424586724]
+show_behind_parent = true
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CheckBox/HBoxContainer" unique_id=2140619021]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_uwn5i")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ItemName" type="Label" parent="CheckBox/HBoxContainer" unique_id=1682512262]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Metal Scrap"
+
+[node name="Amount" type="Label" parent="CheckBox/HBoxContainer" unique_id=503692361]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "x 42"
+
+[node name="Background" type="TextureRect" parent="CheckBox" unique_id=46636435]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_wob72")

@@ -133,8 +133,8 @@ func update_shader(delta: float) -> void:
 	
 	
 	if is_sun:
-		sprite.rotate(delta * 0.1)
-		shader_offset += Vector2(delta, delta) * 0.1
+		sprite.rotate(delta * 0.03)
+		shader_offset += Vector2(delta, delta) * 0.03
 	else:
 		sprite.rotate(angle_to_rotate * -2)
 		shader_offset += Vector2(angle_to_rotate, 0) * 10.0

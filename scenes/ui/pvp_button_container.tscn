@@ -19,7 +19,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="PvpButtonContainer" type="Button" unique_id=1100182923]
+[node name="PvpButton" type="Button" unique_id=1100182923]
 offset_top = -8.0
 offset_right = 68.5
 offset_bottom = 23.0
@@ -31,4 +31,6 @@ text = "Button"
 script = ExtResource("1_jm1a7")
 metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
 
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="toggled" from="." to="." method="_on_toggled"]

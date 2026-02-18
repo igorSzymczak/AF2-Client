@@ -132,7 +132,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 metadata/_edit_lock_ = true
 
-[node name="PvpButtonContainer" parent="PanelBottom/Center" unique_id=452804170 instance=ExtResource("9_mps81")]
+[node name="PvpButton" parent="PanelBottom/Center" unique_id=452804170 instance=ExtResource("9_mps81")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

@@ -33,6 +33,8 @@ var IS_MAIN_PLAYER: bool
 var default_label_pos: Vector2
 var alive: = true
 var user_prefs: UserPreferences
+var pvp: bool = false
+
 func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()
 	
@@ -55,11 +57,7 @@ func _ready() -> void:
 		g.update.connect(emit_server_signals)
 	else:
 		camera.set_enabled(false)
-		call_deferred("other_player_setup_poi")
 		reticle.hide()
-
-func other_player_setup_poi():
-	GlobalSignals.emit_signal("setup_poi", self)
 
 var monitorable: bool = false
 func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
@@ -94,6 +92,8 @@ func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
 			speed_boost_active = value
 		g.PlayerProperty.MONITORABLE:
 			monitorable = value
+		g.PlayerProperty.PVP:
+			pvp = value
 
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
@@ -111,6 +111,7 @@ func _physics_process(delta: float) -> void:
 		
 	else:
 		handle_other_player(delta)
+
 
 var last_pos = Vector2.ZERO
 var last_rot = 0
@@ -188,6 +189,13 @@ func handle_other_player(delta: float) -> void:
 		show()
 		set_modulate(Color(1, 1, 1, 1))
 		health_component.show()
+	
+	if g.me.pvp and pvp:
+		nickname_label.self_modulate = Color(1.0, 0.2, 0.2, 1.0)
+	else:
+		nickname_label.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+		
 
 
 var momentum_speed_cap: float = MAX_SPEED

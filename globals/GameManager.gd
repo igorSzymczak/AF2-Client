@@ -155,7 +155,8 @@ enum PlayerProperty {
 	MONITORABLE,
 	LVL,
 	SPEED_BOOST,
-	DEATH_ARGS
+	DEATH_ARGS,
+	PVP,
 }
 
 const PLAYER_PROPERTY_SCHEMA: Dictionary[PlayerProperty, Dictionary] = {
@@ -218,6 +219,10 @@ const PLAYER_PROPERTY_SCHEMA: Dictionary[PlayerProperty, Dictionary] = {
 	PlayerProperty.DEATH_ARGS: {
 		"type": TYPE_DICTIONARY,
 		"default": {}
+	},
+	PlayerProperty.PVP: {
+		"type": TYPE_BOOL,
+		"default": false
 	}
 }
 
@@ -298,6 +303,10 @@ func update_player_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Players.has(id):
 		var stats: Stats = Players[id]["stats"]
 		stats.set_stat_value(stat_type, value)
+
+signal requested_toggle_pvp(value: bool)
+func request_toggle_pvp(value: bool):
+	requested_toggle_pvp.emit(value)
 
 func get_player(user_id: int) -> Player:
 	if Players.has(user_id):

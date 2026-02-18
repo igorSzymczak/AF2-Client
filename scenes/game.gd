@@ -57,6 +57,7 @@ func client_signals():
 	
 	g.player_shoot.connect(handle_player_shoot)
 	g.set_weapon_request.connect(_on_set_weapon_request)
+	g.requested_toggle_pvp.connect(_on_requested_toggle_pvp)
 
 ## STRUCTURES
 
@@ -122,6 +123,8 @@ func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_user
 func _on_set_weapon_request(slot: int, weapon_type: WeaponManager.Type): request_set_weapon.rpc_id(1, slot, weapon_type)
 func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_type: WeaponManager.Type): pass # Only Server
 
+func _on_requested_toggle_pvp(value: bool):
+	request_toogle_pvp.rpc_id(1, value)
 
 @rpc("authority", "call_remote", "reliable")
 func set_player_position(pos: Vector2):
@@ -140,7 +143,14 @@ func player_shoot(user_id: int, index: int):
 func request_set_weapon(slot: int, weapon_type: WeaponManager.Type):
 	handle_set_weapon_request(multiplayer.get_remote_sender_id(), slot, weapon_type)
 
+@rpc("any_peer", "call_remote", "reliable")
+func request_toogle_pvp(value: bool):
+	_handle_request_toggle_pvp(multiplayer.get_remote_sender_id(), value)
+
 func server_handle_local_player_property(_user_id: int, _prop: int, _value: Variant):
+	pass # Only Server
+
+func _handle_request_toggle_pvp(_user_id: int, _value: bool) -> void:
 	pass # Only Server
 
 ## WEAPONS & BULLETS

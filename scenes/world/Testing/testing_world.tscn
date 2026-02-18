@@ -313,7 +313,6 @@ offset_bottom = -168.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_x44fw")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mow7c")
 step = 0.1
-value = 33.0
 rounded = true
 show_percentage = false
 

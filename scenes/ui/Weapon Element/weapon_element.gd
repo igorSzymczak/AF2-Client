@@ -32,10 +32,6 @@ func set_weapon_name(value: String):
 
 func set_lvl(value: int):
 	lvl_label.set_text("lvl " + str(value))
-	if value == 0:
-		lvl_label.hide()
-	else:
-		lvl_label.show()
 
 func set_icon_texture(value: Texture2D):
 	icon_rect.texture = value

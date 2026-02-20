@@ -105,6 +105,9 @@ func show_weapon_tooltip(index: int):
 	if index < 1 or index > 5: return
 	
 	var weapon_data: WeaponRuntimeData = PlayerData.get_hotbar_weapon(index)
+	if !is_instance_valid(weapon_data):
+		return
+	
 	var weapon_type: WeaponManager.Type = weapon_data.get_prop(PlayerData.WeaponProperty.WEAPON_TYPE)
 	
 	var weapon: Weapon = WeaponManager.get_weapon(weapon_type)

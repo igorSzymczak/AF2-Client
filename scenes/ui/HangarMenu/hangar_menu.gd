@@ -42,9 +42,9 @@ func _process(delta):
 	play_current_animation(delta)
 
 var args: Dictionary
-var hangar_name := "Unknown Hangar"
-var ships_to_buy : Dictionary
-var owned_ships : Dictionary
+var hangar_name: String = "Unknown Hangar"
+var ships_to_buy : Dictionary[ShipManager.ShipType, int]
+var owned_ships : Array[ShipManager.ShipType]
 func set_args(new_args: Dictionary):
 	if !new_args.is_empty():
 		args = new_args
@@ -77,10 +77,10 @@ func set_args(new_args: Dictionary):
 				ship_select.pressed.connect(display_ship_info.bind(ship_select.ship_component))
 
 var land_ship_name: String
-var current_ship_name := ""
+var current_ship_type: ShipManager.ShipType
 func display_ship_info(ship: ShipComponent):
-	if is_instance_valid(ship) and current_ship_name != ship.name:
-		current_ship_name = ship.name
+	if is_instance_valid(ship) and current_ship_type != ship.ship_type:
+		current_ship_type = ship.ship_type
 		
 		var ship_name = ship.ship_name
 		var health = ship.health
@@ -98,7 +98,7 @@ func display_ship_info(ship: ShipComponent):
 		buy_button.set_disabled(false)
 		if current_section == shop_section:
 			buy_button.set_text("Buy")
-			if owned_ships.has(current_ship_name):
+			if owned_ships.has(current_ship_type):
 				buy_button.set_disabled(true)
 		elif current_section == my_ships_section:
 			buy_button.set_text("Select")
@@ -273,6 +273,6 @@ static func set_points(container: Control, amount: int):
 
 func _on_buy_button_pressed():
 	if current_section == shop_section:
-		ShipManager.request_buy_ship.rpc_id(1, AuthManager.my_username , current_ship_name)
+		ShipManager.request_buy_ship.rpc_id(1, AuthManager.my_username , current_ship_type)
 	elif current_section == my_ships_section:
-		ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_name)
+		ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_type)

@@ -121,7 +121,6 @@ autowrap_mode = 3
 
 [node name="LvlLabel" type="Label" parent="PanelContainer/H/InfoContainer" unique_id=1606309794]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

@@ -23,9 +23,7 @@ func get_ship(ship_type: ShipType) -> ShipComponent:
 
 func create_ship_select(ship_type: ShipType):
 	var ship: ShipComponent = get_ship(ship_type)
-	print("I want to make a ship_select, did i succed?")
 	if ship:
-		print("Yes!")
 		var ship_select: ShipSelect = ship_select_scene.instantiate()
 		ship_select.ship_type = ship_type
 		return ship_select

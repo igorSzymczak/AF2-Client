@@ -87,18 +87,17 @@ func _create_effect_sprite() -> Sprite2D:
 
 func _apply_initial_material_state(effect: SHADER, inst: Sprite2D) -> void:
 	match effect:
-
 		SHADER.SPEED_BOOST:
-			inst.material = preload("res://shaders/Abilities/SpeedBoost/sprite.tscn").instantiate().material.duplicate(true)
+			inst.material = load("res://shaders/Abilities/SpeedBoost/sprite.tscn").instantiate().material.duplicate(true)
 
 		SHADER.HEAL:
-			inst.material = preload("res://shaders/Abilities/Heal/sprite.tscn").duplicate(true)
+			inst.material = load("res://shaders/Abilities/Heal/sprite.tscn").duplicate(true)
 
 		SHADER.DAMAGE_BOOST:
-			inst.material = preload("res://shaders/Abilities/DamageBoost/sprite.tscn").duplicate(true)
+			inst.material = load("res://shaders/Abilities/DamageBoost/sprite.tscn").duplicate(true)
 
 		SHADER.SHIELD:
-			inst.material = preload("res://shaders/Abilities/Shield/sprite.tscn").duplicate(true)
+			inst.material = load("res://shaders/Abilities/Shield/sprite.tscn").duplicate(true)
 
 
 func _fade_and_delete(inst: Sprite2D) -> void:

@@ -8,8 +8,8 @@ enum ActorType {
 }
 
 var Actors: Dictionary[ActorType, PackedScene] = {
-	ActorType.ZLATTE : preload("res://scenes/entities/Actor/Zlatte/Zlatte.tscn"),
-	ActorType.ELITE_LAUNCHER: preload("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn")
+	ActorType.ZLATTE : load("res://scenes/entities/Actor/Zlatte/Zlatte.tscn"),
+	ActorType.ELITE_LAUNCHER: load("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn")
 }
 
 func get_actor_type(actor: Actor) -> ActorType:
@@ -27,7 +27,7 @@ enum TurretType {
 }
 
 var Turrets: Dictionary[TurretType, PackedScene] = {
-	TurretType.DEFAULT : preload("res://scenes/objects/Spawners/Turrets/turret.tscn")
+	TurretType.DEFAULT : load("res://scenes/objects/Spawners/Turrets/turret.tscn")
 }
 
 func get_turret_type(turret: Turret) -> TurretType:
@@ -45,7 +45,7 @@ enum SpawnerType {
 }
 
 var Spawners: Dictionary[SpawnerType, PackedScene] = {
-	SpawnerType.DEFAULT : preload("res://scenes/objects/Spawners/spawner.tscn")
+	SpawnerType.DEFAULT : load("res://scenes/objects/Spawners/spawner.tscn")
 }
 
 func get_spawner_type(spawner: Spawner) -> SpawnerType:

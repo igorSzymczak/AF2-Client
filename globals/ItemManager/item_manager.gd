@@ -1,12 +1,12 @@
 extends Node
 
-const ITEM_SCENES: Dictionary[Item.Code, PackedScene] = {
-	Item.Code.DEFAULT: preload("res://scenes/items/item.tscn"),
-	Item.Code.METAL_SCRAP: preload("res://scenes/items/metal_scrap/metal_scrap.tscn"),
-	Item.Code.BIG_METAL_SCRAP: preload("res://scenes/items/big_metal_scrap/big_metal_scrap.tscn"),
-	Item.Code.PHASE_CRYSTAL: preload("res://scenes/items/phase_crystal/phase_crystal.tscn"),
-	Item.Code.BIONIC_IMPLANT: preload("res://scenes/items/bionic_implant/bionic_implant.tscn"),
-	Item.Code.FUSION_CORE: preload("res://scenes/items/fusion_core/fusion_core.tscn"),
+var ITEM_SCENES: Dictionary[Item.Code, PackedScene] = {
+	Item.Code.DEFAULT: load("res://scenes/items/item.tscn"),
+	Item.Code.METAL_SCRAP: load("res://scenes/items/metal_scrap/metal_scrap.tscn"),
+	Item.Code.BIG_METAL_SCRAP: load("res://scenes/items/big_metal_scrap/big_metal_scrap.tscn"),
+	Item.Code.PHASE_CRYSTAL: load("res://scenes/items/phase_crystal/phase_crystal.tscn"),
+	Item.Code.BIONIC_IMPLANT: load("res://scenes/items/bionic_implant/bionic_implant.tscn"),
+	Item.Code.FUSION_CORE: load("res://scenes/items/fusion_core/fusion_core.tscn"),
 }
 
 func create_item_scene(

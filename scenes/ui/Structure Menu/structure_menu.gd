@@ -37,7 +37,7 @@ func _process(delta):
 
 var args: Dictionary
 var structure_name := "Unknown Structure"
-var owned_ships : Dictionary
+var owned_ships : Array[ShipManager.ShipType]
 func set_args(new_args: Dictionary):
 	if !new_args.is_empty():
 		args = new_args
@@ -55,7 +55,7 @@ func select_animation(animation_name: String):
 	if animation_name == "open":
 		selected_animation = "open"
 		animation_finished = false
-		land_ship_name = g.me.ship.name
+		land_ship_type = g.me.ship.ship_type
 		show()
 		current_section.hide()
 		current_section = main_section
@@ -172,16 +172,17 @@ func setup_ships_section():
 		for child in my_ships_container.get_children():
 			my_ships_container.remove_child(child)
 			child.queue_free()
-		for ship_name in owned_ships:
-			var ship_select: ShipSelect = ShipManager.create_ship_select(ship_name)
+		
+		for ship_type: ShipManager.ShipType in owned_ships:
+			var ship_select: ShipSelect = ShipManager.create_ship_select(ship_type)
 			my_ships_container.add_child(ship_select)
 			ship_select.pressed.connect(display_ship_info.bind(ship_select.ship_component))
 
-var land_ship_name: String
-var current_ship_name := ""
+var land_ship_type: ShipManager.ShipType
+var current_ship_type: ShipManager.ShipType
 func display_ship_info(ship: ShipComponent):
-	if is_instance_valid(ship) and current_ship_name != ship.name:
-		current_ship_name = ship.name
+	if is_instance_valid(ship) and current_ship_type != ship.ship_type:
+		current_ship_type = ship.ship_type
 		
 		var ship_name = ship.ship_name
 		var health = ship.health
@@ -192,7 +193,7 @@ func display_ship_info(ship: ShipComponent):
 		ship_name_label.set_text(ship_name)
 		select_button.show()
 		select_button.set_disabled(false)
-		if current_ship_name == land_ship_name:
+		if current_ship_type == land_ship_type:
 			select_button.set_disabled(true)
 		
 		for child in health_points.get_children(): child.show()
@@ -226,7 +227,7 @@ func display_ship_info(ship: ShipComponent):
 				shield_regen += 1
 		
 		
-		g.me.set_ship(ship.name)
+		g.me.set_ship(ship.ship_type)
 		g.me.engine.activate_thruster()
 
 
@@ -237,7 +238,7 @@ func hide_or_show_recycling_button() -> void:
 		recycling_button.hide()
 
 func _on_select_button_pressed():
-	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_name)
+	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_type)
 
 func _on_ships_button_pressed():
 	select_animation("ships")

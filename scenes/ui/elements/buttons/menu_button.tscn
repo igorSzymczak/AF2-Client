@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbwuqf2oql4bi"]
+[gd_scene format=3 uid="uid://dbwuqf2oql4bi"]
 
-[ext_resource type="Script" path="res://scenes/ui/elements/buttons/menu_button.gd" id="1_2sih6"]
+[ext_resource type="Script" uid="uid://dkrfatcxwvxnq" path="res://scenes/ui/elements/buttons/menu_button.gd" id="1_2sih6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ph1j4"]
 content_margin_left = 15.0
@@ -20,7 +20,7 @@ content_margin_top = 5.0
 content_margin_right = 15.0
 content_margin_bottom = 5.0
 
-[node name="MenuButton" type="Button"]
+[node name="MenuButton" type="Button" unique_id=1308949393]
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 40
@@ -30,7 +30,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_6v56x")
 text = "Menu Button"
 script = ExtResource("1_2sih6")
 
-[node name="Underline" type="ColorRect" parent="."]
+[node name="Underline" type="ColorRect" parent="." unique_id=1772328218]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 1
 anchors_preset = 7

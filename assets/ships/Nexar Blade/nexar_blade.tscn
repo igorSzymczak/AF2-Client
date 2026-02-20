@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1m7db1ntbnk5" path="res://assets/ships/Nexar Blade/Nexar Blade.png" id="1_tewum"]
 [ext_resource type="Texture2D" uid="uid://17q5anm5rw0p" path="res://assets/ships/Nexar Blade/Nexar Blade Lights.png" id="2_gesq4"]
-[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_xrvir"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="2_xrvir"]
 [ext_resource type="Script" uid="uid://caogachdnxp68" path="res://assets/ships/Nexar Blade/Animation.gd" id="3_0ii1c"]
 [ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_28mvk"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_j7nos"]

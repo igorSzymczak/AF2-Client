@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkfidcf3py1w5"]
+[gd_scene format=3 uid="uid://dkfidcf3py1w5"]
 
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="1_njjip"]
-[ext_resource type="Script" path="res://scenes/ui/Boss Health/boss_health.gd" id="1_scw4f"]
+[ext_resource type="Script" uid="uid://pj3dni7qqseu" path="res://scenes/ui/Boss Health/boss_health.gd" id="1_scw4f"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="2_87c0c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t3if"]
@@ -9,43 +9,43 @@ bg_color = Color(0.141176, 0.141176, 0.141176, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ntfnk"]
 
-[node name="BossHealth" type="Control"]
+[node name="BossHealth" type="Control" unique_id=1528473766]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_scw4f")
 
-[node name="ShieldBar" parent="." instance=ExtResource("1_njjip")]
+[node name="ShieldBar" parent="." unique_id=429241748 instance=ExtResource("1_njjip")]
 layout_mode = 0
 offset_left = -300.0
 offset_top = -182.0
 offset_right = 300.0
 offset_bottom = -170.0
 
-[node name="HealthBar" parent="." instance=ExtResource("2_87c0c")]
+[node name="HealthBar" parent="." unique_id=1471641800 instance=ExtResource("2_87c0c")]
 layout_mode = 0
 offset_left = -300.0
 offset_top = -165.0
 offset_right = 300.0
 offset_bottom = -153.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=689493966]
 layout_mode = 0
 offset_left = -323.0
 offset_top = -251.0
 offset_right = 285.0
 offset_bottom = -201.0
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=964065242]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5t3if")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer" unique_id=1165587035]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer" unique_id=273558609]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.376471)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)

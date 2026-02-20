@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcbfub6o3kuxo"]
+[gd_scene format=3 uid="uid://bcbfub6o3kuxo"]
 
 [ext_resource type="Texture2D" uid="uid://cacfvfcry1b1f" path="res://assets/particles/explosion1.png" id="1_8abvv"]
-[ext_resource type="Script" path="res://globals/ExplosionManager/explosions/explosion_huge/explosion_huge.gd" id="2_44hug"]
+[ext_resource type="Script" uid="uid://bb6oar26fox4t" path="res://globals/ExplosionManager/explosions/explosion_huge/explosion_huge.gd" id="2_44hug"]
 
 [sub_resource type="Gradient" id="Gradient_j84dh"]
 offsets = PackedFloat32Array(0.00314465, 0.122642, 0.313514, 0.486486, 0.724324)
@@ -34,19 +34,19 @@ scale_max = 3.5
 scale_curve = SubResource("CurveTexture_tvnhn")
 color_ramp = SubResource("GradientTexture1D_5oj1d")
 
-[node name="ExplosionHuge" type="GPUParticles2D"]
+[node name="ExplosionHuge" type="GPUParticles2D" unique_id=60571870]
 self_modulate = Color(2, 2, 2, 1)
 z_index = 3
 position = Vector2(473, 406)
 emitting = false
 amount = 67
-process_material = SubResource("ParticleProcessMaterial_48b3o")
 texture = ExtResource("1_8abvv")
 lifetime = 12.0
 one_shot = true
 speed_scale = 0.6
 explosiveness = 1.0
 fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_48b3o")
 script = ExtResource("2_44hug")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

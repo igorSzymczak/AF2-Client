@@ -8,10 +8,6 @@
 
 config_version=5
 
-[animation]
-
-compatibility/default_parent_skeleton_in_mesh_instance_3d=true
-
 [application]
 
 config/name="AF2"
@@ -33,7 +29,7 @@ SoundManager="*res://globals/SoundManager/sound_manager.tscn"
 ChatManager="*res://globals/ChatManager/ChatManager.gd"
 HomerusManager="*res://scenes/bosses/Homerus/HomerusManager.gd"
 AuthManager="*res://globals/Authentication/AuthManager.gd"
-ShipManager="*res://globals/ShipManager/ShipManager.gd"
+ShipManager="*res://globals/PlayerData/ShipManager.gd"
 EXP="*res://globals/Experience/exp_manager.gd"
 InventoryManager="*res://globals/Inventory/inventory_manager.gd"
 Functions="*res://globals/Functions/functions.gd"
@@ -41,6 +37,7 @@ ItemManager="*res://globals/ItemManager/item_manager.gd"
 StatDefinitions="*res://globals/StatDefinitions/StatDefinitions.gd"
 StatManager="*res://globals/StatManager/StatManager.gd"
 WeaponManager="*uid://cr5pjrwhd04dh"
+PlayerData="*uid://blvm8gqg1odw3"
 EntityManager="*uid://blw11035gvxkt"
 MapManager="*uid://5im5bfrugjyp"
 

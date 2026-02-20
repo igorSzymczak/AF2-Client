@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://6bkbmxrojq2g"]
+[gd_scene format=3 uid="uid://6bkbmxrojq2g"]
 
 [ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://assets/particles/Thrust Particle 2.png" id="1_vxbm8"]
 
@@ -31,6 +31,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 3.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 angle_max = 360.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -47,8 +48,8 @@ scale_over_velocity_curve = SubResource("CurveTexture_p8btv")
 color_ramp = SubResource("GradientTexture1D_d4hbf")
 alpha_curve = SubResource("CurveTexture_dnwfh")
 
-[node name="Accelerate" type="GPUParticles2D"]
+[node name="Accelerate" type="GPUParticles2D" unique_id=1844810923]
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_23pot")
 texture = ExtResource("1_vxbm8")
 visibility_rect = Rect2(-500, -500, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_23pot")

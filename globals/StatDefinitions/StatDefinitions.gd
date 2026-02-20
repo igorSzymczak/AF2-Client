@@ -59,6 +59,11 @@ const DEFINITIONS: Dictionary[Stats.TYPE, Dictionary] = {
 		"min": 1.0,
 		"max": 1_000.0
 	},
+	Stats.TYPE.POWER_REGEN: {
+		"base": 5.0,
+		"min": 0.1,
+		"max": 100.0
+	},
 	Stats.TYPE.SPEED: {
 		"base": 300.0,
 		"min": 0.0,

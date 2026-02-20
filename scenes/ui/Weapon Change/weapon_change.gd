@@ -73,8 +73,8 @@ func select_animation(animation_name: String):
 		g.can_perform_actions = false
 		show()
 		
-		load_weapons(g.PlayerInfo.arsenal)
-		load_hotbar(g.PlayerInfo.weapons)
+		load_arsenal(PlayerData.get_prop(PlayerData.Property.ARSENAL))
+		load_hotbar(PlayerData.get_prop(PlayerData.Property.HOTBAR))
 		
 	elif animation_name == "close":
 		g.can_perform_actions = true
@@ -83,14 +83,15 @@ func select_animation(animation_name: String):
 		
 		hide()
 
-func load_weapons(weapons: Dictionary):
+func load_arsenal(arsenal: Dictionary[WeaponManager.Type, WeaponRuntimeData]):
 	
 	inventory = []
 	for child in weapons_section.get_children():
 		child.queue_free()
 	
-	var found_first_proper := false
-	for weapon_type: WeaponManager.Type in weapons:
+	var found_first_proper: bool = false
+	for weapon_type: WeaponManager.Type in arsenal:
+		var weapon_data: WeaponRuntimeData = arsenal[weapon_type]
 		var weapon: Weapon = WeaponManager.get_weapon(weapon_type)
 		
 		if !found_first_proper:
@@ -103,21 +104,22 @@ func load_weapons(weapons: Dictionary):
 		element.weapon_name = weapon.weapon_name
 		element.info_shown = true
 		element.weapon = weapon
-		element.lvl = weapons[weapon_type].lvl
+		element.lvl = weapon_data.get_prop(PlayerData.WeaponProperty.LVL)
 		
 		inventory.push_back(element)
 		element.button.pressed.connect(handle_click.bind(element, false))
 		
 		highlight_inventory()
 
-func load_hotbar(weapons: Dictionary):
+func load_hotbar(weapons: Dictionary[WeaponManager.Type, WeaponRuntimeData]):
 	
 	hotbar = []
 	for child in hotbar_section.get_children():
 		child.queue_free()
 	
 	for slot: int in weapons:
-		var weapon_type: WeaponManager.Type = weapons[slot].type
+		var weapon_data: WeaponRuntimeData = weapons[slot]
+		var weapon_type: WeaponManager.Type = weapons[slot].get_prop(PlayerData.WeaponProperty.WEAPON_TYPE)
 		
 		var weapon: Weapon = WeaponManager.get_weapon(weapon_type)
 		var element: WeaponElement = weapon_ui_scene.instantiate()
@@ -126,7 +128,7 @@ func load_hotbar(weapons: Dictionary):
 		element.weapon_name = weapon.weapon_name
 		element.info_shown = true
 		element.weapon = weapon
-		element.lvl = weapons[slot].lvl
+		element.lvl = weapon_data.get_prop(PlayerData.WeaponProperty.LVL)
 		element.set_alignment(BoxContainer.ALIGNMENT_CENTER)
 		
 		hotbar.push_back(element)

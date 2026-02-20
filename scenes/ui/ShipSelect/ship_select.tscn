@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cohaqpgblddcb"]
+[gd_scene format=3 uid="uid://cohaqpgblddcb"]
 
-[ext_resource type="Script" path="res://scenes/ui/ShipSelect/ship_select.gd" id="1_v11rp"]
+[ext_resource type="Script" uid="uid://yyu8joi76xxb" path="res://scenes/ui/ShipSelect/ship_select.gd" id="1_v11rp"]
 
-[node name="ShipSelect" type="Button"]
+[node name="ShipSelect" type="Button" unique_id=1419289730]
 custom_minimum_size = Vector2(0, 36)
 anchors_preset = 10
 anchor_right = 1.0
@@ -12,7 +12,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_v11rp")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=100936618]
 layout_mode = 1
 offset_right = 232.0
 offset_bottom = 34.0
@@ -21,18 +21,18 @@ size_flags_vertical = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=740720456]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 32
 
-[node name="ShipControl" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="ShipControl" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1695323793]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 
-[node name="ShipLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="ShipLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=2078633918]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 24)
 layout_mode = 2

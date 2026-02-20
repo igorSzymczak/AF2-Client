@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dcn8s74a2sjyn" path="res://assets/ships/Nexar Reaver/Nexar Reaver.png" id="1_gctjj"]
 [ext_resource type="Texture2D" uid="uid://c468ylpm7rsda" path="res://assets/ships/Nexar Reaver/Nexar Reaver Lights.png" id="2_04ocu"]
-[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_6cr4w"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="2_6cr4w"]
 [ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_0ginr"]
 [ext_resource type="Script" uid="uid://b2nib5rbl1k1w" path="res://assets/ships/Nexar Reaver/Animation.gd" id="3_50kql"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_fr04d"]
@@ -34,15 +34,15 @@ _data = {
 &"NexarReaverPulse": SubResource("Animation_dyips")
 }
 
-[node name="NexarReaver" type="Sprite2D" unique_id=113914337 node_paths=PackedStringArray("engine")]
+[node name="NexarReaver" type="Sprite2D" unique_id=1042224632 node_paths=PackedStringArray("engine")]
 material = SubResource("ShaderMaterial_esedj")
 rotation = 1.5708
 texture = ExtResource("1_gctjj")
 region_rect = Rect2(-32, -32, 200, 256)
 script = ExtResource("2_6cr4w")
 engine = NodePath("Engine")
+ship_type = 2
 ship_name = "Nexar Reaver"
-hangar_scale = Vector2(0.5, 0.5)
 armor = 9
 shield = 8
 shield_regen = 7
@@ -50,6 +50,7 @@ base_health = 480
 base_armor = 26
 base_shield = 760
 base_shield_regen = 66
+metadata/_custom_type_script = "uid://10vuhv4ky8yl"
 
 [node name="Shadow" parent="." unique_id=495161807 instance=ExtResource("3_0ginr")]
 

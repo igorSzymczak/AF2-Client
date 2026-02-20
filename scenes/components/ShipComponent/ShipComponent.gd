@@ -10,22 +10,22 @@ enum SHADER {
 @onready var lights: Sprite2D = $Lights 
 @export var engine: Thruster
 
-@export var ship_name := "Default Ship Name"
-@export var hangar_scale := Vector2(0.6, 0.6)
+@export var ship_type : ShipManager.ShipType
+@export var ship_name : String = "Default Ship Name"
+@export var hangar_scale: Vector2 = Vector2(0.6, 0.6)
 
 @export var health := 5
 @export var armor := 5
 @export var shield := 5
 @export var shield_regen := 5
 
-@export var base_health := 50
-@export var base_armor := 50
-@export var base_shield := 50
-@export var base_shield_regen := 50
+@export var base_health : int = 50
+@export var base_armor : int = 50
+@export var base_shield : int = 50
+@export var base_shield_regen : int = 50
 
-var effect_sprite: Sprite2D = null  # kopia statku dla aktualnego efektu
+var effect_sprite: Sprite2D = null
 
-# trzymamy aktywne instancje efektów
 var active_effects := {}  # { SHADER : Sprite2D }
 var shaders: Node2D
 
@@ -36,30 +36,21 @@ func _ready() -> void:
 	add_child(shaders)
 
 func _process(delta: float) -> void:
-	# speed boost jako przykład efektu dynamicznego
 	if active_effects.has(SHADER.SPEED_BOOST):
 		_update_speed_boost(delta)
 
 
-# -----------------------------------------------------
-# PUBLIC: wywołanie efektu
-# -----------------------------------------------------
 func apply_shader(effect: SHADER) -> void:
 	if active_effects.has(effect):
-		return  # efekt już działa
+		return
 
-	# utwórz nową kopię sprite'a
 	var inst: Sprite2D = _create_effect_sprite()
 	shaders.add_child(inst)
 	active_effects[effect] = inst
 
-	# nadaj materiał efektu
 	_apply_initial_material_state(effect, inst)
 
 
-# -----------------------------------------------------
-# PUBLIC: wygaszenie efektu
-# -----------------------------------------------------
 func remove_shader(effect: SHADER) -> void:
 	if not active_effects.has(effect):
 		return
@@ -70,9 +61,6 @@ func remove_shader(effect: SHADER) -> void:
 	_fade_and_delete(inst)
 
 
-# -----------------------------------------------------
-# EFEKT: SPEED BOOST — dynamiczne aktualizacje
-# -----------------------------------------------------
 func _update_speed_boost(delta: float) -> void:
 	var inst: Sprite2D = active_effects[SHADER.SPEED_BOOST]
 	var mat := inst.material
@@ -87,22 +75,16 @@ func _update_speed_boost(delta: float) -> void:
 	mat.set("shader_parameter/margin", min(0.02, 0.01 * velocity))
 
 
-# -----------------------------------------------------
-# TWORZENIE SPRITE KOPII
-# -----------------------------------------------------
 func _create_effect_sprite() -> Sprite2D:
 	var sprite := Sprite2D.new()
 	sprite.texture = texture
 	sprite.position = position
 	sprite.rotation = rotation
 	sprite.scale = scale
-	sprite.z_index = z_index + 1  # efekt nad oryginałem
+	sprite.z_index = z_index + 1
 	return sprite
 
 
-# -----------------------------------------------------
-# START PARAMETRÓW DLA EFEKTÓW
-# -----------------------------------------------------
 func _apply_initial_material_state(effect: SHADER, inst: Sprite2D) -> void:
 	match effect:
 
@@ -119,16 +101,12 @@ func _apply_initial_material_state(effect: SHADER, inst: Sprite2D) -> void:
 			inst.material = preload("res://shaders/Abilities/Shield/sprite.tscn").duplicate(true)
 
 
-# -----------------------------------------------------
-# WYGASZENIE → USUNIĘCIE EFEKTU
-# -----------------------------------------------------
 func _fade_and_delete(inst: Sprite2D) -> void:
 	var mat := inst.material
 	if not mat:
 		inst.queue_free()
 		return
 
-	# Zbieramy wszystkie parametry, które shader posiada.
 	var params := {}
 	for param in mat.get_property_list():
 		if !param.name.contains("shader_parameter/"):
@@ -136,21 +114,17 @@ func _fade_and_delete(inst: Sprite2D) -> void:
 		
 		var value = mat.get(param.name)
 		
-		# Możesz filtrować, jeśli tylko niektóre mają być wygaszane
 		if typeof(value) == TYPE_FLOAT:
 			params[param.name] = value
 
-	# Jeśli nic nie ma do wygaszania → delete
 	if params.is_empty():
 		inst.queue_free()
 		return
 	
-	# Tween równoległy
 	var tween := create_tween().set_parallel(true)
 	for param_name in params.keys():
 		var start_value: float = params[param_name]
 
-		# Tweening method that changes parameter values directly
 		tween.tween_method(func method(i): mat.set((param_name), i), start_value, 0.0, 1)
 
 	tween.finished.connect(func():

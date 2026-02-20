@@ -2,19 +2,19 @@ class_name ShipSelect extends BetterButton
 
 @export var engine_active: bool = false
 
-@export var ship_name: String
+@export var ship_type: ShipManager.ShipType
 @onready var ship_control: Control = %ShipControl
 @onready var ship_label: Label = %ShipLabel
 
 var ship_component: ShipComponent = null
 func _ready():
-	ship_component = ShipManager.get_ship(ship_name)
+	ship_component = ShipManager.get_ship(ship_type)
 	if !ship_component: 
 		push_error("Ship Component not specified!")
 		return
 	add_child(ship_component)
 	
-	if !engine_active: ship_component.engine.queue_free()
+	if !engine_active and ship_component.engine: ship_component.engine.queue_free()
 	ship_component.set_rotation(0)
 	ship_component.set_scale(ship_component.hangar_scale)
 	var new_control_size = ship_component.get_rect().size / 2.0

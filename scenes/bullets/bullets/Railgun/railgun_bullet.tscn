@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://tp2ey8uut024"]
+[gd_scene format=3 uid="uid://tp2ey8uut024"]
 
-[ext_resource type="Script" path="res://scenes/bullets/bullets/Railgun/railgun_bullet.gd" id="1_6ngrc"]
+[ext_resource type="Script" uid="uid://cythitadjkk8r" path="res://scenes/bullets/bullets/Railgun/railgun_bullet.gd" id="1_6ngrc"]
 [ext_resource type="Texture2D" uid="uid://dls4pb5lynmoo" path="res://assets/projectiles/Railgun Bullet.png" id="2_wafov"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_74cyi"]
 radius = 8.06226
 
-[node name="Railgun_Bullet" type="Area2D"]
+[node name="Railgun_Bullet" type="Area2D" unique_id=2100985164]
 monitorable = false
 script = ExtResource("1_6ngrc")
 
-[node name="HitBox" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1619597703]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_74cyi")
 
-[node name="BulletSprite" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=353207660]
 position = Vector2(-10, 1.90735e-06)
 scale = Vector2(0.310127, 0.310127)
 texture = ExtResource("2_wafov")

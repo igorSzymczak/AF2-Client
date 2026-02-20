@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 
 var current_world: Node2D
 var me: Player
-var PlayerInfo: Dictionary = {}
 
 var Structures: Dictionary[int, Dictionary] = {}
 var Players: Dictionary[int, Dictionary] = {}
@@ -151,7 +150,7 @@ enum PlayerProperty {
 	HEALTH,
 	SHIELD,
 	ALIVE,
-	SHIP_NAME,
+	SHIP_TYPE,
 	MONITORABLE,
 	LVL,
 	SPEED_BOOST,
@@ -200,9 +199,9 @@ const PLAYER_PROPERTY_SCHEMA: Dictionary[PlayerProperty, Dictionary] = {
 		"type": TYPE_BOOL,
 		"default": true
 	},
-	PlayerProperty.SHIP_NAME: {
-		"type": TYPE_STRING,
-		"default": "UnknownShip"
+	PlayerProperty.SHIP_TYPE: {
+		"type": TYPE_INT, # enum ShipManager.ShipType
+		"default": 0
 	},
 	PlayerProperty.MONITORABLE: {
 		"type": TYPE_BOOL,
@@ -315,14 +314,6 @@ func get_player(user_id: int) -> Player:
 		return null
 
 signal weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
-
-signal player_info(player_info: Dictionary)
-signal player_info_changed()
-func set_player_info(new_player_info: Dictionary):
-	var current_weapon: int = PlayerInfo.current_weapon if PlayerInfo.has("current_weapon") else 1
-	PlayerInfo = new_player_info
-	PlayerInfo.current_weapon = current_weapon
-	player_info_changed.emit()
 
 signal player_shoot(index: int)
 

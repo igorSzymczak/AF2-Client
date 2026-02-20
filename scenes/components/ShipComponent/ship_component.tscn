@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbah1mrtwdj3y"]
+[gd_scene format=3 uid="uid://bbah1mrtwdj3y"]
 
-[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="1_baypl"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="1_baypl"]
 
-[node name="ShipComponent" type="Sprite2D"]
+[node name="ShipComponent" type="Sprite2D" unique_id=1388547083]
 script = ExtResource("1_baypl")

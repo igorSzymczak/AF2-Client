@@ -53,7 +53,6 @@ func disconnected_from_server() -> void:
 
 func client_signals():
 	g.local_player_property_changed.connect(handle_local_player_property_changed)
-	g.player_info.connect(handle_update_player_info)
 	
 	g.player_shoot.connect(handle_player_shoot)
 	g.set_weapon_request.connect(_on_set_weapon_request)
@@ -117,7 +116,6 @@ func handle_client_player_property_changed(id: int, prop: int, value: Variant):
 func handle_client_player_removed(id: int):
 	g.remove_player(id)
 
-func handle_update_player_info(player_info: Dictionary): g.set_player_info(player_info)
 func handle_player_shoot(index: int): player_shoot.rpc_id(1, AuthManager.my_user_id, index)
 
 func _on_set_weapon_request(slot: int, weapon_type: WeaponManager.Type): request_set_weapon.rpc_id(1, slot, weapon_type)
@@ -132,8 +130,8 @@ func set_player_position(pos: Vector2):
 	g.me.velocity = Vector2.ZERO
 
 @rpc("authority", "call_remote", "reliable")
-func send_player_info(player_info: Dictionary):
-	g.player_info.emit(player_info)
+func send_player_data(player_data: Dictionary):
+	handle_player_data(player_data)
 
 @rpc("any_peer", "call_remote", "reliable")
 func player_shoot(user_id: int, index: int):
@@ -152,6 +150,11 @@ func server_handle_local_player_property(_user_id: int, _prop: int, _value: Vari
 
 func _handle_request_toggle_pvp(_user_id: int, _value: bool) -> void:
 	pass # Only Server
+
+func handle_player_data(player_data: Dictionary) -> void:
+	PlayerData.from_dict(player_data)
+
+
 
 ## WEAPONS & BULLETS
 

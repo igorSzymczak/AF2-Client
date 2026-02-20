@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpf2hgh1ctfnx"]
+[gd_scene format=3 uid="uid://dpf2hgh1ctfnx"]
 
-[ext_resource type="Script" path="res://scenes/components/TeamEnum/Team.gd" id="1_sco1r"]
+[ext_resource type="Script" uid="uid://by6unepvsm1w6" path="res://scenes/components/TeamEnum/Team.gd" id="1_sco1r"]
 
-[node name="Team" type="Node2D"]
+[node name="Team" type="Node2D" unique_id=164222497]
 script = ExtResource("1_sco1r")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chcxaewbmb4p7"]
+[gd_scene format=3 uid="uid://chcxaewbmb4p7"]
 
 [ext_resource type="Script" uid="uid://xadwwcbxppf2" path="res://scenes/ui/ui.gd" id="1_2c1t4"]
 [ext_resource type="PackedScene" uid="uid://co4eekalpp6kr" path="res://scenes/ui/game.tscn" id="2_nkdw5"]
@@ -10,34 +10,34 @@
 [ext_resource type="PackedScene" uid="uid://d3sbwh6x5ryko" path="res://scenes/ui/Weapon Change/weapon_change.tscn" id="7_f758s"]
 [ext_resource type="PackedScene" uid="uid://cug2k55cvgsod" path="res://scenes/ui/Cargo Preview/cargo_preview.tscn" id="7_uegxj"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" unique_id=1045982652]
 script = ExtResource("1_2c1t4")
 
-[node name="DeathScreen" parent="." instance=ExtResource("3_xshnj")]
+[node name="DeathScreen" parent="." unique_id=1471352572 instance=ExtResource("3_xshnj")]
 visible = false
 z_index = 1
 
-[node name="Game" parent="." instance=ExtResource("2_nkdw5")]
+[node name="Game" parent="." unique_id=229575200 instance=ExtResource("2_nkdw5")]
 visible = false
 z_index = 5
 
-[node name="HangarMenu" parent="." instance=ExtResource("6_xr3hv")]
+[node name="HangarMenu" parent="." unique_id=2145343821 instance=ExtResource("6_xr3hv")]
 visible = false
 z_index = 10
 
-[node name="StructureMenu" parent="." instance=ExtResource("6_loyla")]
+[node name="StructureMenu" parent="." unique_id=2010557724 instance=ExtResource("6_loyla")]
 visible = false
 z_index = 10
 
-[node name="ESCMenu" parent="." instance=ExtResource("4_4qyyq")]
+[node name="ESCMenu" parent="." unique_id=979566620 instance=ExtResource("4_4qyyq")]
 visible = false
 offset_right = 350.0
 
-[node name="CargoPreview" parent="." instance=ExtResource("7_uegxj")]
+[node name="CargoPreview" parent="." unique_id=545198403 instance=ExtResource("7_uegxj")]
 visible = false
 
-[node name="WeaponChange" parent="." instance=ExtResource("7_f758s")]
+[node name="WeaponChange" parent="." unique_id=1734591013 instance=ExtResource("7_f758s")]
 visible = false
 z_index = 21
 
-[node name="AuthScreen" parent="." instance=ExtResource("5_wjlru")]
+[node name="AuthScreen" parent="." unique_id=1629765787 instance=ExtResource("5_wjlru")]

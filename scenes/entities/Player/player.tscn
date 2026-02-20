@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
 [ext_resource type="PackedScene" uid="uid://c0bcb0dfhtema" path="res://scenes/components/Collector/Collector.tscn" id="6_o8fb4"]
 [ext_resource type="Texture2D" uid="uid://b1gyqxf8ompt1" path="res://assets/ui/other/Reticle.png" id="6_rarct"]
-[ext_resource type="PackedScene" uid="uid://y4hetgssvu6u" path="res://assets/ships/Nexar Reaver/nexar_reaver.tscn" id="7_ec8if"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
 radius = 54.99998
@@ -45,8 +44,6 @@ zoom = Vector2(0.5, 0.5)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="ShipComponent" parent="." unique_id=307033384 instance=ExtResource("7_ec8if")]
 
 [node name="HealthComponent" parent="." unique_id=1409147522 instance=ExtResource("4_emusc")]
 z_index = 1

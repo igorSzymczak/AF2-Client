@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cs180idhi8s5w"]
+[gd_scene format=3 uid="uid://cs180idhi8s5w"]
 
 [ext_resource type="Shader" uid="uid://bkx1xcyfblugs" path="res://shaders/Abilities/Shield/speed_boost.gdshader" id="1_m6gmd"]
 [ext_resource type="Texture2D" uid="uid://bv42bbyy7yfb0" path="res://assets/ships/Nexar Carrier/Nexar Carrier.png" id="2_gdauu"]
@@ -20,7 +20,7 @@ shader_parameter/glow_strength = 0.455
 shader_parameter/gradient = SubResource("GradientTexture1D_66l08")
 shader_parameter/margin = -0.13499999989272998
 
-[node name="Sprite" type="Sprite2D"]
+[node name="Sprite" type="Sprite2D" unique_id=37014421]
 material = SubResource("ShaderMaterial_l0mxq")
 texture = ExtResource("2_gdauu")
 region_rect = Rect2(-56, -72, 224, 344)

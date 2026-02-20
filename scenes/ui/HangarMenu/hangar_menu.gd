@@ -139,7 +139,7 @@ func display_ship_info(ship: ShipComponent):
 		set_points(shield_points, shield)
 		set_points(shield_regen_points, shield_regen)
 		
-		g.me.set_ship(ship.name)
+		g.me.set_ship(ship.ship_type)
 		g.me.engine.activate_thruster()
 
 var animation_finished = true

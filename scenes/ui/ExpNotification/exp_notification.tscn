@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cewmldm7kb3dj"]
+[gd_scene format=3 uid="uid://cewmldm7kb3dj"]
 
-[ext_resource type="Script" path="res://scenes/ui/ExpNotification/ExpLabel.gd" id="1_oo5ia"]
+[ext_resource type="Script" uid="uid://b2yhv6koy2ddx" path="res://scenes/ui/ExpNotification/ExpLabel.gd" id="1_oo5ia"]
 
-[node name="ExpNotification" type="Label"]
+[node name="ExpNotification" type="Label" unique_id=904436936]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -16,10 +16,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.427451, 0.00392157, 0.87451, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
 theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_constants/shadow_outline_size = 10
-theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 20
 text = "20 exp"
 horizontal_alignment = 1

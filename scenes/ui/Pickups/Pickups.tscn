@@ -1,30 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7f4wgrci2wsa"]
+[gd_scene format=3 uid="uid://c7f4wgrci2wsa"]
 
 [ext_resource type="Script" uid="uid://dheunq8sckg22" path="res://scenes/ui/Pickups/pickups.gd" id="1_juvdt"]
 [ext_resource type="PackedScene" uid="uid://dhg4e70xq1b5a" path="res://scenes/ui/Pickups/pickup.tscn" id="2_4k2xa"]
 
-[node name="Pickups" type="PanelContainer"]
+[node name="Pickups" type="PanelContainer" unique_id=674484723]
 offset_right = 178.0
 offset_bottom = 56.0
 size_flags_vertical = 3
 script = ExtResource("1_juvdt")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=63990879]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="PickupsContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="PickupsContainer" type="VBoxContainer" parent="MarginContainer" unique_id=295942117]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Pickup" parent="MarginContainer/PickupsContainer" instance=ExtResource("2_4k2xa")]
+[node name="Pickup" parent="MarginContainer/PickupsContainer" unique_id=553507205 instance=ExtResource("2_4k2xa")]
 layout_mode = 2
 
-[node name="Pickup2" parent="MarginContainer/PickupsContainer" instance=ExtResource("2_4k2xa")]
+[node name="Pickup2" parent="MarginContainer/PickupsContainer" unique_id=216043712 instance=ExtResource("2_4k2xa")]
 layout_mode = 2
 
-[node name="Pickup3" parent="MarginContainer/PickupsContainer" instance=ExtResource("2_4k2xa")]
+[node name="Pickup3" parent="MarginContainer/PickupsContainer" unique_id=1729172597 instance=ExtResource("2_4k2xa")]
 layout_mode = 2

@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cykkh2wew6crk"]
+[gd_scene format=3 uid="uid://cykkh2wew6crk"]
 
-[ext_resource type="Script" path="res://scenes/ui/Materials/materials.gd" id="1_g0ksg"]
+[ext_resource type="Script" uid="uid://d0vrdorogjb0y" path="res://scenes/ui/Materials/materials.gd" id="1_g0ksg"]
 [ext_resource type="Texture2D" uid="uid://cpjj8oaj1f7pc" path="res://assets/ui/inventory/steel.png" id="1_o50fp"]
 [ext_resource type="Texture2D" uid="uid://bqvkdsw678u54" path="res://assets/ui/inventory/flux.png" id="2_jecv5"]
 [ext_resource type="Texture2D" uid="uid://wcdd1ygbse85" path="res://assets/ui/inventory/hydrogen_crystals.png" id="2_tne6b"]
 [ext_resource type="Texture2D" uid="uid://ddtwfkxlvu0bi" path="res://assets/ui/inventory/plasma_fluids.png" id="3_r4rxh"]
 [ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="4_sj1pd"]
 
-[node name="Materials" type="PanelContainer"]
+[node name="Materials" type="PanelContainer" unique_id=1521942048]
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 0.065
@@ -23,7 +23,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 script = ExtResource("1_g0ksg")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1233964855]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 4
@@ -31,110 +31,110 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=192598058]
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="Flux" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Flux" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1910261748]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Flux"]
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Flux" unique_id=1870570822]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Flux/Icon"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Flux/Icon" unique_id=415126100]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_jecv5")
 stretch_mode = 5
 
-[node name="FluxAmount" type="Label" parent="MarginContainer/HBoxContainer/Flux"]
+[node name="FluxAmount" type="Label" parent="MarginContainer/HBoxContainer/Flux" unique_id=1178845547]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "0"
 
-[node name="Steel" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Steel" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=2096494944]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Steel"]
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Steel" unique_id=741009185]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Steel/Icon"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Steel/Icon" unique_id=1950436197]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("1_o50fp")
 stretch_mode = 5
 
-[node name="SteelAmount" type="Label" parent="MarginContainer/HBoxContainer/Steel"]
+[node name="SteelAmount" type="Label" parent="MarginContainer/HBoxContainer/Steel" unique_id=876857955]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "0"
 
-[node name="HydrogenCrystals" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HydrogenCrystals" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1205486526]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HydrogenCrystals"]
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HydrogenCrystals" unique_id=803420786]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HydrogenCrystals/Icon"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/HydrogenCrystals/Icon" unique_id=880377975]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_tne6b")
 stretch_mode = 5
 
-[node name="HydrogenCrystalsAmount" type="Label" parent="MarginContainer/HBoxContainer/HydrogenCrystals"]
+[node name="HydrogenCrystalsAmount" type="Label" parent="MarginContainer/HBoxContainer/HydrogenCrystals" unique_id=448185552]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "0"
 
-[node name="PlasmaFluids" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="PlasmaFluids" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=855301434]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PlasmaFluids"]
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PlasmaFluids" unique_id=1324969840]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PlasmaFluids/Icon"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/PlasmaFluids/Icon" unique_id=166098719]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_r4rxh")
 stretch_mode = 5
 
-[node name="PlasmaFluidsAmount" type="Label" parent="MarginContainer/HBoxContainer/PlasmaFluids"]
+[node name="PlasmaFluidsAmount" type="Label" parent="MarginContainer/HBoxContainer/PlasmaFluids" unique_id=2030504183]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 text = "0"
 
-[node name="Iridium" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Iridium" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1812357673]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Iridium"]
+[node name="Icon" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Iridium" unique_id=79215744]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Iridium/Icon"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Iridium/Icon" unique_id=1410243234]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_sj1pd")
 stretch_mode = 5
 
-[node name="IridiumAmount" type="Label" parent="MarginContainer/HBoxContainer/Iridium"]
+[node name="IridiumAmount" type="Label" parent="MarginContainer/HBoxContainer/Iridium" unique_id=413552305]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 14

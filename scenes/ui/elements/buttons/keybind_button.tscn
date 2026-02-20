@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://drgvryt6jud63"]
+[gd_scene format=3 uid="uid://drgvryt6jud63"]
 
-[ext_resource type="Script" path="res://scenes/ui/elements/buttons/keybind_button.gd" id="1_i6q4u"]
+[ext_resource type="Script" uid="uid://jhsuijkq433l" path="res://scenes/ui/elements/buttons/keybind_button.gd" id="1_i6q4u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t88ig"]
 bg_color = Color(0, 0, 0, 0.235294)
@@ -10,18 +10,18 @@ bg_color = Color(1, 1, 1, 0.235294)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8d8p"]
 
-[node name="KeybindButton" type="Button"]
+[node name="KeybindButton" type="Button" unique_id=10465009]
 custom_minimum_size = Vector2(0, 32)
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_t88ig")
-theme_override_styles/hover = SubResource("StyleBoxFlat_xfdvt")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_xfdvt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xfdvt")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_x8d8p")
 script = ExtResource("1_i6q4u")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=154823599]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,20 +33,20 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1097514871]
 layout_mode = 2
 
-[node name="LabelAction" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LabelAction" type="Label" parent="MarginContainer/HBoxContainer" unique_id=778084079]
 layout_mode = 2
 mouse_filter = 1
 text = "Action Name"
 
-[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer" unique_id=1936302139]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 
-[node name="LabelInput" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LabelInput" type="Label" parent="MarginContainer/HBoxContainer" unique_id=941090551]
 layout_mode = 2
 mouse_filter = 1
 text = "Key"

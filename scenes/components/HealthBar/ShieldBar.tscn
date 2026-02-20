@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://q6ugrdiyry72"]
+[gd_scene format=3 uid="uid://q6ugrdiyry72"]
 
-[ext_resource type="Script" path="res://scenes/components/HealthBar/ShieldBar.gd" id="1_j2lqw"]
+[ext_resource type="Script" uid="uid://bjvbew85kqewj" path="res://scenes/components/HealthBar/ShieldBar.gd" id="1_j2lqw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3ibx"]
 
@@ -19,7 +19,7 @@ shadow_offset = Vector2(0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6h7vs"]
 bg_color = Color(1, 0.0980392, 0.231373, 1)
 
-[node name="ShieldBar" type="ProgressBar"]
+[node name="ShieldBar" type="ProgressBar" unique_id=2109862433]
 z_index = 1
 offset_right = 160.0
 offset_bottom = 4.0
@@ -31,7 +31,7 @@ rounded = true
 show_percentage = false
 script = ExtResource("1_j2lqw")
 
-[node name="DamageBar" type="ProgressBar" parent="."]
+[node name="DamageBar" type="ProgressBar" parent="." unique_id=551494613]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -45,7 +45,7 @@ value = 70.0
 rounded = true
 show_percentage = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1915678089]
 wait_time = 0.4
 one_shot = true
 

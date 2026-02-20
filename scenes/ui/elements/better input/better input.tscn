@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://3q3ue05vm40o"]
+[gd_scene format=3 uid="uid://3q3ue05vm40o"]
 
-[ext_resource type="Script" path="res://scenes/ui/elements/better input/better input.gd" id="1_ddtvs"]
+[ext_resource type="Script" uid="uid://2uy7qoynrov3" path="res://scenes/ui/elements/better input/better input.gd" id="1_ddtvs"]
 
-[node name="BetterInput" type="LineEdit"]
+[node name="BetterInput" type="LineEdit" unique_id=325835072]
 caret_blink = true
 caret_blink_interval = 0.5
 script = ExtResource("1_ddtvs")

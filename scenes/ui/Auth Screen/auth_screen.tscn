@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cctbruyrj1i8n"]
+[gd_scene format=3 uid="uid://cctbruyrj1i8n"]
 
-[ext_resource type="Script" path="res://scenes/ui/Auth Screen/auth_screen.gd" id="1_sohdu"]
+[ext_resource type="Script" uid="uid://bxhppfshfygmd" path="res://scenes/ui/Auth Screen/auth_screen.gd" id="1_sohdu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1o0f8"]
 
@@ -48,7 +48,7 @@ expand_margin_right = 8.0
 expand_margin_bottom = 6.0
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="AuthScreen" type="Control"]
+[node name="AuthScreen" type="Control" unique_id=206966544]
 z_index = 999
 layout_mode = 3
 anchors_preset = 15
@@ -58,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sohdu")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=508660424]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,49 +66,49 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1569687839]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=448739154]
 layout_mode = 2
 alignment = 1
 
-[node name="MessageContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="MessageContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=256350835]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 alignment = 1
 
-[node name="ErrorLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MessageContainer"]
+[node name="ErrorLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MessageContainer" unique_id=947403508]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.313726, 0.247059, 1)
 text = "Error"
 
-[node name="SuccessLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MessageContainer"]
+[node name="SuccessLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MessageContainer" unique_id=1926503690]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.207843, 0.901961, 0.247059, 1)
 text = "Success"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=802721598]
 custom_minimum_size = Vector2(0, 512)
 layout_mode = 2
 alignment = 1
 
-[node name="RegisterScreen" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RegisterScreen" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=328979363]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_1o0f8")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen" unique_id=1934930118]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,28 +120,28 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer" unique_id=1363279315]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Separator5" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="Separator5" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1138073773]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1232489636]
 layout_mode = 2
 alignment = 1
 
-[node name="UsernameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="UsernameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1620257164]
 layout_mode = 2
 text = "Username"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1631428371]
 layout_mode = 2
 alignment = 1
 
-[node name="RegisterUsername" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="RegisterUsername" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=983321944]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -152,24 +152,24 @@ alignment = 1
 max_length = 15
 expand_to_text_length = true
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=695340624]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=526476755]
 layout_mode = 2
 alignment = 1
 
-[node name="PasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="PasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1927942528]
 layout_mode = 2
 text = "Password"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=58592110]
 layout_mode = 2
 alignment = 1
 
-[node name="RegisterPassword" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="RegisterPassword" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1387070060]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -181,24 +181,24 @@ max_length = 32
 expand_to_text_length = true
 secret = true
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=871889393]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=732802565]
 layout_mode = 2
 alignment = 1
 
-[node name="RepeatPasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer5"]
+[node name="RepeatPasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer5" unique_id=784019664]
 layout_mode = 2
 text = "Repeat Password"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=228063048]
 layout_mode = 2
 alignment = 1
 
-[node name="RegisterPasswordRepeat" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer6"]
+[node name="RegisterPasswordRepeat" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer6" unique_id=1224599318]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -210,16 +210,16 @@ max_length = 15
 expand_to_text_length = true
 secret = true
 
-[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1208508921]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1019445889]
 layout_mode = 2
 alignment = 1
 
-[node name="RegisterButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer7"]
+[node name="RegisterButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer7" unique_id=1444255608]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0.301961, 0.301961, 0.301961, 1)
@@ -229,24 +229,24 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_81de1")
 theme_override_styles/focus = SubResource("StyleBoxFlat_wq76j")
 text = "Create Account"
 
-[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1977882014]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer" unique_id=1900990974]
 layout_mode = 2
 alignment = 1
 
-[node name="SwitchLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="SwitchLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=285332681]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Already have an account? "
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=1018108842]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="SwitchToLogin" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="SwitchToLogin" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/RegisterScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=579247543]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0.301961, 0.301961, 0.301961, 1)
@@ -257,13 +257,13 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_81de1")
 theme_override_styles/focus = SubResource("StyleBoxFlat_wq76j")
 text = "Log In"
 
-[node name="LoginScreen" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LoginScreen" type="Panel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1874520902]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_1o0f8")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen" unique_id=1738444291]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,28 +275,28 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer" unique_id=1682702152]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Separator5" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="Separator5" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=930418934]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=275918592]
 layout_mode = 2
 alignment = 1
 
-[node name="UsernameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="UsernameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer" unique_id=618951642]
 layout_mode = 2
 text = "Username"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=1352133272]
 layout_mode = 2
 alignment = 1
 
-[node name="LoginUsername" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="LoginUsername" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=219782259]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -307,24 +307,24 @@ alignment = 1
 max_length = 15
 expand_to_text_length = true
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=1295620760]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=1146422191]
 layout_mode = 2
 alignment = 1
 
-[node name="PasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="PasswordLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer4" unique_id=1320215043]
 layout_mode = 2
 text = "Password"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=89972909]
 layout_mode = 2
 alignment = 1
 
-[node name="LoginPassword" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="LoginPassword" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=668560663]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -336,16 +336,16 @@ max_length = 32
 expand_to_text_length = true
 secret = true
 
-[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=163424030]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer7" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=94880065]
 layout_mode = 2
 alignment = 1
 
-[node name="LoginButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer7"]
+[node name="LoginButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer7" unique_id=1714490142]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0.301961, 0.301961, 0.301961, 1)
@@ -355,24 +355,24 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_81de1")
 theme_override_styles/focus = SubResource("StyleBoxFlat_wq76j")
 text = "Log In"
 
-[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=1325233729]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer8" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer" unique_id=237590034]
 layout_mode = 2
 alignment = 1
 
-[node name="SwitchLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="SwitchLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=806277283]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Don't have an account?"
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=756630295]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="SwitchToRegister" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8"]
+[node name="SwitchToRegister" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/LoginScreen/MarginContainer/VBoxContainer/HBoxContainer8" unique_id=2054021910]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_disabled_color = Color(0.301961, 0.301961, 0.301961, 1)

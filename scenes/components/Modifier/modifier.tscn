@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1rpexi53j0sx"]
+[gd_scene format=3 uid="uid://b1rpexi53j0sx"]
 
 [ext_resource type="Script" uid="uid://cqegevo6cgcnh" path="res://scenes/components/Modifier/modifier.gd" id="1_vgv3g"]
 
-[node name="Modifier" type="Node"]
+[node name="Modifier" type="Node" unique_id=2067220417]
 script = ExtResource("1_vgv3g")

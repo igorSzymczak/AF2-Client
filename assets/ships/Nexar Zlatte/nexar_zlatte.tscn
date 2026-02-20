@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b0y3t5j6dgqn6" path="res://assets/ships/Nexar Zlatte/Nexar Zlatte.png" id="1_3utq7"]
 [ext_resource type="Texture2D" uid="uid://nfei0q7uc6c1" path="res://assets/ships/Nexar Zlatte/Nexar Zlatte Lights.png" id="2_apj08"]
-[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_pohn7"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="2_pohn7"]
 [ext_resource type="Script" uid="uid://b3d5mlqiqrlu0" path="res://scenes/components/Shadow/shadow.gd" id="3_1k2xf"]
 [ext_resource type="Script" uid="uid://8lld7wovf1f6" path="res://assets/ships/Nexar Zlatte/Animation.gd" id="3_veqcq"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_vtk6o"]
@@ -190,6 +190,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_3utq7")
 script = ExtResource("2_pohn7")
 engine = NodePath("Engine")
+ship_type = 3
 ship_name = "Nexar Zlatte"
 health = 1
 armor = 1

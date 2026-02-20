@@ -1,8 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://bs1m1idguikev"]
+[gd_scene format=3 uid="uid://bs1m1idguikev"]
 
 [ext_resource type="Theme" uid="uid://dk1bu2y8w4psy" path="res://scenes/ui/main_theme.tres" id="1_8hfp8"]
-[ext_resource type="Script" path="res://scenes/ui/power bar/power_bar.gd" id="1_ob7kw"]
-[ext_resource type="Shader" path="res://scenes/ui/power bar/power_bar.gdshader" id="3_qfqpr"]
+[ext_resource type="Script" uid="uid://chov8h32fnsa3" path="res://scenes/ui/power bar/power_bar.gd" id="1_ob7kw"]
+[ext_resource type="Shader" uid="uid://r75rd7tjnhmj" path="res://scenes/ui/power bar/power_bar.gdshader" id="3_qfqpr"]
 [ext_resource type="PackedScene" uid="uid://cflxrtspib0eh" path="res://scenes/ui/Tooltip/weapon_tooltip.tscn" id="4_j7qec"]
 [ext_resource type="Texture2D" uid="uid://n47jub7diikx" path="res://assets/ui/energy bar/num 1.png" id="4_lvilq"]
 [ext_resource type="Texture2D" uid="uid://bdvr0a4x04leu" path="res://assets/ui/energy bar/num 2.png" id="5_ev24y"]
@@ -24,27 +24,27 @@ frequency = 0.0024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x0m3h"]
 generate_mipmaps = false
-seamless = true
 noise = SubResource("FastNoiseLite_hqoa3")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fngle"]
 shader = ExtResource("3_qfqpr")
-shader_parameter/scroll1 = Vector2(0.045, 0.11)
-shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 shader_parameter/texture2 = SubResource("NoiseTexture2D_x0m3h")
 shader_parameter/colorTexture = SubResource("GradientTexture2D_cmbhi")
+shader_parameter/scroll1 = Vector2(0.045, 0.11)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_anc77"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7kj2t"]
+noise = SubResource("FastNoiseLite_anc77")
 seamless = true
 seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_anc77")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6r28"]
 size = Vector2(258, 46.188)
 
-[node name="Power Bar" type="Control"]
+[node name="Power Bar" type="Control" unique_id=263690716]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -53,7 +53,7 @@ theme = ExtResource("1_8hfp8")
 script = ExtResource("1_ob7kw")
 metadata/_edit_lock_ = true
 
-[node name="PowerBarFrame" type="Polygon2D" parent="."]
+[node name="PowerBarFrame" type="Polygon2D" parent="." unique_id=1574913291]
 z_index = 2
 position = Vector2(-320.001, -66)
 skew = 0.523599
@@ -62,14 +62,14 @@ antialiased = true
 polygon = PackedVector2Array(-10, -10, 271.732, -10, 271.732, 60, -10, 60)
 vertex_colors = PackedColorArray(0.0941176, 0.0941176, 0.0941176, 0.792157, 0.145098, 0.0941176, 0.0941176, 0.792157, 0.137255, 0, 0, 0.792157, 0.133333, 0.0941176, 0.0941176, 0.792157)
 
-[node name="Elements" type="Control" parent="PowerBarFrame"]
+[node name="Elements" type="Control" parent="PowerBarFrame" unique_id=870520393]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="B1" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B1" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1985881837]
 clip_children = 1
 position = Vector2(10, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -77,7 +77,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B1"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B1" unique_id=627053902]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(129.037, -78.8684)
@@ -86,7 +86,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B2" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B2" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=2062812877]
 clip_children = 1
 position = Vector2(35, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -94,7 +94,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B2"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B2" unique_id=1093149800]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(96.8948, -87.4604)
@@ -103,7 +103,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B3" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B3" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1464761960]
 clip_children = 1
 position = Vector2(60.4651, 6.9282)
 scale = Vector2(0.666667, 0.666667)
@@ -111,7 +111,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B3"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B3" unique_id=1366157746]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(59.3953, -87.4604)
@@ -120,7 +120,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B4" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B4" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1410704941]
 clip_children = 1
 position = Vector2(84.9997, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -128,7 +128,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B4"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B4" unique_id=133284598]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(21.8953, -87.4604)
@@ -137,7 +137,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B5" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B5" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1632161217]
 clip_children = 1
 position = Vector2(110, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -145,7 +145,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B5"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B5" unique_id=1511506605]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-15.605, -87.4604)
@@ -154,7 +154,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B6" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B6" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=247914372]
 clip_children = 1
 position = Vector2(135, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -162,7 +162,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B6"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B6" unique_id=607688155]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-53.105, -87.4604)
@@ -171,7 +171,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B7" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B7" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1126449632]
 clip_children = 1
 position = Vector2(159.999, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -179,7 +179,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B7"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B7" unique_id=1979965803]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-90.6035, -87.4604)
@@ -188,7 +188,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B8" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B8" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1161768038]
 clip_children = 1
 position = Vector2(185, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -196,7 +196,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B8"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B8" unique_id=1896381494]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-128.105, -87.4604)
@@ -205,7 +205,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B9" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B9" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=1970604656]
 clip_children = 1
 position = Vector2(210, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -213,7 +213,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B9"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B9" unique_id=1685699611]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-165.605, -87.4604)
@@ -222,7 +222,7 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="B10" type="Polygon2D" parent="PowerBarFrame/Elements"]
+[node name="B10" type="Polygon2D" parent="PowerBarFrame/Elements" unique_id=528583157]
 clip_children = 1
 position = Vector2(235, 7.5)
 scale = Vector2(0.666667, 0.666667)
@@ -230,7 +230,7 @@ color = Color(0.388235, 0.352941, 0.662745, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B10"]
+[node name="Noise" type="Sprite2D" parent="PowerBarFrame/Elements/B10" unique_id=1233556312]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(-203.105, -87.4604)
@@ -239,14 +239,14 @@ skew = -0.463648
 texture = SubResource("NoiseTexture2D_7kj2t")
 metadata/_edit_lock_ = true
 
-[node name="HoverArea" type="Area2D" parent="PowerBarFrame"]
+[node name="HoverArea" type="Area2D" parent="PowerBarFrame" unique_id=1839426976]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerBarFrame/HoverArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerBarFrame/HoverArea" unique_id=1310564409]
 position = Vector2(131.239, 24.2487)
 shape = SubResource("RectangleShape2D_s6r28")
 
-[node name="LabelContainer" type="PanelContainer" parent="."]
+[node name="LabelContainer" type="PanelContainer" parent="." unique_id=224085402]
 visible = false
 layout_mode = 0
 offset_left = -289.0
@@ -254,18 +254,18 @@ offset_top = -154.0
 offset_right = -249.0
 offset_bottom = -114.0
 
-[node name="MarginContainer" type="MarginContainer" parent="LabelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="LabelContainer" unique_id=425234556]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="LabelContainer/MarginContainer"]
+[node name="Label" type="Label" parent="LabelContainer/MarginContainer" unique_id=2140471754]
 layout_mode = 2
 text = "dupa Romana#"
 
-[node name="WeaponTooltip" parent="." instance=ExtResource("4_j7qec")]
+[node name="WeaponTooltip" parent="." unique_id=1114768804 instance=ExtResource("4_j7qec")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -276,14 +276,14 @@ offset_bottom = -137.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="WeaponPanels" type="Control" parent="."]
+[node name="WeaponPanels" type="Control" parent="." unique_id=221398597]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_lock_ = true
 
-[node name="WeaponPanel1" type="Panel" parent="WeaponPanels"]
+[node name="WeaponPanel1" type="Panel" parent="WeaponPanels" unique_id=889278074]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
@@ -294,13 +294,13 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num1" type="Sprite2D" parent="WeaponPanels/WeaponPanel1"]
+[node name="Num1" type="Sprite2D" parent="WeaponPanels/WeaponPanel1" unique_id=1570781399]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_lvilq")
 
-[node name="WeaponPanel2" type="Panel" parent="WeaponPanels"]
+[node name="WeaponPanel2" type="Panel" parent="WeaponPanels" unique_id=415740050]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 1
@@ -312,13 +312,13 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num2" type="Sprite2D" parent="WeaponPanels/WeaponPanel2"]
+[node name="Num2" type="Sprite2D" parent="WeaponPanels/WeaponPanel2" unique_id=122346308]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_ev24y")
 
-[node name="WeaponPanel3" type="Panel" parent="WeaponPanels"]
+[node name="WeaponPanel3" type="Panel" parent="WeaponPanels" unique_id=1927432588]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
@@ -329,13 +329,13 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num3" type="Sprite2D" parent="WeaponPanels/WeaponPanel3"]
+[node name="Num3" type="Sprite2D" parent="WeaponPanels/WeaponPanel3" unique_id=1571932217]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("6_3swax")
 
-[node name="WeaponPanel4" type="Panel" parent="WeaponPanels"]
+[node name="WeaponPanel4" type="Panel" parent="WeaponPanels" unique_id=1226154565]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
@@ -346,13 +346,13 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num4" type="Sprite2D" parent="WeaponPanels/WeaponPanel4"]
+[node name="Num4" type="Sprite2D" parent="WeaponPanels/WeaponPanel4" unique_id=739577702]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("7_l2mww")
 
-[node name="WeaponPanel5" type="Panel" parent="WeaponPanels"]
+[node name="WeaponPanel5" type="Panel" parent="WeaponPanels" unique_id=417810248]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 0
@@ -363,20 +363,20 @@ offset_bottom = -79.6
 size_flags_horizontal = 0
 size_flags_vertical = 2
 
-[node name="Num5" type="Sprite2D" parent="WeaponPanels/WeaponPanel5"]
+[node name="Num5" type="Sprite2D" parent="WeaponPanels/WeaponPanel5" unique_id=200807618]
 modulate = Color(1, 1, 1, 0.431373)
 position = Vector2(26.75, 26.25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("8_04y5n")
 
-[node name="WeaponFrame" type="Sprite2D" parent="."]
+[node name="WeaponFrame" type="Sprite2D" parent="." unique_id=1871440959]
 clip_children = 1
 z_index = 1
 position = Vector2(-298.5, -105.5)
 scale = Vector2(0.507812, 0.507812)
 texture = ExtResource("9_uoq5w")
 
-[node name="Noise" type="Sprite2D" parent="WeaponFrame"]
+[node name="Noise" type="Sprite2D" parent="WeaponFrame" unique_id=601137434]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_fngle")
 position = Vector2(182.154, 182.154)

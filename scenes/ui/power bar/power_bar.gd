@@ -48,15 +48,22 @@ func _ready() -> void:
 	weapon_panel_3.mouse_exited.connect(weapon_tooltip.hide)
 	weapon_panel_4.mouse_exited.connect(weapon_tooltip.hide)
 	weapon_panel_5.mouse_exited.connect(weapon_tooltip.hide)
+	
+	PlayerData.prop_changed.connect(_handle_prop_changed)
 
-func _process(_delta) -> void:
-	if !g.PlayerInfo.is_empty():
-		draw_bars()
-		manage_weapon_change()
+func _handle_prop_changed(prop: PlayerData.Property, value: Variant) -> void:
+	match prop:
+		PlayerData.Property.CURRENT_POWER:
+			draw_bars(value)
+		PlayerData.Property.CURRENT_HOTBAR_SLOT:
+			manage_weapon_change(value)
+
+func _process(_delta: float) -> void:
 		weapon_frame_load()
 	
-func draw_bars() -> void:
-	var total_percentage = (g.PlayerInfo.current_power / g.PlayerInfo.max_power) * 100
+func draw_bars(current_power: float) -> void:
+	if !StatManager.my_stats: return
+	var total_percentage = (current_power / StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value) * 100
 	
 	var bars_filled = total_percentage / 10
 	
@@ -71,22 +78,21 @@ func draw_bars() -> void:
 	B9.modulate.a = (bars_filled - 8)
 	B10.modulate.a = (bars_filled - 9)
 
-var last_weapon_index = 1
-func manage_weapon_change() -> void:
-	if last_weapon_index != g.PlayerInfo.current_weapon:
-		last_weapon_index = g.PlayerInfo.current_weapon
-		var weapon_panel_size_halfed = weapon_panel_1.get_size() / 2.0
-		if(last_weapon_index == 1): weapon_frame.position = weapon_panel_1.position + weapon_panel_size_halfed
-		if(last_weapon_index == 2): weapon_frame.position = weapon_panel_2.position + weapon_panel_size_halfed
-		if(last_weapon_index == 3): weapon_frame.position = weapon_panel_3.position + weapon_panel_size_halfed
-		if(last_weapon_index == 4): weapon_frame.position = weapon_panel_4.position + weapon_panel_size_halfed
-		if(last_weapon_index == 5): weapon_frame.position = weapon_panel_5.position + weapon_panel_size_halfed
+var current_weapon: WeaponRuntimeData = null
+func manage_weapon_change(current_slot: int) -> void:
+		current_weapon = PlayerData.get_hotbar_weapon(current_slot)
+		var weapon_panel_size_halfed: Vector2 = weapon_panel_1.get_size() / 2.0
+		if(current_slot == 1): weapon_frame.position = weapon_panel_1.position + weapon_panel_size_halfed
+		if(current_slot == 2): weapon_frame.position = weapon_panel_2.position + weapon_panel_size_halfed
+		if(current_slot == 3): weapon_frame.position = weapon_panel_3.position + weapon_panel_size_halfed
+		if(current_slot == 4): weapon_frame.position = weapon_panel_4.position + weapon_panel_size_halfed
+		if(current_slot == 5): weapon_frame.position = weapon_panel_5.position + weapon_panel_size_halfed
 
 func weapon_frame_load() -> void:
-	var current_weapon = g.PlayerInfo.weapons[g.PlayerInfo.current_weapon]
-	if current_weapon.shoot_delay > 200:
-		var time_elapsed = float(Time.get_ticks_msec() - current_weapon.last_shot)
-		var percentage = min(1, time_elapsed / float(current_weapon.shoot_delay))
+	if !current_weapon: return
+	if current_weapon.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY) > 200:
+		var time_elapsed: int = Time.get_ticks_msec() - current_weapon.get_prop(PlayerData.WeaponProperty.LAST_SHOT)
+		var percentage = min(1, time_elapsed / float(current_weapon.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY)))
 		var weapon_panel_height = weapon_panel_1.get_size().y * 2.3
 		
 		var new_shader_y = default_weapon_frame_shader_pos_y + (weapon_panel_height * (1 - percentage))
@@ -97,24 +103,25 @@ func weapon_frame_load() -> void:
 
 func show_weapon_tooltip(index: int):
 	if index < 1 or index > 5: return
-	if g.PlayerInfo.is_empty(): return
 	
-	var weapon: Dictionary = g.PlayerInfo.weapons[index]
-	var weapon_name: String = weapon.name
-	var dmg: float = weapon.damage
+	var weapon_data: WeaponRuntimeData = PlayerData.get_hotbar_weapon(index)
+	var weapon_type: WeaponManager.Type = weapon_data.get_prop(PlayerData.WeaponProperty.WEAPON_TYPE)
 	
-	var weapon_element: Weapon = WeaponManager.get_weapon(weapon.type)
+	var weapon: Weapon = WeaponManager.get_weapon(weapon_type)
 	
-	var bullet_range: Array = weapon.bullet_amount
+	var weapon_name: String = weapon.weapon_name
+	var dmg: float = weapon_data.get_prop(PlayerData.WeaponProperty.DAMAGE)
+	
+	var bullet_range: Vector2i = weapon_data.get_prop(PlayerData.WeaponProperty.BULLET_AMOUNT_RANGE)
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0
 	
-	var rps: float = 1000.0 / float(weapon.shoot_delay)
+	var rps: float = 1000.0 / float(weapon_data.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY))
 	
 	var dps: float = rps * average_bullets * dmg
 	
 	weapon_tooltip.title.set_text(weapon_name)
 	weapon_tooltip.dmg.set_text(Functions.shorten_number(dmg))
 	weapon_tooltip.dps.set_text(Functions.shorten_number(dps))
-	weapon_tooltip.description.set_text(weapon_element.description_short)
+	weapon_tooltip.description.set_text(weapon.description_short)
 	
 	weapon_tooltip.show()

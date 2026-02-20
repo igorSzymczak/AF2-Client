@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cflxrtspib0eh"]
+[gd_scene format=3 uid="uid://cflxrtspib0eh"]
 
-[ext_resource type="Script" path="res://scenes/ui/Tooltip/weapon_tooltip.gd" id="1_nf8ny"]
+[ext_resource type="Script" uid="uid://csyf4em2sws74" path="res://scenes/ui/Tooltip/weapon_tooltip.gd" id="1_nf8ny"]
 
-[node name="WeaponTooltip" type="PanelContainer"]
+[node name="WeaponTooltip" type="PanelContainer" unique_id=1042111318]
 z_index = 3
 custom_minimum_size = Vector2(280, 100)
 offset_left = -100.0
@@ -14,7 +14,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 script = ExtResource("1_nf8ny")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2027337942]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -22,11 +22,11 @@ theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1846410584]
 layout_mode = 2
 size_flags_vertical = 9
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2045144618]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
@@ -35,47 +35,47 @@ text = "Title"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=1582407906]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="Line1" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Line1" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1919391181]
 layout_mode = 2
 
-[node name="o1" type="Label" parent="MarginContainer/VBoxContainer/Line1"]
+[node name="o1" type="Label" parent="MarginContainer/VBoxContainer/Line1" unique_id=277619235]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "damage per hit"
 
-[node name="dmg" type="Label" parent="MarginContainer/VBoxContainer/Line1"]
+[node name="dmg" type="Label" parent="MarginContainer/VBoxContainer/Line1" unique_id=490895086]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "10"
 horizontal_alignment = 1
 
-[node name="Line2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Line2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=629993629]
 layout_mode = 2
 
-[node name="o1" type="Label" parent="MarginContainer/VBoxContainer/Line2"]
+[node name="o1" type="Label" parent="MarginContainer/VBoxContainer/Line2" unique_id=2063691126]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DPS"
 
-[node name="dps" type="Label" parent="MarginContainer/VBoxContainer/Line2"]
+[node name="dps" type="Label" parent="MarginContainer/VBoxContainer/Line2" unique_id=1526102393]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "600"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1787956067]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 17)
 layout_mode = 2
 
-[node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=486510344]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(10, 0)

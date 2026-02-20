@@ -20,8 +20,8 @@ var landed_structure: Structure = null
 @onready var nickname_label: Label = %NicknameLabel
 @onready var lvl_label: Label = %LvlLabel
 
-@onready var ship: ShipComponent = $ShipComponent
-@onready var engine: Thruster = $ShipComponent/Engine
+@onready var ship: ShipComponent
+@onready var engine: Thruster
 @onready var camera: Camera2D = $Camera2D
 @onready var reticle: Sprite2D = $Reticle
 
@@ -74,6 +74,9 @@ func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
 		g.PlayerProperty.VELOCITY:
 			server_velocity = value
 		g.PlayerProperty.ENGINE_ACTIVE:
+			if !is_instance_valid(engine):
+				return
+			
 			if value: engine.activate_thruster()
 			else: engine.deactivate_thruster(velocity)
 		g.PlayerProperty.HEALTH:
@@ -82,7 +85,7 @@ func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
 			health_component.shield = value
 		g.PlayerProperty.ALIVE:
 			handle_alive_changed(value)
-		g.PlayerProperty.SHIP_NAME:
+		g.PlayerProperty.SHIP_TYPE:
 			set_ship(value)
 			if IS_MAIN_PLAYER:
 				GlobalSignals.close_current_ui.emit()
@@ -101,11 +104,10 @@ func _physics_process(delta: float) -> void:
 		handle_movement(delta)
 		camera_zoom_out(delta)
 		
-		if !g.PlayerInfo.is_empty():
-			handle_change_weapon()
-			if Input.is_action_pressed("Shoot"):
-				handle_shoot()
-			regen_power(delta)
+		handle_change_weapon()
+		if Input.is_action_pressed("Shoot"):
+			handle_shoot()
+		regen_power(delta)
 		
 		handle_reticle(delta)
 		
@@ -335,33 +337,36 @@ func handle_change_weapon(num_pressed: int = 0) -> void:
 	elif(Input.is_action_pressed("Weapon5")): num_pressed = 5
 	
 	if num_pressed != 0:
-		g.PlayerInfo["current_weapon"] = num_pressed
+		PlayerData.set_prop(PlayerData.Property.CURRENT_HOTBAR_SLOT, num_pressed)
 		
 		handle_shoot()
 
 func handle_shoot() -> void:
 	if alive and g.can_perform_actions and not g.is_mouse_over_menu() and monitorable:
+		var index: int = PlayerData.get_prop(PlayerData.Property.CURRENT_HOTBAR_SLOT)
+		var weapon_data: WeaponRuntimeData = PlayerData.get_hotbar_weapon(index)
+		if !weapon_data: # We dont have such index
+			return
 		
-		var index: int = g.PlayerInfo.current_weapon
-		var power_usage: float = g.PlayerInfo.weapons[index].power_usage
-		var current_power: float = g.PlayerInfo.current_power
-		var shoot_delay: int = g.PlayerInfo.weapons[index].shoot_delay
-		var last_shot: int = g.PlayerInfo.weapons[index].last_shot
+		var power_usage: float = weapon_data.get_prop(PlayerData.WeaponProperty.POWER_USAGE)
+		var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
+		var shoot_delay: int = weapon_data.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY)
+		var last_shot: int = weapon_data.get_prop(PlayerData.WeaponProperty.LAST_SHOT)
 		
-		var t = Time.get_ticks_msec()
+		var t: int = Time.get_ticks_msec()
 		if current_power >= power_usage && t - shoot_delay > last_shot:
 			current_power -= power_usage
 			last_shot = t
 			
-			g.PlayerInfo.current_power = current_power
-			g.PlayerInfo.weapons[index].last_shot = last_shot
+			PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
+			weapon_data.set_prop(PlayerData.WeaponProperty.LAST_SHOT, last_shot)
 			
 			g.player_shoot.emit(index)
 
 func regen_power(delta) -> void:
-	var current_power = g.PlayerInfo.current_power
-	var max_power = g.PlayerInfo.max_power
-	var power_regen_rate = g.PlayerInfo.power_regen_rate
+	var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
+	var max_power = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value
+	var power_regen_rate = StatManager.my_stats.get_stat(Stats.TYPE.POWER_REGEN).value
 	
 	if current_power < max_power:
 		var percentage_of_max = current_power / max_power
@@ -369,7 +374,7 @@ func regen_power(delta) -> void:
 		
 		current_power += (delta * pow(PI, 3)) * power_regen_multiplier * max(1, pow(power_regen_rate, 1.0/4.0))
 	current_power = min(current_power, max_power)
-	g.PlayerInfo.current_power = current_power
+	PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
 
 var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:
@@ -389,12 +394,13 @@ func camera_zoom_out(delta: float) -> void:
 	camera.set_offset(camera_offset)
 	GlobalSignals.emit_signal("camera_offset", camera_offset)
 
-func set_ship(new_ship_name: String):
-	if new_ship_name == ship.name: return
+func set_ship(new_ship_type: ShipManager.ShipType):
+	if is_instance_valid(ship) and new_ship_type == ship.ship_type: return
 	
-	var new_ship: ShipComponent = ShipManager.get_ship(new_ship_name)
+	var new_ship: ShipComponent = ShipManager.get_ship(new_ship_type)
 	if new_ship == null: return
-	ship.queue_free()
+	if is_instance_valid(ship):
+		ship.queue_free()
 	add_child(new_ship)
 	ship = new_ship
 	engine = ship.engine

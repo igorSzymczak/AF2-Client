@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk28uwmclcsh3"]
+[gd_scene format=3 uid="uid://dk28uwmclcsh3"]
 
-[ext_resource type="Script" path="res://scenes/entities/ship.gd" id="1_cibfv"]
+[ext_resource type="Script" uid="uid://cvlorbrrafv1y" path="res://scenes/entities/ship.gd" id="1_cibfv"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="2_vm24s"]
 [ext_resource type="Texture2D" uid="uid://kpp12e5gu50h" path="res://assets/ships/shiptemp.png" id="3_t5ieg"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_d82u2"]
@@ -14,46 +14,40 @@
 radius = 12.0
 height = 74.0
 
-[node name="Ship" type="CharacterBody2D"]
+[node name="Ship" type="CharacterBody2D" unique_id=201457585]
 script = ExtResource("1_cibfv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1505297487]
 shape = SubResource("CircleShape2D_35uua")
 
-[node name="Engine" parent="." instance=ExtResource("2_vm24s")]
+[node name="Engine" parent="." unique_id=380267990 instance=ExtResource("2_vm24s")]
 position = Vector2(-28, -2.50111e-12)
 
-[node name="Ship" type="Sprite2D" parent="."]
+[node name="Ship" type="Sprite2D" parent="." unique_id=241714538]
 position = Vector2(16, -2.50111e-12)
 rotation = 1.57079
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_t5ieg")
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_d82u2")]
-top_level = true
-MAX_SHIELD = 1000.0
-SHIELD_REGEN_VALUE = 20.0
-SHIELD_REGEN_BOOST = 2.0
-MAX_HEALTH = 1000.0
+[node name="HealthComponent" parent="." unique_id=381951201 instance=ExtResource("4_d82u2")]
 
-[node name="HealthBar" parent="HealthComponent" instance=ExtResource("5_ks1ce")]
+[node name="HealthBar" parent="HealthComponent" unique_id=1402312023 instance=ExtResource("5_ks1ce")]
 offset_left = -48.0
 offset_top = 40.0
 offset_right = 48.0
 offset_bottom = 48.0
 metadata/_edit_use_anchors_ = true
 
-[node name="ShieldBar" parent="HealthComponent" instance=ExtResource("6_nw45n")]
+[node name="ShieldBar" parent="HealthComponent" unique_id=2093606436 instance=ExtResource("6_nw45n")]
 offset_left = -48.0
 offset_top = 29.0
 offset_right = 48.0
 offset_bottom = 37.0
 metadata/_edit_use_anchors_ = true
 
-[node name="HitboxComponent" parent="." instance=ExtResource("7_0u1l0")]
-team = 101
+[node name="HitboxComponent" parent="." unique_id=462722193 instance=ExtResource("7_0u1l0")]
 
-[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="HitBox" type="CollisionShape2D" parent="HitboxComponent" unique_id=131275457]
 position = Vector2(13, 0)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_3g0ym")

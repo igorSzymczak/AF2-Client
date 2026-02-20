@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cude02rftdri2"]
+[gd_scene format=3 uid="uid://cude02rftdri2"]
 
 [ext_resource type="Script" uid="uid://btv1aevr31n4a" path="res://scenes/items/item.gd" id="1_lml6x"]
 [ext_resource type="Texture2D" uid="uid://boj5mmfd21ob4" path="res://assets/items/i (6).png" id="2_ugwvm"]
@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_lml6x"]
 radius = 30.0
 
-[node name="BionicImplant" type="Area2D"]
+[node name="BionicImplant" type="Area2D" unique_id=191194260]
 collision_layer = 32
 collision_mask = 16
 monitoring = false
@@ -15,9 +15,9 @@ code = 5
 display_name = "Bionic Implant"
 metadata/_custom_type_script = "uid://btv1aevr31n4a"
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=287418061]
 scale = Vector2(0.66666657, 0.6666667)
 texture = ExtResource("2_ugwvm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1866404501]
 shape = SubResource("CircleShape2D_lml6x")

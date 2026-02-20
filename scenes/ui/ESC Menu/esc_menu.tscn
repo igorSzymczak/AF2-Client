@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://duauim31qmjgx"]
+[gd_scene format=3 uid="uid://duauim31qmjgx"]
 
 [ext_resource type="Script" uid="uid://r4y27slkx28s" path="res://scenes/ui/ESC Menu/esc_menu.gd" id="1_uv064"]
 [ext_resource type="Script" uid="uid://cmoyxgwcnrsb1" path="res://scenes/ui/ESC Menu/sections/main.gd" id="2_8nhoy"]
@@ -14,7 +14,7 @@ bg_color = Color(0, 0, 0, 0.784314)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xvjfu"]
 
-[node name="ESCMenu" type="Control"]
+[node name="ESCMenu" type="Control" unique_id=1389861356]
 z_index = 20
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 3
@@ -24,7 +24,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 script = ExtResource("1_uv064")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1836170822]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yt3jc")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1896693311]
 clip_contents = true
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -41,11 +41,11 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="Main" type="Control" parent="PanelContainer/MarginContainer"]
+[node name="Main" type="Control" parent="PanelContainer/MarginContainer" unique_id=2252168]
 layout_mode = 2
 script = ExtResource("2_8nhoy")
 
-[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main" unique_id=1206010244]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -53,21 +53,21 @@ offset_bottom = 80.0
 grow_horizontal = 2
 size_flags_vertical = 0
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Top"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Top" unique_id=1224061488]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 
-[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Top"]
+[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Top" unique_id=508072071]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Your Nickname"
 horizontal_alignment = 1
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Main/Top"]
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Main/Top" unique_id=1750296103]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="NicknameInput" type="LineEdit" parent="PanelContainer/MarginContainer/Main/Top"]
+[node name="NicknameInput" type="LineEdit" parent="PanelContainer/MarginContainer/Main/Top" unique_id=1412386612]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -78,7 +78,7 @@ max_length = 15
 expand_to_text_length = true
 script = ExtResource("3_lsuid")
 
-[node name="Center" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+[node name="Center" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main" unique_id=980322517]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -92,62 +92,62 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Center"]
+[node name="Menu" type="Label" parent="PanelContainer/MarginContainer/Main/Center" unique_id=1664715882]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Menu"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Main/Center"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Main/Center" unique_id=310356848]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="ReturnButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="ReturnButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=1971792996 instance=ExtResource("2_lop0p")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Return"
 
-[node name="ShipButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="ShipButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=925133556 instance=ExtResource("2_lop0p")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Ship"
 
-[node name="SettingsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="SettingsButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=564295280 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Settings"
 
-[node name="KeybindsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="KeybindsButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=740418351 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Keybinds"
 
-[node name="ShopButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="ShopButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=533807643 instance=ExtResource("2_lop0p")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Shop"
 
-[node name="WeaponsButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="WeaponsButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=1114163206 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Weapons"
 
-[node name="CargoButton" parent="PanelContainer/MarginContainer/Main/Center" instance=ExtResource("2_lop0p")]
+[node name="CargoButton" parent="PanelContainer/MarginContainer/Main/Center" unique_id=463211013 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Cargo"
 
-[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main"]
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Main" unique_id=2075995556]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -160,22 +160,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="QuitButton" parent="PanelContainer/MarginContainer/Main/Bottom" instance=ExtResource("2_lop0p")]
+[node name="QuitButton" parent="PanelContainer/MarginContainer/Main/Bottom" unique_id=477266566 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Exit Game"
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Bottom"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Main/Bottom" unique_id=2078269581]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 
-[node name="Settings" type="Control" parent="PanelContainer/MarginContainer"]
+[node name="Settings" type="Control" parent="PanelContainer/MarginContainer" unique_id=1317715716]
 visible = false
 layout_mode = 2
 script = ExtResource("5_72kll")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Settings"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Settings" unique_id=1545351618]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -187,100 +187,100 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_xvjfu")
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer"]
+[node name="Top" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer" unique_id=537348233]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
-[node name="Sound" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="Sound" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" unique_id=312477001]
 layout_mode = 2
 
-[node name="SoundSettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="SoundSettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=226096138]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Audio
 "
 horizontal_alignment = 1
 
-[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=409240438]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=1736998375]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
+[node name="MusicVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=2144874726 instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Music"
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=539250153]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=1518157887]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "SFX Volume"
 horizontal_alignment = 1
 
-[node name="SFXVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
+[node name="SFXVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=987684089 instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Effects"
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=818424406]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="InterfaceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="InterfaceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=31938137]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Interface Volume"
 horizontal_alignment = 1
 
-[node name="InterfaceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
+[node name="InterfaceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=1801661735 instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Interface"
 
-[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="Separator3" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=920364230]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="AmbienceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound"]
+[node name="AmbienceVolumeLabel" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=664777577]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Ambience Volume"
 horizontal_alignment = 1
 
-[node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" instance=ExtResource("6_77mv8")]
+[node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=2101201973 instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
 bus_name = "Interface"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" unique_id=1522443754]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Gameplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top"]
+[node name="Gameplay" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" unique_id=343236765]
 layout_mode = 2
 
-[node name="GameplaySettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+[node name="GameplaySettings" type="Label" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay" unique_id=1651794389]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Gameplay"
 horizontal_alignment = 1
 
-[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+[node name="Separator" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay" unique_id=1540026909]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="DisableMouseAim" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+[node name="DisableMouseAim" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay" unique_id=505637136]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -294,11 +294,11 @@ alignment = 1
 icon_alignment = 1
 expand_icon = true
 
-[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+[node name="Separator2" type="Control" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay" unique_id=636568862]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Reticle" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay"]
+[node name="Reticle" type="CheckBox" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Gameplay" unique_id=1289075271]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
@@ -313,7 +313,7 @@ alignment = 1
 icon_alignment = 1
 expand_icon = true
 
-[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings"]
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Settings" unique_id=653131860]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -326,17 +326,17 @@ size_flags_horizontal = 3
 size_flags_vertical = 10
 alignment = 2
 
-[node name="ReturnToMainButton" parent="PanelContainer/MarginContainer/Settings/Bottom" instance=ExtResource("2_lop0p")]
+[node name="ReturnToMainButton" parent="PanelContainer/MarginContainer/Settings/Bottom" unique_id=1497490485 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Return"
 
-[node name="Keybinds" type="Control" parent="PanelContainer/MarginContainer"]
+[node name="Keybinds" type="Control" parent="PanelContainer/MarginContainer" unique_id=524156632]
 visible = false
 layout_mode = 2
 script = ExtResource("7_d6wb6")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Keybinds"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/Keybinds" unique_id=120385404]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -344,43 +344,43 @@ anchor_bottom = 0.926
 offset_bottom = -56.4401
 grow_horizontal = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer" unique_id=93015621]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Keybinds" type="Label" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+[node name="Keybinds" type="Label" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer" unique_id=925979208]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Keybinds"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer" unique_id=1167926885]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+[node name="Separator4" type="Control" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer" unique_id=1530832927]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer"]
+[node name="ActionList" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer" unique_id=1807321649]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="KeybindButton" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+[node name="KeybindButton" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" unique_id=234583861 instance=ExtResource("8_0ibdm")]
 layout_mode = 2
 
-[node name="KeybindButton2" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+[node name="KeybindButton2" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" unique_id=2134767024 instance=ExtResource("8_0ibdm")]
 layout_mode = 2
 
-[node name="KeybindButton3" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+[node name="KeybindButton3" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" unique_id=1102697233 instance=ExtResource("8_0ibdm")]
 layout_mode = 2
 
-[node name="KeybindButton4" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" instance=ExtResource("8_0ibdm")]
+[node name="KeybindButton4" parent="PanelContainer/MarginContainer/Keybinds/ScrollContainer/VBoxContainer/ActionList" unique_id=175016501 instance=ExtResource("8_0ibdm")]
 layout_mode = 2
 
-[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds"]
+[node name="Bottom" type="VBoxContainer" parent="PanelContainer/MarginContainer/Keybinds" unique_id=1090943005]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -389,13 +389,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ResetButton" parent="PanelContainer/MarginContainer/Keybinds/Bottom" instance=ExtResource("2_lop0p")]
+[node name="ResetButton" parent="PanelContainer/MarginContainer/Keybinds/Bottom" unique_id=1205952779 instance=ExtResource("2_lop0p")]
 z_index = 20
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Reset to Default"
 
-[node name="ReturnToMainButton2" parent="PanelContainer/MarginContainer/Keybinds/Bottom" instance=ExtResource("2_lop0p")]
+[node name="ReturnToMainButton2" parent="PanelContainer/MarginContainer/Keybinds/Bottom" unique_id=551505490 instance=ExtResource("2_lop0p")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Return"

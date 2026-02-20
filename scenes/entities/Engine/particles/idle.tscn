@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://u2byke68jilv"]
+[gd_scene format=3 uid="uid://u2byke68jilv"]
 
 [ext_resource type="Texture2D" uid="uid://csoo1j28sqnm0" path="res://assets/particles/Thrust Particle 1.png" id="1_sbfij"]
 
@@ -25,6 +25,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 8.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 angle_max = 360.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
@@ -38,9 +39,9 @@ scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_foe4m")
 alpha_curve = SubResource("CurveTexture_cggpy")
 
-[node name="Idle" type="GPUParticles2D"]
+[node name="Idle" type="GPUParticles2D" unique_id=1682333538]
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_kcq65")
 texture = ExtResource("1_sbfij")
 speed_scale = 2.0
 visibility_rect = Rect2(-500, -500, 1000, 1000)
+process_material = SubResource("ParticleProcessMaterial_kcq65")

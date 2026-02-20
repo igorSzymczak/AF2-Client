@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bv42bbyy7yfb0" path="res://assets/ships/Nexar Carrier/Nexar Carrier.png" id="1_nsvxk"]
 [ext_resource type="Texture2D" uid="uid://rlkmw647k61o" path="res://assets/ships/Nexar Carrier/Nexar Carrier Lights.png" id="2_0tqap"]
-[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ship_component.gd" id="2_sop6d"]
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="2_sop6d"]
 [ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_5vwwt"]
 [ext_resource type="Script" uid="uid://b2fj1p6p575ph" path="res://assets/ships/Nexar Carrier/Animation.gd" id="3_pih7l"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_6x0v7"]
@@ -37,6 +37,7 @@ rotation = 1.5708
 texture = ExtResource("1_nsvxk")
 script = ExtResource("2_sop6d")
 engine = NodePath("Engine")
+ship_type = 1
 ship_name = "Nexar Carrier"
 health = 8
 armor = 7

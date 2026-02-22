@@ -3,6 +3,8 @@ extends Node2D
 @onready var bullet_manager: Node2D = $BulletManager
 var structures: Array[Structure]
 
+@onready var environment: WorldEnvironment = %WorldEnvironment
+
 func get_structure(structure_name: String) -> Structure:
 	for structure: Structure in structures:
 		if structure.structure_name == structure_name:

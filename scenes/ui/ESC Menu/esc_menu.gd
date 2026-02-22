@@ -6,121 +6,98 @@ extends Control
 @onready var keybinds_section = $PanelContainer/MarginContainer/Keybinds
 
 @onready var current_section: Control = main_section
-@onready var default_section_pos_x: float = 30.0
+var next_section: Control
+var previous_section: Control
+@onready var padding: float = 30.0
 func _ready():
 	position.x = -menu_width
 	main_section.show()
-	settings_section.hide()
 
-func _process(delta):
-	play_current_animation(delta)
-
-var animation_finished = true
-var selected_animation = null
 func select_animation(animation_name: String):
 	if animation_name == "open":
-		selected_animation = "open"
-		animation_finished = false
-		current_section.hide()
-		main_section.show()
+		#hide_section(current_section)
+		show_self()
 	elif animation_name == "close":
-		selected_animation = "close"
-		animation_finished = false
+		hide_self()
 	elif animation_name == "settings":
-		if current_section != settings_section and animation_finished:
-			selected_animation = "settings"
-			animation_finished = false
+		next_section = settings_section
+		hide_section(current_section)
+		show_section(next_section)
 	elif animation_name == "keybinds":
-		if current_section != keybinds_section and animation_finished:
-			selected_animation = "keybinds"
-			animation_finished = false
+		next_section = keybinds_section
+		hide_section(current_section)
+		show_section(next_section)
 	elif animation_name == "weapons":
 		GlobalSignals.close_current_ui.emit()
 		GlobalSignals.open_ui.emit("weapon_change")
-		selected_animation = "close"
-		animation_finished = false
+		hide_section(current_section)
+		hide_self()
 	elif animation_name == "main":
-		if current_section != main_section and animation_finished:
-			selected_animation = "main"
-			animation_finished = false
+		next_section = main_section
+		hide_section(current_section)
+		show_section(next_section)
 	elif animation_name == "cargo":
 		GlobalSignals.open_ui.emit("cargo")
-		selected_animation = "close"
-		animation_finished = false
+		hide_section(current_section)
+		hide_self()
 
-func play_current_animation(delta: float):
-	if !animation_finished:
-		if selected_animation == "open":
-			show()
-			current_section.hide()
-			current_section = main_section
-			current_section.show()
-			position.x = lerpf(position.x, 0.0, delta * 10)
-			if position.x >= -1:
-				position.x = 0
-				animation_finished = true
-		elif selected_animation == "close":
-			position.x = lerpf(position.x, -menu_width, delta * 10)
-			if position.x <= -menu_width + 1:
-				position.x = - menu_width
-				animation_finished = true
-				hide()
-		elif selected_animation == "settings":
-			hide_current_and_show(delta, settings_section)
-		elif selected_animation == "keybinds":
-			hide_current_and_show(delta, keybinds_section)
-		elif selected_animation == "main":
-			hide_current_and_show(delta, main_section)
+func hide_section(section: Control) -> void:
+	if section == null:
+		return
+	
+	var final_x: float = -menu_width + padding * 2.0
+	if next_section:
+		if next_section.animation_index < section.animation_index:
+			final_x = menu_width
+	
+	var tween: Tween = create_tween()
+	tween.tween_property(section, "position", Vector2(final_x, padding), 0.1)
+	await tween.finished
+	section.hide()
+	
+	previous_section = section
 
-var hide_show_finished = true
-func hide_current_and_show(delta, selected_section: Control):
-	if selected_section.animation_index >= current_section.animation_index: 
-		# Swipe everything to Left
-		if hide_show_finished:
-			hide_show_finished = false
-			selected_section.show()
-			current_section.position.x = default_section_pos_x
-			current_section.modulate.a = 1.0
-			selected_section.modulate.a = 0.0
-		
-		current_section.position.x = lerpf(current_section.position.x, - menu_width, delta * 10)
-		current_section.modulate.a = lerpf(selected_section.modulate.a, 0.0, delta * 10)
-		
-		selected_section.modulate.a = lerpf(selected_section.modulate.a, 1.0, delta * 10)
-		
-		if selected_section.modulate.a >= 0.99:
-			animation_finished = true
-			hide_show_finished = true
-			current_section.position.x = default_section_pos_x
-			current_section.hide()
-			current_section.modulate.a = 1.0
-			selected_section.modulate.a = 1.0
-			
-			current_section = selected_section
-			
-	elif selected_section.animation_index < current_section.animation_index:
-		# Swipe everything to Right
-		if hide_show_finished:
-			hide_show_finished = false
-			selected_section.show()
-			current_section.position.x = default_section_pos_x
-			current_section.modulate.a = 1.0
-			selected_section.modulate.a = 0.0
-		
-		current_section.position.x = lerpf(current_section.position.x, menu_width, delta * 10)
-		current_section.modulate.a = lerpf(selected_section.modulate.a, 0.0, delta * 10)
-		
-		selected_section.modulate.a = lerpf(selected_section.modulate.a, 1.0, delta * 10)
-		
-		if selected_section.modulate.a >= 0.99:
-			animation_finished = true
-			hide_show_finished = true
-			current_section.position.x = default_section_pos_x
-			current_section.hide()
-			current_section.modulate.a = 1.0
-			selected_section.modulate.a = 1.0
-			
-			current_section = selected_section
+func hide_self() -> void:
+	hide_section(current_section)
+	var width: float = menu_width
+	
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "position", Vector2(-width, 0.0), 0.1)
+	await tween.finished
+	hide()
+
+func show_self() -> void:
+	current_section = main_section
+	
+	main_section.position = Vector2(padding, padding)
+	main_section.show()
+	show()
+	
+	var tween: Tween = create_tween()
+	tween.tween_property(self, "position", Vector2.ZERO, 0.1)
+	await tween.finished
+	show()
+	main_section.show()
+
+func show_section(section: Control) -> void:
+	if section == null:
+		return
+	next_section = null
+	current_section = section
+	
+	var final_x: float = -menu_width + padding * 2.0
+	if previous_section:
+		if previous_section.animation_index < section.animation_index:
+			final_x = menu_width
+	
+	section.show()
+	section.position = Vector2(final_x, padding)
+	var tween: Tween = create_tween()
+	tween.tween_property(section, "position", Vector2(padding, padding), 0.1)
+	await tween.finished
+	section.show()
+	
+	previous_section = null
 
 func _on_settings_button_button_down(): select_animation("settings")
 func _on_keybinds_button_pressed():select_animation("keybinds")

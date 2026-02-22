@@ -1,0 +1,24 @@
+[gd_resource type="Environment" format=3 uid="uid://cyyajkc4r8ovc"]
+
+[resource]
+background_mode = 3
+background_energy_multiplier = 2.07
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_exposure = 0.7
+ssao_intensity = 4.96
+ssao_light_affect = 0.28
+ssao_ao_channel_affect = 0.6
+ssil_radius = 16.0
+ssil_intensity = 11.31
+glow_enabled = true
+glow_levels/1 = 1.12
+glow_levels/2 = 0.61
+glow_levels/3 = 0.25
+glow_levels/4 = 0.62
+glow_levels/6 = 0.25
+glow_bloom = 0.6
+volumetric_fog_density = 0.0
+adjustment_enabled = true
+adjustment_saturation = 1.11

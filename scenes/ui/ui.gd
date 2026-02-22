@@ -11,11 +11,11 @@ extends CanvasLayer
 
 
 func _ready():
-	GlobalSignals.connect("set_ui", set_to)
-	GlobalSignals.connect("open_ui", open_ui)
-	GlobalSignals.connect("close_current_ui", close_current)
-	GlobalSignals.connect("close_all_ui", close_all)
-	GlobalSignals.connect("set_ui_args", set_current_args)
+	GlobalSignals.set_ui.connect(set_to)
+	GlobalSignals.open_ui.connect(open_ui)
+	GlobalSignals.close_current_ui.connect(close_current)
+	GlobalSignals.close_all_ui.connect(close_all)
+	GlobalSignals.set_ui_args.connect(set_current_args)
 	
 	#_print_queue()
 

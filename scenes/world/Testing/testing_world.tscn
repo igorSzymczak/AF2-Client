@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cmkjgrpsd0642" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
 [ext_resource type="AudioStream" uid="uid://da4t5kutoglbb" path="res://audio/music/Adelante.ogg" id="4_i1nhf"]
 [ext_resource type="Script" uid="uid://woltbir3fg30" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
+[ext_resource type="Environment" uid="uid://cyyajkc4r8ovc" path="res://scenes/world/Testing/environment.tres" id="5_m5ugb"]
 [ext_resource type="AudioStream" uid="uid://dq41yeii32aig" path="res://audio/music/Limit.ogg" id="5_sjcft"]
 [ext_resource type="AudioStream" uid="uid://biekh5d4blwxn" path="res://audio/music/Metal.ogg" id="6_76tyi"]
 [ext_resource type="AudioStream" uid="uid://dc3br4apparek" path="res://audio/music/Pendulum.ogg" id="7_grnjj"]
@@ -50,29 +51,6 @@ shader_parameter/speed2 = 0.2
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ngnn3"]
 size = Vector2(1000, 1000)
-
-[sub_resource type="Environment" id="Environment_55vx4"]
-background_mode = 3
-background_energy_multiplier = 2.07
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 0.7
-ssao_intensity = 4.96
-ssao_light_affect = 0.28
-ssao_ao_channel_affect = 0.6
-ssil_radius = 16.0
-ssil_intensity = 11.31
-glow_enabled = true
-glow_levels/1 = 1.12
-glow_levels/2 = 0.61
-glow_levels/3 = 0.25
-glow_levels/4 = 0.62
-glow_levels/6 = 0.25
-glow_bloom = 0.6
-volumetric_fog_density = 0.0
-adjustment_enabled = true
-adjustment_saturation = 1.11
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mauus"]
 streams_count = 5
@@ -255,7 +233,8 @@ script = ExtResource("3_28mi7")
 metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=782538449]
-environment = SubResource("Environment_55vx4")
+unique_name_in_owner = true
+environment = ExtResource("5_m5ugb")
 
 [node name="Soundtrack" type="AudioStreamPlayer2D" parent="." unique_id=749772158]
 stream = SubResource("AudioStreamRandomizer_mauus")

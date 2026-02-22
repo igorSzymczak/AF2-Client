@@ -133,10 +133,10 @@ func update_shader(delta: float) -> void:
 	
 	
 	if is_sun:
-		sprite.rotate(delta * 0.03)
+		#sprite.rotate(delta * 0.03)
 		shader_offset += Vector2(delta, delta) * 0.03
 	else:
-		sprite.rotate(angle_to_rotate * -2)
+		#sprite.rotate(angle_to_rotate * -2)
 		shader_offset += Vector2(angle_to_rotate, 0) * 10.0
 	
 	sprite.material.set_shader_parameter("texture_offset", shader_offset)
@@ -146,7 +146,6 @@ func update_shader(delta: float) -> void:
 	var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
 	var t = (distance_to_sun_squared - 100000) / 100000
 	var light_z = atan(t) - 1
-	
 	
 	var angle_to_sun = sprite.global_position.direction_to(local_sun.global_position)
 	

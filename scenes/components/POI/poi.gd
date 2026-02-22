@@ -11,6 +11,7 @@ enum TYPE {
 	SUN,
 	ITEM,
 	RECYCLE_STATION,
+	WEAPON_FACTORY
 }
 
 var id: int

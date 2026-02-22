@@ -21,6 +21,8 @@ func create_poi_icon(type: POI.TYPE) -> Node2D:
 		POI.TYPE.SUN: return load("res://scenes/ui/POI Icons/sun_icon.tscn").instantiate()
 		POI.TYPE.ITEM: return load("res://scenes/ui/POI Icons/item_icon.tscn").instantiate()
 		POI.TYPE.RECYCLE_STATION: return load("res://scenes/ui/POI Icons/recycle_station_icon.tscn").instantiate()
+		POI.TYPE.WEAPON_FACTORY: return load("res://scenes/ui/POI Icons/weapon_factory_icon.tscn").instantiate()
+		
 	return null
 
 func get_related_position(initial_position: Vector2, relative_position: Vector2, zoom: float = 1.0) -> Vector2:

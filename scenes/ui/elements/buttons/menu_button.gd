@@ -34,4 +34,3 @@ func handle_hover(delta: float):
 			if underline.size.x <= button_width * 0.01:
 				underline.size.x = 0
 				currently_underlined = false
-	

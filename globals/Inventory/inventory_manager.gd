@@ -34,12 +34,6 @@ var currencies: Dictionary[Currency, int] = {
 	Currency.IRIDIUM: 0,
 }
 
-var flux: int = 0
-var steel: int = 0
-var hydrogen_crystals: int = 0
-var plasma_fluids: int = 0
-var iridium: int = 0
-
 var cargo: Dictionary[Item.Code, int] = {}
 
 func try_eject_cargo(_user_id: int) -> void:
@@ -73,6 +67,16 @@ func _handle_set_item(code: int, amount: int):
 signal recycled_currencies(recycled_currencies: Dictionary[Currency, int])
 func _handle_curriencies_recycled_gained(currencies_gained: Dictionary[int, int]):
 	recycled_currencies.emit(currencies_gained as Dictionary[Currency, int])
+
+func can_afford_costs(costs: Dictionary[InventoryManager.Currency, int]) -> bool:
+	if costs.is_empty(): return true
+	
+	for currency in costs:
+		var value: int = costs[currency]
+		if get_currency(currency) < value:
+			return false
+	
+	return true
 
 @rpc("authority", "call_remote", "reliable")
 func _set_currency(currency: int, value: int):

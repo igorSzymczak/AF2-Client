@@ -28,7 +28,6 @@ var props: Dictionary[Property, Variant] = {
 
 signal loaded()
 signal prop_changed(prop: Property, value: Variant)
-signal arsenal_weapon_changed(weapon_type, prop, value)
 signal hotbar_weapon_changed(slot, prop, value)
 
 func set_prop(prop: Property, value: Variant) -> void:
@@ -96,11 +95,6 @@ func from_dict(data: Dictionary) -> void:
 
 func add_arsenal_weapon(weapon_type: WeaponManager.Type, weapon_data: WeaponRuntimeData) -> void:
 	props[Property.ARSENAL][weapon_type] = weapon_data
-	
-	weapon_data.prop_changed.connect(
-		func(prop, value):
-			arsenal_weapon_changed.emit(weapon_type, prop, value)
-	)
 
 func get_arsenal_weapon(weapon_type: WeaponManager.Type) -> WeaponRuntimeData:
 	if !props[Property.ARSENAL].has(weapon_type):

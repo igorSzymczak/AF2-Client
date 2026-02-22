@@ -2,9 +2,20 @@
 
 [ext_resource type="Script" uid="uid://cmdnnciy8e564" path="res://scenes/ui/Structure Menu/structure_menu.gd" id="1_blcxh"]
 [ext_resource type="Script" uid="uid://dwps7pgymqpy7" path="res://scenes/ui/Structure Menu/sections/main.gd" id="2_wmips"]
-[ext_resource type="Script" uid="uid://bimomotbtpim2" path="res://scenes/ui/Structure Menu/sections/Ships.gd" id="4_b2287"]
+[ext_resource type="Script" uid="uid://bimomotbtpim2" path="res://scenes/ui/Structure Menu/sections/Ships/Ships.gd" id="4_b2287"]
 [ext_resource type="PackedScene" uid="uid://dbwuqf2oql4bi" path="res://scenes/ui/elements/buttons/menu_button.tscn" id="4_m1e70"]
 [ext_resource type="Script" uid="uid://bi1od12cca7v" path="res://scenes/ui/Structure Menu/sections/Recycling/recycling.gd" id="5_wje8e"]
+[ext_resource type="Script" uid="uid://du8bruokgs02r" path="res://scenes/ui/Structure Menu/sections/WeaponFactory/weapon_factory.gd" id="6_jn3te"]
+[ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="6_wje8e"]
+[ext_resource type="Script" uid="uid://cp8d3vyb0c4tq" path="res://scenes/ui/Structure Menu/sections/WeaponFactory/weapon_factory_right_panel.gd" id="8_iwwpk"]
+[ext_resource type="Script" uid="uid://s5wmfxf4n8p0" path="res://scenes/ui/Weapon Element/weapon_element.gd" id="8_wbhhh"]
+[ext_resource type="Texture2D" uid="uid://bqvkdsw678u54" path="res://assets/ui/inventory/flux.png" id="10_prqev"]
+[ext_resource type="Texture2D" uid="uid://cpjj8oaj1f7pc" path="res://assets/ui/inventory/steel.png" id="11_o627u"]
+[ext_resource type="Texture2D" uid="uid://wcdd1ygbse85" path="res://assets/ui/inventory/hydrogen_crystals.png" id="12_dv668"]
+[ext_resource type="Texture2D" uid="uid://ddtwfkxlvu0bi" path="res://assets/ui/inventory/plasma_fluids.png" id="13_irre1"]
+[ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="14_afcyn"]
+[ext_resource type="Script" uid="uid://dkrfatcxwvxnq" path="res://scenes/ui/elements/buttons/menu_button.gd" id="15_o627u"]
+[ext_resource type="Script" uid="uid://mbcywag0ibsg" path="res://scenes/ui/Structure Menu/sections/Ships/ships_right.gd" id="16_dv668"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -43,6 +54,117 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwwpk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j8ao"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_dsfqt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfabp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 3
+border_color = Color(0.4, 0.4, 0.4, 1)
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_02lmo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prqev"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.627451, 0.298039, 1, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o627u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dv668"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o627u"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_irre1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afcyn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nkgc"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -114,10 +236,10 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_blcxh")
+metadata/_edit_lock_ = true
 
 [node name="Left" type="PanelContainer" parent="." unique_id=1132117975]
 unique_name_in_owner = true
-clip_contents = true
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 1
 anchors_preset = 9
@@ -127,6 +249,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yt3jc")
 
 [node name="MarginContainer" type="MarginContainer" parent="Left" unique_id=1800253740]
+clip_contents = true
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
@@ -187,6 +310,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Recycle Junk"
+
+[node name="WeaponFactoryButton" parent="Left/MarginContainer/Main/Center" unique_id=1308949393 instance=ExtResource("4_m1e70")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Weapon Factory"
 
 [node name="Separator" type="Control" parent="Left/MarginContainer/Main/Center" unique_id=1971435484]
 custom_minimum_size = Vector2(0, 200)
@@ -319,9 +449,852 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Return"
 
-[node name="ShipsRight" type="PanelContainer" parent="." unique_id=79903016]
+[node name="WeaponFactory" type="Control" parent="Left/MarginContainer" unique_id=1638499204 node_paths=PackedStringArray("right_panel")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 2
+script = ExtResource("6_jn3te")
+right_panel = NodePath("../../../WeaponFactoryRightPanel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Left/MarginContainer/WeaponFactory" unique_id=1922159114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Weapons" type="Label" parent="Left/MarginContainer/WeaponFactory/VBoxContainer" unique_id=1362283677]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Weapons"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Left/MarginContainer/WeaponFactory/VBoxContainer" unique_id=102949399]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Left/MarginContainer/WeaponFactory/VBoxContainer" unique_id=414401414]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Left/MarginContainer/WeaponFactory/VBoxContainer/ScrollContainer" unique_id=1645434211]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="WeaponsContainer" type="VBoxContainer" parent="Left/MarginContainer/WeaponFactory/VBoxContainer/ScrollContainer/HBoxContainer" unique_id=812896069]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="WeaponElement" parent="Left/MarginContainer/WeaponFactory/VBoxContainer/ScrollContainer/HBoxContainer/WeaponsContainer" unique_id=1772088911 instance=ExtResource("6_wje8e")]
+layout_mode = 2
+
+[node name="WeaponElement2" parent="Left/MarginContainer/WeaponFactory/VBoxContainer/ScrollContainer/HBoxContainer/WeaponsContainer" unique_id=216395399 instance=ExtResource("6_wje8e")]
+layout_mode = 2
+
+[node name="WeaponElement3" parent="Left/MarginContainer/WeaponFactory/VBoxContainer/ScrollContainer/HBoxContainer/WeaponsContainer" unique_id=125577589 instance=ExtResource("6_wje8e")]
+layout_mode = 2
+
+[node name="WeaponReturnButton" parent="Left/MarginContainer/WeaponFactory/VBoxContainer" unique_id=186329168 instance=ExtResource("4_m1e70")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Return"
+
+[node name="WeaponFactoryRightPanel" type="Control" parent="." unique_id=877026836]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 350.0
+offset_right = 6.0
+script = ExtResource("8_iwwpk")
+
+[node name="PanelContainer" type="PanelContainer" parent="WeaponFactoryRightPanel" unique_id=1433115317]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_iwwpk")
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponFactoryRightPanel/PanelContainer" unique_id=20690860]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
+
+[node name="InfoSection" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer" unique_id=1206330973]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Left" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection" unique_id=2004105392]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 52
+
+[node name="Heading" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left" unique_id=293911407]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 24
+
+[node name="IconContainer" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading" unique_id=1945030215]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="WeaponElement" type="BoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" unique_id=126238464]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("8_wbhhh")
+
+[node name="PanelContainer" type="PanelContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement" unique_id=1351309976]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6j8ao")
+
+[node name="H" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer" unique_id=1987296428]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H" unique_id=1345548016]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("ImageTexture_dsfqt")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IconLabel" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/Icon" unique_id=526571107]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_tfabp")
+text = "BL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconColor" type="ColorRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/Icon/IconLabel" unique_id=377170193]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(1, 0, 0.431373, 0.501961)
+
+[node name="InfoContainer" type="Control" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H" unique_id=1252330465]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(174, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="M" type="MarginContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer" unique_id=679198559]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="NameLabel" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer/M" unique_id=1267239699]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "Blaster"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LvlLabel" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer" unique_id=1605815795]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "lvl 0"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer" unique_id=1623291768]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
+z_index = 2
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_02lmo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_prqev")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_o627u")
+theme_override_styles/focus = SubResource("StyleBoxFlat_prqev")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading" unique_id=86401196]
+layout_mode = 2
+theme_override_constants/separation = -2
+alignment = 1
+
+[node name="WeaponName" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer" unique_id=1457370722]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Weapon Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer" unique_id=1300377883]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Kinetic" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=26606025]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.745098, 0.956863, 1)
+theme_override_font_sizes/font_size = 18
+text = "Kinetic"
+
+[node name="Plus1" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=521422659]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "+"
+
+[node name="Energy" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=759289972]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.219608, 0.219608, 1)
+theme_override_font_sizes/font_size = 18
+text = "Energy"
+
+[node name="Plus2" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=1690970515]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "+"
+
+[node name="Corrosive" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Heading/VBoxContainer/HBoxContainer" unique_id=1959823896]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.27451, 0.647059, 0.282353, 1)
+theme_override_font_sizes/font_size = 18
+text = "Corrosive"
+
+[node name="Stats" type="MarginContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left" unique_id=1186471599]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="H" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats" unique_id=1891037920]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Dmg" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1415603366]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1577421065]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Base damage :"
+
+[node name="DmgStat" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1734584766]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="DmgPoints" type="Control" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1197840187]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=929827142]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1270816494]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=128062702]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=710437086]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=727135278]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1763171498]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=864711302]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1998596009]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=194283613]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=241568617]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Rps" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1055494733]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=2086417616]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rate of fire :"
+
+[node name="RpsStat" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=616460912]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "1 RPS"
+horizontal_alignment = 1
+
+[node name="RpsPoints" type="Control" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=444546294]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=395352592]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=839208859]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1921427314]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1816543155]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1135147418]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=434471538]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=810621789]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=88840229]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=606913749]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=752370055]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Power" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1306628594]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=110152597]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Power cost :"
+
+[node name="PowerStat" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=2080386650]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "30"
+horizontal_alignment = 1
+
+[node name="PowerPoints" type="Control" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=495095783]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1674606130]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=713063524]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1038550668]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1264775260]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1039074905]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=244273024]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1773898755]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1179049749]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1874765011]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=878483365]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Range" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1206599108]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=607257892]
+custom_minimum_size = Vector2(212, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Range :"
+
+[node name="RangeStat" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=584348762]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "80"
+horizontal_alignment = 1
+
+[node name="RangePoints" type="Control" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1998032693]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+
+[node name="B1" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1111449340]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=638833818]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=991305859]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=127295802]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1569582547]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=221037748]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=328101471]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=124546725]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=323935785]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=484385794]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Description" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left" unique_id=1030127255]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Description" unique_id=1337628311]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Description"
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Description" unique_id=553449798]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+
+[node name="Description" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/Description/MarginContainer" unique_id=848595660]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at leo suscipit, venenatis ex sed, pharetra magna. Donec lobortis porta purus, eget finibus lorem mattis ut. Cras tempus finibus libero. "
+autowrap_mode = 3
+
+[node name="CostsSection" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left" unique_id=2050602587]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MaterialsLabel" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection" unique_id=464894698]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Required Materials"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection" unique_id=527992224]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="HboxContainer" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer" unique_id=1220236846]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="LeftPanel" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer" unique_id=1226702119]
+layout_mode = 2
+alignment = 1
+
+[node name="Flux" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel" unique_id=868801680]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Flux" unique_id=206286919]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("10_prqev")
+stretch_mode = 5
+
+[node name="FluxAmount" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Flux" unique_id=23933901]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Steel" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel" unique_id=2143602645]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Steel" unique_id=1129960948]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("11_o627u")
+stretch_mode = 5
+
+[node name="SteelAmount" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Steel" unique_id=1170045132]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HydrogenCrystals" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel" unique_id=124034368]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=767377301]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("12_dv668")
+stretch_mode = 5
+
+[node name="HydrogenCrystalsAmount" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=1544574563]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="PlasmaFluids" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel" unique_id=272988277]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=596668196]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("13_irre1")
+stretch_mode = 5
+
+[node name="PlasmaFluidsAmount" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=997838148]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Iridium" type="HBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel" unique_id=3946432]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Iridium" unique_id=2052093363]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("14_afcyn")
+stretch_mode = 5
+
+[node name="IridiumAmount" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/LeftPanel/Iridium" unique_id=882255062]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="RightPanel" type="VBoxContainer" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer" unique_id=453006848]
+layout_mode = 2
+alignment = 1
+
+[node name="GreenReason" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel" unique_id=76678533]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85490197, 0, 1)
+text = "Bought!"
+horizontal_alignment = 1
+
+[node name="RedReason" type="Label" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel" unique_id=281630642]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85490197, 0, 0, 1)
+text = "You are broke"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ProduceButton" type="Button" parent="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel" unique_id=996247550]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_disabled_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_dv668")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o627u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_irre1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_afcyn")
+text = "Produce"
+script = ExtResource("15_o627u")
+metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
+
+[node name="ShipsRight" type="PanelContainer" parent="." unique_id=79903016]
+unique_name_in_owner = true
+top_level = true
 clip_contents = true
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 1
@@ -329,10 +1302,11 @@ anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -174.0
+offset_left = -173.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4nkgc")
+script = ExtResource("16_dv668")
 
 [node name="MarginContainer" type="MarginContainer" parent="ShipsRight" unique_id=631252852]
 layout_mode = 2
@@ -866,7 +1840,11 @@ hover_underline_effect = false
 
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/ShipsButton" to="." method="_on_ships_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/RecyclingButton" to="." method="_on_recycling_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/Main/Center/WeaponFactoryButton" to="." method="_on_weapon_factory_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Bottom/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Ships/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Recycling/VBoxContainer/CargoReturnButton2" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/WeaponFactory/VBoxContainer/WeaponReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="Left/MarginContainer/WeaponFactory" method="_on_produce_button_pressed"]
+[connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="WeaponFactoryRightPanel" method="_on_produce_button_pressed"]
 [connection signal="pressed" from="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/SelectButton" to="." method="_on_select_button_pressed"]

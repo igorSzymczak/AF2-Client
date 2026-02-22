@@ -40,6 +40,7 @@ WeaponManager="*uid://cr5pjrwhd04dh"
 PlayerData="*uid://blvm8gqg1odw3"
 EntityManager="*uid://blw11035gvxkt"
 MapManager="*uid://5im5bfrugjyp"
+PlayerDataManager="*uid://c60cj80xqi2wq"
 
 [debug]
 

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c2mw5xrwsrxrw"]
+
+[ext_resource type="Script" uid="uid://dmwpfmer1c2m2" path="res://scenes/objects/Structures/Weapon Factory/weapon_factory.gd" id="1_8dr81"]
+
+[node name="WeaponFactory" type="Area2D" unique_id=193463019]
+script = ExtResource("1_8dr81")
+metadata/_custom_type_script = "uid://b6b0p8wsg0wxg"

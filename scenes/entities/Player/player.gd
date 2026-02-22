@@ -206,7 +206,7 @@ var speed_boost_active: bool = false : set = set_speed_boost
 var speed_boost_duration: float = 1.5 #s
 var speed_boost_delay: float = 3.0 #s
 var speed_boost_turn_speed: float = 0.2
-var last_speed_boost_time: float = 0.0 # s
+var last_speed_boost_time: float = 3.0 # s
 
 var direction := Vector2.ZERO
 

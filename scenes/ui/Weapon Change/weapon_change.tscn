@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d3sbwh6x5ryko"]
 
 [ext_resource type="Script" uid="uid://xs1jujgk5eed" path="res://scenes/ui/Weapon Change/weapon_change.gd" id="1_lfqe3"]
+[ext_resource type="Script" uid="uid://s5wmfxf4n8p0" path="res://scenes/ui/Weapon Element/weapon_element.gd" id="2_1iu4t"]
 [ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="2_eoedh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4p5cv"]
@@ -146,6 +147,39 @@ border_width_right = 5
 border_color = Color(0.690196, 0.690196, 0.690196, 0.537255)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jefry"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sas3"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_l1mp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0116"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 3
+border_color = Color(0.4, 0.4, 0.4, 1)
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hk3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c5n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.627451, 0.298039, 1, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mkaiw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_um4ts"]
 bg_color = Color(1, 1, 1, 0)
@@ -386,9 +420,116 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="WeaponElement" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" unique_id=1583273082 instance=ExtResource("2_eoedh")]
+[node name="WeaponElement" type="BoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer" unique_id=1583273082]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource("2_1iu4t")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement" unique_id=772325297]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6sas3")
+
+[node name="H" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer" unique_id=130681561]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H" unique_id=994051443]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("ImageTexture_l1mp7")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IconLabel" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/Icon" unique_id=1591534601]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_a0116")
+text = "BL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconColor" type="ColorRect" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/Icon/IconLabel" unique_id=185347430]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(1, 0, 0.431373, 0.501961)
+
+[node name="InfoContainer" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H" unique_id=458676484]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(174, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="M" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer" unique_id=1678360789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="NameLabel" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer/M" unique_id=1417152636]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "Blaster"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LvlLabel" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer/H/InfoContainer" unique_id=1606309794]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "lvl 0"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading/IconContainer/WeaponElement/PanelContainer" unique_id=1006574663]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.6)
+z_index = 2
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hk3r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5c5n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mkaiw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_v5c5n")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Heading" unique_id=1252337902]
 layout_mode = 2

@@ -5,6 +5,7 @@ extends Control
 @onready var main_section = %Main
 @onready var ships_section = %Ships
 @onready var recycling_section = %Recycling
+@onready var weapon_factory_section = %WeaponFactory
 @onready var main_structure_title = %MainStructureTitle
 
 @onready var ships_right_panel = %ShipsRight
@@ -24,15 +25,18 @@ extends Control
 @onready var select_button: BetterButton = %SelectButton
 
 @onready var recycling_button: BetterButton = %RecyclingButton
+@onready var weapon_factory_button: BetterButton = %WeaponFactoryButton
 
 @onready var default_right_panel_pos_x: float = get_viewport_rect().size.x - menu_width
 @onready var current_section: Control = main_section
 @onready var default_section_pos_x: float = 0.0
+
+@onready var weapon_factory_right_panel: Control = %WeaponFactoryRightPanel
+
 func _ready():
-	left_panel.position.x = -menu_width
+	position.x = -menu_width
 
 func _process(delta):
-	default_right_panel_pos_x = get_viewport_rect().size.x - menu_width
 	play_current_animation(delta)
 
 var args: Dictionary
@@ -41,13 +45,11 @@ var owned_ships : Array[ShipManager.ShipType]
 func set_args(new_args: Dictionary):
 	if !new_args.is_empty():
 		args = new_args
-		if args.has("name") and structure_name != args.name:
-			structure_name = args.name
-			setup_structure_name()
+		structure_name = g.me.landed_structure.structure_name
+		setup_structure_name()
 		if args.has("owned_ships") and owned_ships != args.owned_ships:
 			owned_ships = args.owned_ships
 			setup_ships_section()
-	
 
 var animation_finished = true
 var selected_animation = null
@@ -61,55 +63,57 @@ func select_animation(animation_name: String):
 		current_section = main_section
 		current_section.show()
 		hide_or_show_recycling_button()
+		hide_or_show_weapon_factory_button()
 	elif animation_name == "close":
 		selected_animation = "close"
 		animation_finished = false
+		weapon_factory_right_panel.slide_out()
+		ships_right_panel.slide_out()
 	elif animation_name == "ships":
 		if current_section != ships_section and animation_finished:
 			selected_animation = "ships"
 			animation_finished = false
-			ships_right_panel.show()
+			ships_right_panel.slide_in()
 	elif animation_name == "recycling":
 		if current_section != recycling_section and animation_finished:
 			selected_animation = "recycling"
 			animation_finished = false
 			recycling_section.load_cargo()
+	elif animation_name == "weapon_factory":
+		if current_section != weapon_factory_section and animation_finished:
+			selected_animation = "weapon_factory"
+			animation_finished = false
+			weapon_factory_section.load_weapons(args)
 	
 	elif animation_name == "main":
 		if current_section != main_section and animation_finished:
 			selected_animation = "main"
 			animation_finished = false
+		weapon_factory_right_panel.slide_out()
+		ships_right_panel.slide_out()
 
 func play_current_animation(delta: float):
 	if !animation_finished:
 		if selected_animation == "open":
-			left_panel.position.x = lerpf(left_panel.position.x, 0.0, delta * 10)
-			if left_panel.position.x >= -1:
-				left_panel.position.x = 0
+			position.x = lerpf(position.x, 0.0, delta * 10)
+			if position.x >= -1:
+				position.x = 0
 				animation_finished = true
 		elif selected_animation == "close":
-			left_panel.position.x = lerpf(left_panel.position.x, -menu_width, delta * 10)
-			if ships_right_panel.visible:
-				ships_right_panel.position.x = lerpf(ships_right_panel.position.x, default_right_panel_pos_x + menu_width, delta * 10)
-			if left_panel.position.x <= -menu_width + 1:
-				left_panel.position.x = - menu_width
-				ships_right_panel.position.x = default_right_panel_pos_x + menu_width
+			if !visible: return
+			position.x = lerpf(position.x, -menu_width, delta * 10)
+			if position.x <= -menu_width + 1:
+				position.x = - menu_width
 				animation_finished = true
-				ships_right_panel.hide()
 				hide()
 		elif selected_animation == "ships":
-			ships_right_panel.position.x = lerpf(ships_right_panel.position.x, default_right_panel_pos_x, delta * 10)
 			hide_current_and_show(delta, ships_section)
-			if ships_right_panel.position.x <= default_right_panel_pos_x + 1 or hide_show_finished == true:
-				ships_right_panel.position.x = default_right_panel_pos_x
 		elif selected_animation == "recycling":
 			hide_current_and_show(delta, recycling_section)
+		elif selected_animation == "weapon_factory":
+			hide_current_and_show(delta, weapon_factory_section)
 		elif selected_animation == "main":
 			hide_current_and_show(delta, main_section)
-			if ships_right_panel.visible:
-				ships_right_panel.position.x = lerpf(ships_right_panel.position.x, default_right_panel_pos_x + menu_width, delta * 10)
-			if ships_right_panel.position.x >= default_right_panel_pos_x + menu_width - 1 or hide_show_finished == true:
-				ships_right_panel.position.x = default_right_panel_pos_x + menu_width
 
 var hide_show_finished = true
 func hide_current_and_show(delta, selected_section: Control):
@@ -237,6 +241,12 @@ func hide_or_show_recycling_button() -> void:
 	else:
 		recycling_button.hide()
 
+func hide_or_show_weapon_factory_button() -> void:
+	if g.me.landed_structure is WeaponFactory:
+		weapon_factory_button.show()
+	else:
+		weapon_factory_button.hide()
+
 func _on_select_button_pressed():
 	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_type)
 
@@ -245,6 +255,9 @@ func _on_ships_button_pressed():
 
 func _on_recycling_button_pressed():
 	select_animation("recycling")
+
+func _on_weapon_factory_button_pressed() -> void:
+	select_animation("weapon_factory")
 
 func _on_return_button_pressed():
 	select_animation("main")

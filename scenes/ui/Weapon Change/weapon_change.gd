@@ -47,21 +47,29 @@ func _process(_delta):
 		element = hotbar_section.get_child(0)
 		element.button.grab_focus.call_deferred()
 	elif Input.is_action_just_pressed("Weapon2"):
+		if hotbar.size() < 2:
+			return
 		var element: WeaponElement = hotbar_section.get_child(1)
 		handle_click(element, true)
 		element = hotbar_section.get_child(1)
 		element.button.grab_focus.call_deferred()
 	elif Input.is_action_just_pressed("Weapon3"):
+		if hotbar.size() < 3:
+			return
 		var element: WeaponElement = hotbar_section.get_child(2)
 		handle_click(element, true)
 		element = hotbar_section.get_child(2)
 		element.button.grab_focus.call_deferred()
 	elif Input.is_action_just_pressed("Weapon4"):
+		if hotbar.size() < 4:
+			return
 		var element: WeaponElement = hotbar_section.get_child(3)
 		handle_click(element, true)
 		element = hotbar_section.get_child(3)
 		element.button.grab_focus.call_deferred()
 	elif Input.is_action_just_pressed("Weapon5"):
+		if hotbar.size() < 5:
+			return
 		var element: WeaponElement = hotbar_section.get_child(4)
 		handle_click(element, true)
 		element = hotbar_section.get_child(4)

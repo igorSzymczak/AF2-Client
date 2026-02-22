@@ -6,9 +6,9 @@ uniform float zoom;
 
 uniform float alpha: hint_range(0.0, 1.0);
 
-const int iterations = 4;
+uniform int iterations = 3;
 const float formuparam2 = 0.79;
-const float volsteps = 3.0;
+uniform float volsteps = 2.0;
 const float stepsizeOrigin = 0.290;
 const float tile = 0.35;
 uniform float speed2 = 0.2;

@@ -382,7 +382,7 @@ func camera_zoom_out(delta: float) -> void:
 	if landed_structure == null:
 		zoom_value = max(0.37, 0.42 - abs(velocity.length()) / 10000.0)
 	else:
-		zoom_value = 1
+		zoom_value = 0.8
 	var zoom_vector: Vector2 = camera.zoom.lerp(Vector2(zoom_value, zoom_value), delta)
 	
 	camera.set_zoom(zoom_vector)

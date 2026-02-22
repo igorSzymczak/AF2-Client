@@ -1,8 +1,12 @@
-shader_type canvas_item;
+ 	shader_type canvas_item;
 render_mode unshaded;
 
 const float PI2 = PI / 2.0;
 const vec3 UP = vec3(0.0, 0.0, 1.0);
+
+uniform bool filter_black = false;
+uniform float filter_alpha_mult = 1.0;
+
 
 uniform float opacity = 1.0;
 
@@ -96,6 +100,7 @@ void fragment() {
 	mat3 normal_matrix = generate_normal_matrix(normal);
 	vec3 displaced_normal = normal_matrix * input_normal;
 	
+	
 	float light_dot = smoothstep(-0.4, 0.0, dot(normal, light_normal));
 	float global_light = mix(light_minimum, light_maximum, light_dot);
 	
@@ -107,4 +112,8 @@ void fragment() {
 	float fade_texels = length(TEXTURE_PIXEL_SIZE) * fade;
 	float alpha = 1.0 - smoothstep(1.0 - fade_texels, 1.0, radius);
 	COLOR.a = alpha * input_color.a * opacity;
+	
+	float avg_color = ((input_color.r + input_color.g + input_color.b) / 3.0);
+	if (filter_black)
+		COLOR.a = COLOR.a * avg_color * filter_alpha_mult;
 }

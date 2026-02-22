@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 
 var current_world: Node2D
 var me: Player
+var user_prefs: UserPreferences = UserPreferences.load_or_create()
 
 var Structures: Dictionary[int, Dictionary] = {}
 var Players: Dictionary[int, Dictionary] = {}

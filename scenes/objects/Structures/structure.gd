@@ -17,8 +17,10 @@ const time_multiplier: float = 30
 @export var is_sun: bool = false
 @export var is_shadered: bool = false
 @export var local_sun: Structure
+@export var atmosphere: Sprite2D
 var orbit: Structure
 @onready var sprite: Sprite2D = $Sprite
+@export var sprite_low_quality: Sprite2D
 @onready var land_area: CollisionShape2D = $LandArea
 
 @onready var poi: POI = $PoiComponent
@@ -34,11 +36,13 @@ func _ready():
 	props.property_changed.connect(_handle_property_changed)
 	
 	if !is_shown:
-		$Sprite.visible = false
+		sprite.visible = false
 	
 	await AuthManager.logged_in
 	g.current_world.structures.append(self)
 	poi.label = structure_name
+	g.user_prefs.graphics_changed.connect(_on_graphics_changed)
+	_on_graphics_changed(g.user_prefs.graphics)
 
 func _process(delta: float) -> void:
 	set_safezone()
@@ -46,6 +50,45 @@ func _process(delta: float) -> void:
 	self_orbit(delta)
 	update_shader(delta)
 	handle_landing(delta)
+
+func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
+	if graphics == UserPreferences.Graphics.HIGH:
+		switch_to_high_quality()
+	elif graphics == UserPreferences.Graphics.MEDIUM:
+		if sprite.scale.x > 0.5:
+			switch_to_low_quality()
+		else:
+			switch_to_high_quality()
+	elif graphics <= UserPreferences.Graphics.LOW:
+		switch_to_low_quality()
+
+func switch_to_low_quality() -> void:
+	is_shadered = false
+	if is_shown:
+		if sprite_low_quality:
+			sprite.hide()
+			sprite_low_quality.show()
+		else:
+			# No low quality model, so stay with regular sprite
+			sprite.show()
+	else:
+		sprite.hide()
+		if sprite_low_quality:
+			sprite_low_quality.hide()
+
+func switch_to_high_quality() -> void:
+	if !sprite.material:
+		return
+	
+	is_shadered = true
+	if is_shown:
+		sprite.show()
+		if sprite_low_quality:
+			sprite_low_quality.hide()
+	else:
+		sprite.hide()
+		if sprite_low_quality:
+			sprite_low_quality.hide()
 
 func set_safezone():
 	if !is_instance_valid(safezone): return
@@ -130,33 +173,34 @@ func update_shader(delta: float) -> void:
 	if shader_offset == null:
 		shader_offset = sprite.material.get_shader_parameter("texture_offset")
 	
-	
-	
 	if is_sun:
 		#sprite.rotate(delta * 0.03)
 		shader_offset += Vector2(delta, delta) * 0.03
 	else:
 		#sprite.rotate(angle_to_rotate * -2)
-		shader_offset += Vector2(angle_to_rotate, 0) * 10.0
+		shader_offset += Vector2(angle_to_rotate, 0) * 5.0
 	
 	sprite.material.set_shader_parameter("texture_offset", shader_offset)
 	
-	if !local_sun:
-		return
-	var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
-	var t = (distance_to_sun_squared - 100000) / 100000
-	var light_z = atan(t) - 1
-	
-	var angle_to_sun = sprite.global_position.direction_to(local_sun.global_position)
-	
-	var planet_rotation = sprite.rotation
-	var cos_rot = cos(planet_rotation)
-	var sin_rot = sin(planet_rotation)
-	
-	var rotated_angle_to_sun = Vector2(angle_to_sun.x * cos_rot + angle_to_sun.y * sin_rot,
-									-angle_to_sun.x * sin_rot + angle_to_sun.y * cos_rot)
-	var light_direction = Vector3(rotated_angle_to_sun.x, rotated_angle_to_sun.y, light_z)
-	sprite.material.set_shader_parameter("light_direction", light_direction)
+	#if !local_sun:
+		#return
+	#var distance_to_sun_squared = sprite.global_position.distance_squared_to(local_sun.global_position)
+	#var t = (distance_to_sun_squared - 100000) / 100000
+	#var light_z = atan(t) - 1
+	#
+	#var angle_to_sun = sprite.global_position.direction_to(local_sun.global_position)
+	#
+	#var planet_rotation = sprite.rotation
+	#var cos_rot = cos(planet_rotation)
+	#var sin_rot = sin(planet_rotation)
+	#
+	#var rotated_angle_to_sun = Vector2(angle_to_sun.x * cos_rot + angle_to_sun.y * sin_rot,
+									#-angle_to_sun.x * sin_rot + angle_to_sun.y * cos_rot)
+	#var light_direction = Vector3(rotated_angle_to_sun.x, rotated_angle_to_sun.y, light_z)
+	#sprite.material.set_shader_parameter("light_direction", light_direction)
+	if atmosphere:
+		atmosphere.material.set_shader_parameter("texture_offset", Vector2(shader_offset.x, 1.0))
+		#atmosphere.material.set_shader_parameter("light_direction", light_direction)
 
 
 

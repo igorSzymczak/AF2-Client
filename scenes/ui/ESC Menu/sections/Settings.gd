@@ -8,18 +8,19 @@ extends Control
 @onready var ambience_slider = %AmbienceVolumeSlider
 @onready var dma_checkbox = %DisableMouseAim
 @onready var reticle_checkbox = %Reticle
+@onready var graphics_select: OptionButton = %GraphicsSelect
 
-var user_prefs: UserPreferences
+var user_prefs: UserPreferences = g.user_prefs
 
 func _ready():
-	user_prefs = UserPreferences.load_or_create()
-	if music_slider: music_slider.value = user_prefs.music_audio_level
-	if effects_slider: effects_slider.value = user_prefs.effects_audio_level
-	if interface_slider: interface_slider.value = user_prefs.interface_audio_level
-	if ambience_slider: ambience_slider.value = user_prefs.ambience_audio_level
+	music_slider.value = user_prefs.music_audio_level
+	effects_slider.value = user_prefs.effects_audio_level
+	interface_slider.value = user_prefs.interface_audio_level
+	ambience_slider.value = user_prefs.ambience_audio_level
 	
-	if dma_checkbox: dma_checkbox.button_pressed = user_prefs.disable_mouse_aim
-	if reticle_checkbox: reticle_checkbox.button_pressed = user_prefs.reticle
+	dma_checkbox.button_pressed = user_prefs.disable_mouse_aim
+	reticle_checkbox.button_pressed = user_prefs.reticle
+	graphics_select.select(user_prefs.graphics)
 	
 
 func _on_music_volume_slider_value_changed(value):
@@ -52,8 +53,10 @@ func _on_disable_mouse_aim_pressed():
 		user_prefs.disable_mouse_aim = !user_prefs.disable_mouse_aim
 		user_prefs.save()
 
-
 func _on_reticle_pressed():
 	if user_prefs:
 		user_prefs.reticle = !user_prefs.reticle
 		user_prefs.save()
+
+func _on_graphics_select_item_selected(index: int) -> void:
+	g.user_prefs.graphics = index as UserPreferences.Graphics

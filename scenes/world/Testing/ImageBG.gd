@@ -1,11 +1,8 @@
 extends CanvasLayer
 
-@onready var rect: ColorRect = $ColorRect
+@onready var rect: ColorRect = %JustBlack
 
-var me: Player
 func _process(_delta):
-	if !me:
-		me = g.me
+	if !g.me:
 		return
-	
-	rect.size = get_viewport().size * (1.0 / me.camera.zoom.x)
+	rect.size = get_viewport().size * (1.0 / g.me.camera.zoom.x)

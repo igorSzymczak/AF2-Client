@@ -1,5 +1,12 @@
 class_name UserPreferences extends Resource
 
+enum Graphics {
+	POTATO,
+	LOW,
+	MEDIUM,
+	HIGH
+}
+
 @export_range(0, 1, 0.1) var music_audio_level: float = 0.5
 @export_range(0, 1, 0.1) var effects_audio_level: float = 0.5
 @export_range(0, 1, 0.1) var interface_audio_level: float = 0.5
@@ -12,6 +19,10 @@ class_name UserPreferences extends Resource
 @export var disable_mouse_aim: bool = false
 @export var reticle: bool = false
 
+@export var graphics: Graphics = Graphics.HIGH : set = set_graphics
+
+signal graphics_changed(value: Graphics)
+
 func save() -> void:
 	ResourceSaver.save(self, "user://user_prefs.tres")
 
@@ -20,3 +31,8 @@ static func load_or_create() -> UserPreferences:
 		return load("user://user_prefs.tres") as UserPreferences
 	else:
 		return UserPreferences.new()
+
+func set_graphics(value: Graphics) -> void:
+	graphics = value
+	save()
+	graphics_changed.emit(value)

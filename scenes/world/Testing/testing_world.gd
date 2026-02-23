@@ -19,14 +19,8 @@ func get_structure(structure_name: String) -> Structure:
 	return null
 
 func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
-	simple_stars.hide()
-	world_environment.environment = null
 	if graphics == UserPreferences.Graphics.HIGH:
 		world_environment.environment = load("res://scenes/world/Testing/environment.tres")
-	# On MEDIUM and HIGH background shader is on
-	elif graphics == UserPreferences.Graphics.LOW:
-		simple_stars.show()
-	elif graphics == UserPreferences.Graphics.POTATO:
-		simple_stars.hide()
-	
+	else:
+		world_environment.environment = null
 	

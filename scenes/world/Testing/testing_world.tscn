@@ -69,10 +69,13 @@ size = Vector2(1000, 1000)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vaisn"]
 shader = ExtResource("3_roh8v")
 shader_parameter/bg_color = Color(0, 0, 0, 0)
-shader_parameter/offset = Vector2(-55.18, 0)
-shader_parameter/zoom = 1.446
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/zoom = 1.0
 shader_parameter/smallStarSlow = 2.735
-shader_parameter/smallStarAmount = 0.322
+shader_parameter/smallStarAmount = 0.282
+shader_parameter/layer_count = 3
+shader_parameter/max_layers = 8
+shader_parameter/base_cell_size = 20.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mauus"]
 streams_count = 5

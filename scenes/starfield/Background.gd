@@ -29,15 +29,21 @@ func _ready() -> void:
 
 func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
 	if graphics == UserPreferences.Graphics.HIGH:
+		simple_stars.hide()
 		show()
 		material.set_shader_parameter("iterations", 4)
 		material.set_shader_parameter("volsteps", 4.0)
 	elif graphics == UserPreferences.Graphics.MEDIUM:
+		simple_stars.hide()
 		show()
 		material.set_shader_parameter("iterations", 3)
 		material.set_shader_parameter("volsteps", 2.0)
 	elif graphics <= UserPreferences.Graphics.LOW:
 		hide()
+		simple_stars.show()
+	elif graphics == UserPreferences.Graphics.POTATO:
+		hide()
+		simple_stars.hide()
 	
 
 func _process(delta):
@@ -53,4 +59,4 @@ func _process(delta):
 	elif simple_stars.visible:
 		var final_position: Vector2 = player.position / 5.0 + camera_offset / 5.0
 		simple_stars.material.set_shader_parameter("offset", final_position)
-		simple_stars.material.set_shader_parameter("zoom", zoom_scale + 1.0)
+		simple_stars.material.set_shader_parameter("zoom", (zoom_scale * 1.5) - 0.3)

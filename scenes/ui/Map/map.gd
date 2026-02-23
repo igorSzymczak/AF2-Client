@@ -10,10 +10,15 @@ var icon_scale: float = 0.5
 var rendered_types : Array[POI.TYPE] = [
 	POI.TYPE.SPAWNER,
 	POI.TYPE.PLAYER,
+	POI.TYPE.PLAYER_HOSTILE,
+	POI.TYPE.PLAYER_FRIENDLY,
 	POI.TYPE.BOSS,
 	POI.TYPE.PLANET,
 	POI.TYPE.HANGAR,
-	POI.TYPE.SUN
+	POI.TYPE.SUN,
+	POI.TYPE.RECYCLE_STATION,
+	POI.TYPE.WEAPON_FACTORY,
+	
 ]
 
 func _ready():
@@ -27,15 +32,23 @@ func _ready():
 	MapManager.poi_removed.connect(remove_point)
 
 func _process(_delta: float) -> void:
-	for poi: POI in MapManager.pois:
-		if !is_instance_valid(poi):
-			MapManager.pois.erase(poi)
-			if points.has(poi.id): points.erase(poi.id)
-			return
-		
-		update_point_position(poi.id, poi.position)
+	if visible:
+		for poi: POI in MapManager.pois:
+			if !is_instance_valid(poi):
+				return
+			
+			update_point_position(poi.id, poi.position)
 	
-	if Input.is_action_just_pressed("Map") and g.can_perform_actions and !g.me.landed_structure:
+	if !g.me:
+		return
+	if !g.can_perform_actions or g.me.landed_structure:
+		return
+	
+	if Input.is_action_pressed("MapHold"):
+		visible = true
+	elif Input.is_action_just_released("MapHold"):
+		visible = false
+	elif Input.is_action_just_pressed("MapTrigger"):
 		visible = !visible
 
 func create_point(poi: POI) -> void:

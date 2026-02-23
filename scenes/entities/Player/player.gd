@@ -24,6 +24,9 @@ var landed_structure: Structure = null
 @onready var engine: Thruster
 @onready var camera: Camera2D = $Camera2D
 @onready var reticle: Sprite2D = $Reticle
+@onready var poi: POI = $PoiComponent
+
+
 
 var username: String
 var nickname: String = "Player"
@@ -56,6 +59,7 @@ func _ready() -> void:
 		z_index = 1
 		g.update.connect(emit_server_signals)
 	else:
+		g.main_player_pvp_changed.connect(_handle_change_pvp)
 		camera.set_enabled(false)
 		reticle.hide()
 
@@ -97,6 +101,7 @@ func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
 			monitorable = value
 		g.PlayerProperty.PVP:
 			pvp = value
+			_handle_change_pvp()
 
 func _physics_process(delta: float) -> void:
 	nickname_container.global_position = global_position + default_label_pos
@@ -128,6 +133,7 @@ func handle_alive_changed(server_alive) -> void:
 		alive = false
 		health_component.hide()
 		set_modulate(Color(2, 2, 2, 0.3))
+		poi.visible = false
 		if IS_MAIN_PLAYER:
 			GlobalSignals.close_all_ui.emit()
 			GlobalSignals.set_ui.emit("death")
@@ -136,6 +142,7 @@ func handle_alive_changed(server_alive) -> void:
 		velocity = Vector2.ZERO
 		health_component.show()
 		set_modulate(Color(1, 1, 1, 1))
+		poi.visible = true
 		if IS_MAIN_PLAYER:
 			GlobalSignals.emit_signal("set_ui", "game")
 
@@ -164,7 +171,6 @@ func handle_other_player(delta: float) -> void:
 	if !is_instance_valid(g.me):
 		return
 	if !g.Players.has(gid):
-		GlobalSignals.emit_signal("delete_poi", self)
 		call_deferred("queue_free")
 		return
 	
@@ -191,14 +197,17 @@ func handle_other_player(delta: float) -> void:
 		show()
 		set_modulate(Color(1, 1, 1, 1))
 		health_component.show()
-	
-	if g.me.pvp and pvp:
-		nickname_label.self_modulate = Color(1.0, 0.2, 0.2, 1.0)
-	else:
-		nickname_label.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
-		
-		
 
+func _handle_change_pvp() -> void:
+	if IS_MAIN_PLAYER:
+		g.main_player_pvp_changed.emit()
+	else:
+		if g.me.pvp and pvp:
+			nickname_label.self_modulate = Color(1.0, 0.2, 0.2, 1.0)
+			poi.change_type(POI.TYPE.PLAYER_HOSTILE)
+		else:
+			nickname_label.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			poi.change_type(POI.TYPE.PLAYER_FRIENDLY)
 
 var momentum_speed_cap: float = MAX_SPEED
 var speed_boost_strength: float = 2.0

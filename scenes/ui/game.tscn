@@ -145,6 +145,8 @@ offset_right = 34.25
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
+focus_mode = 0
+focus_behavior_recursive = 1
 text = "PvP"
 
 [node name="Filler" type="Polygon2D" parent="PanelBottom/Center" unique_id=1288461941]

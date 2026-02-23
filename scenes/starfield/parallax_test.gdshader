@@ -15,12 +15,12 @@ uniform float speed2 = 0.2;
 
 const float brightness = 0.0915;
 const float darkmatter = 0.200;
-const float distfading = 0.260;
+const float distfading = 0.360;
 const float saturation = 0.90;
 
 
-const float transverseSpeed = 1.0; //zoom;
-const float cloud = 0.17;
+const float transverseSpeed = 1.0;
+const float cloud = 0.27;
 
 
 float triangle(float x, float a) {
@@ -48,8 +48,16 @@ float field(in vec3 p) {
 void fragment() {
 	float stepsize = stepsizeOrigin + sin(TIME * 0.0001);
 	
-    vec2 uv2 = 2. * FRAGCOORD.xy / vec2(512) - 1.;
-	vec2 uvs = uv2 * vec2(512)  / 512.;
+	vec2 screen_size = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 center = screen_size * 0.5;
+	
+	// zakres -1 .. 1, wycentrowany
+	vec2 uv2 = (FRAGCOORD.xy - center) / center;
+	
+	// korekta proporcji (żeby nie było rozciągnięcia)
+	uv2.x *= screen_size.x / screen_size.y;
+	
+	vec2 uvs = uv2;
 
 	//float time = TIME;
 	float time2 = time;

@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 		update.emit()
 
 var current_world: Node2D
+signal main_player_pvp_changed()
 var me: Player
 var user_prefs: UserPreferences = UserPreferences.load_or_create()
 

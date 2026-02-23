@@ -11,7 +11,9 @@ enum TYPE {
 	SUN,
 	ITEM,
 	RECYCLE_STATION,
-	WEAPON_FACTORY
+	WEAPON_FACTORY,
+	PLAYER_HOSTILE,
+	PLAYER_FRIENDLY
 }
 
 var id: int
@@ -55,6 +57,12 @@ func set_label(value: String) -> void:
 func remove():
 	MapManager.poi_removed.emit(id)
 	MapManager.pois.erase(self)
+
+func change_type(new_type: TYPE) -> void:
+	remove()
+	type = new_type
+	MapManager.pois.append(self)
+	MapManager.poi_created.emit(self)
 
 signal position_changed(value: Vector2)
 signal rotation_changed(value: float)

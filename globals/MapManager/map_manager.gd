@@ -22,6 +22,8 @@ func create_poi_icon(type: POI.TYPE) -> Node2D:
 		POI.TYPE.ITEM: return load("res://scenes/ui/POI Icons/item_icon.tscn").instantiate()
 		POI.TYPE.RECYCLE_STATION: return load("res://scenes/ui/POI Icons/recycle_station_icon.tscn").instantiate()
 		POI.TYPE.WEAPON_FACTORY: return load("res://scenes/ui/POI Icons/weapon_factory_icon.tscn").instantiate()
+		POI.TYPE.PLAYER_HOSTILE: return load("res://scenes/ui/POI Icons/player_hostile_icon.tscn").instantiate()
+		POI.TYPE.PLAYER_FRIENDLY: return load("res://scenes/ui/POI Icons/player_friendly_icon.tscn").instantiate()
 		
 	return null
 

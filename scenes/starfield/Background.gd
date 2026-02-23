@@ -31,8 +31,8 @@ func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
 	if graphics == UserPreferences.Graphics.HIGH:
 		simple_stars.hide()
 		show()
-		material.set_shader_parameter("iterations", 4)
-		material.set_shader_parameter("volsteps", 4.0)
+		material.set_shader_parameter("iterations", 6)
+		material.set_shader_parameter("volsteps", 5.0)
 	elif graphics == UserPreferences.Graphics.MEDIUM:
 		simple_stars.hide()
 		show()

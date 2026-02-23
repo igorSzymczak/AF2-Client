@@ -25,6 +25,7 @@ func _ready() -> void:
 	GlobalSignals.connect("give_main_player", _setup_main_player)
 	
 	g.user_prefs.graphics_changed.connect(_on_graphics_changed)
+	_on_graphics_changed(g.user_prefs.graphics)
 
 func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
 	if graphics == UserPreferences.Graphics.HIGH:

@@ -65,8 +65,8 @@ func _update_speed_boost(delta: float) -> void:
 	var inst: Sprite2D = active_effects[SHADER.SPEED_BOOST]
 	var mat := inst.material
 
-	var parent: Node2D = get_parent()
-	var max_speed: float = parent.MAX_SPEED
+	var parent: Player = get_parent()
+	var max_speed: float = parent.speed
 	var velocity: float = ((parent.velocity.length()) - max_speed) * delta
 
 	mat.set("shader_parameter/stretch", 3.0 * velocity)

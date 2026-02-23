@@ -6,11 +6,7 @@ var gid: int # GameManager ID
 var stats: Stats = Stats.new()
 var props: PropertyContainer = PropertyContainer.new(g.PLAYER_PROPERTY_SCHEMA)
 
-const TURN_SPEED := 3.0 
-const DECELERATION_SPEED := 400.0
-const MAX_SPEED := 500.0
-const DRAG_COEF := 100.0
-const SPEED := 500.0 # ship stat
+const DRAG_COEF := 200.0
 
 var landed_structure: Structure = null
 
@@ -38,6 +34,8 @@ var alive: = true
 var user_prefs: UserPreferences
 var pvp: bool = false
 
+var speed: float
+
 func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()
 	
@@ -62,6 +60,17 @@ func _ready() -> void:
 		g.main_player_pvp_changed.connect(_handle_change_pvp)
 		camera.set_enabled(false)
 		reticle.hide()
+	
+	stats.get_stat(Stats.TYPE.SPEED).value_changed.connect(_on_speed_changed)
+	stats.get_stat(Stats.TYPE.SPEED_BOOST_DELAY).value_changed.connect(func reset(value: float): speed_boost_delay = value)
+	stats.get_stat(Stats.TYPE.SPEED_BOOST_DURATION).value_changed.connect(func reset(value: float): speed_boost_duration = value)
+	stats.get_stat(Stats.TYPE.SPEED_BOOST_STRENGTH).value_changed.connect(func reset(value: float): speed_boost_strength = value)
+	stats.get_stat(Stats.TYPE.SPEED_BOOST_TURN_SPEED).value_changed.connect(func reset(value: float): speed_boost_turn_speed = value)
+	
+
+func _on_speed_changed(value: float) -> void:
+	speed = value
+	momentum_speed_cap = value
 
 var monitorable: bool = false
 func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
@@ -152,7 +161,7 @@ func emit_server_signals():
 			last_pos = global_position
 			g.local_player_property_changed.emit(g.PlayerProperty.GLOBAL_POSITION, global_position)
 		
-		if last_rot != rotation:
+		if abs(angle_difference(last_rot, rotation)) > 0.01:
 			last_rot = rotation
 			g.local_player_property_changed.emit(g.PlayerProperty.ROTATION, rotation)
 		
@@ -209,12 +218,12 @@ func _handle_change_pvp() -> void:
 			nickname_label.self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			poi.change_type(POI.TYPE.PLAYER_FRIENDLY)
 
-var momentum_speed_cap: float = MAX_SPEED
-var speed_boost_strength: float = 2.0
+var momentum_speed_cap: float = 0.0
+var speed_boost_strength: float = 1.0
 var speed_boost_active: bool = false : set = set_speed_boost
-var speed_boost_duration: float = 1.5 #s
-var speed_boost_delay: float = 3.0 #s
-var speed_boost_turn_speed: float = 0.2
+var speed_boost_duration: float = 0.0 #s
+var speed_boost_delay: float = 1.0 #s
+var speed_boost_turn_speed: float = 1.0
 var last_speed_boost_time: float = 3.0 # s
 
 var direction := Vector2.ZERO
@@ -231,17 +240,19 @@ func handle_movement(delta: float) -> void:
 	# SpeedBoost
 	manage_speed_boost(delta)
 	
-	
+	var turn_speed: float = stats.get_stat(Stats.TYPE.TURN_SPEED).value
 	
 	# Rotation
 	var speed_boost_rotation_mult: float = speed_boost_turn_speed if speed_boost_active else 1.0
-	var mod_turn_speed: float = TURN_SPEED * delta * speed_boost_rotation_mult
+	var mod_turn_speed: float = turn_speed * delta * speed_boost_rotation_mult
 	
 	if !user_prefs.disable_mouse_aim:
 		if IS_MAIN_PLAYER and landed_structure == null:
 			var mouse_pos: Vector2 = get_global_mouse_position()
 			var target_rotation: float = global_position.angle_to_point(mouse_pos)
-			rotation = rotate_toward(rotation, target_rotation, mod_turn_speed)
+			if abs(angle_difference(rotation, target_rotation)) > mod_turn_speed:
+				rotation = rotate_toward(rotation, target_rotation, mod_turn_speed)
+			else: rotation = target_rotation
 	
 	elif user_prefs.disable_mouse_aim:
 		if Input.is_action_pressed("SlowTurn"):
@@ -260,29 +271,33 @@ func handle_movement(delta: float) -> void:
 
 		# jeśli boost trwa → aktualizujemy maksymalny osiągnięty "moment"
 		if speed_boost_active:
-			momentum_speed_cap = MAX_SPEED * speed_boost_strength
+			momentum_speed_cap = speed * speed_boost_strength
 
 		# przyspieszanie albo aktywny boost
 		if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
 			var boost_mul = speed_boost_strength if speed_boost_active else 1.0
-			velocity += direction * SPEED * delta * 1.5 * boost_mul
+			velocity += direction * speed * delta * 1.5 * boost_mul
 
 			# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
 			velocity = velocity.limit_length(momentum_speed_cap)
 		# hamowanie
 		elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
-			velocity -= velocity.normalized() * DECELERATION_SPEED * delta
+			var decelerate_vector: Vector2 = velocity.normalized() * speed / 2.0 * delta
+			if velocity.length_squared() > decelerate_vector.length_squared():
+				velocity -= decelerate_vector
+			else: velocity = Vector2.ZERO
 
 		# naturalny opór
-		if !velocity.is_equal_approx(Vector2.ZERO):
-			velocity -= velocity.normalized() * DRAG_COEF * delta / 2.5
+		var drag_vector: Vector2 = velocity.normalized() * DRAG_COEF * delta / 2.5
+		if velocity.length_squared() > drag_vector.length_squared():
+			velocity -= drag_vector
 		else:
 			velocity = Vector2.ZERO
 		
-		if momentum_speed_cap > MAX_SPEED:
+		if momentum_speed_cap > speed:
 			momentum_speed_cap -= DRAG_COEF * delta / 2.5
 		elif momentum_speed_cap > velocity.length():
-			momentum_speed_cap = max(MAX_SPEED, velocity.length())
+			momentum_speed_cap = max(speed, velocity.length())
 
 		handle_thrust()
 		move_and_slide()
@@ -332,7 +347,6 @@ func handle_thrust() -> void:
 			engine.deactivate_thruster(velocity)
 			engine_active = false
 			g.local_player_property_changed.emit(g.PlayerProperty.ENGINE_ACTIVE, engine_active)
-	
 
 func handle_change_weapon(num_pressed: int = 0) -> void:
 	if !g.can_perform_actions:

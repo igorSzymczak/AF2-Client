@@ -28,6 +28,11 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	for poi: POI in MapManager.pois:
+		if !is_instance_valid(poi):
+			MapManager.pois.erase(poi)
+			if points.has(poi.id): points.erase(poi.id)
+			return
+		
 		update_point_position(poi.id, poi.position)
 	
 	if Input.is_action_just_pressed("Map") and g.can_perform_actions and !g.me.landed_structure:

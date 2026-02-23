@@ -38,12 +38,14 @@ func _on_graphics_changed(graphics: UserPreferences.Graphics) -> void:
 		show()
 		material.set_shader_parameter("iterations", 3)
 		material.set_shader_parameter("volsteps", 2.0)
-	elif graphics <= UserPreferences.Graphics.LOW:
+	elif graphics == UserPreferences.Graphics.LOW:
 		hide()
 		simple_stars.show()
+		simple_stars.material.set_shader_parameter("layer_count", 3)
 	elif graphics == UserPreferences.Graphics.POTATO:
 		hide()
-		simple_stars.hide()
+		simple_stars.show()
+		simple_stars.material.set_shader_parameter("layer_count", 1)
 	
 
 func _process(delta):

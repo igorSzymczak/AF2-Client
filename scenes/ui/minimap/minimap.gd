@@ -27,6 +27,11 @@ func _process(_delta: float) -> void:
 	label_y.text = str(roundi(g.me.global_position.y / coords_scale))
 	
 	for poi: POI in MapManager.pois:
+		if !is_instance_valid(poi):
+			MapManager.pois.erase(poi)
+			if points.has(poi.id): points.erase(poi.id)
+			return
+		
 		update_point_position(poi.id, poi.position)
 
 func create_point(poi: POI) -> void:

@@ -73,7 +73,7 @@ shader_parameter/offset = Vector2(0, 0)
 shader_parameter/zoom = 1.0
 shader_parameter/smallStarSlow = 2.735
 shader_parameter/smallStarAmount = 0.282
-shader_parameter/layer_count = 3
+shader_parameter/layer_count = 1
 shader_parameter/max_layers = 8
 shader_parameter/base_cell_size = 20.0
 

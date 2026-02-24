@@ -266,3 +266,7 @@ func _on_exit_button_pressed():
 	if g.me.landed_structure != null:
 		g.me.landed_structure.request_leave_structure.rpc_id(1, g.me.gid)
 		GlobalSignals.set_ui.emit("game")
+
+
+func _on_upgrade_station_button_pressed() -> void:
+	pass # Replace with function body.

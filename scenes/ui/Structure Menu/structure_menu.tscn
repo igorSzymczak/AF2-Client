@@ -225,6 +225,94 @@ corner_radius_bottom_left = 7
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5onfs"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay2sa"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sas3"]
+bg_color = Color(0.266667, 0.266667, 0.266667, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[sub_resource type="ImageTexture" id="ImageTexture_l1mp7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0116"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 3
+border_color = Color(0.4, 0.4, 0.4, 1)
+expand_margin_right = 3.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hk3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5c5n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.627451, 0.298039, 1, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mkaiw"]
+
+[sub_resource type="Gradient" id="Gradient_dv668"]
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_irre1"]
+gradient = SubResource("Gradient_dv668")
+width = 24
+height = 24
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a7qb"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [node name="StructureMenu" type="Control" unique_id=413686903]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 3
@@ -258,6 +346,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="Main" type="Control" parent="Left/MarginContainer" unique_id=1830344191]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("2_wmips")
 
@@ -317,6 +406,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Weapon Factory"
+
+[node name="UpgradeStationButton" parent="Left/MarginContainer/Main/Center" unique_id=1656136402 instance=ExtResource("4_m1e70")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Upgrade Station"
 
 [node name="Separator" type="Control" parent="Left/MarginContainer/Main/Center" unique_id=1971435484]
 custom_minimum_size = Vector2(0, 200)
@@ -502,6 +598,50 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="WeaponReturnButton" parent="Left/MarginContainer/WeaponFactory/VBoxContainer" unique_id=186329168 instance=ExtResource("4_m1e70")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Return"
+
+[node name="UpgradeStation" type="Control" parent="Left/MarginContainer" unique_id=1708447624]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Left/MarginContainer/UpgradeStation" unique_id=1347094142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Upgrades" type="Label" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=295304796]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Upgrade Station"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=542354389]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=1131753538]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer/ScrollContainer" unique_id=1567735432]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="WeaponsContainer" type="VBoxContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer/ScrollContainer/HBoxContainer" unique_id=649483613]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="WeaponReturnButton" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=2119537315 instance=ExtResource("4_m1e70")]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
@@ -1294,6 +1434,7 @@ metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
 
 [node name="ShipsRight" type="PanelContainer" parent="." unique_id=79903016]
 unique_name_in_owner = true
+visible = false
 top_level = true
 clip_contents = true
 custom_minimum_size = Vector2(350, 0)
@@ -1838,13 +1979,749 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_ystpj")
 text = "Select"
 hover_underline_effect = false
 
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1751537862]
+custom_minimum_size = Vector2(606, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5onfs")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=754452782]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=346748891]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=925508089]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Weapons"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=261528876]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=563641809]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1638418422]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Panel" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1160232238]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay2sa")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel" unique_id=1704772163]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer" unique_id=1227977520]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1005841341]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WeaponElement" type="BoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title" unique_id=913738301]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("8_wbhhh")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement" unique_id=772325297]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6sas3")
+
+[node name="H" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer" unique_id=130681561]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H" unique_id=994051443]
+z_index = 1
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("ImageTexture_l1mp7")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IconLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/Icon" unique_id=1591534601]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_a0116")
+text = "BL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconColor" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/Icon/IconLabel" unique_id=185347430]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(1, 0, 0.431373, 0.501961)
+
+[node name="InfoContainer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H" unique_id=458676484]
+visible = false
+custom_minimum_size = Vector2(174, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="M" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer" unique_id=1678360789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer/M" unique_id=1417152636]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "Blaster"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LvlLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer" unique_id=1606309794]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "lvl 0"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer" unique_id=1006574663]
+modulate = Color(1, 1, 1, 0.6)
+z_index = 2
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hk3r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5c5n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mkaiw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_v5c5n")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title" unique_id=260495752]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Blaster"
+
+[node name="UpgradePoints" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title" unique_id=2065916035]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=1692727993]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=1161463112]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=1608685083]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=1607562011]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1998456425]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=579184100]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=10126344]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=905955590]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "1"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1592294602]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "2"
+
+[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=796667079]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "3
+"
+
+[node name="HboxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1948449015]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="LeftPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer" unique_id=255580616]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Flux" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1146088638]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Flux" unique_id=1982791451]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("10_prqev")
+stretch_mode = 5
+
+[node name="FluxAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Flux" unique_id=1811385267]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Steel" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=299537831]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Steel" unique_id=1848926167]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("11_o627u")
+stretch_mode = 5
+
+[node name="SteelAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Steel" unique_id=25978934]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HydrogenCrystals" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1758965537]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=1353255384]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("12_dv668")
+stretch_mode = 5
+
+[node name="HydrogenCrystalsAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=1614889729]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="PlasmaFluids" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1762476289]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=159782734]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("13_irre1")
+stretch_mode = 5
+
+[node name="PlasmaFluidsAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=2139692924]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Iridium" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1584171558]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Iridium" unique_id=113948208]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("14_afcyn")
+stretch_mode = 5
+
+[node name="IridiumAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Iridium" unique_id=1252153404]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="RightPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer" unique_id=1353310705]
+layout_mode = 2
+alignment = 1
+
+[node name="GreenReason" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=1903400612]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85490197, 0, 1)
+text = "Bought!"
+horizontal_alignment = 1
+
+[node name="RedReason" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=376083964]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85490197, 0, 0, 1)
+text = "You are broke"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ProduceButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=1892914935]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_disabled_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_dv668")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o627u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_irre1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_afcyn")
+text = "Upgrade!"
+script = ExtResource("15_o627u")
+metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1191013468]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1056359626]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2" unique_id=2066116313]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1742467919]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1417209233]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=2018404153]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=190333571]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=121999053]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Panel2" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=369243812]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay2sa")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2" unique_id=162098198]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer" unique_id=540033969]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1988262433]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="WeaponElement" type="BoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title" unique_id=1984091466]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("8_wbhhh")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement" unique_id=390715749]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6sas3")
+
+[node name="H" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer" unique_id=1322854394]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H" unique_id=1930563147]
+z_index = 1
+custom_minimum_size = Vector2(58, 58)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("ImageTexture_l1mp7")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="IconLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/Icon" unique_id=1593551483]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_a0116")
+text = "BL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconColor" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/Icon/IconLabel" unique_id=1035707493]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(1, 0, 0.431373, 0.501961)
+
+[node name="InfoContainer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H" unique_id=2041362397]
+visible = false
+custom_minimum_size = Vector2(174, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="M" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer" unique_id=724477742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 16
+
+[node name="NameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer/M" unique_id=1745199969]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "Blaster"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="LvlLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer/H/InfoContainer" unique_id=317624118]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = -1.0
+offset_bottom = 23.0
+grow_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 12
+text = "lvl 0"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/WeaponElement/PanelContainer" unique_id=113948168]
+modulate = Color(1, 1, 1, 0.6)
+z_index = 2
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hk3r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5c5n")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mkaiw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_v5c5n")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title" unique_id=1034801549]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Blaster"
+
+[node name="UpgradePoints" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title" unique_id=721659579]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=22480801]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=2086101802]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/Title/UpgradePoints" unique_id=1208767737]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_irre1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=2083942931]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=756744488]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=170672564]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1225760382]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1525650802]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "1"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=209286990]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "2"
+
+[node name="Button3" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1445133229]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2a7qb")
+text = "3
+"
+
+[node name="HboxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1633431860]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="LeftPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer" unique_id=1062344594]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Flux" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1717368608]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Flux" unique_id=1838800994]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("10_prqev")
+stretch_mode = 5
+
+[node name="FluxAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Flux" unique_id=1302069150]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Steel" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=535276819]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Steel" unique_id=1751417775]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("11_o627u")
+stretch_mode = 5
+
+[node name="SteelAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Steel" unique_id=1933107077]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HydrogenCrystals" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=509108232]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=855236224]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("12_dv668")
+stretch_mode = 5
+
+[node name="HydrogenCrystalsAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/HydrogenCrystals" unique_id=1630554199]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="PlasmaFluids" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1826834341]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=1126934839]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("13_irre1")
+stretch_mode = 5
+
+[node name="PlasmaFluidsAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/PlasmaFluids" unique_id=477837685]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Iridium" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel" unique_id=1279951987]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Iridium" unique_id=544019391]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("14_afcyn")
+stretch_mode = 5
+
+[node name="IridiumAmount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/LeftPanel/Iridium" unique_id=75798124]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="RightPanel" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer" unique_id=1190006330]
+layout_mode = 2
+alignment = 1
+
+[node name="GreenReason" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=1144399783]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85490197, 0, 1)
+text = "Bought!"
+horizontal_alignment = 1
+
+[node name="RedReason" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=853477589]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85490197, 0, 0, 1)
+text = "You are broke"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ProduceButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=506029337]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_disabled_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_dv668")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o627u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_irre1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_afcyn")
+text = "Upgrade!"
+script = ExtResource("15_o627u")
+metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1498239429]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1159559401]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2" unique_id=442920233]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1370090280]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1411004128]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=1624023202]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=319887409]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label5" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2/VBoxContainer" unique_id=78313992]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/ShipsButton" to="." method="_on_ships_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/RecyclingButton" to="." method="_on_recycling_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/WeaponFactoryButton" to="." method="_on_weapon_factory_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/Main/Center/UpgradeStationButton" to="." method="_on_upgrade_station_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Bottom/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Ships/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Recycling/VBoxContainer/CargoReturnButton2" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/WeaponFactory/VBoxContainer/WeaponReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/UpgradeStation/VBoxContainer/WeaponReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="Left/MarginContainer/WeaponFactory" method="_on_produce_button_pressed"]
 [connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="WeaponFactoryRightPanel" method="_on_produce_button_pressed"]
 [connection signal="pressed" from="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/SelectButton" to="." method="_on_select_button_pressed"]

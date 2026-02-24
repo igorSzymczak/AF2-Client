@@ -36,7 +36,9 @@
 [ext_resource type="Texture2D" uid="uid://csg7ql2cr76ni" path="res://assets/structures/planets/2k_sun.jpg" id="25_s3fht"]
 [ext_resource type="Texture2D" uid="uid://dr2mukx7r5jok" path="res://assets/structures/planets/Saturn Ring Upper.png" id="26_ba8t5"]
 [ext_resource type="Texture2D" uid="uid://cwqnt5jwqotl8" path="res://assets/Glow.png" id="26_cp65u"]
+[ext_resource type="PackedScene" uid="uid://w2n3wwf05n4t" path="res://scenes/objects/Structures/UpgradeStation/upgrade_station.tscn" id="26_u35gn"]
 [ext_resource type="Texture2D" uid="uid://d32tuv34is0m0" path="res://assets/structures/planets/Saturn Ring.png" id="27_ti3ut"]
+[ext_resource type="Texture2D" uid="uid://b3i6k04u7cd30" path="res://assets/structures/AF Upgrade Station.png" id="27_y8ph0"]
 [ext_resource type="Texture2D" uid="uid://dnqth1jon5q5c" path="res://assets/structures/planets/2k_uranus.jpg" id="28_ba8t5"]
 [ext_resource type="Texture2D" uid="uid://d1xiscfe5cqss" path="res://assets/structures/planets/Saturn Ring Bottom.png" id="28_nfcpv"]
 [ext_resource type="Texture2D" uid="uid://dbfwfkde5yhjc" path="res://assets/structures/planets/Low Quality/Sun.png" id="28_ojxu6"]
@@ -513,6 +515,55 @@ scale = Vector2(1.25, 1.25)
 texture = ExtResource("14_4cia3")
 
 [node name="ShaderRed" type="Sprite2D" parent="Planets/WeaponFactory/AuraRed" unique_id=628413979]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_n0kn8")
+position = Vector2(15.4963, -39.7095)
+scale = Vector2(1.99001, 1.9803)
+texture = SubResource("NoiseTexture2D_076eo")
+
+[node name="UpgradeStation" parent="Planets" unique_id=1872254706 instance=ExtResource("26_u35gn")]
+position = Vector2(126, -3043)
+structure_name = "Beta Upgrade Station"
+
+[node name="PoiComponent" parent="Planets/UpgradeStation" unique_id=253257651 instance=ExtResource("13_nfcpv")]
+type = 13
+
+[node name="LandArea" type="CollisionShape2D" parent="Planets/UpgradeStation" unique_id=853674454]
+visible = false
+shape = SubResource("CircleShape2D_jkw5k")
+
+[node name="SafeZone" type="Area2D" parent="Planets/UpgradeStation" unique_id=1640208879]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planets/UpgradeStation/SafeZone" unique_id=1112796225]
+shape = SubResource("CircleShape2D_1j1jk")
+debug_color = Color(0, 0.819608, 0, 0.152941)
+
+[node name="Sprite" type="Sprite2D" parent="Planets/UpgradeStation" unique_id=1306759869]
+scale = Vector2(3.2749999, 3.2749996)
+texture = ExtResource("27_y8ph0")
+
+[node name="AuraBlue" type="Sprite2D" parent="Planets/UpgradeStation" unique_id=1450730468]
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderBlue" type="Sprite2D" parent="Planets/UpgradeStation/AuraBlue" unique_id=1559662233]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4dtfb")
+position = Vector2(2.58716, 1.15637)
+scale = Vector2(1.74183, 1.61305)
+texture = SubResource("NoiseTexture2D_462n5")
+
+[node name="AuraRed" type="Sprite2D" parent="Planets/UpgradeStation" unique_id=883473796]
+visible = false
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("14_4cia3")
+
+[node name="ShaderRed" type="Sprite2D" parent="Planets/UpgradeStation/AuraRed" unique_id=409339385]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_n0kn8")
 position = Vector2(15.4963, -39.7095)

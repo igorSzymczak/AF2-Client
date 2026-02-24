@@ -8,7 +8,6 @@ extends Control
 const weapon_ui_scene: PackedScene = preload("res://scenes/ui/Weapon Element/weapon_element.tscn")
 var weapons: Dictionary[WeaponManager.Type, Dictionary] # nested costs -> Dictionary[InventoryManager.Currency, int]
 
-
 func load_weapons(structure_args: Dictionary) -> void:
 	clear_weapons_container()
 	currently_chosen_element = null

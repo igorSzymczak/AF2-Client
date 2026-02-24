@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://tpmcdseq82v6"]
+
+[sub_resource type="Gradient" id="Gradient_dv668"]
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_irre1"]
+gradient = SubResource("Gradient_dv668")
+width = 24
+height = 24
+fill_from = Vector2(0, 1)
+
+[node name="TextureRect" type="TextureRect" unique_id=2046294234]
+texture = SubResource("GradientTexture2D_irre1")

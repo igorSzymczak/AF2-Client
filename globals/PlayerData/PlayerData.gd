@@ -11,6 +11,7 @@ enum Property {
 enum WeaponProperty {
 		WEAPON_TYPE, 		# Only these 2
 		LVL,				# Are used for weapons in ARSENAL
+		UPGRADE_COSTS,		# Array[Dictionary[Currency, int]]
 	SLOT,
 	POWER_USAGE,
 	SHOOT_DELAY,

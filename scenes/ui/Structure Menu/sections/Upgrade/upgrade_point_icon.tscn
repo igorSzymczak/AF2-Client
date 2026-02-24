@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cqy64yskg5b0v"]
+
+[ext_resource type="Script" uid="uid://b0qp5dnn8f45y" path="res://scenes/ui/Structure Menu/sections/Upgrade/upgrade_point_icon.gd" id="1_gv75l"]
+
+[sub_resource type="Gradient" id="Gradient_dv668"]
+offsets = PackedFloat32Array(0.004115226, 1)
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_irre1"]
+gradient = SubResource("Gradient_dv668")
+width = 24
+height = 24
+fill_to = Vector2(1, 1)
+
+[node name="UpgradePointIcon" type="TextureRect" unique_id=1032964180]
+texture = SubResource("GradientTexture2D_irre1")
+script = ExtResource("1_gv75l")

@@ -129,10 +129,6 @@ func set_player_position(pos: Vector2):
 	g.me.global_position = pos
 	g.me.velocity = Vector2.ZERO
 
-@rpc("authority", "call_remote", "reliable")
-func send_player_data(player_data: Dictionary):
-	handle_player_data(player_data)
-
 @rpc("any_peer", "call_remote", "reliable")
 func player_shoot(user_id: int, index: int):
 	g.handle_player_shoot(user_id, index)
@@ -150,9 +146,6 @@ func server_handle_local_player_property(_user_id: int, _prop: int, _value: Vari
 
 func _handle_request_toggle_pvp(_user_id: int, _value: bool) -> void:
 	pass # Only Server
-
-func handle_player_data(player_data: Dictionary) -> void:
-	PlayerData.from_dict(player_data)
 
 
 

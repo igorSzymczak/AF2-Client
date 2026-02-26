@@ -230,9 +230,9 @@ const PLAYER_PROPERTY_SCHEMA: Dictionary[PlayerProperty, Dictionary] = {
 signal local_player_property_changed(prop: int, value: Variant)
 signal player_added(player: Player)
 signal player_property_changed(player_id: int, prop: PlayerProperty, value: Variant)
-func add_player(player_data: Dictionary):
-	var props: Dictionary = player_data["props"]
-	var stats: Dictionary = player_data["stats"]
+func add_player(data: Dictionary):
+	var props: Dictionary = data["props"]
+	var stats: Dictionary = data["stats"]
 	
 	var gid: int = props[PlayerProperty.GID]
 	if Players.has(gid):

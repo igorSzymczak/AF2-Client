@@ -14,6 +14,8 @@ func load_weapons() -> void:
 		var weapon_data: WeaponRuntimeData = arsenal[weapon_type]
 		var lvl: int  = weapon_data.get_prop(PlayerData.WeaponProperty.LVL)
 		var upgrade_costs = weapon_data.get_prop(PlayerData.WeaponProperty.UPGRADE_COSTS)
+		upgrade_costs = [] if upgrade_costs == null else upgrade_costs
+		
 		
 		entries_container.add_child(entry)
 		entry.init(weapon_type, lvl, upgrade_costs)

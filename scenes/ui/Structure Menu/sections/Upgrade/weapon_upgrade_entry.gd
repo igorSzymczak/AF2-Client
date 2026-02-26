@@ -44,7 +44,7 @@ var weapon: Weapon
 var current_lvl: int = 0 
 var selected_lvl: int = 0
 
-var costs: Array[Dictionary]
+var costs: Array
 
 func _ready() -> void:
 	padding = main_margin_container.get_theme_constant("margin_bottom")
@@ -78,7 +78,7 @@ func _ready() -> void:
 	
 	##await get_tree().create_timer(0.6).timeout
 
-func init(new_weapon_type: WeaponManager.Type, lvl: int, upgrade_costs: Array[Dictionary]) -> void:
+func init(new_weapon_type: WeaponManager.Type, lvl: int, upgrade_costs: Array) -> void:
 	_set_weapon(new_weapon_type)
 	set_current_lvl(lvl)
 	costs = upgrade_costs

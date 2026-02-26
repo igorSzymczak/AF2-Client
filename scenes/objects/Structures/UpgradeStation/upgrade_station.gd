@@ -1,0 +1,1 @@
+class_name UpgradeStation extends Structure

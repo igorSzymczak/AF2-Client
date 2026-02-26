@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://w2n3wwf05n4t"]
+
+[ext_resource type="Script" uid="uid://bw20ycwiu1g18" path="res://scenes/objects/Structures/UpgradeStation/upgrade_station.gd" id="1_dmpl0"]
+
+[node name="UpgradeStation" type="Area2D" unique_id=1872254706]
+script = ExtResource("1_dmpl0")
+structure_name = "Upgrade Station"
+landable = true
+metadata/_custom_type_script = "uid://b6b0p8wsg0wxg"

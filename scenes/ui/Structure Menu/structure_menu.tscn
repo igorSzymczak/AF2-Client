@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bi1od12cca7v" path="res://scenes/ui/Structure Menu/sections/Recycling/recycling.gd" id="5_wje8e"]
 [ext_resource type="Script" uid="uid://du8bruokgs02r" path="res://scenes/ui/Structure Menu/sections/WeaponFactory/weapon_factory.gd" id="6_jn3te"]
 [ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="6_wje8e"]
+[ext_resource type="Script" uid="uid://bgxe7n12nkhnf" path="res://scenes/ui/Structure Menu/upgrade_station.gd" id="8_afcyn"]
 [ext_resource type="Script" uid="uid://cp8d3vyb0c4tq" path="res://scenes/ui/Structure Menu/sections/WeaponFactory/weapon_factory_right_panel.gd" id="8_iwwpk"]
 [ext_resource type="Script" uid="uid://s5wmfxf4n8p0" path="res://scenes/ui/Weapon Element/weapon_element.gd" id="8_wbhhh"]
 [ext_resource type="Texture2D" uid="uid://bqvkdsw678u54" path="res://assets/ui/inventory/flux.png" id="10_prqev"]
@@ -16,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="14_afcyn"]
 [ext_resource type="Script" uid="uid://dkrfatcxwvxnq" path="res://scenes/ui/elements/buttons/menu_button.gd" id="15_o627u"]
 [ext_resource type="Script" uid="uid://mbcywag0ibsg" path="res://scenes/ui/Structure Menu/sections/Ships/ships_right.gd" id="16_dv668"]
+[ext_resource type="PackedScene" uid="uid://ceda322ro3fel" path="res://scenes/ui/Structure Menu/sections/Upgrade/weapon_upgrade_entry.tscn" id="17_irre1"]
+[ext_resource type="Script" uid="uid://ciyj78gsnwyod" path="res://scenes/ui/Structure Menu/sections/Upgrade/weapon_upgrade_panel.gd" id="18_5onfs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt3jc"]
 bg_color = Color(0, 0, 0, 0.784314)
@@ -225,6 +228,18 @@ corner_radius_bottom_left = 7
 expand_margin_top = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5onfs"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [node name="StructureMenu" type="Control" unique_id=413686903]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 3
@@ -258,6 +273,7 @@ theme_override_constants/margin_bottom = 30
 
 [node name="Main" type="Control" parent="Left/MarginContainer" unique_id=1830344191]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("2_wmips")
 
@@ -317,6 +333,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Weapon Factory"
+
+[node name="UpgradeStationButton" parent="Left/MarginContainer/Main/Center" unique_id=1656136402 instance=ExtResource("4_m1e70")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Upgrade Station"
 
 [node name="Separator" type="Control" parent="Left/MarginContainer/Main/Center" unique_id=1971435484]
 custom_minimum_size = Vector2(0, 200)
@@ -507,8 +530,56 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 26
 text = "Return"
 
+[node name="UpgradeStation" type="Control" parent="Left/MarginContainer" unique_id=1708447624 node_paths=PackedStringArray("weapon_upgrade_panel")]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("8_afcyn")
+weapon_upgrade_panel = NodePath("../../../WeaponUpgradePanel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Left/MarginContainer/UpgradeStation" unique_id=1347094142]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Upgrades" type="Label" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=295304796]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Upgrade Station"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=542354389]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=1131753538]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer/ScrollContainer" unique_id=1567735432]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="WeaponsContainer" type="VBoxContainer" parent="Left/MarginContainer/UpgradeStation/VBoxContainer/ScrollContainer/HBoxContainer" unique_id=649483613]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="WeaponReturnButton" parent="Left/MarginContainer/UpgradeStation/VBoxContainer" unique_id=2119537315 instance=ExtResource("4_m1e70")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 26
+text = "Return"
+
 [node name="WeaponFactoryRightPanel" type="Control" parent="." unique_id=877026836]
 unique_name_in_owner = true
+visible = false
 clip_contents = true
 layout_mode = 1
 anchor_right = 0.5
@@ -1294,6 +1365,7 @@ metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
 
 [node name="ShipsRight" type="PanelContainer" parent="." unique_id=79903016]
 unique_name_in_owner = true
+visible = false
 top_level = true
 clip_contents = true
 custom_minimum_size = Vector2(350, 0)
@@ -1838,13 +1910,65 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_ystpj")
 text = "Select"
 hover_underline_effect = false
 
+[node name="WeaponUpgradePanel" type="PanelContainer" parent="." unique_id=1751537862]
+unique_name_in_owner = true
+visible = false
+top_level = true
+custom_minimum_size = Vector2(606, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -131.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5onfs")
+script = ExtResource("18_5onfs")
+
+[node name="MarginContainer" type="MarginContainer" parent="WeaponUpgradePanel" unique_id=754452782]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponUpgradePanel/MarginContainer" unique_id=346748891]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="WeaponUpgradePanel/MarginContainer/VBoxContainer" unique_id=925508089]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Weapons"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="WeaponUpgradePanel/MarginContainer/VBoxContainer" unique_id=261528876]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="WeaponUpgradePanel/MarginContainer/VBoxContainer" unique_id=563641809]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntriesContainer" type="VBoxContainer" parent="WeaponUpgradePanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1638418422]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="WeaponUpgradeEntry" parent="WeaponUpgradePanel/MarginContainer/VBoxContainer/ScrollContainer/EntriesContainer" unique_id=1822301726 instance=ExtResource("17_irre1")]
+layout_mode = 2
+
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/ShipsButton" to="." method="_on_ships_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/RecyclingButton" to="." method="_on_recycling_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Center/WeaponFactoryButton" to="." method="_on_weapon_factory_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/Main/Center/UpgradeStationButton" to="." method="_on_upgrade_station_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Main/Bottom/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Ships/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/Recycling/VBoxContainer/CargoReturnButton2" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="Left/MarginContainer/WeaponFactory/VBoxContainer/WeaponReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Left/MarginContainer/UpgradeStation/VBoxContainer/WeaponReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="Left/MarginContainer/WeaponFactory" method="_on_produce_button_pressed"]
 [connection signal="pressed" from="WeaponFactoryRightPanel/PanelContainer/MarginContainer/InfoSection/Left/CostsSection/MarginContainer/HboxContainer/RightPanel/ProduceButton" to="WeaponFactoryRightPanel" method="_on_produce_button_pressed"]
 [connection signal="pressed" from="ShipsRight/MarginContainer/VBoxContainer/ShipInfoContainer/SelectButton" to="." method="_on_select_button_pressed"]

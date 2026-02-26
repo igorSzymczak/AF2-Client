@@ -6,6 +6,7 @@ extends Control
 @onready var ships_section = %Ships
 @onready var recycling_section = %Recycling
 @onready var weapon_factory_section = %WeaponFactory
+@onready var upgrade_station_section: Control = %UpgradeStation
 @onready var main_structure_title = %MainStructureTitle
 
 @onready var ships_right_panel = %ShipsRight
@@ -23,6 +24,7 @@ extends Control
 @onready var shield_regen_amount: Label = %ShieldRegenAmount
 @onready var shield_regen_points: HBoxContainer = %ShieldRegenPoints
 @onready var select_button: BetterButton = %SelectButton
+@onready var upgrade_station_button: BetterButton = %UpgradeStationButton
 
 @onready var recycling_button: BetterButton = %RecyclingButton
 @onready var weapon_factory_button: BetterButton = %WeaponFactoryButton
@@ -32,9 +34,15 @@ extends Control
 @onready var default_section_pos_x: float = 0.0
 
 @onready var weapon_factory_right_panel: Control = %WeaponFactoryRightPanel
+@onready var weapon_upgrade_panel: WeaponUpgradePanel = %WeaponUpgradePanel
 
 func _ready():
 	position.x = -menu_width
+	main_section.show()
+	ships_section.hide()
+	recycling_section.hide()
+	weapon_factory_section.hide()
+	upgrade_station_section.hide()
 
 func _process(delta):
 	play_current_animation(delta)
@@ -64,11 +72,15 @@ func select_animation(animation_name: String):
 		current_section.show()
 		hide_or_show_recycling_button()
 		hide_or_show_weapon_factory_button()
+		hide_or_show_upgrade_station_button()
+		weapon_upgrade_panel.slide_out()
+		
 	elif animation_name == "close":
 		selected_animation = "close"
 		animation_finished = false
 		weapon_factory_right_panel.slide_out()
 		ships_right_panel.slide_out()
+		weapon_upgrade_panel.slide_out()
 	elif animation_name == "ships":
 		if current_section != ships_section and animation_finished:
 			selected_animation = "ships"
@@ -84,6 +96,12 @@ func select_animation(animation_name: String):
 			selected_animation = "weapon_factory"
 			animation_finished = false
 			weapon_factory_section.load_weapons(args)
+	elif animation_name == "upgrade_station":
+		if current_section != upgrade_station_section and animation_finished:
+			selected_animation = "upgrade_station"
+			animation_finished = false
+			upgrade_station_section.load_upgrades()
+	
 	
 	elif animation_name == "main":
 		if current_section != main_section and animation_finished:
@@ -91,6 +109,8 @@ func select_animation(animation_name: String):
 			animation_finished = false
 		weapon_factory_right_panel.slide_out()
 		ships_right_panel.slide_out()
+		weapon_upgrade_panel.slide_out()
+		
 
 func play_current_animation(delta: float):
 	if !animation_finished:
@@ -112,6 +132,8 @@ func play_current_animation(delta: float):
 			hide_current_and_show(delta, recycling_section)
 		elif selected_animation == "weapon_factory":
 			hide_current_and_show(delta, weapon_factory_section)
+		elif selected_animation == "upgrade_station":
+			hide_current_and_show(delta, upgrade_station_section)
 		elif selected_animation == "main":
 			hide_current_and_show(delta, main_section)
 
@@ -247,6 +269,14 @@ func hide_or_show_weapon_factory_button() -> void:
 	else:
 		weapon_factory_button.hide()
 
+func hide_or_show_upgrade_station_button() -> void:
+	if g.me.landed_structure is UpgradeStation:
+		upgrade_station_button.show()
+	else:
+		upgrade_station_button.hide()
+
+
+
 func _on_select_button_pressed():
 	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_type)
 
@@ -266,3 +296,7 @@ func _on_exit_button_pressed():
 	if g.me.landed_structure != null:
 		g.me.landed_structure.request_leave_structure.rpc_id(1, g.me.gid)
 		GlobalSignals.set_ui.emit("game")
+
+
+func _on_upgrade_station_button_pressed() -> void:
+	select_animation("upgrade_station")

@@ -40,6 +40,12 @@ func request_select_ship(username: String, ship_type: ShipType):
 func request_buy_weapon(weapon_type: WeaponManager.Type):
 	handle_buy_weapon(multiplayer.get_remote_sender_id(), weapon_type)
 
+@rpc("any_peer", "call_remote", "reliable")
+func request_upgrade_weapon(weapon_type: WeaponManager.Type, lvl: int):
+	handle_upgrade_weapon(multiplayer.get_remote_sender_id(), weapon_type, lvl)
+
 func handle_buy_ship(_username, _ship_type): pass # Only Server
 func handle_select_ship(_username, _ship_type): pass # Only Server
 func handle_buy_weapon(_user_id, _weapon_type): pass # Only Server
+func handle_upgrade_weapon(_user_id, _weapon_type, _lvl): pass # Only Server
+	

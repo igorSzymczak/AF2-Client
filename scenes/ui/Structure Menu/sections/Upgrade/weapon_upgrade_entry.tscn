@@ -1,0 +1,442 @@
+[gd_scene format=3 uid="uid://ceda322ro3fel"]
+
+[ext_resource type="Script" uid="uid://dnigqjoe8q21b" path="res://scenes/ui/Structure Menu/sections/Upgrade/weapon_upgrade_entry.gd" id="1_1pn7u"]
+[ext_resource type="PackedScene" uid="uid://bpal8b1ogmybs" path="res://scenes/ui/Weapon Element/weapon_element.tscn" id="1_22c5j"]
+[ext_resource type="Texture2D" uid="uid://bqvkdsw678u54" path="res://assets/ui/inventory/flux.png" id="2_1pn7u"]
+[ext_resource type="Script" uid="uid://b0qp5dnn8f45y" path="res://scenes/ui/Structure Menu/sections/Upgrade/upgrade_point_icon.gd" id="3_g58kg"]
+[ext_resource type="Texture2D" uid="uid://cpjj8oaj1f7pc" path="res://assets/ui/inventory/steel.png" id="3_s1ahr"]
+[ext_resource type="PackedScene" uid="uid://bjvqdopyimyma" path="res://scenes/ui/Structure Menu/sections/Upgrade/upgrade_button_select.tscn" id="4_7jg4m"]
+[ext_resource type="Texture2D" uid="uid://wcdd1ygbse85" path="res://assets/ui/inventory/hydrogen_crystals.png" id="4_g58kg"]
+[ext_resource type="Texture2D" uid="uid://ddtwfkxlvu0bi" path="res://assets/ui/inventory/plasma_fluids.png" id="5_7jg4m"]
+[ext_resource type="Texture2D" uid="uid://bax8hjmaulh50" path="res://assets/ui/inventory/iridium.png" id="6_qqr2f"]
+[ext_resource type="Script" uid="uid://dkrfatcxwvxnq" path="res://scenes/ui/elements/buttons/menu_button.gd" id="7_j6epe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay2sa"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Gradient" id="Gradient_g58kg"]
+offsets = PackedFloat32Array(0.004115226, 1)
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g58kg"]
+gradient = SubResource("Gradient_g58kg")
+width = 24
+height = 24
+fill_from = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_7jg4m"]
+offsets = PackedFloat32Array(0.004115226, 1)
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qqr2f"]
+gradient = SubResource("Gradient_7jg4m")
+width = 24
+height = 24
+fill_from = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_j6epe"]
+offsets = PackedFloat32Array(0.004115226, 1)
+colors = PackedColorArray(0.1882353, 0.1882353, 0.1882353, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pstln"]
+gradient = SubResource("Gradient_j6epe")
+width = 24
+height = 24
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1y8y"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjqah"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lngh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.5019608, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt8pf"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 3
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 3
+corner_detail = 1
+
+[node name="WeaponUpgradeEntry" type="PanelContainer" unique_id=1822301726]
+clip_contents = true
+custom_minimum_size = Vector2(582, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -291.0
+offset_right = 291.0
+offset_bottom = 283.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay2sa")
+accessibility_region = true
+script = ExtResource("1_1pn7u")
+
+[node name="MainMargin" type="MarginContainer" parent="." unique_id=872908678]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin" unique_id=654188471]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ExpandButton" type="Button" parent="MainMargin/VBoxContainer" unique_id=1954894493]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="TitleSection" type="HBoxContainer" parent="MainMargin/VBoxContainer/ExpandButton" unique_id=2050144891]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="WeaponElementContainer" type="VBoxContainer" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection" unique_id=1525741463]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WeaponElement" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection/WeaponElementContainer" unique_id=1772088911 instance=ExtResource("1_22c5j")]
+layout_mode = 2
+mouse_behavior_recursive = 1
+
+[node name="WeaponNameLabel" type="Label" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection" unique_id=719091308]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "Blaster"
+vertical_alignment = 1
+
+[node name="UpgradePointsContainer" type="HBoxContainer" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection" unique_id=502108677]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="UpgradePointIcon" type="TextureRect" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection/UpgradePointsContainer" unique_id=1032964180]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_g58kg")
+script = ExtResource("3_g58kg")
+
+[node name="UpgradePointIcon2" type="TextureRect" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection/UpgradePointsContainer" unique_id=1659226046]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_qqr2f")
+script = ExtResource("3_g58kg")
+
+[node name="UpgradePointIcon3" type="TextureRect" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection/UpgradePointsContainer" unique_id=1655858442]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_pstln")
+script = ExtResource("3_g58kg")
+
+[node name="Separator" type="Control" parent="MainMargin/VBoxContainer/ExpandButton/TitleSection" unique_id=318677614]
+layout_mode = 2
+
+[node name="UpgradeSection" type="HBoxContainer" parent="MainMargin/VBoxContainer" unique_id=1696924876]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 188)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMargin/VBoxContainer/UpgradeSection" unique_id=1558019379]
+custom_minimum_size = Vector2(316, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer" unique_id=458479736]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer" unique_id=1387530587]
+layout_mode = 2
+alignment = 1
+
+[node name="UpgradeButton1" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer" unique_id=845033301 instance=ExtResource("4_7jg4m")]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+
+[node name="UpgradeButton2" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer" unique_id=853849628 instance=ExtResource("4_7jg4m")]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "2"
+
+[node name="UpgradeButton3" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1216588651 instance=ExtResource("4_7jg4m")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3"
+
+[node name="HboxContainer" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer" unique_id=1261517914]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="CostsPanel" type="VBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer" unique_id=1225200747]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Flux" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel" unique_id=10248780]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Flux" unique_id=609730125]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_1pn7u")
+stretch_mode = 5
+
+[node name="FluxAmount" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Flux" unique_id=871918085]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Steel" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel" unique_id=651246821]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Steel" unique_id=1062842038]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_s1ahr")
+stretch_mode = 5
+
+[node name="SteelAmount" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Steel" unique_id=2147401870]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HydrogenCrystals" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel" unique_id=2120491741]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/HydrogenCrystals" unique_id=1956801829]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("4_g58kg")
+stretch_mode = 5
+
+[node name="HydrogenCrystalsAmount" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/HydrogenCrystals" unique_id=1187455682]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="PlasmaFluids" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel" unique_id=110276208]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/PlasmaFluids" unique_id=1532313838]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5_7jg4m")
+stretch_mode = 5
+
+[node name="PlasmaFluidsAmount" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/PlasmaFluids" unique_id=1218100631]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Iridium" type="HBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel" unique_id=1051648495]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Iridium" unique_id=77948325]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("6_qqr2f")
+stretch_mode = 5
+
+[node name="IridiumAmount" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/CostsPanel/Iridium" unique_id=101245059]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer" unique_id=445198528]
+layout_mode = 2
+alignment = 1
+
+[node name="GreenReason" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=806231839]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.85490197, 0, 1)
+text = "Bought!"
+horizontal_alignment = 1
+
+[node name="RedReason" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=552467634]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85490197, 0, 0, 1)
+text = "You are broke"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="UpgradeButton" type="Button" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HboxContainer/RightPanel" unique_id=332191340]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_pressed_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_colors/font_disabled_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_f1y8y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kjqah")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1lngh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qt8pf")
+text = "Upgrade!"
+script = ExtResource("7_j6epe")
+metadata/_custom_type_script = "uid://dkrfatcxwvxnq"
+
+[node name="VSeparator" type="VSeparator" parent="MainMargin/VBoxContainer/UpgradeSection" unique_id=1280222444]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MainMargin/VBoxContainer/UpgradeSection" unique_id=399177186]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="BonusesContainer" type="VBoxContainer" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2" unique_id=1037881229]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2/BonusesContainer" unique_id=1534935538]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label2" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2/BonusesContainer" unique_id=796426157]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label3" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2/BonusesContainer" unique_id=653815200]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label4" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2/BonusesContainer" unique_id=2001093373]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[node name="Label5" type="Label" parent="MainMargin/VBoxContainer/UpgradeSection/MarginContainer2/BonusesContainer" unique_id=1104919427]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+10% Damage"
+
+[connection signal="pressed" from="MainMargin/VBoxContainer/ExpandButton" to="." method="_on_expand_button_pressed"]
+[connection signal="mouse_entered" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_1_mouse_entered"]
+[connection signal="mouse_exited" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_mouse_exited"]
+[connection signal="pressed" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton1" to="." method="_on_upgrade_button_1_pressed"]
+[connection signal="mouse_entered" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_mouse_exited"]
+[connection signal="pressed" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton2" to="." method="_on_upgrade_button_2_pressed"]
+[connection signal="mouse_entered" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton3" to="." method="_on_upgrade_button_3_mouse_entered"]
+[connection signal="mouse_exited" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton3" to="." method="_on_upgrade_button_mouse_exited"]
+[connection signal="pressed" from="MainMargin/VBoxContainer/UpgradeSection/MarginContainer/VBoxContainer/HBoxContainer/UpgradeButton3" to="." method="_on_upgrade_button_3_pressed"]

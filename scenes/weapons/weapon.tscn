@@ -6,3 +6,6 @@
 script = ExtResource("1_vahxa")
 weapon_name = "Default Weapon"
 weapon_type = 2
+lvl_1_bonuses = PackedStringArray("+ 1 output")
+lvl_2_bonuses = PackedStringArray("+ 2 outputs", "+ 25% base damage")
+lvl_3_bonuses = PackedStringArray("+ 4 outputs", "+ 50% base damage", "+25% homing speed")

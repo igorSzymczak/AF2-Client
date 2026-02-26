@@ -18,7 +18,7 @@ var rendered_types : Array[POI.TYPE] = [
 	POI.TYPE.SUN,
 	POI.TYPE.RECYCLE_STATION,
 	POI.TYPE.WEAPON_FACTORY,
-	
+	POI.TYPE.UPGRADE_STATION
 ]
 
 func _ready():

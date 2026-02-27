@@ -114,7 +114,6 @@ func show_weapon_tooltip(index: int):
 	
 	var weapon_name: String = weapon.weapon_name
 	var dmg: float = weapon_data.get_prop(PlayerData.WeaponProperty.DAMAGE)
-	print("current weapo damge for ", weapon_name, " is ", dmg)
 	
 	var bullet_range: Vector2i = weapon_data.get_prop(PlayerData.WeaponProperty.BULLET_AMOUNT_RANGE)
 	var average_bullets: float = float(bullet_range[0] + bullet_range[1]) / 2.0

@@ -12,6 +12,7 @@ enum Type {
 	SHOCKWAVE_GENERATOR,
 	ENERGY_NOVA,
 	ENERGY_BLAST,
+	TORPEDOES,
 }
 
 var _Weapons: Dictionary[Type, PackedScene] = {
@@ -26,6 +27,7 @@ var _Weapons: Dictionary[Type, PackedScene] = {
 	Type.SHOCKWAVE_GENERATOR: load("res://scenes/weapons/ShockwaveGenerator/shockwave_generator.tscn"),
 	Type.ENERGY_NOVA: load("res://scenes/weapons/Energy Nova/energy_nova.tscn"),
 	Type.ENERGY_BLAST: load("res://scenes/weapons/EnergyBlast/energy_blast.tscn"),
+	Type.TORPEDOES: load("res://scenes/weapons/Torpedoes/torpedoes.tscn")
 }
 
 func get_type(weapon: Weapon) -> Type:
@@ -49,6 +51,7 @@ enum BulletType {
 	PIERCING_BULLET,
 	SPAWNER_LASER,
 	ENERGY_BLAST_PROJECTILE,
+	TORPEDO
 }
 
 var _Bullets: Dictionary[BulletType, PackedScene] = {
@@ -62,7 +65,8 @@ var _Bullets: Dictionary[BulletType, PackedScene] = {
 	BulletType.PLASMA: load("res://scenes/bullets/bullets/PlasmaGun/plasma.tscn"),
 	BulletType.PIERCING_BULLET: load("res://scenes/bullets/bullets/PiercingGun/piercing_bullet.tscn"),
 	BulletType.SPAWNER_LASER: load("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn"),
-	BulletType.ENERGY_BLAST_PROJECTILE: load("res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.tscn")
+	BulletType.ENERGY_BLAST_PROJECTILE: load("res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.tscn"),
+	BulletType.TORPEDO: load("res://scenes/bullets/bullets/Torpedoes/torpedo.tscn")
 }
 
 func get_bullet_type(bullet: Bullet) -> BulletType:

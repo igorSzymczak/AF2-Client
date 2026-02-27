@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c7o6d3yt1mdxl"]
+
+[ext_resource type="Script" uid="uid://byhb3cd7gyixq" path="res://scenes/bullets/bullets/Torpedoes/torpedo.gd" id="1_6jsrs"]
+[ext_resource type="Texture2D" uid="uid://b6voovjnybswk" path="res://assets/projectiles/torpedo.png" id="2_rgt7j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jsrs"]
+radius = 13.0
+height = 272.0
+
+[node name="Torpedo" type="Area2D" unique_id=564496302]
+top_level = true
+visibility_layer = 2
+monitorable = false
+script = ExtResource("1_6jsrs")
+
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=1136783833]
+position = Vector2(-12, -1)
+scale = Vector2(0.377, 0.377)
+texture = ExtResource("2_rgt7j")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1265517310]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6jsrs")

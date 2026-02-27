@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b8fan3qdsllmt"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_2scpx"]
+
+[node name="Torpedoes" type="Node" unique_id=238031912]
+script = ExtResource("1_2scpx")
+weapon_name = "Torpedoes"
+weapon_type = 11
+damage = 130
+rps = 3.0
+power_cost = 40
+range = 9
+lvl_1_bonuses = PackedStringArray("+ 11.5% base damage")
+lvl_2_bonuses = PackedStringArray("+ 11.5% base damage", "+20% speed")
+lvl_3_bonuses = PackedStringArray("+ 23% base damage", "+20% speed", "+1 output")
+damage_points = 8
+rps_points = 6
+power_points = 9
+range_points = 10
+kinetic = true
+energy = true
+description_long = "The Rocket Launcher fires 3 slow-moving rockets that gradually gain speed, making them difficult to evade. With a substantial range and high AoE damage, they excel against groups of enemies. However, their slow firing rate and high energy consumption are drawbacks. Additionally, they detonate under the influence of the Energy Nova weapon."
+description_short = "Unleashes slow rockets with high AoE damage, effective against groups and on Long Range."

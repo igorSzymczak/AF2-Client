@@ -4,10 +4,9 @@ class_name BulletHoming
 @onready var trail: Line2D = $Trail
 @onready var trail_position: Marker2D = $TrailPosition
 
-func special_effects() -> void:
+func special_effects(_delta: float) -> void:
 	draw_trail()
 
-var queue: Array
 var MAX_LENGTH: int = 10
 
 func draw_trail() -> void:
@@ -15,11 +14,8 @@ func draw_trail() -> void:
 		return
 	
 	var pos = trail_position.global_position
-	queue.push_front(pos)
+	trail.add_point(pos, 0)
 
-	if queue.size() > MAX_LENGTH:
-		queue.pop_back()
-
-	trail.clear_points()
-	for point in queue:
-		trail.add_point(point)
+	var points_amount: int = trail.points.size()
+	if points_amount > MAX_LENGTH:
+		trail.remove_point(points_amount - 1)

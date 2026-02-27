@@ -2,16 +2,53 @@
 
 [ext_resource type="Script" uid="uid://byhb3cd7gyixq" path="res://scenes/bullets/bullets/Torpedoes/torpedo.gd" id="1_6jsrs"]
 [ext_resource type="Texture2D" uid="uid://b6voovjnybswk" path="res://assets/projectiles/torpedo.png" id="2_rgt7j"]
+[ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://assets/particles/Thrust Particle 2.png" id="3_6jsrs"]
+
+[sub_resource type="Gradient" id="Gradient_ytxt1"]
+offsets = PackedFloat32Array(0, 0.15231788, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.84313726, 0.3529412, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mk4ne"]
+gradient = SubResource("Gradient_ytxt1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vpp3h"]
+particle_flag_disable_z = true
+direction = Vector3(-100, 0, 0)
+spread = 12.273
+initial_velocity_max = 37.21
+gravity = Vector3(-100, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_mk4ne")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jsrs"]
 radius = 13.0
 height = 272.0
+
+[sub_resource type="Curve" id="Curve_rgt7j"]
+_data = [Vector2(0, 0.9325843), 0.0, 11.02729, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 0.9325843)
+point_0/right_tangent = 11.02729
+point_1/position = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_6jsrs"]
+colors = PackedColorArray(1, 0, 0, 0.49411765, 1, 0, 0, 0.1882353)
 
 [node name="Torpedo" type="Area2D" unique_id=564496302]
 top_level = true
 visibility_layer = 2
 monitorable = false
 script = ExtResource("1_6jsrs")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2046386574]
+position = Vector2(-136, 0)
+amount = 64
+amount_ratio = 0.7935
+sub_emitter = NodePath(".")
+texture = ExtResource("3_6jsrs")
+visibility_rect = Rect2(-600, -600, 1200, 1200)
+process_material = SubResource("ParticleProcessMaterial_vpp3h")
 
 [node name="BulletSprite" type="Sprite2D" parent="." unique_id=1136783833]
 position = Vector2(-12, -1)
@@ -21,3 +58,23 @@ texture = ExtResource("2_rgt7j")
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1265517310]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6jsrs")
+
+[node name="LineRight" type="Line2D" parent="." unique_id=1926948387]
+top_level = true
+position = Vector2(-157, 19)
+points = PackedVector2Array(0, 0, -16, 0, -37, 0, -56, 0, -73, 0, -93, 0, -100, 0)
+width_curve = SubResource("Curve_rgt7j")
+gradient = SubResource("Gradient_6jsrs")
+
+[node name="LineRightPosition" type="Marker2D" parent="." unique_id=584917996]
+position = Vector2(-157, 19)
+
+[node name="LineLeft" type="Line2D" parent="." unique_id=382154328]
+top_level = true
+position = Vector2(-157, -19.5)
+points = PackedVector2Array(0, 0, -16, 0, -37, 0, -56, 0, -73, 0, -93, 0, -100, 0)
+width_curve = SubResource("Curve_rgt7j")
+gradient = SubResource("Gradient_6jsrs")
+
+[node name="LineLeftPosition" type="Marker2D" parent="." unique_id=1531629759]
+position = Vector2(-157, -19.5)

@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	
 	update_position(delta)
 	
-	special_effects()
+	special_effects(delta)
 	bullet_scale_out()
 
 var calculated_global_position: Vector2
@@ -91,7 +91,7 @@ func update_position(delta: float) -> void:
 		global_position = global_position.lerp(server_pos + velocity, delta * 10)
 		rotation = lerp_angle(rotation, velocity.angle(), delta * 10)
 
-func special_effects() -> void:
+func special_effects(_delta: float) -> void:
 	# special effects every frame
 	modulate.a = opacity
 

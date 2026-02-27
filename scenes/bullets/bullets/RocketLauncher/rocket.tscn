@@ -7,6 +7,8 @@
 [sub_resource type="Curve" id="Curve_1dnbw"]
 _data = [Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+point_0/position = Vector2(0.5, 1)
+point_1/position = Vector2(1, 0)
 
 [sub_resource type="Gradient" id="Gradient_co1ty"]
 colors = PackedColorArray(1.5, 0, 0, 0.373, 1, 0, 0, 0)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c13pf0qcga3ug"
+path="res://.godot/imported/Torpedo (3).mp3-0fabe48502289db02de9a8c9462ad219.mp3str"
+
+[deps]
+
+source_file="res://audio/effects/weapons/Torpedo (3).mp3"
+dest_files=["res://.godot/imported/Torpedo (3).mp3-0fabe48502289db02de9a8c9462ad219.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

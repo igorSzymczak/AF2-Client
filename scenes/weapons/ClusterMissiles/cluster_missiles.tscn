@@ -5,7 +5,7 @@
 [node name="ClusterMissiles" type="Node" unique_id=971829523]
 script = ExtResource("1_5aoly")
 weapon_name = "Cluster Missiles"
-damage = 75
+damage = 30
 rps = 13.2
 power_cost = 15
 range = 8

@@ -356,7 +356,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 21
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/H/V2/H2/BorderRight/MarginContainer" unique_id=442719190]
 layout_mode = 2

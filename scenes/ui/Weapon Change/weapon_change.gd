@@ -15,14 +15,27 @@ extends Control
 @onready var energy_label: Label = %Energy
 @onready var plus2_label: Label = %Plus2
 @onready var corrosive_label: Label = %Corrosive
+
 @onready var dmg_label: Label = %DmgStat
+@onready var dmg_arrow: Label = %DmgArrow
+@onready var dmg_label_upgraded: Label = %DmgStatUpgraded
 @onready var dmg_points_container: Control = %DmgPoints
+
 @onready var rps_label: Label = %RpsStat
+@onready var rps_arrow: Label = %RpsArrow
+@onready var rps_label_upgraded: Label = %RpsStatUpgraded
 @onready var rps_points_container: Control = %RpsPoints
+
 @onready var power_label: Label = %PowerStat
+@onready var power_arrow: Label = %PowerArrow
+@onready var power_label_upgraded: Label = %PowerStatUpgraded
 @onready var power_points_container: Control = %PowerPoints
+
 @onready var range_label: Label = %RangeStat
+@onready var range_arrow: Label = %RangeArrow
+@onready var range_label_upgraded: Label = %RangeStatUpgraded
 @onready var range_points_container: Control = %RangePoints
+
 @onready var description_label: Label = %Description
 @onready var hotbar_label: Label = %HotbarLabel
 
@@ -174,16 +187,9 @@ func highlight_inventory(_ignore = false):
 func show_weapon(weapon: Weapon):
 	info_section.show()
 	
-	name_label.set_text(weapon.weapon_name)
-	dmg_label.set_text(str(weapon.damage))
-	rps_label.set_text(str(weapon.rps))
-	power_label.set_text(str(weapon.power_cost))
-	range_label.set_text(str(weapon.range))
+	set_stats(weapon.weapon_type)
 	
-	set_points(dmg_points_container, weapon.damage_points)
-	set_points(rps_points_container, weapon.rps_points)
-	set_points(power_points_container, weapon.power_points)
-	set_points(range_points_container, weapon.range_points)
+	name_label.text = weapon.weapon_name
 	
 	var element: WeaponElement = weapon_ui_scene.instantiate()
 	
@@ -202,6 +208,74 @@ func show_weapon(weapon: Weapon):
 var selecting: bool = false
 var element_a: WeaponElement
 var element_b: WeaponElement
+
+func set_stats(weapon_type: WeaponManager.Type) -> void: 
+	var dmg_0: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.DMG, WeaponManager.WeaponDataType.MIN)
+	var rps_0: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RPS, WeaponManager.WeaponDataType.MIN)
+	var power_0: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.POWER, WeaponManager.WeaponDataType.MIN)
+	var range_0: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RANGE, WeaponManager.WeaponDataType.MIN)
+	
+	var dmg_points_0: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.DMG, WeaponManager.WeaponDataType.POINTS_MIN))
+	var rps_points_0: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RPS, WeaponManager.WeaponDataType.POINTS_MIN))
+	var power_points_0: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.POWER, WeaponManager.WeaponDataType.POINTS_MIN))
+	var range_points_0: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RANGE, WeaponManager.WeaponDataType.POINTS_MIN))
+	
+	var dmg_max: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.DMG, WeaponManager.WeaponDataType.MAX)
+	var rps_max: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RPS, WeaponManager.WeaponDataType.MAX)
+	var power_max: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.POWER, WeaponManager.WeaponDataType.MAX)
+	var range_max: float = WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RANGE, WeaponManager.WeaponDataType.MAX)
+	
+	var dmg_points_max: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.DMG, WeaponManager.WeaponDataType.POINTS_MAX))
+	var rps_points_max: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RPS, WeaponManager.WeaponDataType.POINTS_MAX))
+	var power_points_max: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.POWER, WeaponManager.WeaponDataType.POINTS_MAX))
+	var range_points_max: int = roundi(WeaponManager.get_weapon_data(weapon_type, WeaponManager.StatType.RANGE, WeaponManager.WeaponDataType.POINTS_MAX))
+	
+	dmg_arrow.hide()
+	dmg_label_upgraded.hide()
+	rps_arrow.hide()
+	rps_label_upgraded.hide()
+	power_arrow.hide()
+	power_label_upgraded.hide()
+	range_arrow.hide()
+	range_label_upgraded.hide()
+	
+	dmg_label.set_text(Functions.shorten_number(dmg_0))
+	power_label.set_text(Functions.shorten_number(power_0))
+	range_label.set_text(Functions.shorten_number(range_0))
+	
+	if dmg_max != dmg_0:
+		dmg_arrow.show()
+		dmg_label_upgraded.show()
+		dmg_label_upgraded.text = Functions.shorten_number(dmg_max)
+	if power_max != power_0:
+		power_arrow.show()
+		power_label_upgraded.show()
+		power_label_upgraded.text = Functions.shorten_number(power_max)
+	if range_max != range_0:
+		range_arrow.show()
+		range_label_upgraded.show()
+		range_label_upgraded.text = Functions.shorten_number(range_max)
+	
+	if rps_0 >= 1:
+		rps_label.set_text(Functions.shorten_number(rps_0))
+	else:
+		var seconds: float = Functions.round_to_dec(1.0 / rps_0, 1)
+		rps_label.set_text("1/" + Functions.shorten_number(seconds) + "s")
+	
+	if rps_max != rps_0:
+		rps_arrow.show()
+		rps_label_upgraded.show()
+		if rps_max >= 1:
+			rps_label_upgraded.set_text(Functions.shorten_number(rps_max))
+		else:
+			var seconds: float = Functions.round_to_dec(1.0 / rps_max, 1)
+			rps_label_upgraded.set_text("1/" + Functions.shorten_number(seconds) + "s")
+	
+	
+	set_points(dmg_points_container, dmg_points_0, dmg_points_max)
+	set_points(rps_points_container, rps_points_0, rps_points_max)
+	set_points(power_points_container, power_points_0, power_points_max)
+	set_points(range_points_container, range_points_0, range_points_max)
 
 func handle_click(element: WeaponElement, in_hotbar: bool = false):
 	if !in_hotbar and !selecting:
@@ -262,13 +336,16 @@ func handle_click(element: WeaponElement, in_hotbar: bool = false):
 			element_b = null
 			hotbar_label.set_text("Hotbar")
 
-static func set_points(container: Control, amount: int):
+func set_points(container: Control, base_amount: int, max_amount: int):
 	for child: Polygon2D in container.get_children():
-		if amount > 0:
+		if base_amount > 0:
 			child.color = Color("33a837")
+		elif max_amount > 0:
+			child.color = Color("ffa837")
 		else:
 			child.color = Color("#444444")
-		amount -= 1
+		base_amount -= 1
+		max_amount -= 1
 
 func set_types(ene: bool, kin: bool, cor: bool):
 	energy_label.hide()

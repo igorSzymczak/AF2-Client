@@ -27,7 +27,6 @@ func _handle_weapons_data_sent(data: Dictionary[Type, Array]) -> void:
 func get_weapon_data(weapon_type: Type, stat_type: StatType, data_type: WeaponDataType) -> float:
 	if stat_type == StatType.UPGRADES_ARRAY:
 		return 0
-	
 	return weapons_data[weapon_type][stat_type][data_type]
 
 func get_weapon_upgrades_info(weapon_type: Type, lvl: int) -> PackedStringArray:
@@ -43,9 +42,10 @@ func get_weapon_upgrades_info(weapon_type: Type, lvl: int) -> PackedStringArray:
 			continue
 		
 		var difference: float = 0
-		var sign_space: String = "- " if upgraded_value < 0 else "+ "
+		var sign_space: String = "+ "
 		if upgraded_value is float or upgraded_value is int:
 			difference = upgraded_value - base_upgrades[prop]
+			sign_space = "- " if difference < 0 else "+ "
 		
 		var percent_difference: float = 0.0
 		if base_value != 0:

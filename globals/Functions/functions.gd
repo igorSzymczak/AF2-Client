@@ -1,35 +1,34 @@
 extends Node
 
-func shorten_number(number: float) -> String:
+func shorten_number(number: float, decimal_point: int = 2) -> String:
 	var abs_number: float = abs(number)
 	var scale: String = ""
 	
-	if abs_number >= 1e9: # billion
+	if abs_number >= 1e9:
 		abs_number /= 1e9
 		scale = " B"
-	elif abs_number >= 1e6: # million
+	elif abs_number >= 1e6:
 		abs_number /= 1e6
 		scale = " M"
-	elif abs_number >= 1e3: # thousand
+	elif abs_number >= 1e3:
 		abs_number /= 1e3
 		scale = " K"
 	
 	var shortened_number: float
-	if !scale:
-		shortened_number = round(abs_number)
-	else:
-		shortened_number = round_to_dec(abs_number, 2)
+	
+	
+	shortened_number = round_to_dec(abs_number, decimal_point)
+	
 	var shortened_number_str: String = str(shortened_number)
 	
+	# Remove leading zeros and dot
 	if "." in shortened_number_str:
-		# Remove trailing zeros after dot
 		shortened_number_str = shortened_number_str.rstrip("0").rstrip(".")
 	
-	var sign_symbol = ""
 	if number < 0:
-		sign_symbol = "-"
+		shortened_number_str = "-" + shortened_number_str
 	
-	return sign_symbol + shortened_number_str + scale
+	return shortened_number_str + scale
 
 func round_to_dec(number: float, digit: int) -> float:
 	return round(number * pow(10.0, digit)) / pow(10.0, digit)

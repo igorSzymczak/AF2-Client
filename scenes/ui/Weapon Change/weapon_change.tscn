@@ -579,139 +579,61 @@ theme_override_colors/font_color = Color(0.27451, 0.647059, 0.282353, 1)
 theme_override_font_sizes/font_size = 18
 text = "Corrosive"
 
-[node name="Stats" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left" unique_id=1079894981]
+[node name="Stats" type="MarginContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left" unique_id=2095719408]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 
-[node name="H" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats" unique_id=1930659304]
+[node name="H" type="VBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats" unique_id=2138744271]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Dmg" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1329266881]
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=223245066]
 layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Stats developed through upgrades"
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1504561048]
-custom_minimum_size = Vector2(212, 0)
+[node name="Dmg" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=571487018]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=465761108]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Base damage :"
 
-[node name="DmgStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1661360151]
+[node name="DmgStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=777343147]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.658824, 0.215686, 1)
 theme_override_font_sizes/font_size = 20
 text = "120"
 horizontal_alignment = 1
 
-[node name="DmgPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1419900566]
+[node name="DmgArrow" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1718174101]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(242, 0)
-layout_mode = 2
-
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=11973325]
-position = Vector2(10, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1452581377]
-position = Vector2(34, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1623740377]
-position = Vector2(58, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=955899999]
-position = Vector2(82, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1889253703]
-position = Vector2(106, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=574428685]
-position = Vector2(130, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1317354899]
-position = Vector2(154, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1745018540]
-position = Vector2(178, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=140412204]
-position = Vector2(202, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=61185148]
-position = Vector2(226, -1.5)
-scale = Vector2(0.6, 0.666667)
-skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
-
-[node name="Rps" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1786073247]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=438777174]
-custom_minimum_size = Vector2(212, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Rate of fire :"
-
-[node name="RpsStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=259630771]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "1 RPS"
+text = "➜"
 horizontal_alignment = 1
 
-[node name="RpsPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=482806272]
+[node name="DmgStatUpgraded" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1825491783]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65882355, 0.21568628, 1)
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="DmgPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg" unique_id=1067403362]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=163212700]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1852701824]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -719,7 +641,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=270457479]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1857586090]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -727,7 +649,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1153467599]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=934321342]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -735,7 +657,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1123119070]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1074076047]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -743,7 +665,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=809592008]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1818009909]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -751,7 +673,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=209085554]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1218556997]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -759,7 +681,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=887262514]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=773717500]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -767,7 +689,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1288500730]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=211910290]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -775,7 +697,128 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=2096315211]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1839734318]
+position = Vector2(202, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(1, 0.65882355, 0.21568628, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Dmg/DmgPoints" unique_id=1105965806]
+position = Vector2(226, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(1, 0.65882355, 0.21568628, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="Rps" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1589126958]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=321947603]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Rounds / Sec :"
+
+[node name="RpsStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=1545586366]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.658824, 0.215686, 1)
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 1
+
+[node name="RpsArrow" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=683500396]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "➜"
+horizontal_alignment = 1
+
+[node name="RpsStatUpgraded" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=635114718]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65882355, 0.21568628, 1)
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="RpsPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps" unique_id=396182555]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(242, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1989384514]
+position = Vector2(10, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=404518391]
+position = Vector2(34, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1149816232]
+position = Vector2(58, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=864687040]
+position = Vector2(82, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=827377462]
+position = Vector2(106, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=1304895148]
+position = Vector2(130, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=2099885318]
+position = Vector2(154, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=746398166]
+position = Vector2(178, -1.5)
+scale = Vector2(0.6, 0.666667)
+skew = 0.436332
+color = Color(0.2, 0.658824, 0.215686, 1)
+antialiased = true
+polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
+
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=542220159]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -783,37 +826,56 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=42699942]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Rps/RpsPoints" unique_id=158437727]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
+color = Color(1, 0.65882355, 0.21568628, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Power" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=53553565]
+[node name="Power" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=297812054]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=838686936]
-custom_minimum_size = Vector2(212, 0)
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=928991661]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Power cost :"
 
-[node name="PowerStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1898941173]
+[node name="PowerStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=132490144]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.658824, 0.215686, 1)
 theme_override_font_sizes/font_size = 20
 text = "30"
 horizontal_alignment = 1
 
-[node name="PowerPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1331471463]
+[node name="PowerArrow" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1929950743]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "➜"
+horizontal_alignment = 1
+
+[node name="PowerStatUpgraded" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=1222708752]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65882355, 0.21568628, 1)
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="PowerPoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power" unique_id=91618597]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=728464478]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1242950704]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -821,7 +883,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=2079741249]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=596526956]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -829,7 +891,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1273598259]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=412537851]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -837,7 +899,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=511610865]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=2028182694]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -845,7 +907,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1155615507]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1816838157]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -853,7 +915,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1922444798]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=845641817]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -861,7 +923,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=609777553]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=386863612]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -869,7 +931,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=901968150]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=71834907]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -877,7 +939,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=46867874]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=630437074]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -885,37 +947,56 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1916266070]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Power/PowerPoints" unique_id=1564225983]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
+color = Color(1, 0.65882355, 0.21568628, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="Range" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=698148254]
+[node name="Range" type="HBoxContainer" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H" unique_id=1497649577]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1371840932]
-custom_minimum_size = Vector2(212, 0)
+[node name="Label" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1411522326]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Range :"
 
-[node name="RangeStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1995082405]
+[node name="RangeStat" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=537179557]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.658824, 0.215686, 1)
 theme_override_font_sizes/font_size = 20
 text = "80"
 horizontal_alignment = 1
 
-[node name="RangePoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1578244635]
+[node name="RangeArrow" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1031458298]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "➜"
+horizontal_alignment = 1
+
+[node name="RangeStatUpgraded" type="Label" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=1182259279]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.65882355, 0.21568628, 1)
+theme_override_font_sizes/font_size = 20
+text = "120"
+horizontal_alignment = 1
+
+[node name="RangePoints" type="Control" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range" unique_id=547045671]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(242, 0)
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1160799912]
+[node name="B1" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=2108553267]
 position = Vector2(10, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -923,7 +1004,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=538245292]
+[node name="B2" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=568525646]
 position = Vector2(34, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -931,7 +1012,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=188585730]
+[node name="B3" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=306438403]
 position = Vector2(58, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -939,7 +1020,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=2007893012]
+[node name="B4" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=706405154]
 position = Vector2(82, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -947,7 +1028,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=380436355]
+[node name="B5" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=542805110]
 position = Vector2(106, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -955,7 +1036,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1646174548]
+[node name="B6" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=609214430]
 position = Vector2(130, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -963,7 +1044,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1689574374]
+[node name="B7" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=415956125]
 position = Vector2(154, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -971,7 +1052,7 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1161208627]
+[node name="B8" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1003386704]
 position = Vector2(178, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
@@ -979,19 +1060,19 @@ color = Color(0.2, 0.658824, 0.215686, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=194192805]
+[node name="B9" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1431524671]
 position = Vector2(202, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
+color = Color(1, 0.65882355, 0.21568628, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 
-[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1933014560]
+[node name="B10" type="Polygon2D" parent="PanelContainer/H/V2/H2/VBoxContainer/MarginContainer/InfoSection/Left/Stats/H/Range/RangePoints" unique_id=1307467585]
 position = Vector2(226, -1.5)
 scale = Vector2(0.6, 0.666667)
 skew = 0.436332
-color = Color(0.2, 0.658824, 0.215686, 1)
+color = Color(1, 0.65882355, 0.21568628, 1)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 25, 0, 25, 50, 0, 50)
 

@@ -28,7 +28,6 @@ func _process(_delta: float):
 			return
 		var anim_to_play: String = next_animation
 		next_animation = ""
-		print("executing next_animation: " + anim_to_play)
 		select_animation(anim_to_play)
 
 func select_animation(animation_name: String):

@@ -113,7 +113,6 @@ func set_current_lvl(value: int, play_sound: bool = false) -> void:
 		if play_sound: SoundManager.play_sound_from_name("Upgrade", g.me.global_position)
 		await point.finished_animation
 		i += 1
-	
 
 func disable_buttons(lvl: int) -> void:
 	upgrade_button_1.disabled = false

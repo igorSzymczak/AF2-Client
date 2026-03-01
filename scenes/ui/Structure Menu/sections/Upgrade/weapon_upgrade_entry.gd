@@ -82,6 +82,7 @@ func init(new_weapon_type: WeaponManager.Type, lvl: int, upgrade_costs: Array) -
 	_set_weapon(new_weapon_type)
 	set_current_lvl(lvl)
 	costs = upgrade_costs
+	show_bonuses(current_lvl)
 
 func _set_weapon(new_weapon_type: WeaponManager.Type) -> void:
 	if weapon_element_container.get_child_count() > 0:
@@ -105,6 +106,7 @@ func set_current_lvl(value: int, play_sound: bool = false) -> void:
 	disable_buttons(value)
 	
 	var i = current_lvl
+	current_lvl = value
 	while i < value:
 		var point: UpgradePointIcon = upgrade_points_container.get_child(i, true)
 		point.selected = true
@@ -112,7 +114,6 @@ func set_current_lvl(value: int, play_sound: bool = false) -> void:
 		await point.finished_animation
 		i += 1
 	
-	current_lvl = value
 
 func disable_buttons(lvl: int) -> void:
 	upgrade_button_1.disabled = false
@@ -173,25 +174,24 @@ func show_bonuses(bonus_lvl: int) -> void:
 	
 	
 	clear_bonuses()
-	var bonuses: PackedStringArray = []
-	match bonus_lvl:
-		1: bonuses = weapon.lvl_1_bonuses
-		2: bonuses = weapon.lvl_2_bonuses
-		3: bonuses = weapon.lvl_3_bonuses
+	var bonuses: PackedStringArray = WeaponManager.get_weapon_upgrades_info(weapon_type, bonus_lvl)
 	if !bonuses:
 		return
 	
 	if bonus_lvl == current_lvl:
 		var label := Label.new()
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.text = "Current upgrades: "
 		bonuses_container.add_child(label)
 	else:
 		var label := Label.new()
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.text = "Lvl " + str(bonus_lvl) + " upgrades:"
 		bonuses_container.add_child(label)
 	
 	for bonus: String in bonuses:
 		var label := Label.new()
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.text = bonus
 		bonuses_container.add_child(label)
 

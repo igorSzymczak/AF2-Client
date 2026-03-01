@@ -1,5 +1,81 @@
 extends Node
 
+enum StatType {
+	DMG = 0,
+	RPS = 1,
+	POWER = 2,
+	RANGE = 3,
+	UPGRADES_ARRAY = 4
+}
+
+enum WeaponDataType {
+	MIN = 0,
+	MAX = 1,
+	POINTS_MIN = 2,
+	POINTS_MAX = 3,
+}
+
+var weapons_data: Dictionary[Type, Array] = {}
+
+@rpc("authority", "call_remote", "reliable")
+func send_weapons_data(data: Dictionary[Type, Array]) -> void:
+	_handle_weapons_data_sent(data)
+
+func _handle_weapons_data_sent(data: Dictionary[Type, Array]) -> void:
+	weapons_data = data
+
+func get_weapon_data(weapon_type: Type, stat_type: StatType, data_type: WeaponDataType) -> float:
+	if stat_type == StatType.UPGRADES_ARRAY:
+		return 0
+	
+	return weapons_data[weapon_type][stat_type][data_type]
+
+func get_weapon_upgrades_info(weapon_type: Type, lvl: int) -> PackedStringArray:
+	if lvl <= 0 or lvl > 3: return []
+	var base_upgrades: Dictionary = weapons_data[weapon_type][StatType.UPGRADES_ARRAY][0]
+	var lvl_upgrades: Dictionary = weapons_data[weapon_type][StatType.UPGRADES_ARRAY][lvl]
+	
+	var upgrades_info: PackedStringArray = []
+	for prop: Weapon.Property in lvl_upgrades:
+		var upgraded_value: Variant = lvl_upgrades[prop]
+		var base_value: Variant = base_upgrades[prop]
+		if upgraded_value is Dictionary:
+			continue
+		
+		var difference: float = 0
+		var sign_space: String = "- " if upgraded_value < 0 else "+ "
+		if upgraded_value is float or upgraded_value is int:
+			difference = upgraded_value - base_upgrades[prop]
+		
+		var percent_difference: float = 0.0
+		if base_value != 0:
+			percent_difference = (difference / base_value) * 100.0
+		
+		var info: String = ""
+		match prop:
+			Weapon.Property.DAMAGE: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% base damage"
+			Weapon.Property.SHOOT_DELAY: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% shoot delay"
+			Weapon.Property.BULLET_SPREAD: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% bullet spread"
+			Weapon.Property.BULLET_AMOUNT: info = sign_space + Functions.shorten_number(abs(difference)) + " bullets shot"
+			Weapon.Property.BULLET_AMOUNT_RNG: info = "randomly shoot up to " + Functions.shorten_number(upgraded_value) + " additional bullets"
+			Weapon.Property.POWER_USAGE_PER_SHOOT: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% used power"
+			Weapon.Property.WEAPON_OUTPUTS: info = sign_space + Functions.shorten_number(abs(difference)) + " weapon outputs"
+			Weapon.Property.WEAPON_OUTPUTS_DISTANCE: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% outputs distance"
+			Weapon.Property.BULLET_SPEED: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% bullet speed"
+			Weapon.Property.BULLET_SPEED_RNG: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% random bullet speed"
+			Weapon.Property.BULLET_LIFE_TIME: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% bullet life time"
+			Weapon.Property.BULLET_LIFE_TIME_RNG: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% bullet random life time"
+			Weapon.Property.BULLET_FALL: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% bullet fatigue"
+			Weapon.Property.BULLET_PIERCING_AMOUNT: info = "pierce up to " + Functions.shorten_number(abs(upgraded_value)) + " targets"
+			Weapon.Property.BULLET_AOE_RADIUS: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% AOE radius"
+			#Weapon.Property.BULLET_OTHER_ARGS: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% "
+			Weapon.Property.SHOCKWAVE_ANGLE: info = Functions.shorten_number(abs(upgraded_value / PI * 180.0)) + "degree angle"
+			Weapon.Property.SHOCKWAVE_SCALE_SPEED: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% grow speed"
+			Weapon.Property.SHOCKWAVE_TIME_TO_VANISH_SECONDS: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% life time"
+		
+		upgrades_info.append(info)
+	return upgrades_info
+
 enum Type {
 	CLUSTER_MISSILES,
 	GATLING_LASER,

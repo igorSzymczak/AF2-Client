@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="5_eio5u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2iwdo"]
-radius = 0.01
+radius = 27.0
 
 [node name="Zlatte" type="CharacterBody2D" unique_id=2017227604]
 script = ExtResource("1_0y6no")
@@ -18,8 +18,6 @@ metadata/_custom_type_script = "uid://cf0pk0erui87j"
 type = 2
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1640793511]
-visible = false
-position = Vector2(-27, 0)
 rotation = -1.57079
 shape = SubResource("CircleShape2D_2iwdo")
 

@@ -6,20 +6,15 @@ var props: PropertyContainer = PropertyContainer.new(g.SPAWNER_PROPERTY_SCHEMA)
 var stats: Stats = Stats.new()
 
 @export var spawner_type: EntityManager.SpawnerType
-@export var team: int = 1
-
 @onready var sprite = $SpawnerSprite
 @onready var eye = $Eye
 @onready var destroyed_sprite = $DestroyedSpawnerSprite
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var poi: POI = $PoiComponent
 
 #var player: Player = null
 #func set_player(emitted_player: Player) -> void:
 	#player = emitted_player
-
-var shoot_range: float
  
 var original_sprite_texture: Texture2D
 func _ready() -> void:
@@ -43,11 +38,6 @@ func _on_property_changed(prop: g.SpawnerProperty, value: Variant) -> void:
 		g.SpawnerProperty.ACTIVE:
 			if value: activate()
 			else: deactivate()
-
-func set_team(new_team: int) -> void:
-	self.team = new_team
-	if is_instance_valid(hitbox_component):
-		hitbox_component.team = new_team
 
 var server_pos: Vector2
 var server_rot: float
@@ -85,7 +75,6 @@ func activate() -> void:
 	# set Amount of Enemies to just the Existing ones (0 if all killed)
 	
 	health_component.set_visible(true)
-	hitbox_component.set_monitorable(true)
 
 func deactivate() -> void:
 	GlobalSignals.create_explosion.emit(global_position, "explosion_large", 1, {})
@@ -97,4 +86,3 @@ func deactivate() -> void:
 	sprite.set_texture(destroyed_sprite.get_texture())
 	
 	health_component.set_visible(false)
-	hitbox_component.set_deferred("monitorable", false)

@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="4_h815f"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="5_ucilr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o8x3n"]
-radius = 0.01
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xr05u"]
+radius = 38.000023
+height = 206.0
 
 [node name="Launcher" type="CharacterBody2D" unique_id=524734028]
 script = ExtResource("1_4tkoo")
@@ -18,10 +19,9 @@ metadata/_custom_type_script = "uid://cf0pk0erui87j"
 type = 2
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1199323708]
-visible = false
-position = Vector2(-27, 0)
+position = Vector2(5, 0)
 rotation = -1.57079
-shape = SubResource("CircleShape2D_o8x3n")
+shape = SubResource("CapsuleShape2D_xr05u")
 
 [node name="Sprite" parent="." unique_id=91668658 instance=ExtResource("2_bd0eg")]
 

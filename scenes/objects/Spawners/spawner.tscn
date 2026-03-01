@@ -4,14 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_1axel"]
 [ext_resource type="Texture2D" uid="uid://msajke14wda1" path="res://assets/spawners/spawner.png" id="3_d3guo"]
 [ext_resource type="Texture2D" uid="uid://c23exqcv5bo8p" path="res://assets/spawners/eye.png" id="4_sg5c5"]
-[ext_resource type="PackedScene" uid="uid://bhkpp6iw15tmm" path="res://scenes/components/Hitbox/HitboxComponent.tscn" id="5_bbd3e"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="6_ppvbk"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="7_l7wyj"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="8_f848a"]
 [ext_resource type="Texture2D" uid="uid://gnonhalx3qf5" path="res://assets/spawners/Broken Spawner.png" id="10_81m4b"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_j0h6w"]
-radius = 62.2013
 
 [node name="Spawner" type="Node2D" unique_id=248401012 groups=["points_of_interest"]]
 script = ExtResource("1_micgo")
@@ -41,13 +37,6 @@ autostart = true
 [node name="ReactivateTimer" type="Timer" parent="." unique_id=1354288483]
 wait_time = 10.0
 one_shot = true
-
-[node name="HitboxComponent" parent="." unique_id=1352899619 node_paths=PackedStringArray("health_component") instance=ExtResource("5_bbd3e")]
-visible = false
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1844279027]
-shape = SubResource("CircleShape2D_j0h6w")
 
 [node name="HealthComponent" parent="." unique_id=1856524418 instance=ExtResource("6_ppvbk")]
 

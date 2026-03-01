@@ -119,7 +119,6 @@ bus = &"Effects"
 
 [node name="EnergyNova" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1162856458]
 stream = ExtResource("11_64xec")
-volume_db = -12.193
 pitch_scale = 0.65
 bus = &"Effects"
 

@@ -72,6 +72,9 @@ func get_weapon_upgrades_info(weapon_type: Type, lvl: int) -> PackedStringArray:
 			Weapon.Property.SHOCKWAVE_ANGLE: info = Functions.shorten_number(abs(upgraded_value / PI * 180.0)) + "degree angle"
 			Weapon.Property.SHOCKWAVE_SCALE_SPEED: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% grow speed"
 			Weapon.Property.SHOCKWAVE_TIME_TO_VANISH_SECONDS: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% life time"
+			Weapon.Property.HOMING_TURN_SPEED: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% homing speed"
+			Weapon.Property.HOMING_GUIDANCE_RADIUS: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% homing distance"
+			Weapon.Property.HOMING_MAX_SPEED_RATIO: info = sign_space + Functions.shorten_number(abs(percent_difference)) + "% max speed"
 		
 		upgrades_info.append(info)
 	return upgrades_info

@@ -3,16 +3,18 @@ extends BetterInput
 var last_text: String
 var last_time := 0
 
-#var user_prefs: UserPreferences
 func _input_ready():
-	pass
-	#user_prefs = UserPreferences.load_or_create()
-	#if user_prefs.nickname.length() > 0 and user_prefs.nickname.length() <= max_length:
-		#text = user_prefs.nickname
-		#g.emit_signal("player_nickname", text)
+	AuthManager.joined.connect(_on_join)
+
+func _on_join() -> void:
+	await get_tree().create_timer(0.1).timeout
+	text = g.me.nickname
+
+func _on_main_player_created(player: Player) -> void:
+	text = player.nickname
 
 func _input_process():
-	var t = Time.get_ticks_msec()
+	var t: int = Time.get_ticks_msec()
 	if t - 1000 > last_time and text != last_text and text.length() > 0 and g.Players.size() > 0:
 		last_text = text
 		last_time = t

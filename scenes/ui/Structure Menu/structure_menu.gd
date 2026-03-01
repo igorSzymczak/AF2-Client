@@ -258,7 +258,6 @@ func display_ship_info(ship: ShipComponent):
 		g.me.set_ship(ship.ship_type)
 		g.me.engine.activate_thruster()
 
-
 func hide_or_show_recycling_button() -> void:
 	if g.me.landed_structure is RecycleStation:
 		recycling_button.show()
@@ -277,9 +276,8 @@ func hide_or_show_upgrade_station_button() -> void:
 	else:
 		upgrade_station_button.hide()
 
-
-
 func _on_select_button_pressed():
+	land_ship_type = current_ship_type
 	ShipManager.request_select_ship.rpc_id(1, AuthManager.my_username , current_ship_type)
 
 func _on_ships_button_pressed():

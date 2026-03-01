@@ -385,7 +385,6 @@ func handle_shoot() -> void:
 			weapon_data.set_prop(PlayerData.WeaponProperty.LAST_SHOT, last_shot)
 			
 			g.player_shoot.emit(index)
-
 func regen_power(delta) -> void:
 	var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
 	var max_power = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value
@@ -396,8 +395,8 @@ func regen_power(delta) -> void:
 		var power_regen_multiplier = max(0.3, min(0.75, percentage_of_max))
 		
 		current_power += (delta * pow(PI, 3)) * power_regen_multiplier * max(1, pow(power_regen_rate, 1.0/4.0))
-	current_power = min(current_power, max_power)
-	PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
+		current_power = min(current_power, max_power)
+		PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
 
 var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:

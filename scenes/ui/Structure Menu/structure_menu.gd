@@ -76,6 +76,7 @@ func select_animation(animation_name: String):
 		weapon_upgrade_panel.slide_out()
 		
 	elif animation_name == "close":
+		g.me.set_ship(land_ship_type)
 		selected_animation = "close"
 		animation_finished = false
 		weapon_factory_right_panel.slide_out()
@@ -107,6 +108,7 @@ func select_animation(animation_name: String):
 		if current_section != main_section and animation_finished:
 			selected_animation = "main"
 			animation_finished = false
+		g.me.set_ship(land_ship_type)
 		weapon_factory_right_panel.slide_out()
 		ships_right_panel.slide_out()
 		weapon_upgrade_panel.slide_out()

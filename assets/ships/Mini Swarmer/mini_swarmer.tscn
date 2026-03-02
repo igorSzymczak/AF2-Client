@@ -1,0 +1,219 @@
+[gd_scene format=3 uid="uid://c8siqjdosjc35"]
+
+[ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="1_tlo8i"]
+[ext_resource type="Texture2D" uid="uid://pi4iff07t3qb" path="res://assets/ships/Mini Swarmer/mini_swarmer.png" id="1_u8oof"]
+[ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_iuslm"]
+[ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_5wajh"]
+[ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_ac2fu"]
+[ext_resource type="PackedScene" uid="uid://u2byke68jilv" path="res://scenes/entities/Engine/particles/idle.tscn" id="6_1ksnc"]
+[ext_resource type="PackedScene" uid="uid://cex8qtsv2geci" path="res://scenes/entities/Engine/particles/speeding.tscn" id="7_4f33a"]
+[ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="8_vx0yq"]
+
+[sub_resource type="Curve" id="Curve_s11yl"]
+_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+point_count = 3
+point_0/right_tangent = 2.06467
+point_0/right_mode = 1
+point_1/position = Vector2(0.150538, 0.310811)
+point_1/left_tangent = 2.06467
+point_1/left_mode = 1
+point_1/right_tangent = 0.384009
+point_2/position = Vector2(1, 0)
+point_2/left_tangent = -1.07396
+
+[sub_resource type="CurveTexture" id="CurveTexture_ijhs1"]
+curve = SubResource("Curve_s11yl")
+
+[sub_resource type="Gradient" id="Gradient_f8foa"]
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0.0988372, 1)
+colors = PackedColorArray(0.831373, 0, 0, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r0lgl"]
+gradient = SubResource("Gradient_f8foa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_awtl0"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.39999998
+color_ramp = SubResource("GradientTexture1D_r0lgl")
+alpha_curve = SubResource("CurveTexture_ijhs1")
+
+[sub_resource type="Curve" id="Curve_sthmy"]
+_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+point_count = 3
+point_0/right_tangent = 2.06467
+point_0/right_mode = 1
+point_1/position = Vector2(0.150538, 0.310811)
+point_1/left_tangent = 2.06467
+point_1/left_mode = 1
+point_1/right_tangent = 0.384009
+point_2/position = Vector2(1, 0)
+point_2/left_tangent = -1.07396
+
+[sub_resource type="CurveTexture" id="CurveTexture_cggpy"]
+curve = SubResource("Curve_sthmy")
+
+[sub_resource type="Gradient" id="Gradient_ox0ho"]
+interpolation_mode = 2
+interpolation_color_space = 2
+offsets = PackedFloat32Array(0, 0.0813954, 0.372093, 1)
+colors = PackedColorArray(0.542647, 0.287812, 0, 1, 0.301961, 0.0588235, 0.0588235, 1, 0.169245, 0.169245, 0.169245, 1, 0.646029, 0.646029, 0.646029, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_foe4m"]
+gradient = SubResource("Gradient_ox0ho")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_520l1"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 5.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+angular_velocity_min = 40.0
+angular_velocity_max = 40.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.29999998
+color_ramp = SubResource("GradientTexture1D_foe4m")
+alpha_curve = SubResource("CurveTexture_cggpy")
+
+[sub_resource type="Curve" id="Curve_3gqq8"]
+_data = [Vector2(0, 0), 0.0, 3.80618, 0, 0, Vector2(0.228495, 0.97973), 0.586487, 0.586487, 0, 0, Vector2(1, 0), -2.73208, 0.0, 0, 0]
+point_count = 3
+point_0/right_tangent = 3.80618
+point_1/position = Vector2(0.228495, 0.97973)
+point_1/left_tangent = 0.586487
+point_1/right_tangent = 0.586487
+point_2/position = Vector2(1, 0)
+point_2/left_tangent = -2.73208
+
+[sub_resource type="CurveTexture" id="CurveTexture_vo6hy"]
+curve = SubResource("Curve_3gqq8")
+
+[sub_resource type="Gradient" id="Gradient_xa562"]
+offsets = PackedFloat32Array(0.334302, 0.476744, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.917844, 0.739886, 1, 0.929412, 0.301961, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4ybhk"]
+gradient = SubResource("Gradient_xa562")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ahei3"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(25, 0, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 6.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(-1, 0, 0)
+spread = 42.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.19999999
+color_ramp = SubResource("GradientTexture1D_4ybhk")
+alpha_curve = SubResource("CurveTexture_vo6hy")
+
+[sub_resource type="Curve" id="Curve_24k4p"]
+_data = [Vector2(0, 0.668919), 0.0, 0.0, 0, 0, Vector2(1, 0.00675678), -5.18412, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 0.668919)
+point_1/position = Vector2(1, 0.00675678)
+point_1/left_tangent = -5.18412
+
+[sub_resource type="CurveTexture" id="CurveTexture_dnwfh"]
+curve = SubResource("Curve_24k4p")
+
+[sub_resource type="Gradient" id="Gradient_dc66j"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.526163, 1)
+colors = PackedColorArray(0.995255, 0.967918, 0.952284, 1, 0.979256, 0.905876, 0.610439, 1, 0.379477, 0.221055, 0.202949, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d4hbf"]
+gradient = SubResource("Gradient_dc66j")
+
+[sub_resource type="Curve" id="Curve_x1bv5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(0.989247, 0)
+point_1/left_tangent = -3.61946
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8btv"]
+curve = SubResource("Curve_x1bv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_83k82"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 3.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(50, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 120.0
+scale_min = 0.14999999
+scale_max = 0.19999999
+scale_over_velocity_min = 115.0
+scale_over_velocity_max = 285.0
+scale_over_velocity_curve = SubResource("CurveTexture_p8btv")
+color_ramp = SubResource("GradientTexture1D_d4hbf")
+alpha_curve = SubResource("CurveTexture_dnwfh")
+
+[node name="MiniSwarmer" type="Sprite2D" unique_id=1813719843]
+scale = Vector2(1.016, 1.016)
+texture = ExtResource("1_u8oof")
+script = ExtResource("1_tlo8i")
+metadata/_custom_type_script = "uid://10vuhv4ky8yl"
+
+[node name="Shadow" parent="." unique_id=495161807 instance=ExtResource("3_iuslm")]
+
+[node name="Engine" parent="." unique_id=2021222415 instance=ExtResource("4_5wajh")]
+modulate = Color(1, 0.8901961, 0, 1)
+show_behind_parent = true
+position = Vector2(-26.000002, 0)
+
+[node name="Light" parent="Engine" unique_id=861844475 instance=ExtResource("5_ac2fu")]
+position = Vector2(-0.36362457, 0)
+process_material = SubResource("ParticleProcessMaterial_awtl0")
+
+[node name="Idle" parent="Engine" unique_id=1682333538 instance=ExtResource("6_1ksnc")]
+position = Vector2(0.0909091, 0)
+process_material = SubResource("ParticleProcessMaterial_520l1")
+
+[node name="Speeding" parent="Engine" unique_id=1515190813 instance=ExtResource("7_4f33a")]
+position = Vector2(-26.748034, -9.536743e-07)
+process_material = SubResource("ParticleProcessMaterial_ahei3")
+
+[node name="Accelerate" parent="Engine" unique_id=1844810923 instance=ExtResource("8_vx0yq")]
+position = Vector2(0.0909092, 9.536743e-07)
+process_material = SubResource("ParticleProcessMaterial_83k82")

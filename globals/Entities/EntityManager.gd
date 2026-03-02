@@ -4,12 +4,16 @@ const player_scene: PackedScene = preload("res://scenes/entities/Player/player.t
 
 enum ActorType {
 	ZLATTE,
-	ELITE_LAUNCHER
+	ELITE_LAUNCHER,
+	MINI_SWARMER,
+	
 }
 
 var Actors: Dictionary[ActorType, PackedScene] = {
 	ActorType.ZLATTE : load("res://scenes/entities/Actor/Zlatte/Zlatte.tscn"),
-	ActorType.ELITE_LAUNCHER: load("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn")
+	ActorType.ELITE_LAUNCHER: load("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn"),
+	ActorType.MINI_SWARMER: load("res://scenes/entities/Actor/MiniSwarmer/mini_swarmer.tscn"),
+	
 }
 
 func get_actor_type(actor: Actor) -> ActorType:

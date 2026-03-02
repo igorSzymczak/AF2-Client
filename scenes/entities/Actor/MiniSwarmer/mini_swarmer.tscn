@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b52j2bjtsptt4"]
+
+[ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_2vfon"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_k4dxv"]
+[ext_resource type="PackedScene" uid="uid://c8siqjdosjc35" path="res://assets/ships/Mini Swarmer/mini_swarmer.tscn" id="3_nlwk2"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_wcisr"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_d83c8"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_y610u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ewows"]
+radius = 12.0
+height = 60.0
+
+[node name="MiniSwarmer" type="CharacterBody2D" unique_id=1624726840]
+script = ExtResource("1_2vfon")
+actor_type = 2
+metadata/_custom_type_script = "uid://cf0pk0erui87j"
+
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_k4dxv")]
+type = 2
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=836595449]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_ewows")
+
+[node name="Sprite" parent="." unique_id=1813719843 instance=ExtResource("3_nlwk2")]
+
+[node name="HealthComponent" parent="." unique_id=525729869 instance=ExtResource("4_wcisr")]
+position = Vector2(0, 6)
+scale = Vector2(0.5, 0.5)
+
+[node name="HealthBar" parent="HealthComponent" unique_id=1473980257 instance=ExtResource("5_d83c8")]
+offset_left = -48.0
+offset_top = 41.0
+offset_right = 48.0
+offset_bottom = 49.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" parent="HealthComponent" unique_id=2109862433 instance=ExtResource("6_y610u")]
+offset_left = -48.0
+offset_top = 29.0
+offset_right = 48.0
+offset_bottom = 37.0
+metadata/_edit_use_anchors_ = true

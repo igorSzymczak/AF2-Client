@@ -60,7 +60,7 @@ func client_signals():
 
 ## STRUCTURES
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_structure_property(id: int, prop: int, value: Variant):
 	handle_client_structure_property_changed(id, prop, value)
 
@@ -86,11 +86,11 @@ func handle_client_structure_property_changed(_id: int, _prop: int, _value: Vari
 func handle_local_player_property_changed(prop: int, value: Variant):
 	update_local_player_property.rpc_id(1, prop, value)
 
-@rpc("any_peer", "call_remote", "reliable")
+@rpc("any_peer", "call_remote", "unreliable")
 func update_local_player_property(prop: int, value: Variant):
 	server_handle_local_player_property(multiplayer.get_remote_sender_id(), prop, value)
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_player_property(id: int, prop: int, value: Variant):
 	handle_client_player_property_changed(id, prop, value)
 
@@ -124,7 +124,7 @@ func handle_set_weapon_request(_user_id: int, _slot: int, _weapon_type: WeaponMa
 func _on_requested_toggle_pvp(value: bool):
 	request_toogle_pvp.rpc_id(1, value)
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func set_player_position(pos: Vector2):
 	g.me.global_position = pos
 	g.me.velocity = Vector2.ZERO
@@ -153,7 +153,7 @@ func _handle_request_toggle_pvp(_user_id: int, _value: bool) -> void:
 
 
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_bullet_property(id: int, prop: int, value: Variant):
 	handle_client_bullet_property_changed(id, prop, value)
 
@@ -166,7 +166,7 @@ func add_existing_bullets(bullets: Array[Dictionary]):
 func add_bullet(bullet_data: Dictionary):
 	handle_client_bullet_added(bullet_data)
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func remove_bullet(id: int):
 	handle_client_bullet_removed(id)
 
@@ -201,7 +201,7 @@ func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name:
 ## SPAWNERS
 
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_spawner_property(id: int, prop: int, value: Variant):
 	handle_client_spawner_property_changed(id, prop, value)
 
@@ -234,7 +234,7 @@ func handle_client_spawner_removed(id: int):
 
 
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_turret_property(id: int, prop: int, value: Variant):
 	handle_client_turret_property_changed(id, prop, value)
 
@@ -267,7 +267,7 @@ func handle_client_turret_removed(id: int):
 
 
 
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "unreliable")
 func update_actor_property(id: int, prop: int, value: Variant):
 	handle_client_actor_property_changed(id, prop, value)
 
@@ -299,32 +299,25 @@ func handle_client_actor_removed(id: int):
 
 
 
-@rpc("authority", "call_local", "reliable")
+@rpc("authority", "call_remote", "reliable")
 func add_item(item: Dictionary):
-	g.add_item(item)
-	
-	# Only on Client
-	create_item(item.id)
+	_handle_create_item(item)
 
-@rpc
-func add_existing_items(Items: Dictionary):
+@rpc("authority", "call_local", "reliable")
+func remove_item(id: int):
+	_handle_remove_item(id)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_items(Items: Array[Dictionary]):
 	handle_add_items(Items)
 
 # Client Functions
-func handle_add_items(Items: Dictionary):
-	for i in Items:
-		var item: Dictionary = Items[i]
-		g.add_item(item)
-		create_item(item.id)
+func handle_add_items(Items: Array[Dictionary]):
+	for item: Dictionary in Items:
+		_handle_create_item(item)
 
-func create_item(id: int):
-	
-	var item_data: Dictionary = g.Items[id]
-	var item: Item = ItemManager.create_item_scene(
-		item_data.type, item_data.code, item_data.display_name,
-		item_data.start_position, item_data.target_position
-	)
-	
-	item.name = str(id)
-	current_world.add_child(item)
-	
+func _handle_create_item(data: Dictionary):
+	g.add_item(data)
+
+func _handle_remove_item(id: int):
+	g.remove_item(id)

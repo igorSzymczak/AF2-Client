@@ -866,9 +866,79 @@ func update_boss_stat(id: int, stat_type: Stats.TYPE, value: float):
 
 # 			ITEMS
 
-func add_item(item: Dictionary):
-	var id: int = item.id
-	if !Items.has(id):
-		Items[id] = item
 
-func remove_item(id: int): if Items.has(id): Items.erase(id)
+
+enum ItemProperty {
+	GID,
+	ITEM_CODE,
+	START_POSITION,
+	TARGET_POSITION,
+	INSIDE_AMOUNT,
+	PICKUP_DELAY_SEC,
+	DISAPPEAR_DELAY_SEC
+}
+
+const ITEM_PROPERTY_SCHEMA: Dictionary[ItemProperty, Dictionary] = {
+	ItemProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	ItemProperty.ITEM_CODE: {
+		"type": TYPE_INT,
+		"default": 0
+	},
+	ItemProperty.START_POSITION: {
+		"type": TYPE_VECTOR2,
+		"default": Vector2.ZERO
+	},
+	ItemProperty.TARGET_POSITION: {
+		"type": TYPE_VECTOR2,
+		"default": Vector2.ZERO
+	},
+	ItemProperty.INSIDE_AMOUNT: {
+		"type": TYPE_INT,
+		"default": 1
+	},
+	ItemProperty.PICKUP_DELAY_SEC: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	ItemProperty.DISAPPEAR_DELAY_SEC: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+}
+
+signal item_added(item: Item)
+func add_item(item_data: Dictionary):
+	var gid: int = item_data[ItemProperty.GID]
+	if Actors.has(gid):
+		return
+	
+	var code: Item.Code = item_data[ItemProperty.ITEM_CODE]
+	var item: Item = ItemManager.get_item(code)
+	if !is_instance_valid(item):
+		push_warning("Item of type ", code, " non existant!")
+		return
+	Items[gid] = {
+		"node": item,
+		"props": item.props
+	}
+	
+	item.spawned = true
+	item.gid = item_data[ItemProperty.GID]
+	item.inside_amount = item_data[ItemProperty.INSIDE_AMOUNT]
+	item.global_position = item_data[ItemProperty.START_POSITION]
+	item.target_position = item_data[ItemProperty.TARGET_POSITION]
+	item.pickup_delay_sec = item_data[ItemProperty.PICKUP_DELAY_SEC]
+	item.disappear_delay_sec = item_data[ItemProperty.DISAPPEAR_DELAY_SEC]
+	
+	item.props.from_dict(item_data)
+	current_world.add_child(item)
+	item_added.emit(item)
+
+func remove_item(gid: int):
+	if Items.has(gid):
+		var item: Item = Items[gid]["node"]
+		Items.erase(gid)
+		item.destroy()

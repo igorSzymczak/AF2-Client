@@ -17,6 +17,9 @@ func _ready() -> void:
 	suckArea.area_entered.connect(_on_suck_area_area_entered)
 	suckArea.area_exited.connect(_on_suck_area_area_exited)
 	collectArea.area_entered.connect(_on_collect_area_area_entered)
+	collectArea.area_exited.connect(_on_collect_area_area_exited)
+
+var collected_items: Array[Item] = []
 
 func _process(delta: float) -> void:
 	if !player.alive or player.landed_structure != null:
@@ -26,8 +29,16 @@ func _process(delta: float) -> void:
 		if !is_instance_valid(item):
 			sucked_items.erase(item)
 			return
+		
+		if !item.pickable: continue
 		var direction: Vector2 = item.global_position.direction_to(global_position)
 		item.global_position += direction * SUCK_SPEED * delta
+	
+	for item in collected_items:
+		if is_instance_valid(item) and item.pickable:
+			item.destroy()
+			collected_items.erase(item)
+			sucked_items.erase(item)
 
 func _on_suck_area_area_entered(item: Area2D) -> void:
 	if item is Item and !sucked_items.has(item) and is_instance_valid(item) and player.alive:
@@ -40,4 +51,8 @@ func _on_suck_area_area_exited(item: Area2D) -> void:
 
 func _on_collect_area_area_entered(item: Area2D) -> void:
 	if item is Item and player.alive:
-		item.destroy()
+		collected_items.append(item)
+
+func _on_collect_area_area_exited(item: Area2D) -> void:
+	if item is Item and player.alive and item in collected_items:
+			collected_items.erase(item)

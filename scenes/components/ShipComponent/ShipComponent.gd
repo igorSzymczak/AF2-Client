@@ -7,7 +7,6 @@ enum SHADER {
 	SHIELD,
 }
 
-@onready var lights: Sprite2D = $Lights 
 @export var engine: Thruster
 
 @export var ship_type : ShipManager.ShipType

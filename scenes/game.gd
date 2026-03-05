@@ -7,6 +7,7 @@ class_name Game
 
 const PORT: int = 7000
 const ADDRESS: String = "127.0.0.1"
+#const ADDRESS: String = "subcloud.org"
 #const ADDRESS: String = "83.29.89.59"
 #const ADDRESS: String = "130.61.143.133"
 

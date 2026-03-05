@@ -236,16 +236,7 @@ func show_costs(lvl: int) -> void:
 	if lvl < 0: return
 	if lvl > 3: return
 	
-	var final_costs: Dictionary[InventoryManager.Currency, int] = {}
-	
-	var i: int = current_lvl
-	while i < min(3, lvl):
-		var cost: Dictionary = costs[i]
-		for currency in cost.keys():
-			if !final_costs.has(currency):
-				final_costs[currency] = 0
-			final_costs[currency] += cost[currency]
-		i+=1
+	var final_costs := get_final_costs(lvl)
 	
 	if final_costs.is_empty():
 		costs_panel.hide()
@@ -273,11 +264,43 @@ func show_costs(lvl: int) -> void:
 	if final_costs.has(InventoryManager.Currency.FLUX):
 		flux_container.show()
 		flux_amount.text = str(final_costs[InventoryManager.Currency.FLUX])
+	
+	upgrade_button.disabled = false
+	red_reason.hide()
+	
+	if lvl <= current_lvl:
+		upgrade_button.disabled = true
+	if lvl > current_lvl:
+		if !InventoryManager.can_afford_costs(final_costs):
+			red_reason.show()
+			red_reason.text = "Can't afford"
+			upgrade_button.disabled = true
+			return
+
+func get_final_costs(lvl: int) -> Dictionary[InventoryManager.Currency, int]:
+	var final_costs: Dictionary[InventoryManager.Currency, int] = {}
+	
+	var i: int = current_lvl
+	while i < min(3, lvl):
+		var cost: Dictionary = costs[i]
+		for currency in cost.keys():
+			if !final_costs.has(currency):
+				final_costs[currency] = 0
+			final_costs[currency] += cost[currency]
+		i+=1
+	
+	return final_costs
 
 func _on_upgrade_button_pressed() -> void:
+	red_reason.hide()
+	green_reason.hide()
+	
 	if selected_lvl == 0:
 		return
-	
+	if !InventoryManager.can_afford_costs(get_final_costs(selected_lvl)):
+		red_reason.show()
+		red_reason.text = "Too broke!"
+		return
 	
 	ShipManager.request_upgrade_weapon.rpc_id(1, weapon_type, selected_lvl)
 	set_current_lvl(selected_lvl, true)

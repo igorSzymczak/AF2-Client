@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_cn746"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_hokib"]
 [ext_resource type="Texture2D" uid="uid://c40348t8nsjk4" path="res://assets/entities/Overseer/Overseer_Spritesheet.png" id="6_qd3v8"]
+[ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://assets/particles/Thrust Particle 2.png" id="7_nkfth"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkfth"]
 radius = 79.0
@@ -54,6 +55,29 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_ruvov"]
+_data = [Vector2(0, 0.7605729), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 0.7605729)
+point_1/position = Vector2(1, 0)
+
+[sub_resource type="CurveTexture" id="CurveTexture_nkfth"]
+curve = SubResource("Curve_ruvov")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rr560"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 171.43
+initial_velocity_max = 171.43
+gravity = Vector3(0, 98, 0)
+scale_min = 0.29999998
+scale_max = 0.5
+color = Color(0.8901961, 0, 1, 1)
+alpha_curve = SubResource("CurveTexture_nkfth")
+
 [node name="Overseer" type="CharacterBody2D" unique_id=2017227604]
 z_index = 2
 script = ExtResource("1_xd58y")
@@ -91,5 +115,13 @@ texture_filter = 1
 scale = Vector2(4.688, 4.688)
 sprite_frames = SubResource("SpriteFrames_flgpi")
 autoplay = "default"
-frame_progress = 0.64780605
+frame = 3
+frame_progress = 0.57238346
 speed_scale = 4.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=848788400]
+z_index = -1
+position = Vector2(0, -8)
+amount = 16
+texture = ExtResource("7_nkfth")
+process_material = SubResource("ParticleProcessMaterial_rr560")

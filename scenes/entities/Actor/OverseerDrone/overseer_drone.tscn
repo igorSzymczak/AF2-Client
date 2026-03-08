@@ -61,6 +61,32 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mt0pv"]
+load_path = "res://.godot/imported/Thrust Particle 2.png-dafd64bfdab672b0e6584fac00f8b7e9.ctex"
+
+[sub_resource type="Curve" id="Curve_hv53c"]
+_data = [Vector2(0, 0.7605729), 0.0, 0.0, 0, 0, Vector2(0.7605729, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 0.7605729)
+point_1/position = Vector2(0.7605729, 0)
+
+[sub_resource type="CurveTexture" id="CurveTexture_s76t5"]
+curve = SubResource("Curve_hv53c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x1a82"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 171.43
+initial_velocity_max = 171.43
+gravity = Vector3(0, 98, 0)
+scale_min = 0.19999999
+scale_max = 0.29999998
+color = Color(0.5529412, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_s76t5")
+
 [node name="OverseerDrone" type="CharacterBody2D" unique_id=2017227604]
 z_index = 1
 script = ExtResource("1_mt0pv")
@@ -96,5 +122,13 @@ texture_filter = 1
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_71ykn")
 autoplay = "default"
-frame_progress = 0.015342706
+frame = 4
+frame_progress = 0.52875715
 speed_scale = 4.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=655154365]
+z_index = -1
+position = Vector2(0, 16)
+amount = 16
+texture = SubResource("CompressedTexture2D_mt0pv")
+process_material = SubResource("ParticleProcessMaterial_x1a82")

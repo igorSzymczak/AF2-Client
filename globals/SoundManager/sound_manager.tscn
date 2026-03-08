@@ -41,6 +41,7 @@ script = ExtResource("1_eracs")
 
 [node name="ClusterMissilesShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1415592336]
 stream = ExtResource("2_hcod6")
+volume_db = 8.0
 pitch_scale = 2.5
 max_distance = 10000.0
 max_polyphony = 10
@@ -48,7 +49,7 @@ bus = &"Effects"
 
 [node name="ClusterMissilesHit" type="AudioStreamPlayer2D" parent="Weapons" unique_id=214234984]
 stream = ExtResource("3_shfl7")
-volume_db = -4.0
+volume_db = 4.0
 pitch_scale = 2.0
 max_distance = 10000.0
 max_polyphony = 10
@@ -56,6 +57,7 @@ bus = &"Effects"
 
 [node name="GatlingLaserShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=403256734]
 stream = ExtResource("4_w7ibe")
+volume_db = 4.0
 pitch_scale = 1.76
 max_distance = 10000.0
 max_polyphony = 10
@@ -63,28 +65,27 @@ bus = &"Effects"
 
 [node name="AcidBlasterShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1465904908]
 stream = ExtResource("5_ffbuk")
-volume_db = 5.0
+volume_db = 10.0
 max_distance = 10000.0
 max_polyphony = 3
 bus = &"Effects"
 
 [node name="RailgunShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1441135652]
 stream = ExtResource("6_54n1y")
-volume_db = -2.5
 max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
 [node name="RocketLauncherShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1478585646]
 stream = ExtResource("7_u04wl")
-volume_db = -12.465
+volume_db = -4.0
 max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
 [node name="RocketLauncherHit" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1725559293]
 stream = ExtResource("3_shfl7")
-volume_db = -2.5
+volume_db = 4.0
 pitch_scale = 1.35
 max_distance = 10000.0
 max_polyphony = 10
@@ -92,14 +93,12 @@ bus = &"Effects"
 
 [node name="PlasmaGunShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1345691828]
 stream = ExtResource("8_qwddl")
-volume_db = -5.0
 max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
 [node name="PiercingGunShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=490176571]
 stream = ExtResource("9_t2ybf")
-volume_db = -6.5
 pitch_scale = 0.75
 max_distance = 10000.0
 max_polyphony = 10
@@ -114,17 +113,19 @@ bus = &"Effects"
 [node name="SpawnerLaserGunShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=335337889]
 stream = SubResource("AudioStreamMP3_vmbbb")
 volume_db = -6.5
+max_distance = 10000.0
 max_polyphony = 10
 bus = &"Effects"
 
 [node name="EnergyNova" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1162856458]
 stream = ExtResource("11_64xec")
+volume_db = 4.0
 pitch_scale = 0.65
 bus = &"Effects"
 
 [node name="TorpedoesShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1849848146]
 stream = SubResource("AudioStreamRandomizer_ynvfb")
-volume_db = 6.5
+volume_db = 10.0
 pitch_scale = 0.65
 max_distance = 3000.0
 bus = &"Effects"
@@ -133,7 +134,7 @@ bus = &"Effects"
 
 [node name="ActorDeath" type="AudioStreamPlayer2D" parent="Entities" unique_id=1115898192]
 stream = ExtResource("12_co5gr")
-volume_db = -2.5
+volume_db = 4.0
 max_distance = 10000.0
 bus = &"Effects"
 
@@ -144,6 +145,7 @@ bus = &"Effects"
 
 [node name="PlayerDeath" type="AudioStreamPlayer2D" parent="Entities" unique_id=1189235608]
 stream = ExtResource("2_hcod6")
+volume_db = 8.0
 max_distance = 10000.0
 bus = &"Effects"
 
@@ -151,7 +153,7 @@ bus = &"Effects"
 
 [node name="HomerusDeath" type="AudioStreamPlayer2D" parent="Bosses" unique_id=2014963135]
 stream = ExtResource("14_u0jht")
-volume_db = -6.5
+volume_db = 8.0
 max_distance = 9999.0
 bus = &"Effects"
 
@@ -159,15 +161,16 @@ bus = &"Effects"
 
 [node name="ButtonHover" type="AudioStreamPlayer2D" parent="UI" unique_id=584415548]
 stream = ExtResource("14_1l1t4")
+volume_db = 12.0
 bus = &"Interface"
 
 [node name="Recycling" type="AudioStreamPlayer2D" parent="UI" unique_id=120725500]
 stream = ExtResource("16_xb7nw")
-volume_db = -2.869
 bus = &"Interface"
 
 [node name="RecyclingEnd" type="AudioStreamPlayer2D" parent="UI" unique_id=176863622]
 stream = ExtResource("17_f4f70")
+volume_db = 2.0
 bus = &"Interface"
 
 [node name="RecyclingNewMaterial" type="AudioStreamPlayer2D" parent="UI" unique_id=469951901]
@@ -176,5 +179,5 @@ bus = &"Interface"
 
 [node name="Upgrade" type="AudioStreamPlayer2D" parent="UI" unique_id=1792595946]
 stream = ExtResource("19_f4f70")
-volume_db = -5.021
+volume_db = -5.0
 bus = &"Interface"

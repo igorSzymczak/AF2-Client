@@ -26,6 +26,7 @@ corner_radius_bottom_right = 1024
 corner_radius_bottom_left = 1024
 
 [node name="Player" type="CharacterBody2D" unique_id=1561202494 groups=["points_of_interest"]]
+z_index = 10
 collision_layer = 17
 collision_mask = 0
 motion_mode = 1

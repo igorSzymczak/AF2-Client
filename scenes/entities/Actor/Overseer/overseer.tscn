@@ -5,13 +5,57 @@
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_pijdg"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_cn746"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_hokib"]
-[ext_resource type="Texture2D" uid="uid://c241sm1cjlc0j" path="res://assets/entities/Overseer/Overseer.png" id="6_qd3v8"]
+[ext_resource type="Texture2D" uid="uid://c40348t8nsjk4" path="res://assets/entities/Overseer/Overseer_Spritesheet.png" id="6_qd3v8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkfth"]
 radius = 79.0
 height = 268.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkfth"]
+atlas = ExtResource("6_qd3v8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruvov"]
+atlas = ExtResource("6_qd3v8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgxbk"]
+atlas = ExtResource("6_qd3v8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr560"]
+atlas = ExtResource("6_qd3v8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tml4"]
+atlas = ExtResource("6_qd3v8")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flgpi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkfth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruvov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgxbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr560")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tml4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Overseer" type="CharacterBody2D" unique_id=2017227604]
+z_index = 2
 script = ExtResource("1_xd58y")
 actor_type = 3
 metadata/_custom_type_script = "uid://cf0pk0erui87j"
@@ -25,6 +69,7 @@ rotation = -1.57079
 shape = SubResource("CapsuleShape2D_nkfth")
 
 [node name="HealthComponent" parent="." unique_id=525729869 instance=ExtResource("4_pijdg")]
+z_index = 1
 position = Vector2(0, 40)
 
 [node name="HealthBar" parent="HealthComponent" unique_id=346474946 instance=ExtResource("5_cn746")]
@@ -41,7 +86,10 @@ offset_right = 48.0
 offset_bottom = 37.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=738944294]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2116931086]
 texture_filter = 1
 scale = Vector2(4.688, 4.688)
-texture = ExtResource("6_qd3v8")
+sprite_frames = SubResource("SpriteFrames_flgpi")
+autoplay = "default"
+frame_progress = 0.64780605
+speed_scale = 4.0

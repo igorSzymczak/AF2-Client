@@ -5,10 +5,20 @@ var stats: Stats = Stats.new()
 var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
 @export var actor_type: EntityManager.ActorType
 
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: Node2D = $Sprite
 @onready var engine: Thruster = sprite.find_child("Engine")
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var poi: POI = $PoiComponent
+
+enum Event {
+	TELEPORT,
+}
+
+enum TeleportData {
+	POSITION,
+	EASE_IN_SEC,
+	EASE_OUT_SEC
+}
 
 func _ready() -> void:
 	health_component.health_depleted.connect(handle_death)
@@ -23,6 +33,7 @@ func _process(delta: float):
 	rotation = lerp_angle(rotation, server_rot, 0.2)
 	
 	velocity = global_position.direction_to(last_pos) * global_position.distance_to(last_pos)
+	last_pos = global_position
 
 func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
 	match prop:
@@ -45,8 +56,29 @@ func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
 			if value: 	engine.activate_thruster()
 			else: 		engine.deactivate_thruster(velocity)
 
-func handle_death() -> void:
+func handle_death(silent: bool = false) -> void:
 	if !is_queued_for_deletion():
-		GlobalSignals.emit_signal("create_explosion", global_position, "explosion_medium", 1, {})
 		poi.remove()
 		queue_free()
+		if !silent:
+			GlobalSignals.create_explosion.emit(global_position, "explosion_medium", 1, {})
+
+func handle_event(event: Event, event_data: Variant) -> void:
+	if event == Event.TELEPORT:
+		var teleport_position: Vector2 = event_data[TeleportData.POSITION]
+		var ease_in_sec: float = event_data[TeleportData.EASE_IN_SEC]
+		var ease_out_sec: float = event_data[TeleportData.EASE_OUT_SEC]
+		
+		var ease_in_scale_tween := create_tween()
+		ease_in_scale_tween.tween_property(self, "scale", Vector2(0.001, 0.001), ease_in_sec)
+		await ease_in_scale_tween.finished
+		
+		global_position = teleport_position
+		last_pos = teleport_position
+		server_pos = teleport_position
+		velocity = Vector2.ZERO
+		
+		var ease_out_scale_tween := create_tween()
+		ease_out_scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), ease_out_sec)
+		
+		

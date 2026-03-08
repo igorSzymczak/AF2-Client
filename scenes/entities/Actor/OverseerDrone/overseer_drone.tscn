@@ -5,13 +5,64 @@
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="3_s76t5"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="4_x1a82"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="5_ac88d"]
-[ext_resource type="Texture2D" uid="uid://bfr473vujurwb" path="res://assets/entities/Overseer Drone/Overseer Drone.png" id="6_mt0pv"]
+[ext_resource type="Texture2D" uid="uid://bwk3cgdqin0cv" path="res://assets/entities/Overseer Drone/Overseer_Drone_Spritesheet.png" id="7_hv53c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkfth"]
-radius = 38.0
-height = 138.0
+radius = 49.0
+height = 176.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s76t5"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1a82"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac88d"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6m7f"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agcyr"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ss85"]
+atlas = ExtResource("7_hv53c")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_71ykn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s76t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1a82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac88d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6m7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agcyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ss85")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="OverseerDrone" type="CharacterBody2D" unique_id=2017227604]
+z_index = 1
 script = ExtResource("1_mt0pv")
 actor_type = 4
 metadata/_custom_type_script = "uid://cf0pk0erui87j"
@@ -40,7 +91,10 @@ offset_right = 48.0
 offset_bottom = 37.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=738944294]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1072904899]
 texture_filter = 1
-scale = Vector2(2.906, 2.906)
-texture = ExtResource("6_mt0pv")
+scale = Vector2(3.5, 3.5)
+sprite_frames = SubResource("SpriteFrames_71ykn")
+autoplay = "default"
+frame_progress = 0.015342706
+speed_scale = 4.0

@@ -285,6 +285,10 @@ func add_actor(actor_data: Dictionary):
 func remove_actor(id: int):
 	handle_client_actor_removed(id)
 
+@rpc("authority", "call_remote", "reliable")
+func create_actor_event(id: int, event: Actor.Event, event_data: Variant):
+	handle_client_actor_event(id, event, event_data)
+
 
 func handle_client_actor_added(actor_data: Dictionary):
 	g.add_actor(actor_data)
@@ -293,7 +297,12 @@ func handle_client_actor_property_changed(id: int, prop: int, value: Variant):
 	g.update_actor_property(id, prop, value)
 
 func handle_client_actor_removed(id: int):
-	g.remove_turret(id)
+	g.remove_actor(id)
+
+func handle_client_actor_event(id: int, event: Actor.Event, event_data: Variant):
+	g.create_actor_event(id, event, event_data)
+
+
 
 ## ITEMS
 

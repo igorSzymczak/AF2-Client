@@ -746,6 +746,11 @@ func add_actor(actor_data: Dictionary):
 signal actor_removed(actor_id: int)
 func remove_actor(actor_id: int) -> void:
 	if Actors.has(actor_id):
+		if is_instance_valid(Actors[actor_id]["node"]):
+			# Apparently assignign null to node here causes crash, so i can't do: 
+			# var actor: Actor = Actors[actor_id]["node"]
+			# instead we use Actors[actor_id]["node"]
+			Actors[actor_id]["node"].handle_death(true)
 		Actors.erase(actor_id)
 		actor_removed.emit(actor_id)
 
@@ -784,6 +789,11 @@ func update_actor_stat(id: int, stat_type: Stats.TYPE, value: float):
 	if Actors.has(id):
 		var stats: Stats = Actors[id]["stats"]
 		stats.set_stat_value(stat_type, value)
+
+func create_actor_event(actor_id: int, event: Actor.Event, event_data: Variant):
+	if Actors.has(actor_id):
+		var actor: Actor = Actors[actor_id]["node"]
+		actor.handle_event(event, event_data)
 
 
 

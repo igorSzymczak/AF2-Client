@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ibkfdx0m1u4"
-path="res://.godot/imported/Nexar Blade.png-1a5211432e5e3888eae5565b5aaa200b.ctex"
+uid="uid://bfr473vujurwb"
+path="res://.godot/imported/Overseer Drone.png-a32527bccf1c62ae0ce6b2e70a6b303e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ships/Medic/Nexar Blade.png"
-dest_files=["res://.godot/imported/Nexar Blade.png-1a5211432e5e3888eae5565b5aaa200b.ctex"]
+source_file="res://assets/entities/Overseer Drone/Overseer Drone.png"
+dest_files=["res://.godot/imported/Overseer Drone.png-a32527bccf1c62ae0ce6b2e70a6b303e.ctex"]
 
 [params]
 

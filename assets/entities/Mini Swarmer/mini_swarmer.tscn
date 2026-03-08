@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8siqjdosjc35"]
 
 [ext_resource type="Script" uid="uid://10vuhv4ky8yl" path="res://scenes/components/ShipComponent/ShipComponent.gd" id="1_tlo8i"]
-[ext_resource type="Texture2D" uid="uid://pi4iff07t3qb" path="res://assets/ships/Mini Swarmer/mini_swarmer.png" id="1_u8oof"]
+[ext_resource type="Texture2D" uid="uid://pi4iff07t3qb" path="res://assets/entities/Mini Swarmer/mini_swarmer.png" id="1_u8oof"]
 [ext_resource type="PackedScene" uid="uid://85fhrslgj4et" path="res://scenes/components/Shadow/shadow.tscn" id="3_iuslm"]
 [ext_resource type="PackedScene" uid="uid://mignawcuevan" path="res://scenes/entities/Engine/engine.tscn" id="4_5wajh"]
 [ext_resource type="PackedScene" uid="uid://d1p6bjwpkw5bs" path="res://scenes/entities/Engine/particles/light.tscn" id="5_ac2fu"]
@@ -10,15 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://6bkbmxrojq2g" path="res://scenes/entities/Engine/particles/accelerate.tscn" id="8_vx0yq"]
 
 [sub_resource type="Curve" id="Curve_s11yl"]
-_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, inf_neg, 0, 1, Vector2(0, 1), -1.07396, 0.0, 0, 0, Vector2(0.310811, 0.150538), -1.07396, 0.384009, 0, 0]
 point_count = 3
-point_0/right_tangent = 2.06467
+point_0/right_tangent = inf_neg
 point_0/right_mode = 1
-point_1/position = Vector2(0.150538, 0.310811)
-point_1/left_tangent = 2.06467
-point_1/left_mode = 1
-point_1/right_tangent = 0.384009
-point_2/position = Vector2(1, 0)
+point_1/position = Vector2(0, 1)
+point_1/left_tangent = -1.07396
+point_2/position = Vector2(0.310811, 0.150538)
 point_2/left_tangent = -1.07396
 
 [sub_resource type="CurveTexture" id="CurveTexture_ijhs1"]
@@ -54,15 +52,13 @@ color_ramp = SubResource("GradientTexture1D_r0lgl")
 alpha_curve = SubResource("CurveTexture_ijhs1")
 
 [sub_resource type="Curve" id="Curve_sthmy"]
-_data = [Vector2(0, 0), 0.0, 2.06467, 0, 1, Vector2(0.150538, 0.310811), 2.06467, 0.384009, 1, 0, Vector2(1, 0), -1.07396, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, inf_neg, 0, 1, Vector2(0, 1), -1.07396, 0.0, 0, 0, Vector2(0.310811, 0.150538), -1.07396, 0.384009, 0, 0]
 point_count = 3
-point_0/right_tangent = 2.06467
+point_0/right_tangent = inf_neg
 point_0/right_mode = 1
-point_1/position = Vector2(0.150538, 0.310811)
-point_1/left_tangent = 2.06467
-point_1/left_mode = 1
-point_1/right_tangent = 0.384009
-point_2/position = Vector2(1, 0)
+point_1/position = Vector2(0, 1)
+point_1/left_tangent = -1.07396
+point_2/position = Vector2(0.310811, 0.150538)
 point_2/left_tangent = -1.07396
 
 [sub_resource type="CurveTexture" id="CurveTexture_cggpy"]
@@ -99,13 +95,12 @@ color_ramp = SubResource("GradientTexture1D_foe4m")
 alpha_curve = SubResource("CurveTexture_cggpy")
 
 [sub_resource type="Curve" id="Curve_3gqq8"]
-_data = [Vector2(0, 0), 0.0, 3.80618, 0, 0, Vector2(0.228495, 0.97973), 0.586487, 0.586487, 0, 0, Vector2(1, 0), -2.73208, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 3.80618, 0, 0, Vector2(0, 1), -2.73208, 0.0, 0, 0, Vector2(0.97973, 0.228495), -2.73208, 0.586487, 0, 0]
 point_count = 3
 point_0/right_tangent = 3.80618
-point_1/position = Vector2(0.228495, 0.97973)
-point_1/left_tangent = 0.586487
-point_1/right_tangent = 0.586487
-point_2/position = Vector2(1, 0)
+point_1/position = Vector2(0, 1)
+point_1/left_tangent = -2.73208
+point_2/position = Vector2(0.97973, 0.228495)
 point_2/left_tangent = -2.73208
 
 [sub_resource type="CurveTexture" id="CurveTexture_vo6hy"]
@@ -138,10 +133,10 @@ color_ramp = SubResource("GradientTexture1D_4ybhk")
 alpha_curve = SubResource("CurveTexture_vo6hy")
 
 [sub_resource type="Curve" id="Curve_24k4p"]
-_data = [Vector2(0, 0.668919), 0.0, 0.0, 0, 0, Vector2(1, 0.00675678), -5.18412, 0.0, 0, 0]
+_data = [Vector2(0.00675678, 1), -5.18412, 0.0, 0, 0, Vector2(0.668919, 0), -5.18412, 0.0, 0, 0]
 point_count = 2
-point_0/position = Vector2(0, 0.668919)
-point_1/position = Vector2(1, 0.00675678)
+point_0/position = Vector2(0.00675678, 1)
+point_1/position = Vector2(0.668919, 0)
 point_1/left_tangent = -5.18412
 
 [sub_resource type="CurveTexture" id="CurveTexture_dnwfh"]
@@ -156,9 +151,9 @@ colors = PackedColorArray(0.995255, 0.967918, 0.952284, 1, 0.979256, 0.905876, 0
 gradient = SubResource("Gradient_dc66j")
 
 [sub_resource type="Curve" id="Curve_x1bv5"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
+_data = [Vector2(0, 0.989247), 0.0, 0.0, 0, 0, Vector2(0.989247, 0), -3.61946, 0.0, 0, 0]
 point_count = 2
-point_0/position = Vector2(0, 1)
+point_0/position = Vector2(0, 0.989247)
 point_1/position = Vector2(0.989247, 0)
 point_1/left_tangent = -3.61946
 

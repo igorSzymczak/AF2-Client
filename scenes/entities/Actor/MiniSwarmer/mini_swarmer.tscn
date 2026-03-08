@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_2vfon"]
 [ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_k4dxv"]
-[ext_resource type="PackedScene" uid="uid://c8siqjdosjc35" path="res://assets/ships/Mini Swarmer/mini_swarmer.tscn" id="3_nlwk2"]
+[ext_resource type="PackedScene" uid="uid://c8siqjdosjc35" path="res://assets/entities/Mini Swarmer/mini_swarmer.tscn" id="3_nlwk2"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_wcisr"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_d83c8"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_y610u"]

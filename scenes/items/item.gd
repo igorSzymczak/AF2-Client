@@ -44,7 +44,6 @@ func _physics_process(delta: float) -> void:
 		pickup_delay_sec -= delta
 		if pickup_delay_sec <= 0:
 			pickable = true
-			print("Pickable true")
 	
 	if disappear_delay_sec <= 0.0:
 		destroy()

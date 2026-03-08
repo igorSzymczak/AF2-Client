@@ -6,14 +6,16 @@ enum ActorType {
 	ZLATTE,
 	ELITE_LAUNCHER,
 	MINI_SWARMER,
-	
+	OVERSEER,
+	OVERSEER_DRONE,
 }
 
 var Actors: Dictionary[ActorType, PackedScene] = {
 	ActorType.ZLATTE : load("res://scenes/entities/Actor/Zlatte/Zlatte.tscn"),
 	ActorType.ELITE_LAUNCHER: load("res://scenes/entities/Actor/EliteLauncher/Launcher.tscn"),
 	ActorType.MINI_SWARMER: load("res://scenes/entities/Actor/MiniSwarmer/mini_swarmer.tscn"),
-	
+	ActorType.OVERSEER: load("res://scenes/entities/Actor/Overseer/overseer.tscn"),
+	ActorType.OVERSEER_DRONE: load("res://scenes/entities/Actor/OverseerDrone/overseer_drone.tscn"),
 }
 
 func get_actor_type(actor: Actor) -> ActorType:

@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://762odp0un0lv"]
+
+[ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_xd58y"]
+[ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_wu1c7"]
+[ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_pijdg"]
+[ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_cn746"]
+[ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_hokib"]
+[ext_resource type="Texture2D" uid="uid://c241sm1cjlc0j" path="res://assets/entities/Overseer/Overseer.png" id="6_qd3v8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkfth"]
+radius = 79.0
+height = 268.0
+
+[node name="Overseer" type="CharacterBody2D" unique_id=2017227604]
+script = ExtResource("1_xd58y")
+actor_type = 3
+metadata/_custom_type_script = "uid://cf0pk0erui87j"
+
+[node name="PoiComponent" parent="." unique_id=990252157 instance=ExtResource("2_wu1c7")]
+type = 2
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1640793511]
+position = Vector2(0, -40)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_nkfth")
+
+[node name="HealthComponent" parent="." unique_id=525729869 instance=ExtResource("4_pijdg")]
+position = Vector2(0, 40)
+
+[node name="HealthBar" parent="HealthComponent" unique_id=346474946 instance=ExtResource("5_cn746")]
+offset_left = -48.0
+offset_top = 41.0
+offset_right = 48.0
+offset_bottom = 49.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldBar" parent="HealthComponent" unique_id=1388568994 instance=ExtResource("6_hokib")]
+offset_left = -48.0
+offset_top = 29.0
+offset_right = 48.0
+offset_bottom = 37.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=738944294]
+texture_filter = 1
+scale = Vector2(4.688, 4.688)
+texture = ExtResource("6_qd3v8")

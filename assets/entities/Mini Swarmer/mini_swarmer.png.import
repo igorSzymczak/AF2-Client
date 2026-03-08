@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2qv23f21llkf"
-path="res://.godot/imported/Nexar Blade Lights.png-c4517cbfba4df428e9a42485043491c5.ctex"
+uid="uid://pi4iff07t3qb"
+path="res://.godot/imported/mini_swarmer.png-0195f48c17396bf6c56daaa61c47f068.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ships/Medic/Nexar Blade Lights.png"
-dest_files=["res://.godot/imported/Nexar Blade Lights.png-c4517cbfba4df428e9a42485043491c5.ctex"]
+source_file="res://assets/entities/Mini Swarmer/mini_swarmer.png"
+dest_files=["res://.godot/imported/mini_swarmer.png-0195f48c17396bf6c56daaa61c47f068.ctex"]
 
 [params]
 

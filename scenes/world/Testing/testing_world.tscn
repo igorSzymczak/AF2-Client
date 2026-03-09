@@ -54,6 +54,8 @@
 [ext_resource type="Texture2D" uid="uid://dt4jp1j3cu8pm" path="res://assets/structures/planets/Low Quality/Saturn.png" id="42_y7v2g"]
 [ext_resource type="Texture2D" uid="uid://cwd6nljoyskpq" path="res://assets/structures/planets/Low Quality/Uranus.png" id="47_wsf8y"]
 [ext_resource type="Texture2D" uid="uid://xq07hitbkstb" path="res://assets/structures/planets/Low Quality/Neptune.png" id="49_vaisn"]
+[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/laser beam.png" id="55_71dmj"]
+[ext_resource type="PackedScene" uid="uid://y4hetgssvu6u" path="res://assets/ships/Nexar Reaver/nexar_reaver.tscn" id="56_2qqyj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgsy"]
 shader = ExtResource("2_q65fh")
@@ -270,6 +272,32 @@ radius = 1010.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23ch"]
 radius = 970.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jl4d6"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 71.43
+gravity = Vector3(0, 0, 0)
+scale_min = 0.04
+scale_max = 0.07
+color = Color(0, 0, 1, 0.14117648)
+
+[sub_resource type="Curve" id="Curve_2a8js"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(0.99999, 1)
+point_2/position = Vector2(1, 1)
+metadata/_snap_count = 23
+
+[sub_resource type="Gradient" id="Gradient_fibc2"]
+offsets = PackedFloat32Array(0, 0.035256412, 0.9647436, 1)
+colors = PackedColorArray(1, 0, 0, 0, 0.95686275, 0, 0.043137256, 1, 0.057220995, 0, 0.942779, 1, 0, 0, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_ugeq3"]
+offsets = PackedFloat32Array(0, 0.01923077, 0.97115386, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="TestingWorld" type="Node2D" unique_id=1041454062]
 script = ExtResource("1_rvknj")
@@ -1165,5 +1193,33 @@ texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Homerus" parent="." unique_id=8305878 instance=ExtResource("14_t01pc")]
 position = Vector2(-7, -3047)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1599004351]
+position = Vector2(-534.9276, -4226.6685)
+amount = 24
+texture = ExtResource("26_cp65u")
+process_material = SubResource("ParticleProcessMaterial_jl4d6")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1949444139]
+position = Vector2(-1340.4666, -4225.13)
+scale = Vector2(20.353354, 6.328245)
+points = PackedVector2Array(0, 0, 0.9564285, 0.020507813, 10, 0, 20, 0, 30, 0, 39.148743, 0, 40, 0)
+width_curve = SubResource("Curve_2a8js")
+gradient = SubResource("Gradient_fibc2")
+texture = ExtResource("55_71dmj")
+texture_mode = 2
+
+[node name="Line2D2" type="Line2D" parent="." unique_id=1643242236]
+position = Vector2(-1340.4666, -4224.924)
+scale = Vector2(20.353354, 2.1075923)
+points = PackedVector2Array(0, 0, 1.0055618, -0.036132813, 10, 0, 20, 0, 30, 0, 36.58117, 0, 37.268784, 0, 37.873047, 0, 38.56066, 0, 39.18576, 0, 39.623333, 0, 40, 0)
+width_curve = SubResource("Curve_2a8js")
+gradient = SubResource("Gradient_ugeq3")
+texture = ExtResource("55_71dmj")
+texture_mode = 2
+
+[node name="NexarReaver" parent="." unique_id=1042224632 instance=ExtResource("56_2qqyj")]
+position = Vector2(-1394, -4226)
+scale = Vector2(0.622544, 0.622544)
 
 [connection signal="finished" from="Soundtrack" to="Soundtrack" method="_on_finished"]

@@ -4,7 +4,7 @@ var is_logged_in := false
 var my_username: String
 var my_user_id: int
 
-var version := "Beta 3.0"
+var version := "Beta 08.03.2026 1"
 var latest_version: String
 
 

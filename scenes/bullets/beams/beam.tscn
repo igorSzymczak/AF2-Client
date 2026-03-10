@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cnmy7cdeomr46"]
+
+[ext_resource type="Script" uid="uid://cdp178nn5j42b" path="res://scenes/bullets/beams/beam.gd" id="1_ll6va"]
+
+[node name="Beam" type="Node2D" unique_id=2108471377 node_paths=PackedStringArray("base_line")]
+script = ExtResource("1_ll6va")
+base_line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1369501327]
+points = PackedVector2Array(0, 0, 100, 0, 200, 0, 300, 0, 400, 0)

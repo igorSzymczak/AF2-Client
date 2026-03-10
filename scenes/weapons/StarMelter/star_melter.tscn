@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cvitm76giypy3"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_x6ray"]
+
+[node name="StarMelter" type="Node" unique_id=1956763825]
+script = ExtResource("1_x6ray")
+weapon_name = "Star Melter"
+weapon_type = 13
+energy = true
+description_long = ":)"
+description_short = "cool"
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

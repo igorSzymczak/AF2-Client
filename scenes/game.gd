@@ -199,6 +199,38 @@ func handle_create_shockwave(shockwave_type: WeaponManager.ShockwaveType, _name:
 
 
 
+## BEAMS
+
+
+
+@rpc("authority", "call_remote", "unreliable")
+func update_beam_property(id: int, prop: int, value: Variant):
+	handle_client_beam_property_changed(id, prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_beams(beams: Array[Dictionary]):
+	for beam_data: Dictionary in beams:
+		handle_client_beam_added(beam_data)
+
+@rpc("authority", "call_remote", "reliable")
+func add_beam(beam_data: Dictionary):
+	handle_client_beam_added(beam_data)
+
+@rpc("authority", "call_remote", "reliable")
+func remove_beam(id: int):
+	handle_client_beam_removed(id)
+
+func handle_client_beam_added(beam_data: Dictionary):
+	g.add_beam(beam_data)
+
+func handle_client_beam_property_changed(id: int, prop: int, value: Variant):
+	g.update_beam_property(id, prop, value)
+
+func handle_client_beam_removed(id: int):
+	g.remove_beam(id)
+
+
+
 ## SPAWNERS
 
 

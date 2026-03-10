@@ -1,0 +1,130 @@
+[gd_scene format=3 uid="uid://670vf2e3trlj"]
+
+[ext_resource type="Script" uid="uid://ytodtu3q5i0i" path="res://scenes/weapons/StarMelter/star_melter_beam.gd" id="1_csif7"]
+[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/laser beam.png" id="2_43mk0"]
+[ext_resource type="Texture2D" uid="uid://cwqnt5jwqotl8" path="res://assets/Glow.png" id="2_csif7"]
+[ext_resource type="AudioStream" uid="uid://dftfdgjr7s1v0" path="res://audio/effects/weapons/StarMelter/star_melter_launch.mp3" id="4_m80mc"]
+[ext_resource type="AudioStream" uid="uid://c14yomk4jrffn" path="res://audio/effects/weapons/StarMelter/star_melter_humming.mp3" id="5_kdkgu"]
+
+[sub_resource type="Curve" id="Curve_m80mc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(1, 0)
+
+[sub_resource type="CurveTexture" id="CurveTexture_2qqyj"]
+curve = SubResource("Curve_m80mc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kdkgu"]
+particle_flag_disable_z = true
+spread = 47.25
+initial_velocity_min = 64.29
+initial_velocity_max = 192.84999
+scale_min = 0.19999999
+scale_max = 0.39999998
+color = Color(0, 0, 1, 0.14117648)
+alpha_curve = SubResource("CurveTexture_2qqyj")
+
+[sub_resource type="Gradient" id="Gradient_jyu18"]
+offsets = PackedFloat32Array(0, 0.09191176, 0.8272059, 0.9375, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 0.11764705, 0, 0.88235295, 1, 0, 0, 1, 0.14117648, 0, 0, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2qqyj"]
+gradient = SubResource("Gradient_jyu18")
+
+[sub_resource type="Curve" id="Curve_8efyn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8590604), 0.0, 0.0, 0, 0]
+point_count = 4
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(0.8590604, 1)
+point_2/position = Vector2(0.8590604, 1)
+point_3/position = Vector2(1, 0.8590604)
+
+[sub_resource type="CurveTexture" id="CurveTexture_jl4d6"]
+curve = SubResource("Curve_8efyn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qqr14"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.17999999
+scale_max = 0.29999998
+scale_curve = SubResource("CurveTexture_jl4d6")
+color_ramp = SubResource("GradientTexture1D_2qqyj")
+
+[sub_resource type="Curve" id="Curve_csif7"]
+_data = [Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+point_0/position = Vector2(0.99999, 1)
+point_1/position = Vector2(1, 1)
+point_2/position = Vector2(1, 1)
+metadata/_snap_count = 23
+
+[sub_resource type="Gradient" id="Gradient_m80mc"]
+offsets = PackedFloat32Array(0, 0.035256412, 0.9647436, 1)
+colors = PackedColorArray(1, 0, 0, 0, 0.95686275, 0, 0.043137256, 1, 0.057220995, 0, 0.942779, 1, 0, 0, 1, 0)
+
+[sub_resource type="Curve" id="Curve_kdkgu"]
+_data = [Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+point_0/position = Vector2(0.99999, 1)
+point_1/position = Vector2(1, 1)
+point_2/position = Vector2(1, 1)
+metadata/_snap_count = 23
+
+[sub_resource type="Gradient" id="Gradient_2qq5q"]
+offsets = PackedFloat32Array(0, 0.01923077, 0.97115386, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="StarMelterBeam" type="Node2D" unique_id=1759060667 node_paths=PackedStringArray("bg_line", "pulse_particles", "end_particles", "base_line")]
+script = ExtResource("1_csif7")
+bg_line = NodePath("BgLine")
+pulse_particles = NodePath("PulseParticles")
+end_particles = NodePath("EndParticles")
+base_line = NodePath("WhiteLine")
+metadata/_custom_type_script = "uid://cdp178nn5j42b"
+
+[node name="EndParticles" type="GPUParticles2D" parent="." unique_id=329965769]
+visible = false
+position = Vector2(1700, 0)
+amount = 24
+texture = ExtResource("2_csif7")
+process_material = SubResource("ParticleProcessMaterial_kdkgu")
+
+[node name="PulseParticles" type="GPUParticles2D" parent="." unique_id=1830624155]
+position = Vector2(-39.999996, 0)
+amount = 32
+texture = ExtResource("2_csif7")
+lifetime = 1.7
+collision_base_size = 0.0
+visibility_rect = Rect2(0, -100, 200, 200)
+local_coords = true
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_qqr14")
+
+[node name="BgLine" type="Line2D" parent="." unique_id=820241667]
+points = PackedVector2Array(0, 0, 5.155159, 0, 100, 0, 200, 0, 300, 0, 400, 0, 500, 0, 600, 0, 1700, 0, 1710, 0)
+width = 100.0
+width_curve = SubResource("Curve_csif7")
+gradient = SubResource("Gradient_m80mc")
+texture = ExtResource("2_43mk0")
+texture_mode = 2
+
+[node name="WhiteLine" type="Line2D" parent="." unique_id=973894227]
+points = PackedVector2Array(0, 0, 5.155159, 0, 100, 0, 200, 0, 300, 0, 400, 0, 500, 0, 600, 0, 1700, 0, 1710, 0)
+width = 15.0
+width_curve = SubResource("Curve_kdkgu")
+gradient = SubResource("Gradient_2qq5q")
+texture = ExtResource("2_43mk0")
+texture_mode = 2
+
+[node name="LaunchSound" type="AudioStreamPlayer2D" parent="." unique_id=1633326153]
+stream = ExtResource("4_m80mc")
+
+[node name="Humming" type="AudioStreamPlayer2D" parent="." unique_id=659819726]
+stream = ExtResource("5_kdkgu")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true

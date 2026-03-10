@@ -371,20 +371,28 @@ func handle_shoot() -> void:
 		if !weapon_data: # We dont have such index
 			return
 		
-		var power_usage: float = weapon_data.get_prop(PlayerData.WeaponProperty.POWER_USAGE)
-		var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
-		var shoot_delay: int = weapon_data.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY)
-		var last_shot: int = weapon_data.get_prop(PlayerData.WeaponProperty.LAST_SHOT)
+		var insta_shoot: bool = weapon_data.get_prop(PlayerData.WeaponProperty.INSTA_SHOOT)
 		
-		var t: int = Time.get_ticks_msec()
-		if current_power >= power_usage && t - shoot_delay > last_shot:
-			current_power -= power_usage
-			last_shot = t
-			
-			PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
-			weapon_data.set_prop(PlayerData.WeaponProperty.LAST_SHOT, last_shot)
-			
+		if insta_shoot:
 			g.player_shoot.emit(index)
+		else:
+			
+			var power_usage: float = weapon_data.get_prop(PlayerData.WeaponProperty.POWER_USAGE)
+			var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
+			var shoot_delay: int = weapon_data.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY)
+			var last_shot: int = weapon_data.get_prop(PlayerData.WeaponProperty.LAST_SHOT)
+		
+			var t: int = Time.get_ticks_msec()
+			if current_power < power_usage or t - shoot_delay < last_shot:
+				return
+			else:
+				current_power -= power_usage
+				last_shot = t
+				
+				PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
+				weapon_data.set_prop(PlayerData.WeaponProperty.LAST_SHOT, last_shot)
+				g.player_shoot.emit(index)
+		
 func regen_power(delta) -> void:
 	var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
 	var max_power = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value

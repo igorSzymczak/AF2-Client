@@ -18,6 +18,7 @@ enum WeaponProperty {
 	LAST_SHOT,
 	DAMAGE,
 	BULLET_AMOUNT_RANGE,
+	INSTA_SHOOT
 }
 
 var props: Dictionary[Property, Variant] = {

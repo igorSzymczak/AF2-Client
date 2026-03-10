@@ -10,6 +10,19 @@ func _on_ready() -> void:
 	var scale_tween: Tween = create_tween()
 	scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), fade_time_sec)
 
+func set_has_target(value: bool) -> void:
+	has_target = value
+	if has_target:
+		modulate = Color(1, 1, 1, 1)
+		pulse_particles.speed_scale = 2.0
+		humming_sound.pitch_scale = 1.25
+		humming_sound.volume_db = -10.0
+	else:
+		modulate = Color(1, 1, 1, 0.7)
+		pulse_particles.speed_scale = 1.0
+		humming_sound.pitch_scale = 1.0
+		humming_sound.volume_db = -13.0
+
 @export var fade_time_sec: float = 0.25
 @export var bg_line: Line2D
 @export var pulse_particles: GPUParticles2D

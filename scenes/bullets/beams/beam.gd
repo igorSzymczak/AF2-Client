@@ -4,6 +4,7 @@ var gid: int
 var beam_type: WeaponManager.BeamType
 var props := PropertyContainer.new(g.BEAM_PROPERTY_SCHEMA)
 var distance: float = 1.0
+var has_target: bool = false : set = set_has_target
 
 @export var point_amount: int = 10
 
@@ -30,12 +31,17 @@ func _on_property_changed(prop: g.BeamProperty, value: Variant) -> void:
 		g.BeamProperty.DISTANCE:
 			distance = value
 			create_beam()
+		g.BeamProperty.HAS_TARGET:
+			has_target = value
 
 func _process(delta: float) -> void:
 	if !g.Beams.has(gid):
 		_handle_death()
 	
 	interpolate_data(delta)
+
+func set_has_target(value: bool) -> void:
+	has_target = value
 
 var server_position: Vector2 = Vector2.ZERO
 var server_rotation: float = 0.0

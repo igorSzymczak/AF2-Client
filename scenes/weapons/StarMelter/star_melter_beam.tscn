@@ -125,5 +125,6 @@ stream = ExtResource("4_m80mc")
 [node name="Humming" type="AudioStreamPlayer2D" parent="." unique_id=659819726]
 stream = ExtResource("5_kdkgu")
 volume_db = -10.0
+pitch_scale = 1.25
 autoplay = true
 parameters/looping = true

@@ -443,6 +443,7 @@ enum BeamProperty {
 	GLOBAL_POSITION,
 	ANGLE,
 	DISTANCE,
+	HAS_TARGET,
 }
 
 const BEAM_PROPERTY_SCHEMA: Dictionary[BeamProperty, Dictionary] = {
@@ -466,6 +467,11 @@ const BEAM_PROPERTY_SCHEMA: Dictionary[BeamProperty, Dictionary] = {
 		"type": TYPE_FLOAT,
 		"default": 10.0
 	},
+	BeamProperty.HAS_TARGET: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	
 }
 
 signal beam_added(beam: Beam)

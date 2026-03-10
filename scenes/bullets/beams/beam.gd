@@ -41,7 +41,6 @@ var server_position: Vector2 = Vector2.ZERO
 var server_rotation: float = 0.0
 func interpolate_data(delta: float) -> void:
 	var factor: float = delta * 20.0
-	#print("delta = ", delta, ", a factor = ", factor)
 	
 	global_position = global_position.lerp(server_position, factor)
 	rotation = lerp_angle(rotation, server_rotation, factor)
@@ -53,7 +52,7 @@ func create_beam() -> void:
 	base_line.add_point(Vector2(0.0, 0.0))
 	base_line.add_point(Vector2(mid_distance / 10.0, 0.0))
 	var i: int = 1
-	while base_line.points.size() < point_amount:
+	while base_line.points.size() <= point_amount:
 		var point_position := Vector2(max(10.0, mid_distance * float(i)), 0.0)
 		base_line.add_point(point_position)
 		i+=1

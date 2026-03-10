@@ -26,8 +26,8 @@ color = Color(0, 0, 1, 0.14117648)
 alpha_curve = SubResource("CurveTexture_2qqyj")
 
 [sub_resource type="Gradient" id="Gradient_jyu18"]
-offsets = PackedFloat32Array(0, 0.09191176, 0.8272059, 0.9375, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 0.11764705, 0, 0.88235295, 1, 0, 0, 1, 0.14117648, 0, 0, 1, 0)
+offsets = PackedFloat32Array(0, 0.09191176, 0.9411765, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 0.11764705, 0, 0.88235295, 1, 0, 0, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2qqyj"]
 gradient = SubResource("Gradient_jyu18")
@@ -87,7 +87,6 @@ base_line = NodePath("WhiteLine")
 metadata/_custom_type_script = "uid://cdp178nn5j42b"
 
 [node name="EndParticles" type="GPUParticles2D" parent="." unique_id=329965769]
-visible = false
 position = Vector2(1700, 0)
 amount = 24
 texture = ExtResource("2_csif7")

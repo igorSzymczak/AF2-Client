@@ -54,6 +54,9 @@
 [ext_resource type="Texture2D" uid="uid://dt4jp1j3cu8pm" path="res://assets/structures/planets/Low Quality/Saturn.png" id="42_y7v2g"]
 [ext_resource type="Texture2D" uid="uid://cwd6nljoyskpq" path="res://assets/structures/planets/Low Quality/Uranus.png" id="47_wsf8y"]
 [ext_resource type="Texture2D" uid="uid://xq07hitbkstb" path="res://assets/structures/planets/Low Quality/Neptune.png" id="49_vaisn"]
+[ext_resource type="PackedScene" uid="uid://1qf7522pvos5" path="res://assets/ships/Nexar Carrier/nexar_carrier.tscn" id="55_2qqyj"]
+[ext_resource type="PackedScene" uid="uid://c0rt7qn77lrxv" path="res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn" id="56_jl4d6"]
+[ext_resource type="PackedScene" uid="uid://762odp0un0lv" path="res://scenes/entities/Actor/Overseer/overseer.tscn" id="57_2a8js"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgsy"]
 shader = ExtResource("2_q65fh")
@@ -1162,6 +1165,15 @@ scale = Vector2(1.99001, 1.9803)
 texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Homerus" parent="." unique_id=8305878 instance=ExtResource("14_t01pc")]
-position = Vector2(-7, -3047)
+position = Vector2(-1686, -2489)
+
+[node name="NexarCarrier" parent="." unique_id=1389712356 instance=ExtResource("55_2qqyj")]
+position = Vector2(-1742, -3038)
+
+[node name="NexarZlatte" parent="." unique_id=1260652566 instance=ExtResource("56_jl4d6")]
+position = Vector2(-1247, -3035)
+
+[node name="Overseer" parent="." unique_id=2017227604 instance=ExtResource("57_2a8js")]
+position = Vector2(-416, -3035)
 
 [connection signal="finished" from="Soundtrack" to="Soundtrack" method="_on_finished"]

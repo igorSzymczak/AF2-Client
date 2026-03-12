@@ -4,8 +4,6 @@ extends Beam
 @onready var humming_sound: AudioStreamPlayer2D = $Humming
 
 func _on_ready() -> void:
-	launch_sound.play()
-	
 	scale = Vector2.ZERO
 	var scale_tween: Tween = create_tween()
 	scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), fade_time_sec)
@@ -31,7 +29,7 @@ func create_beam() -> void:
 	if !base_line or !bg_line:
 		return
 	
-	pulse_particles.lifetime = (distance / 1000.0)
+	pulse_particles.lifetime = (distance / 1000.0) + 0.2
 	pulse_particles.visibility_rect = Rect2(0, -100, distance + 100, 200)
 	#pulse_particles.preprocess = 0
 	end_particles.position.x = distance

@@ -22,12 +22,12 @@ initial_velocity_min = 64.29
 initial_velocity_max = 192.84999
 scale_min = 0.19999999
 scale_max = 0.39999998
-color = Color(0, 0, 1, 0.14117648)
+color = Color(1, 0, 0, 0.14117648)
 alpha_curve = SubResource("CurveTexture_2qqyj")
 
 [sub_resource type="Gradient" id="Gradient_jyu18"]
-offsets = PackedFloat32Array(0, 0.09191176, 0.9411765, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 0.11764705, 0, 0.88235295, 1, 0, 0, 1, 0)
+offsets = PackedFloat32Array(0, 0.10294118, 0.9669118, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2qqyj"]
 gradient = SubResource("Gradient_jyu18")
@@ -52,6 +52,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.17999999
 scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_jl4d6")
+color = Color(1, 1, 1, 0.5882353)
 color_ramp = SubResource("GradientTexture1D_2qqyj")
 
 [sub_resource type="Curve" id="Curve_csif7"]
@@ -64,7 +65,7 @@ metadata/_snap_count = 23
 
 [sub_resource type="Gradient" id="Gradient_m80mc"]
 offsets = PackedFloat32Array(0, 0.035256412, 0.9647436, 1)
-colors = PackedColorArray(1, 0, 0, 0, 0.95686275, 0, 0.043137256, 1, 0.057220995, 0, 0.942779, 1, 0, 0, 1, 0)
+colors = PackedColorArray(1, 0, 0, 0, 0.95686275, 0, 0.043137256, 1, 1, 0, 0, 1, 1, 0, 0, 0)
 
 [sub_resource type="Curve" id="Curve_kdkgu"]
 _data = [Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -121,10 +122,13 @@ texture_mode = 2
 
 [node name="LaunchSound" type="AudioStreamPlayer2D" parent="." unique_id=1633326153]
 stream = ExtResource("4_m80mc")
+autoplay = true
+max_distance = 10000.0
 
 [node name="Humming" type="AudioStreamPlayer2D" parent="." unique_id=659819726]
 stream = ExtResource("5_kdkgu")
 volume_db = -10.0
 pitch_scale = 1.25
 autoplay = true
+max_distance = 4000.0
 parameters/looping = true

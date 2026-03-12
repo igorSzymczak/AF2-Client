@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://2t5noopc2okk"]
 
-[ext_resource type="Script" uid="uid://bm010qeerfaoa" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
-[ext_resource type="Shader" uid="uid://ddbbssx30cvio" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
-[ext_resource type="Script" uid="uid://vtqdfima23j" path="res://scenes/world/Testing/ImageBG.gd" id="2_q4866"]
-[ext_resource type="Script" uid="uid://n3wvy6odfhaq" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
-[ext_resource type="Shader" uid="uid://d2ohxpy20hcn4" path="res://scenes/components/ShipComponent/sky.gdshader" id="3_roh8v"]
+[ext_resource type="Script" uid="uid://c081k13bu4er2" path="res://scenes/world/Testing/testing_world.gd" id="1_rvknj"]
+[ext_resource type="Shader" uid="uid://bre1admgpq3lq" path="res://scenes/starfield/parallax_test.gdshader" id="2_q65fh"]
+[ext_resource type="Script" uid="uid://btm6gi1uel6o3" path="res://scenes/world/Testing/ImageBG.gd" id="2_q4866"]
+[ext_resource type="Script" uid="uid://cmkjgrpsd0642" path="res://scenes/starfield/Background.gd" id="3_28mi7"]
+[ext_resource type="Shader" uid="uid://b1xqv24eafcmg" path="res://scenes/components/ShipComponent/sky.gdshader" id="3_roh8v"]
 [ext_resource type="AudioStream" uid="uid://da4t5kutoglbb" path="res://audio/music/Adelante.ogg" id="4_i1nhf"]
-[ext_resource type="Script" uid="uid://b3ywratuah35c" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
+[ext_resource type="Script" uid="uid://woltbir3fg30" path="res://scenes/bullets/bullet_manager.gd" id="4_o2uum"]
 [ext_resource type="Environment" uid="uid://cyyajkc4r8ovc" path="res://scenes/world/Testing/environment.tres" id="5_m5ugb"]
 [ext_resource type="AudioStream" uid="uid://dq41yeii32aig" path="res://audio/music/Limit.ogg" id="5_sjcft"]
 [ext_resource type="AudioStream" uid="uid://biekh5d4blwxn" path="res://audio/music/Metal.ogg" id="6_76tyi"]
 [ext_resource type="AudioStream" uid="uid://dc3br4apparek" path="res://audio/music/Pendulum.ogg" id="7_grnjj"]
 [ext_resource type="PackedScene" uid="uid://6boohbiplenv" path="res://scenes/objects/Structures/structure.tscn" id="7_q3uef"]
-[ext_resource type="Script" uid="uid://c170d1i5v1564" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
+[ext_resource type="Script" uid="uid://fjtvlisdmalr" path="res://scenes/world/Testing/Soundtrack.gd" id="8_64m46"]
 [ext_resource type="AudioStream" uid="uid://dybovpqmckd4v" path="res://audio/music/moon song in f.ogg" id="9_gouh0"]
-[ext_resource type="Shader" uid="uid://c2gqjsre1lask" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
-[ext_resource type="Script" uid="uid://ceupg2dr8eorg" path="res://scenes/objects/Structures/Recycle Station/recycle_station.gd" id="12_678x6"]
+[ext_resource type="Shader" uid="uid://dhwrime62fp7n" path="res://addons/planet2d/planet.gdshader" id="9_ockqu"]
+[ext_resource type="Script" uid="uid://cv4qqpdoxikwn" path="res://scenes/objects/Structures/Recycle Station/recycle_station.gd" id="12_678x6"]
 [ext_resource type="PackedScene" uid="uid://uuy2hrkbxif3" path="res://scenes/objects/Structures/Hangar/hangar.tscn" id="12_uiqek"]
-[ext_resource type="Script" uid="uid://myig4e3lnf7r" path="res://scenes/components/POI/poi.gd" id="13_mbaas"]
+[ext_resource type="Script" uid="uid://cnpqcmwolryj" path="res://scenes/components/POI/poi.gd" id="13_mbaas"]
 [ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="13_nfcpv"]
 [ext_resource type="Texture2D" uid="uid://c8yex6f1sds5l" path="res://assets/structures/InvertGlow.png" id="14_4cia3"]
 [ext_resource type="PackedScene" uid="uid://cu67f3v2dyl2k" path="res://scenes/bosses/Homerus/homerus.tscn" id="14_t01pc"]
@@ -54,9 +54,6 @@
 [ext_resource type="Texture2D" uid="uid://dt4jp1j3cu8pm" path="res://assets/structures/planets/Low Quality/Saturn.png" id="42_y7v2g"]
 [ext_resource type="Texture2D" uid="uid://cwd6nljoyskpq" path="res://assets/structures/planets/Low Quality/Uranus.png" id="47_wsf8y"]
 [ext_resource type="Texture2D" uid="uid://xq07hitbkstb" path="res://assets/structures/planets/Low Quality/Neptune.png" id="49_vaisn"]
-[ext_resource type="PackedScene" uid="uid://1qf7522pvos5" path="res://assets/ships/Nexar Carrier/nexar_carrier.tscn" id="55_2qqyj"]
-[ext_resource type="PackedScene" uid="uid://c0rt7qn77lrxv" path="res://assets/ships/Nexar Zlatte/nexar_zlatte.tscn" id="56_jl4d6"]
-[ext_resource type="PackedScene" uid="uid://762odp0un0lv" path="res://scenes/entities/Actor/Overseer/overseer.tscn" id="57_2a8js"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgsy"]
 shader = ExtResource("2_q65fh")
@@ -1166,14 +1163,5 @@ texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Homerus" parent="." unique_id=8305878 instance=ExtResource("14_t01pc")]
 position = Vector2(-1686, -2489)
-
-[node name="NexarCarrier" parent="." unique_id=1389712356 instance=ExtResource("55_2qqyj")]
-position = Vector2(-1742, -3038)
-
-[node name="NexarZlatte" parent="." unique_id=1260652566 instance=ExtResource("56_jl4d6")]
-position = Vector2(-1247, -3035)
-
-[node name="Overseer" parent="." unique_id=2017227604 instance=ExtResource("57_2a8js")]
-position = Vector2(-416, -3035)
 
 [connection signal="finished" from="Soundtrack" to="Soundtrack" method="_on_finished"]

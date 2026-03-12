@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_y610u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ewows"]
-radius = 12.0
-height = 60.0
+radius = 32.0
+height = 168.0
 
 [node name="MiniSwarmer" type="CharacterBody2D" unique_id=1624726840]
 script = ExtResource("1_2vfon")
@@ -21,12 +21,11 @@ type = 2
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=836595449]
 rotation = -1.57079
-scale = Vector2(10, 10)
 shape = SubResource("CapsuleShape2D_ewows")
 
 [node name="Sprite" parent="." unique_id=1813719843 instance=ExtResource("3_nlwk2")]
 texture_filter = 1
-scale = Vector2(10, 10)
+scale = Vector2(2.6, 2.6)
 
 [node name="HealthComponent" parent="." unique_id=525729869 instance=ExtResource("4_wcisr")]
 position = Vector2(0, 6)

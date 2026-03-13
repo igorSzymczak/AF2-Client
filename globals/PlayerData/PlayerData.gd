@@ -117,3 +117,25 @@ func get_hotbar_weapon(slot: WeaponManager.Type) -> WeaponRuntimeData:
 		return null
 	
 	return props[Property.HOTBAR][slot] as WeaponRuntimeData
+
+func give_power(amount: float) -> void:
+	var current_power: float = get_prop(PlayerData.Property.CURRENT_POWER)
+	var max_power: float = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value
+	
+	current_power += amount
+	current_power = min(current_power, max_power)
+	
+	set_prop(PlayerData.Property.CURRENT_POWER, current_power)
+
+func take_power(amount: float) -> void:
+	var current_power: float = get_prop(PlayerData.Property.CURRENT_POWER)
+	var max_power: float = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value
+	
+	current_power -= amount
+	current_power = max(current_power, 0.0)
+	
+	set_prop(PlayerData.Property.CURRENT_POWER, current_power)
+
+func get_current_weapon_data() -> WeaponRuntimeData:
+	var current_slot: int = get_prop(Property.CURRENT_HOTBAR_SLOT)
+	return get_hotbar_weapon(current_slot)

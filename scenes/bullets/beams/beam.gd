@@ -33,12 +33,41 @@ func _on_property_changed(prop: g.BeamProperty, value: Variant) -> void:
 			create_beam()
 		g.BeamProperty.HAS_TARGET:
 			has_target = value
+		g.BeamProperty.IS_LOCAL_PLAYER:
+			is_local_player = value
+			if is_local_player:
+				var weapon_data: WeaponRuntimeData = PlayerData.get_current_weapon_data()
+				shoot_delay_sec = weapon_data.get_prop(PlayerData.WeaponProperty.SHOOT_DELAY) / 1000.0
+				power_cost = weapon_data.get_prop(PlayerData.WeaponProperty.POWER_USAGE)
+				
+		g.BeamProperty.TIME_FROM_LAST_DAMAGE:
+			time_from_last_damage = value
+		
 
+var time_from_last_damage: float = 0.0
+var is_local_player: bool = false
+var shoot_delay_sec: float = 0.0
+var power_cost: float = 0.0
 func _process(delta: float) -> void:
 	if !g.Beams.has(gid):
 		_handle_death()
 	
+	handle_local_player_beam(delta)
 	interpolate_data(delta)
+
+func handle_local_player_beam(delta: float) -> void:
+	if !is_local_player:
+		return
+	if !has_target:
+		return
+	
+	#print("cost: ", power_cost)
+	#print("Shoot delay sec: ", shoot_delay_sec)
+	
+	time_from_last_damage += delta
+	if time_from_last_damage > shoot_delay_sec:
+		time_from_last_damage -= shoot_delay_sec
+		PlayerData.take_power(power_cost)
 
 func set_has_target(value: bool) -> void:
 	has_target = value

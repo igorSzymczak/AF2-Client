@@ -444,6 +444,8 @@ enum BeamProperty {
 	ANGLE,
 	DISTANCE,
 	HAS_TARGET,
+	IS_LOCAL_PLAYER,
+	TIME_FROM_LAST_DAMAGE,
 }
 
 const BEAM_PROPERTY_SCHEMA: Dictionary[BeamProperty, Dictionary] = {
@@ -470,6 +472,14 @@ const BEAM_PROPERTY_SCHEMA: Dictionary[BeamProperty, Dictionary] = {
 	BeamProperty.HAS_TARGET: {
 		"type": TYPE_BOOL,
 		"default": false
+	},
+	BeamProperty.IS_LOCAL_PLAYER: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	BeamProperty.TIME_FROM_LAST_DAMAGE: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
 	},
 	
 }

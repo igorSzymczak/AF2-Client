@@ -392,7 +392,7 @@ func handle_shoot() -> void:
 				PlayerData.set_prop(PlayerData.Property.CURRENT_POWER, current_power)
 				weapon_data.set_prop(PlayerData.WeaponProperty.LAST_SHOT, last_shot)
 				g.player_shoot.emit(index)
-		
+
 func regen_power(delta) -> void:
 	var current_power: float = PlayerData.get_prop(PlayerData.Property.CURRENT_POWER)
 	var max_power = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value

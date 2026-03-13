@@ -25,19 +25,19 @@ scale_max = 0.39999998
 color = Color(1, 0, 0, 0.14117648)
 alpha_curve = SubResource("CurveTexture_2qqyj")
 
-[sub_resource type="Gradient" id="Gradient_jyu18"]
-offsets = PackedFloat32Array(0, 0.10294118, 0.9669118, 1)
-colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0)
+[sub_resource type="Gradient" id="Gradient_kdkgu"]
+offsets = PackedFloat32Array(0, 0.10294118, 0.91780823, 1)
+colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_2qqyj"]
-gradient = SubResource("Gradient_jyu18")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kdkgu"]
+gradient = SubResource("Gradient_kdkgu")
 
 [sub_resource type="Curve" id="Curve_8efyn"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8590604), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.8590604), 0.0, 0.0, 0, 0]
 point_count = 4
-point_0/position = Vector2(0, 1)
+point_0/position = Vector2(0.8590604, 1)
 point_1/position = Vector2(0.8590604, 1)
-point_2/position = Vector2(0.8590604, 1)
+point_2/position = Vector2(1, 0)
 point_3/position = Vector2(1, 0.8590604)
 
 [sub_resource type="CurveTexture" id="CurveTexture_jl4d6"]
@@ -53,12 +53,12 @@ scale_min = 0.17999999
 scale_max = 0.29999998
 scale_curve = SubResource("CurveTexture_jl4d6")
 color = Color(1, 1, 1, 0.5882353)
-color_ramp = SubResource("GradientTexture1D_2qqyj")
+color_ramp = SubResource("GradientTexture1D_kdkgu")
 
 [sub_resource type="Curve" id="Curve_csif7"]
-_data = [Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
-point_0/position = Vector2(0.99999, 1)
+point_0/position = Vector2(1, 1)
 point_1/position = Vector2(1, 1)
 point_2/position = Vector2(1, 1)
 metadata/_snap_count = 23
@@ -68,9 +68,9 @@ offsets = PackedFloat32Array(0, 0.035256412, 0.9647436, 1)
 colors = PackedColorArray(1, 0, 0, 0, 0.95686275, 0, 0.043137256, 1, 1, 0, 0, 1, 1, 0, 0, 0)
 
 [sub_resource type="Curve" id="Curve_kdkgu"]
-_data = [Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
-point_0/position = Vector2(0.99999, 1)
+point_0/position = Vector2(1, 1)
 point_1/position = Vector2(1, 1)
 point_2/position = Vector2(1, 1)
 metadata/_snap_count = 23

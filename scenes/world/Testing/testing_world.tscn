@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://c2mw5xrwsrxrw" path="res://scenes/objects/Structures/Weapon Factory/weapon_factory.tscn" id="22_cp65u"]
 [ext_resource type="Texture2D" uid="uid://dimbe0ofc3b13" path="res://assets/structures/planets/2k_mars.jpg" id="23_csfw6"]
 [ext_resource type="Texture2D" uid="uid://cm5x7ugqj6cjn" path="res://assets/structures/AF Weapon Factory.png" id="23_mow7c"]
+[ext_resource type="Shader" uid="uid://dt0lgeirxjt0h" path="res://shaders/black_hole.gdshader" id="23_p61na"]
 [ext_resource type="Texture2D" uid="uid://cefm7yi7k75y0" path="res://assets/structures/planets/2k_jupiter.jpg" id="24_xrk2u"]
 [ext_resource type="Texture2D" uid="uid://b4km1ne8ihhja" path="res://assets/structures/planets/2k_saturn.jpg" id="25_daj6h"]
 [ext_resource type="Texture2D" uid="uid://csg7ql2cr76ni" path="res://assets/structures/planets/2k_sun.jpg" id="25_s3fht"]
@@ -270,6 +271,51 @@ radius = 1010.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t23ch"]
 radius = 970.0
+
+[sub_resource type="Gradient" id="Gradient_71dmj"]
+colors = PackedColorArray(0, 0, 0, 0.3764706, 1, 0, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2qqyj"]
+gradient = SubResource("Gradient_71dmj")
+fill = 1
+fill_from = Vector2(0.45299146, 0.491453)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_p61na"]
+offsets = PackedFloat32Array(0, 0.22510822)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_71dmj"]
+gradient = SubResource("Gradient_p61na")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_2qqyj"]
+offsets = PackedFloat32Array(0.5151515, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p61na"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2qqyj"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_p61na")
+color_ramp = SubResource("Gradient_2qqyj")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jl4d6"]
+shader = ExtResource("23_p61na")
+shader_parameter/resolution = Vector2(256, 256)
+shader_parameter/colorResolution = 100.0
+shader_parameter/distortionIntensity = 200.0
+shader_parameter/spiralDistortionIntensity = -6.4999999478458
+shader_parameter/holeSize = 0.11999999731776
+shader_parameter/holeColor = SubResource("GradientTexture2D_71dmj")
+shader_parameter/image = SubResource("NoiseTexture2D_2qqyj")
+shader_parameter/rotations = 1.5
+shader_parameter/depth = 0.60000000894072
+shader_parameter/spiralIntensity = 1.0
+shader_parameter/shrinkSpeed = 0.2
+shader_parameter/roationSpeed = 0.1
+shader_parameter/haloColor = SubResource("GradientTexture2D_2qqyj")
 
 [node name="TestingWorld" type="Node2D" unique_id=1041454062]
 script = ExtResource("1_rvknj")
@@ -1162,6 +1208,14 @@ scale = Vector2(1.99001, 1.9803)
 texture = SubResource("NoiseTexture2D_076eo")
 
 [node name="Homerus" parent="." unique_id=8305878 instance=ExtResource("14_t01pc")]
-position = Vector2(-1686, -2489)
+position = Vector2(-2302, -2912)
+
+[node name="BlackHole" type="Sprite2D" parent="." unique_id=190891278]
+visible = false
+z_index = 1000
+material = SubResource("ShaderMaterial_jl4d6")
+position = Vector2(-29.999512, -3.000023)
+scale = Vector2(1.1134756, 1.1134756)
+texture = ExtResource("28_ojxu6")
 
 [connection signal="finished" from="Soundtrack" to="Soundtrack" method="_on_finished"]

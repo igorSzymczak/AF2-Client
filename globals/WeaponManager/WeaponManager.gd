@@ -94,6 +94,7 @@ enum Type {
 	TORPEDOES,
 	BEAM_WEAPON,
 	STAR_MELTER,
+	RAY_WEAPON
 }
 
 var _Weapons: Dictionary[Type, PackedScene] = {
@@ -111,6 +112,7 @@ var _Weapons: Dictionary[Type, PackedScene] = {
 	Type.TORPEDOES: load("res://scenes/weapons/Torpedoes/torpedoes.tscn"),
 	Type.BEAM_WEAPON: load("res://scenes/weapons/BeamWeapon/beam_weapon.tscn"),
 	Type.STAR_MELTER: load("res://scenes/weapons/StarMelter/star_melter.tscn"),
+	Type.RAY_WEAPON: load("res://scenes/weapons/RayWeapon/ray_weapon.tscn")
 	
 }
 
@@ -205,3 +207,24 @@ func get_beam(beam_type: BeamType) -> Beam:
 
 func get_beam_scene(beam_type: BeamType) -> PackedScene:
 	return _Beams[beam_type]
+
+
+
+enum RayType {
+	RAY,
+	
+}
+
+var _Rays: Dictionary[RayType, PackedScene] = {
+	RayType.RAY: load("res://scenes/bullets/rays/ray.tscn"),
+	
+}
+
+func get_ray_type(ray: Ray) -> RayType:
+	return ray.ray_type
+
+func get_ray(ray_type: RayType) -> Ray:
+	return _Rays[ray_type].instantiate()
+
+func get_ray_scene(ray_type: RayType) -> PackedScene:
+	return _Rays[ray_type]

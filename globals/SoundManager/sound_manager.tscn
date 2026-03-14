@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://csiqrftufef7t" path="res://audio/ui/boop.ogg" id="14_1l1t4"]
 [ext_resource type="AudioStream" uid="uid://c13pf0qcga3ug" path="res://audio/effects/weapons/Torpedo (3).mp3" id="14_osi10"]
 [ext_resource type="AudioStream" uid="uid://dii5glc4tbdtu" path="res://audio/effects/explosion_huge.ogg" id="14_u0jht"]
+[ext_resource type="AudioStream" uid="uid://cak8jr6mowr7u" path="res://audio/effects/weapons/Rays/ray_shot.mp3" id="15_wkckx"]
 [ext_resource type="AudioStream" uid="uid://pv6a5qm66gcu" path="res://audio/ui/Recycling/recycling.mp3" id="16_xb7nw"]
 [ext_resource type="AudioStream" uid="uid://bclmovev7b6dm" path="res://audio/ui/Recycling/recycling_end.mp3" id="17_f4f70"]
 [ext_resource type="AudioStream" uid="uid://cmhgg2cbh5ik3" path="res://audio/ui/Recycling/recycling_new_material.mp3" id="18_hc88r"]
@@ -33,6 +34,12 @@ streams_count = 3
 stream_0/stream = ExtResource("12_af104")
 stream_1/stream = ExtResource("13_wkckx")
 stream_2/stream = ExtResource("14_osi10")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_osi10"]
+random_pitch = 1.122462
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("15_wkckx")
 
 [node name="SoundManager" type="Node" unique_id=636181282]
 script = ExtResource("1_eracs")
@@ -128,6 +135,12 @@ stream = SubResource("AudioStreamRandomizer_ynvfb")
 volume_db = 10.0
 pitch_scale = 0.65
 max_distance = 3000.0
+bus = &"Effects"
+
+[node name="RayWeaponShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=2052257793]
+stream = SubResource("AudioStreamRandomizer_osi10")
+volume_db = -5.0
+max_polyphony = 3
 bus = &"Effects"
 
 [node name="Entities" type="Node" parent="." unique_id=282972643]

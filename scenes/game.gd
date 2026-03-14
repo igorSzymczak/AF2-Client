@@ -231,6 +231,38 @@ func handle_client_beam_removed(id: int):
 
 
 
+## Rays
+
+
+
+@rpc("authority", "call_remote", "unreliable")
+func update_ray_property(id: int, prop: int, value: Variant):
+	handle_client_ray_property_changed(id, prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_rays(rays: Array[Dictionary]):
+	for ray_data: Dictionary in rays:
+		handle_client_ray_added(ray_data)
+
+@rpc("authority", "call_remote", "reliable")
+func add_ray(ray_data: Dictionary):
+	handle_client_ray_added(ray_data)
+
+@rpc("authority", "call_remote", "reliable")
+func remove_ray(id: int):
+	handle_client_ray_removed(id)
+
+func handle_client_ray_added(ray_data: Dictionary):
+	g.add_ray(ray_data)
+
+func handle_client_ray_property_changed(id: int, prop: int, value: Variant):
+	g.update_ray_property(id, prop, value)
+
+func handle_client_ray_removed(id: int):
+	g.remove_ray(id)
+
+
+
 ## SPAWNERS
 
 

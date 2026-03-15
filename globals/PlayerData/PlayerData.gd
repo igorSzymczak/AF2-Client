@@ -129,7 +129,6 @@ func give_power(amount: float) -> void:
 
 func take_power(amount: float) -> void:
 	var current_power: float = get_prop(PlayerData.Property.CURRENT_POWER)
-	var max_power: float = StatManager.my_stats.get_stat(Stats.TYPE.MAX_POWER).value
 	
 	current_power -= amount
 	current_power = max(current_power, 0.0)

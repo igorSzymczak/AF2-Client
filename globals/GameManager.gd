@@ -19,6 +19,7 @@ enum ENTITY_TYPE {
 
 signal update()
 const player_update_delay_msec: int = 50
+const server_delta: float = 0.016666
 var update_time: int = 0
 func _process(delta: float) -> void:
 	update_time += round(delta * 1000)
@@ -34,12 +35,14 @@ var user_prefs: UserPreferences = UserPreferences.load_or_create()
 
 var Structures: Dictionary[int, Dictionary] = {}
 var Players: Dictionary[int, Dictionary] = {}
-var Bullets: Dictionary = {}
+var Bullets: Dictionary[int, Dictionary] = {}
+var Beams: Dictionary[int, Dictionary] = {}
+var Rays: Dictionary[int, Dictionary] = {}
 var Spawners: Dictionary[int, Dictionary] = {}
 var Turrets: Dictionary[int, Dictionary] = {}
 var Actors: Dictionary[int, Dictionary] = {}
 var Bosses: Dictionary[int, Dictionary] = {}
-var Items: Dictionary = {}
+var Items: Dictionary[int, Dictionary] = {}
 
 # Allows or Disallows to use Weapons, Abilities etc. Changed through different Menus
 var can_perform_actions = true
@@ -411,7 +414,7 @@ func get_bullet_property(bullet_id: int, prop: BulletProperty) -> Variant:
 	if Bullets.has(bullet_id):
 		var props: PropertyContainer = Bullets[bullet_id].props
 		return props.get_property(prop)
-	return STRUCTURE_PROPERTY_SCHEMA[prop].default
+	return BEAM_PROPERTY_SCHEMA[prop].default
 
 func get_bullet_props(bullet_id: int) -> PropertyContainer:
 	if Bullets.has(bullet_id):
@@ -432,6 +435,205 @@ signal shockwave_created(
 	time_to_vanish: float, current_time_of_living: int,
 	server_timestamp: int
 )
+
+
+
+enum BeamProperty {
+	GID,
+	BEAM_TYPE,
+	GLOBAL_POSITION,
+	ANGLE,
+	DISTANCE,
+	HAS_TARGET,
+	IS_LOCAL_PLAYER,
+	TIME_FROM_LAST_DAMAGE,
+}
+
+const BEAM_PROPERTY_SCHEMA: Dictionary[BeamProperty, Dictionary] = {
+	BeamProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	BeamProperty.BEAM_TYPE: {
+		"type": TYPE_INT, # WeaponManager.BulletType (enum)
+		"default": WeaponManager.BeamType.BEAM
+	},
+	BeamProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	BeamProperty.ANGLE: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	BeamProperty.DISTANCE: {
+		"type": TYPE_FLOAT,
+		"default": 10.0
+	},
+	BeamProperty.HAS_TARGET: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	BeamProperty.IS_LOCAL_PLAYER: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	BeamProperty.TIME_FROM_LAST_DAMAGE: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	
+}
+
+signal beam_added(beam: Beam)
+signal beam_property_changed(beam_id: int, prop: BeamProperty, value: Variant)
+func add_beam(beam_data: Dictionary):
+	var gid: int = beam_data[BeamProperty.GID]
+	if Beams.has(gid):
+		return
+	
+	var type: WeaponManager.BeamType = beam_data[BeamProperty.BEAM_TYPE]
+	var beam: Beam = WeaponManager.get_beam(type)
+	if !is_instance_valid(beam):
+		push_warning("Beam of type ", type, " non existant!")
+		return
+	
+	beam.global_position = beam_data[BeamProperty.GLOBAL_POSITION]
+	beam.rotation = beam_data[BeamProperty.ANGLE]
+	
+	Beams[gid] = {
+		"node": beam,
+		"props": beam.props
+	}
+	g.current_world.add_child(beam)
+	beam_added.emit(beam)
+	beam.props.property_changed.connect(func(prop: int, value: Variant):
+		beam_property_changed.emit(beam.gid, prop, value)
+	)
+	beam.props.from_dict(beam_data)
+
+signal beam_removed(beam_id: int)
+func remove_beam(beam_id: int) -> void:
+	if Beams.has(beam_id):
+		Beams.erase(beam_id)
+		beam_removed.emit(beam_id)
+
+func get_beam_property(beam_id: int, prop: BeamProperty) -> Variant:
+	if Beams.has(beam_id):
+		var props: PropertyContainer = Beams[beam_id].props
+		return props.get_property(prop)
+	return BEAM_PROPERTY_SCHEMA[prop].default
+
+func get_beam_props(beam_id: int) -> PropertyContainer:
+	if Beams.has(beam_id):
+		return Beams[beam_id].props
+	return null
+
+func update_beam_property(beam_id: int, prop: BeamProperty, value: Variant) -> void:
+	if !Beams.has(beam_id):
+		return
+	
+	var props: PropertyContainer = Beams[beam_id]["props"]
+	props.set_property(prop, value)
+
+
+
+## Rays
+
+
+
+enum RayProperty {
+	GID,
+	RAY_TYPE,
+	GLOBAL_POSITION,
+	ROTATION,
+	DISTANCE,
+	RADIUS,
+	TIME_TO_LIVE,
+}
+
+const RAY_PROPERTY_SCHEMA: Dictionary[RayProperty, Dictionary] = {
+	RayProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	RayProperty.RAY_TYPE: {
+		"type": TYPE_INT, # WeaponManager.RayType (enum)
+		"default": WeaponManager.RayType.RAY
+	},
+	RayProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2i.ZERO
+	},
+	RayProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	RayProperty.DISTANCE: {
+		"type": TYPE_FLOAT,
+		"default": 100.0
+	},
+	RayProperty.RADIUS: {
+		"type": TYPE_FLOAT,
+		"default": 10.0
+	},
+	RayProperty.TIME_TO_LIVE: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	
+}
+
+signal ray_added(ray: Ray)
+signal ray_property_changed(ray_id: int, prop: RayProperty, value: Variant)
+func add_ray(ray_data: Dictionary):
+	var gid: int = ray_data[RayProperty.GID]
+	if Rays.has(gid):
+		return
+	
+	var type: WeaponManager.RayType = ray_data[RayProperty.RAY_TYPE]
+	var ray: Ray = WeaponManager.get_ray(type)
+	if !is_instance_valid(ray):
+		push_warning("Ray of type ", type, " non existant!")
+		return
+	
+	ray.global_position = ray_data[RayProperty.GLOBAL_POSITION]
+	ray.rotation = ray_data[RayProperty.ROTATION]
+	
+	Rays[gid] = {
+		"node": ray,
+		"props": ray.props
+	}
+	g.current_world.add_child(ray)
+	ray_added.emit(ray)
+	ray.props.property_changed.connect(func(prop: int, value: Variant):
+		ray_property_changed.emit(ray.gid, prop, value)
+	)
+	ray.props.from_dict(ray_data)
+
+signal ray_removed(ray_id: int)
+func remove_ray(ray_id: int) -> void:
+	if Rays.has(ray_id):
+		Rays.erase(ray_id)
+		ray_removed.emit(ray_id)
+
+func get_ray_property(ray_id: int, prop: RayProperty) -> Variant:
+	if Rays.has(ray_id):
+		var props: PropertyContainer = Rays[ray_id].props
+		return props.get_property(prop)
+	return RAY_PROPERTY_SCHEMA[prop].default
+
+func get_ray_props(ray_id: int) -> PropertyContainer:
+	if Rays.has(ray_id):
+		return Rays[ray_id].props
+	return null
+
+func update_ray_property(ray_id: int, prop: RayProperty, value: Variant) -> void:
+	if !Rays.has(ray_id):
+		return
+	
+	var props: PropertyContainer = Rays[ray_id]["props"]
+	props.set_property(prop, value)
 
 
 

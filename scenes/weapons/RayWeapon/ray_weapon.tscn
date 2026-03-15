@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c181pbqpsc2d6"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_prdp6"]
+
+[node name="RayWeapon" type="Node" unique_id=1471481403]
+script = ExtResource("1_prdp6")
+weapon_name = "Ray Weapon"
+weapon_type = 14
+energy = true
+description_long = "ray weaponbe"
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

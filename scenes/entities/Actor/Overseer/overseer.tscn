@@ -56,10 +56,10 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_ruvov"]
-_data = [Vector2(0, 0.7605729), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7605729, 0), 0.0, 0.0, 0, 0]
 point_count = 2
-point_0/position = Vector2(0, 0.7605729)
-point_1/position = Vector2(1, 0)
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(0.7605729, 0)
 
 [sub_resource type="CurveTexture" id="CurveTexture_nkfth"]
 curve = SubResource("Curve_ruvov")
@@ -88,6 +88,7 @@ metadata/_custom_type_script = "uid://cf0pk0erui87j"
 type = 2
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1640793511]
+visible = false
 position = Vector2(0, -40)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_nkfth")

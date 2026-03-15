@@ -81,6 +81,8 @@ func _create_effect_sprite() -> Sprite2D:
 	sprite.rotation = rotation
 	sprite.scale = scale
 	sprite.z_index = z_index + 1
+	sprite.region_enabled = region_enabled
+	sprite.region_rect = region_rect
 	return sprite
 
 

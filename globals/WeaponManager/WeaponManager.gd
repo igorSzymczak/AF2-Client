@@ -92,6 +92,9 @@ enum Type {
 	ENERGY_NOVA,
 	ENERGY_BLAST,
 	TORPEDOES,
+	BEAM_WEAPON,
+	STAR_MELTER,
+	RAY_WEAPON
 }
 
 var _Weapons: Dictionary[Type, PackedScene] = {
@@ -106,7 +109,11 @@ var _Weapons: Dictionary[Type, PackedScene] = {
 	Type.SHOCKWAVE_GENERATOR: load("res://scenes/weapons/ShockwaveGenerator/shockwave_generator.tscn"),
 	Type.ENERGY_NOVA: load("res://scenes/weapons/Energy Nova/energy_nova.tscn"),
 	Type.ENERGY_BLAST: load("res://scenes/weapons/EnergyBlast/energy_blast.tscn"),
-	Type.TORPEDOES: load("res://scenes/weapons/Torpedoes/torpedoes.tscn")
+	Type.TORPEDOES: load("res://scenes/weapons/Torpedoes/torpedoes.tscn"),
+	Type.BEAM_WEAPON: load("res://scenes/weapons/BeamWeapon/beam_weapon.tscn"),
+	Type.STAR_MELTER: load("res://scenes/weapons/StarMelter/star_melter.tscn"),
+	Type.RAY_WEAPON: load("res://scenes/weapons/RayWeapon/ray_weapon.tscn")
+	
 }
 
 func get_type(weapon: Weapon) -> Type:
@@ -130,7 +137,7 @@ enum BulletType {
 	PIERCING_BULLET,
 	SPAWNER_LASER,
 	ENERGY_BLAST_PROJECTILE,
-	TORPEDO
+	TORPEDO,
 }
 
 var _Bullets: Dictionary[BulletType, PackedScene] = {
@@ -177,3 +184,47 @@ func get_shockwave(shockwave_type: ShockwaveType) -> ShockWave:
 
 func get_shockwave_scene(shockwave_type: ShockwaveType) -> PackedScene:
 	return _Shockwaves[shockwave_type]
+
+
+
+enum BeamType {
+	BEAM,
+	STAR_MELTER_BEAM,
+	
+}
+
+var _Beams: Dictionary[BeamType, PackedScene] = {
+	BeamType.BEAM: load("res://scenes/bullets/beams/beam.tscn"),
+	BeamType.STAR_MELTER_BEAM: load("res://scenes/weapons/StarMelter/star_melter_beam.tscn"),
+	
+}
+
+func get_beam_type(beam: Beam) -> BeamType:
+	return beam.beam_type
+
+func get_beam(beam_type: BeamType) -> Beam:
+	return _Beams[beam_type].instantiate()
+
+func get_beam_scene(beam_type: BeamType) -> PackedScene:
+	return _Beams[beam_type]
+
+
+
+enum RayType {
+	RAY,
+	
+}
+
+var _Rays: Dictionary[RayType, PackedScene] = {
+	RayType.RAY: load("res://scenes/bullets/rays/ray.tscn"),
+	
+}
+
+func get_ray_type(ray: Ray) -> RayType:
+	return ray.ray_type
+
+func get_ray(ray_type: RayType) -> Ray:
+	return _Rays[ray_type].instantiate()
+
+func get_ray_scene(ray_type: RayType) -> PackedScene:
+	return _Rays[ray_type]

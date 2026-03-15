@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cb42g7wskvu87"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_3fw6b"]
+
+[node name="BeamWeapon" type="Node" unique_id=238031912]
+script = ExtResource("1_3fw6b")
+weapon_name = "Beam Weapon"
+weapon_type = 12
+energy = true
+description_long = "idk shoots beam"
+description_short = "LAZERRRRRRR"

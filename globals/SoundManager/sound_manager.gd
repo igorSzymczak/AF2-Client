@@ -5,7 +5,7 @@ extends Node
 @onready var bosses = $Bosses
 @onready var ui = $UI
 
-const MAX_POLYPHONY: int = 3
+const MAX_POLYPHONY: int = 5
 
 var sound_list: Array[AudioStreamPlayer2D] = []
 func _ready():

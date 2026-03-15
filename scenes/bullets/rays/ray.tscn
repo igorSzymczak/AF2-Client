@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://7ua285u4ndgq"]
+
+[ext_resource type="Script" uid="uid://cqa4aubsjga0s" path="res://scenes/bullets/rays/ray.gd" id="1_kdspq"]
+
+[node name="Ray" type="Node2D" unique_id=1322846287 node_paths=PackedStringArray("base_line")]
+script = ExtResource("1_kdspq")
+base_line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=94226646]
+antialiased = true

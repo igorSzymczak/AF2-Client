@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csct8q3t6g3nc"]
 
-[ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_mt0pv"]
+[ext_resource type="Script" uid="uid://bmmbrv74t4umn" path="res://scenes/entities/Actor/OverseerDrone/overseer_drone.gd" id="1_mt0pv"]
 [ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_hv53c"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="3_s76t5"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="4_x1a82"]
@@ -132,3 +132,6 @@ position = Vector2(0, 16)
 amount = 16
 texture = SubResource("CompressedTexture2D_mt0pv")
 process_material = SubResource("ParticleProcessMaterial_x1a82")
+
+[node name="RayPosition" type="Marker2D" parent="." unique_id=810998434]
+position = Vector2(0, 32)

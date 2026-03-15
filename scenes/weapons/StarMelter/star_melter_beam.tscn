@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://670vf2e3trlj"]
 
 [ext_resource type="Script" uid="uid://ytodtu3q5i0i" path="res://scenes/weapons/StarMelter/star_melter_beam.gd" id="1_csif7"]
-[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/laser beam.png" id="2_43mk0"]
+[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/beam_texture.png" id="2_43mk0"]
 [ext_resource type="Texture2D" uid="uid://cwqnt5jwqotl8" path="res://assets/Glow.png" id="2_csif7"]
 [ext_resource type="AudioStream" uid="uid://dftfdgjr7s1v0" path="res://audio/effects/weapons/StarMelter/star_melter_launch.mp3" id="4_m80mc"]
 [ext_resource type="AudioStream" uid="uid://c14yomk4jrffn" path="res://audio/effects/weapons/StarMelter/star_melter_humming.mp3" id="5_kdkgu"]

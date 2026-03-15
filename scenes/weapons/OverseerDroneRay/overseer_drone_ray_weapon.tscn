@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://x6tboalwwxpk"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_i0j41"]
+
+[node name="OverseerDroneRayWeapon" type="Node" unique_id=1225569455]
+script = ExtResource("1_i0j41")
+weapon_name = "Overseer Drone Ray"
+weapon_type = 15
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

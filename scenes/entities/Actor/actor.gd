@@ -12,6 +12,7 @@ var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
 
 enum Event {
 	TELEPORT,
+	OVERSEER_DRONE_ABOUT_TO_SHOOT_RAY,
 }
 
 enum TeleportData {
@@ -65,20 +66,25 @@ func handle_death(silent: bool = false) -> void:
 
 func handle_event(event: Event, event_data: Variant) -> void:
 	if event == Event.TELEPORT:
-		var teleport_position: Vector2 = event_data[TeleportData.POSITION]
-		var ease_in_sec: float = event_data[TeleportData.EASE_IN_SEC]
-		var ease_out_sec: float = event_data[TeleportData.EASE_OUT_SEC]
-		
-		var ease_in_scale_tween := create_tween()
-		ease_in_scale_tween.tween_property(self, "scale", Vector2(0.001, 0.001), ease_in_sec)
-		await ease_in_scale_tween.finished
-		
-		global_position = teleport_position
-		last_pos = teleport_position
-		server_pos = teleport_position
-		velocity = Vector2.ZERO
-		
-		var ease_out_scale_tween := create_tween()
-		ease_out_scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), ease_out_sec)
-		
-		
+		handle_teleport(event_data)
+	if event == Event.OVERSEER_DRONE_ABOUT_TO_SHOOT_RAY:
+		handle_overseer_drone_about_to_shoot_ray(event_data)
+
+func handle_teleport(event_data) -> void:
+	var teleport_position: Vector2 = event_data[TeleportData.POSITION]
+	var ease_in_sec: float = event_data[TeleportData.EASE_IN_SEC]
+	var ease_out_sec: float = event_data[TeleportData.EASE_OUT_SEC]
+	
+	var ease_in_scale_tween := create_tween()
+	ease_in_scale_tween.tween_property(self, "scale", Vector2(0.001, 0.001), ease_in_sec)
+	await ease_in_scale_tween.finished
+	
+	global_position = teleport_position
+	last_pos = teleport_position
+	server_pos = teleport_position
+	velocity = Vector2.ZERO
+	
+	var ease_out_scale_tween := create_tween()
+	ease_out_scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), ease_out_sec)
+
+func handle_overseer_drone_about_to_shoot_ray(_event_data) -> void: pass # Only Overseer Drone

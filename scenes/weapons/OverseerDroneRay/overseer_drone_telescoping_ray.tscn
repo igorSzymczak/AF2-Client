@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://4qq5e1mfjbda"]
+
+[ext_resource type="Script" uid="uid://dwmoemmlhe1nm" path="res://scenes/weapons/OverseerDroneRay/overseer_drone_telescoping_ray.gd" id="1_oen5h"]
+[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/beam_texture.png" id="2_oen5h"]
+[ext_resource type="AudioStream" uid="uid://gd07hecie3pn" path="res://audio/effects/Ship/Overseer/overseer_drone_ray_load.mp3" id="3_c1oxx"]
+
+[sub_resource type="Curve" id="Curve_oen5h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32996634, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+point_0/position = Vector2(0, 1)
+point_1/position = Vector2(0.32996634, 0)
+
+[sub_resource type="Gradient" id="Gradient_c1oxx"]
+offsets = PackedFloat32Array(0, 0.8069498, 1)
+colors = PackedColorArray(0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_oen5h"]
+offsets = PackedFloat32Array(0, 0.8069498, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="OverseerDroneTelescopingRay" type="Node2D" unique_id=785373636 node_paths=PackedStringArray("base_line", "lines")]
+show_behind_parent = true
+script = ExtResource("1_oen5h")
+radius = 15.0
+is_local = true
+point_amount = 20
+base_line = NodePath("BaseLine")
+lines = [NodePath("GradientLine"), NodePath("BaseLine")]
+metadata/_custom_type_script = "uid://cqa4aubsjga0s"
+
+[node name="GradientLine" type="Line2D" parent="." unique_id=1314492320]
+modulate = Color(0, 1, 1, 1)
+points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
+width = 200.0
+width_curve = SubResource("Curve_oen5h")
+gradient = SubResource("Gradient_c1oxx")
+texture = ExtResource("2_oen5h")
+texture_mode = 1
+
+[node name="BaseLine" type="Line2D" parent="." unique_id=609252577]
+modulate = Color(1, 1, 1, 0.77254903)
+points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
+width = 15.0
+width_curve = SubResource("Curve_oen5h")
+gradient = SubResource("Gradient_oen5h")
+texture = ExtResource("2_oen5h")
+texture_mode = 2
+antialiased = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=581179449]
+stream = ExtResource("3_c1oxx")
+autoplay = true
+bus = &"Effects"

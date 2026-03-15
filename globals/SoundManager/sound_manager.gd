@@ -23,10 +23,9 @@ func _build_sound_list():
 	
 	for sound:AudioStreamPlayer2D in sound_list:
 		sound.max_polyphony = MAX_POLYPHONY
-		sound.max_distance = max(sound.max_distance, 20000)
+		sound.max_distance = max(sound.max_distance, 10000)
 		sound.attenuation = 5.0
 		sound.panning_strength = 3.0
-		
 
 # Server only
 @rpc("authority", "call_remote", "reliable")

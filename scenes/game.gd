@@ -176,7 +176,6 @@ func handle_client_bullet_added(bullet_data: Dictionary):
 
 func handle_client_bullet_property_changed(id: int, prop: int, value: Variant):
 	g.update_bullet_property(id, prop, value)
-	print("changed bullet property")
 
 func handle_client_bullet_removed(id: int):
 	g.remove_bullet(id)

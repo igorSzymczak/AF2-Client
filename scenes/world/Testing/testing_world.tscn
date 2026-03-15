@@ -75,8 +75,8 @@ shader_parameter/bg_color = Color(0, 0, 0, 0)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/zoom = 1.0
 shader_parameter/smallStarSlow = 2.735
-shader_parameter/smallStarAmount = 0.282
-shader_parameter/layer_count = 1
+shader_parameter/smallStarAmount = 0.092
+shader_parameter/layer_count = 3
 shader_parameter/max_layers = 8
 shader_parameter/base_cell_size = 20.0
 
@@ -650,21 +650,21 @@ texture = ExtResource("26_cp65u")
 metadata/_edit_lock_ = true
 
 [node name="LightFront2" type="Sprite2D" parent="Planets/Sun/LightFront" unique_id=720561690]
-modulate = Color(0.99607843, 1, 1, 0.4392157)
+modulate = Color(0.99607843, 1, 1, 0.50980395)
 z_index = 3
 scale = Vector2(3.6659267, 3.6659267)
 texture = ExtResource("26_cp65u")
 metadata/_edit_lock_ = true
 
 [node name="LightFront3" type="Sprite2D" parent="Planets/Sun/LightFront" unique_id=171210637]
-modulate = Color(0.99607843, 1, 1, 0.25882354)
+modulate = Color(0.99607843, 1, 1, 0.39215687)
 z_index = 3
 scale = Vector2(7.786802, 7.786802)
 texture = ExtResource("26_cp65u")
 metadata/_edit_lock_ = true
 
 [node name="LightBehind" type="Sprite2D" parent="Planets/Sun" unique_id=1946257256]
-modulate = Color(0.99607843, 0.43137255, 0.17254902, 0.5647059)
+modulate = Color(0.99607843, 0.43137255, 0.17254902, 0.23921569)
 show_behind_parent = true
 scale = Vector2(8.14525, 8.189333)
 texture = ExtResource("26_cp65u")

@@ -59,10 +59,10 @@ func _handle_death() -> void:
 	alpha_tween.tween_property(self, "modulate", Color(1,1,1,0.0), fade_time_sec)
 	
 	var volume_1_tween: Tween = create_tween()
-	volume_1_tween.tween_property(launch_sound, "volume_db", -20.0, fade_time_sec)
+	volume_1_tween.tween_property(launch_sound, "volume_db", -15.0, fade_time_sec)
 	
 	var volume_2_tween: Tween = create_tween()
-	volume_2_tween.tween_property(humming_sound, "volume_db", -20.0, fade_time_sec)
+	volume_2_tween.tween_property(humming_sound, "volume_db", -15.0, fade_time_sec)
 	
 	
 	await scale_tween.finished

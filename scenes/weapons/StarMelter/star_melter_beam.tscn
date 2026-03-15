@@ -33,11 +33,11 @@ colors = PackedColorArray(1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0)
 gradient = SubResource("Gradient_kdkgu")
 
 [sub_resource type="Curve" id="Curve_8efyn"]
-_data = [Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.8590604), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(0.8590604, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8590604), 0.0, 0.0, 0, 0]
 point_count = 4
-point_0/position = Vector2(0.8590604, 1)
+point_0/position = Vector2(0, 1)
 point_1/position = Vector2(0.8590604, 1)
-point_2/position = Vector2(1, 0)
+point_2/position = Vector2(0.8590604, 1)
 point_3/position = Vector2(1, 0.8590604)
 
 [sub_resource type="CurveTexture" id="CurveTexture_jl4d6"]
@@ -122,13 +122,16 @@ texture_mode = 2
 
 [node name="LaunchSound" type="AudioStreamPlayer2D" parent="." unique_id=1633326153]
 stream = ExtResource("4_m80mc")
+volume_db = 5.0
 autoplay = true
 max_distance = 10000.0
+bus = &"Effects"
 
 [node name="Humming" type="AudioStreamPlayer2D" parent="." unique_id=659819726]
 stream = ExtResource("5_kdkgu")
-volume_db = -10.0
+volume_db = -5.0
 pitch_scale = 1.25
 autoplay = true
 max_distance = 4000.0
+bus = &"Effects"
 parameters/looping = true

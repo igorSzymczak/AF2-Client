@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_c3jqm"]
 [ext_resource type="PackedScene" uid="uid://c0bcb0dfhtema" path="res://scenes/components/Collector/Collector.tscn" id="6_o8fb4"]
 [ext_resource type="Texture2D" uid="uid://b1gyqxf8ompt1" path="res://assets/ui/other/Reticle.png" id="6_rarct"]
+[ext_resource type="AudioStream" uid="uid://cglewrnwra06b" path="res://audio/effects/Ship/spaceship_humm.mp3" id="8_tihqr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
 radius = 54.99998
@@ -138,3 +139,14 @@ z_index = 100
 z_as_relative = false
 position = Vector2(900, 0)
 texture = ExtResource("6_rarct")
+
+[node name="HummSound" type="AudioStreamPlayer2D" parent="." unique_id=1610943406]
+unique_name_in_owner = true
+stream = ExtResource("8_tihqr")
+autoplay = true
+max_distance = 6000.0
+attenuation = 5.0
+max_polyphony = 10
+panning_strength = 3.0
+bus = &"Ambience"
+parameters/looping = true

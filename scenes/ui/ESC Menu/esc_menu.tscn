@@ -260,7 +260,7 @@ horizontal_alignment = 1
 [node name="AmbienceVolumeSlider" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top/Sound" unique_id=2101201973 instance=ExtResource("6_77mv8")]
 unique_name_in_owner = true
 layout_mode = 2
-bus_name = "Interface"
+bus_name = "Ambience"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/Settings/ScrollContainer/Top" unique_id=1522443754]
 custom_minimum_size = Vector2(0, 32)

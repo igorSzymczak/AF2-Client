@@ -21,6 +21,7 @@ var landed_structure: Structure = null
 @onready var camera: Camera2D = $Camera2D
 @onready var reticle: Sprite2D = $Reticle
 @onready var poi: POI = $PoiComponent
+@onready var humm_sound: AudioStreamPlayer2D = %HummSound
 
 
 
@@ -187,7 +188,8 @@ func handle_other_player(delta: float) -> void:
 	rotation = lerp_angle(rotation, server_rotation,  delta * 10)
 	velocity = velocity.lerp(server_velocity, delta * 20)
 	
-		
+	manage_sound()
+	
 	var is_main_player_alive: bool = g.me.alive
 	if landed_structure != null:
 		pass # Alpha being set in func land_on()
@@ -236,9 +238,15 @@ func set_speed_boost(value: bool) -> void:
 	
 	speed_boost_active = value
 
+func manage_sound() -> void:
+	humm_sound.volume_linear = clampf(velocity.length() / 3000.0, 0, 0.1)
+	if engine_active:
+		humm_sound.volume_linear *= 2.0
+
 func handle_movement(delta: float) -> void:
 	# SpeedBoost
 	manage_speed_boost(delta)
+	manage_sound()
 	
 	var turn_speed: float = stats.get_stat(Stats.TYPE.TURN_SPEED).value
 	
@@ -413,7 +421,7 @@ var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:
 	var zoom_value: float
 	if landed_structure == null:
-		zoom_value = max(0.37, 0.42 - abs(velocity.length()) / 10000.0)
+		zoom_value = max(0.25, 0.42 - abs(velocity.length()) / 5000.0)
 	else:
 		zoom_value = 0.8
 	var zoom_vector: Vector2 = camera.zoom.lerp(Vector2(zoom_value, zoom_value), delta)

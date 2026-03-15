@@ -44,6 +44,7 @@ func _on_interface_volume_slider_value_changed(value):
 
 func _on_ambience_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(ambience_slider.bus_index, linear_to_db(value))
+	print("Set ambience volume")
 	if user_prefs:
 		user_prefs.ambience_audio_level = value
 		user_prefs.save()

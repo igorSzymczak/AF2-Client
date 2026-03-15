@@ -70,9 +70,9 @@ script = ExtResource("1_eracs")
 [node name="ClusterMissilesShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1415592336]
 stream = ExtResource("2_hcod6")
 pitch_scale = 2.5
-max_distance = 10000.0
+max_distance = 20000.0
 max_polyphony = 10
-bus = &"Effects"
+bus = &"Ambience"
 
 [node name="ClusterMissilesHit" type="AudioStreamPlayer2D" parent="Weapons" unique_id=214234984]
 stream = ExtResource("3_shfl7")
@@ -93,7 +93,8 @@ bus = &"Effects"
 [node name="AcidBlasterShoot" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1465904908]
 stream = ExtResource("5_ffbuk")
 volume_db = 2.0
-max_distance = 10000.0
+max_distance = 20000.0
+attenuation = 5.0
 max_polyphony = 3
 bus = &"Effects"
 

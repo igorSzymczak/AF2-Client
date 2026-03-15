@@ -36,7 +36,9 @@ _data = {
 
 [node name="NexarReaver" type="Sprite2D" unique_id=1042224632 node_paths=PackedStringArray("engine")]
 material = SubResource("ShaderMaterial_esedj")
+position = Vector2(16, 0)
 rotation = 1.5708
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("1_gctjj")
 region_rect = Rect2(-400, -400, 934, 992)
 script = ExtResource("2_6cr4w")

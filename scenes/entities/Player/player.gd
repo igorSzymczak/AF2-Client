@@ -264,47 +264,50 @@ func handle_movement(delta: float) -> void:
 			rotation = rotate_toward(rotation, rotation + PI, mod_turn_speed)
 		elif Input.is_action_pressed("TurnRight"):
 			rotation = rotate_toward(rotation, rotation - PI, mod_turn_speed)
-		
-		# Position
-	if landed_structure == null:
-		direction = Vector2(cos(rotation), sin(rotation))
-
-		# jeśli boost trwa → aktualizujemy maksymalny osiągnięty "moment"
-		if speed_boost_active:
-			momentum_speed_cap = speed * speed_boost_strength
-
-		# przyspieszanie albo aktywny boost
-		if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
-			var boost_mul = speed_boost_strength if speed_boost_active else 1.0
-			velocity += direction * speed * delta * 1.5 * boost_mul
-
-			# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
-			velocity = velocity.limit_length(momentum_speed_cap)
-		# hamowanie
-		elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
-			var decelerate_vector: Vector2 = velocity.normalized() * speed / 2.0 * delta
-			if velocity.length_squared() > decelerate_vector.length_squared():
-				velocity -= decelerate_vector
-			else: velocity = Vector2.ZERO
-
-		# naturalny opór
-		var drag_vector: Vector2 = velocity.normalized() * DRAG_COEF * delta / 2.5
-		if velocity.length_squared() > drag_vector.length_squared():
-			velocity -= drag_vector
-		else:
-			velocity = Vector2.ZERO
-		
-		if momentum_speed_cap > speed:
-			momentum_speed_cap -= DRAG_COEF * delta / 2.5
-		elif momentum_speed_cap > velocity.length():
-			momentum_speed_cap = max(speed, velocity.length())
-
-		handle_thrust()
-		move_and_slide()
-
 	
-	elif landed_structure != null:
+	
+	
+	## 								Position
+	if landed_structure != null:
 		global_position = global_position.lerp(landed_structure.global_position, delta * 5)
+		return
+	
+	
+	
+	direction = Vector2(cos(rotation), sin(rotation))
+	
+	# jeśli boost trwa → aktualizujemy maksymalny osiągnięty "moment"
+	if speed_boost_active:
+		momentum_speed_cap = speed * speed_boost_strength
+	
+	# przyspieszanie albo aktywny boost
+	if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
+		var boost_mul = speed_boost_strength if speed_boost_active else 1.0
+		velocity += direction * speed * delta * 2.0 * boost_mul
+	
+		# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
+		velocity = velocity.limit_length(momentum_speed_cap)
+	# hamowanie
+	elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
+		var decelerate_vector: Vector2 = velocity.normalized() * speed / 2.0 * delta
+		if velocity.length_squared() > decelerate_vector.length_squared():
+			velocity -= decelerate_vector
+		else: velocity = Vector2.ZERO
+	
+	# naturalny opór
+	var drag_vector: Vector2 = velocity.normalized() * DRAG_COEF * delta / 2.5
+	if velocity.length_squared() > drag_vector.length_squared():
+		velocity -= drag_vector
+	else:
+		velocity = Vector2.ZERO
+	
+	if momentum_speed_cap > speed:
+		momentum_speed_cap -= DRAG_COEF * delta / 2.5
+	elif momentum_speed_cap > velocity.length():
+		momentum_speed_cap = max(speed, velocity.length())
+	
+	handle_thrust()
+	move_and_slide()
 
 func manage_speed_boost(delta: float) -> void:
 	last_speed_boost_time += delta

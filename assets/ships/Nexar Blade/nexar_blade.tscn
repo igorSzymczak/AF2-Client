@@ -34,7 +34,7 @@ _data = {
 
 [node name="NexarBlade" type="Sprite2D" unique_id=1072497997 node_paths=PackedStringArray("engine")]
 rotation = 1.5708
-scale = Vector2(1.1, 1.1)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("1_tewum")
 script = ExtResource("2_xrvir")
 engine = NodePath("Engine")

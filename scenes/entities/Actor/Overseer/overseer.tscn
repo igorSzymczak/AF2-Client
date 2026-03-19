@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://762odp0un0lv"]
 
-[ext_resource type="Script" uid="uid://cf0pk0erui87j" path="res://scenes/entities/Actor/actor.gd" id="1_xd58y"]
+[ext_resource type="Script" uid="uid://c52f7ivupvy0r" path="res://scenes/entities/Actor/Overseer/overseer.gd" id="1_nkfth"]
 [ext_resource type="PackedScene" uid="uid://b1u1aqjb0soe7" path="res://scenes/components/POI/PoiComponent.tscn" id="2_wu1c7"]
 [ext_resource type="PackedScene" uid="uid://bpun3plji8rds" path="res://scenes/components/Health/HealthComponent.tscn" id="4_pijdg"]
 [ext_resource type="PackedScene" uid="uid://bsxdnjwwuwcca" path="res://scenes/components/HealthBar/HealthBar.tscn" id="5_cn746"]
 [ext_resource type="PackedScene" uid="uid://q6ugrdiyry72" path="res://scenes/components/HealthBar/ShieldBar.tscn" id="6_hokib"]
 [ext_resource type="Texture2D" uid="uid://c40348t8nsjk4" path="res://assets/entities/Overseer/Overseer_Spritesheet.png" id="6_qd3v8"]
 [ext_resource type="Texture2D" uid="uid://b4bxrt25qdkca" path="res://assets/particles/Thrust Particle 2.png" id="7_nkfth"]
+[ext_resource type="AudioStream" uid="uid://chj45b664prpi" path="res://audio/effects/Ship/Overseer/overseer_drones_tp.mp3" id="8_ruvov"]
+[ext_resource type="AudioStream" uid="uid://cpcin2kcv26un" path="res://audio/effects/Ship/Overseer/overseer_transform.mp3" id="9_pgxbk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkfth"]
 radius = 79.0
@@ -56,9 +58,9 @@ animations = [{
 }]
 
 [sub_resource type="Curve" id="Curve_ruvov"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.7605729, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.7605729), 0.0, 0.0, 0, 0, Vector2(0.7605729, 0), 0.0, 0.0, 0, 0]
 point_count = 2
-point_0/position = Vector2(0, 1)
+point_0/position = Vector2(0, 0.7605729)
 point_1/position = Vector2(0.7605729, 0)
 
 [sub_resource type="CurveTexture" id="CurveTexture_nkfth"]
@@ -80,7 +82,7 @@ alpha_curve = SubResource("CurveTexture_nkfth")
 
 [node name="Overseer" type="CharacterBody2D" unique_id=2017227604]
 z_index = 2
-script = ExtResource("1_xd58y")
+script = ExtResource("1_nkfth")
 actor_type = 3
 metadata/_custom_type_script = "uid://cf0pk0erui87j"
 
@@ -126,3 +128,15 @@ position = Vector2(0, -8)
 amount = 16
 texture = ExtResource("7_nkfth")
 process_material = SubResource("ParticleProcessMaterial_rr560")
+
+[node name="DronesTpSound" type="AudioStreamPlayer2D" parent="." unique_id=2005402161]
+stream = ExtResource("8_ruvov")
+pitch_scale = 1.2
+max_distance = 10000.0
+panning_strength = 3.0
+bus = &"Effects"
+
+[node name="Phase2TransformSound" type="AudioStreamPlayer2D" parent="." unique_id=261808476]
+stream = ExtResource("9_pgxbk")
+max_distance = 20000.0
+panning_strength = 3.0

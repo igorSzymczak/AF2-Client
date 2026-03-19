@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://csiqrftufef7t" path="res://audio/ui/boop.ogg" id="14_1l1t4"]
 [ext_resource type="AudioStream" uid="uid://c13pf0qcga3ug" path="res://audio/effects/weapons/Torpedo (3).mp3" id="14_osi10"]
 [ext_resource type="AudioStream" uid="uid://dii5glc4tbdtu" path="res://audio/effects/explosion_huge.ogg" id="14_u0jht"]
-[ext_resource type="AudioStream" uid="uid://cybgqwqpo678d" path="res://audio/effects/Ship/Overseer/overseer_drone_ray_shoot.mp3" id="15_af104"]
+[ext_resource type="AudioStream" uid="uid://b62owgf2s0lv1" path="res://audio/effects/Ship/Overseer/overseer_barrage.mp3" id="15_af104"]
 [ext_resource type="AudioStream" uid="uid://pv6a5qm66gcu" path="res://audio/ui/Recycling/recycling.mp3" id="16_xb7nw"]
 [ext_resource type="AudioStream" uid="uid://bclmovev7b6dm" path="res://audio/ui/Recycling/recycling_end.mp3" id="17_f4f70"]
 [ext_resource type="AudioStream" uid="uid://2ejbwxfbdodj" path="res://audio/ui/Upgrade_Sound.mp3" id="19_f4f70"]
@@ -176,6 +176,13 @@ bus = &"Effects"
 stream = SubResource("AudioStreamRandomizer_osi10")
 volume_db = 2.0
 pitch_scale = 0.87
+max_distance = 20000.0
+max_polyphony = 3
+bus = &"Effects"
+
+[node name="OverseerBarrage" type="AudioStreamPlayer2D" parent="Weapons" unique_id=1425368874]
+stream = SubResource("AudioStreamRandomizer_osi10")
+volume_db = 2.0
 max_distance = 20000.0
 max_polyphony = 3
 bus = &"Effects"

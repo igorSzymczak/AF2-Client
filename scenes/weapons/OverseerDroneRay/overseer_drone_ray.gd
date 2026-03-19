@@ -1,9 +1,9 @@
 extends Ray
 
+@onready var gradient_line: Line2D = $GradientLine
+
 func _on_ready() -> void:
-	#print("Tweening for ", time_to_live)
-	
-	scale = Vector2(0.0, 1.0)
+	scale = Vector2(1.0, 0.0)
 	
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_BOUNCE)
@@ -13,13 +13,12 @@ func _on_ready() -> void:
 	await get_tree().create_timer(time_to_live - 0.1).timeout
 	
 	var tween_out: Tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(0.0, 1.0), 0.0)
-	
-	await tween_out.finished
-	_handle_death()
+	tween_out.tween_property(self, "scale", Vector2(1.0, 0.0), 0.1)
 
 func set_radius(value: float) -> void:
-	if !base_line:
+	if !base_line or !gradient_line:
 		return
+	
 	radius = value
-	base_line.set_width(radius * 3.0)
+	base_line.set_width(radius)
+	gradient_line.set_width(radius * 6.0)

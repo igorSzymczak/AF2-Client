@@ -3,6 +3,7 @@ class_name Ray extends Node2D
 var gid: int
 var ray_type: WeaponManager.RayType
 var props := PropertyContainer.new(g.RAY_PROPERTY_SCHEMA)
+@export var gradient_lines_additional_distance: float = 100.0
 @export var distance: float = 1.0
 @export var radius: float = 3.0 : set = set_radius
 @export var time_to_live: float = 1.0
@@ -60,8 +61,12 @@ func interpolate_data(delta: float) -> void:
 @export var base_line: Line2D ## This one will have base radius set
 @export var lines: Array[Line2D]
 func create_beam() -> void:
-	var mid_distance: float = distance / float(point_amount)
 	for line in lines:
+		var mod_distance: float = distance
+		if line != base_line:
+			mod_distance += gradient_lines_additional_distance
+		
+		var mid_distance: float = mod_distance / float(point_amount)
 		line.clear_points()
 		line.add_point(Vector2(0.0, 0.0))
 		line.add_point(Vector2(mid_distance / 10.0, 0.0))

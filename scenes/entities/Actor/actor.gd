@@ -12,6 +12,7 @@ var props: PropertyContainer = PropertyContainer.new(g.ACTOR_PROPERTY_SCHEMA)
 
 enum Event {
 	TELEPORT,
+	SET_AI_STATE,
 	OVERSEER_DRONE_ABOUT_TO_SHOOT_RAY,
 }
 
@@ -30,11 +31,15 @@ var server_rot: float = 0
 var server_engine_active: bool
 var last_pos := Vector2.ZERO
 func _process(delta: float):
-	global_position = global_position.lerp(server_pos, delta * 10)
+	global_position = global_position.lerp(server_pos, delta * 20)
 	rotation = lerp_angle(rotation, server_rot, 0.2)
 	
 	velocity = global_position.direction_to(last_pos) * global_position.distance_to(last_pos)
 	last_pos = global_position
+	
+	_process_ai(delta)
+
+func _process_ai(_delta: float) -> void: pass # To be replaced by specific Actor
 
 func _on_property_changed(prop: g.ActorProperty, value: Variant) -> void:
 	match prop:
@@ -67,6 +72,8 @@ func handle_death(silent: bool = false) -> void:
 func handle_event(event: Event, event_data: Variant) -> void:
 	if event == Event.TELEPORT:
 		handle_teleport(event_data)
+	if event == Event.SET_AI_STATE:
+		handle_set_ai_state(event_data)
 	if event == Event.OVERSEER_DRONE_ABOUT_TO_SHOOT_RAY:
 		handle_overseer_drone_about_to_shoot_ray(event_data)
 
@@ -87,4 +94,5 @@ func handle_teleport(event_data) -> void:
 	var ease_out_scale_tween := create_tween()
 	ease_out_scale_tween.tween_property(self, "scale", Vector2(1.0, 1.0), ease_out_sec)
 
+func handle_set_ai_state(_state) -> void: pass  # to be replaced by specific Actor class
 func handle_overseer_drone_about_to_shoot_ray(_event_data) -> void: pass # Only Overseer Drone

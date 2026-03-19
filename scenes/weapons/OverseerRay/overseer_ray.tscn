@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://c2nipxobeiues"]
+
+[ext_resource type="Script" uid="uid://d3gbu5qxx7ahn" path="res://scenes/weapons/OverseerRay/overseer_ray.gd" id="1_nit0i"]
+[ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/beam_texture.png" id="2_nit0i"]
+[ext_resource type="Texture2D" uid="uid://dsfjtinw8jnrg" path="res://assets/projectiles/Laser Curve Short.png" id="3_06yfp"]
+[ext_resource type="AudioStream" uid="uid://b550gqbte7dln" path="res://audio/effects/Ship/Overseer/overseer_ray_attack.mp3" id="4_2pl4v"]
+
+[sub_resource type="Curve" id="Curve_06yfp"]
+_data = [Vector2(0, 0.52808994), 0.0, 0.0, 0, 0, Vector2(0.3306122, 1), 0.0, 0.0, 0, 0, Vector2(0.8653061, 0.77528095), -1.1489904, -1.1489904, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+point_0/position = Vector2(0, 0.52808994)
+point_1/position = Vector2(0.3306122, 1)
+point_2/position = Vector2(0.8653061, 0.77528095)
+point_2/left_tangent = -1.1489904
+point_2/right_tangent = -1.1489904
+point_3/position = Vector2(1, 0)
+
+[sub_resource type="CurveTexture" id="CurveTexture_2pl4v"]
+curve = SubResource("Curve_06yfp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2pl4v"]
+particle_flag_disable_z = true
+velocity_pivot = Vector3(100, 0, 0)
+direction = Vector3(100, 0, 0)
+spread = 0.0
+initial_velocity_min = 4000.0
+initial_velocity_max = 4000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.5
+scale_max = 3.0
+alpha_curve = SubResource("CurveTexture_2pl4v")
+
+[sub_resource type="Gradient" id="Gradient_2pl4v"]
+offsets = PackedFloat32Array(0, 0.023166023, 0.84555984, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_06yfp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GradientLine:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.5176471, 0, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2pl4v"]
+resource_name = "overseer_beam"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GradientLine:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.5176471, 0, 1, 1), Color(0.6156863, 0, 1, 0.8627451), Color(0.5176471, 0, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_76jwx"]
+_data = {
+&"RESET": SubResource("Animation_06yfp"),
+&"overseer_beam": SubResource("Animation_2pl4v")
+}
+
+[node name="OverseerRay" type="Node2D" unique_id=145232414 node_paths=PackedStringArray("base_line", "lines")]
+script = ExtResource("1_nit0i")
+base_line = NodePath("BaseLine")
+lines = [NodePath("GradientLine"), NodePath("BaseLine")]
+metadata/_custom_type_script = "uid://cqa4aubsjga0s"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1467615394]
+modulate = Color(0.7921569, 0, 1, 0.39607844)
+texture = ExtResource("3_06yfp")
+local_coords = true
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_2pl4v")
+
+[node name="GradientLine" type="Line2D" parent="." unique_id=1471701811]
+modulate = Color(0.5176471, 0, 1, 1)
+points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
+width = 720.0
+gradient = SubResource("Gradient_2pl4v")
+texture = ExtResource("2_nit0i")
+texture_mode = 1
+
+[node name="BaseLine" type="Line2D" parent="." unique_id=2079588715]
+modulate = Color(1, 0, 0.8666667, 0.7019608)
+points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
+width = 120.0
+gradient = SubResource("Gradient_2pl4v")
+texture = ExtResource("2_nit0i")
+texture_mode = 2
+antialiased = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=908834495]
+libraries/ = SubResource("AnimationLibrary_76jwx")
+speed_scale = 5.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1279723112]
+stream = ExtResource("4_2pl4v")
+volume_db = 5.0
+pitch_scale = 0.8
+autoplay = true
+max_distance = 6000.0
+panning_strength = 3.0
+bus = &"Effects"

@@ -599,17 +599,21 @@ func add_ray(ray_data: Dictionary):
 	
 	ray.global_position = ray_data[RayProperty.GLOBAL_POSITION]
 	ray.rotation = ray_data[RayProperty.ROTATION]
+	ray.radius = ray_data[RayProperty.RADIUS]
+	ray.time_to_live = ray_data[RayProperty.TIME_TO_LIVE]
+	ray.distance = ray_data[RayProperty.DISTANCE]
+	
+	g.current_world.add_child(ray)
 	
 	Rays[gid] = {
 		"node": ray,
 		"props": ray.props
 	}
-	g.current_world.add_child(ray)
 	ray_added.emit(ray)
 	ray.props.property_changed.connect(func(prop: int, value: Variant):
 		ray_property_changed.emit(ray.gid, prop, value)
 	)
-	ray.props.from_dict(ray_data)
+	ray.props.from_dict(ray_data)	
 
 signal ray_removed(ray_id: int)
 func remove_ray(ray_id: int) -> void:

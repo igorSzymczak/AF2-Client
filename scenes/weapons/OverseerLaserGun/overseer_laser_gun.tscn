@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://eu1q8ay1wujl"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_5ss5p"]
+
+[node name="OverseerLaserGun" type="Node" unique_id=516617321]
+script = ExtResource("1_5ss5p")
+weapon_name = "Overseer Laser Gun"
+weapon_type = 17
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

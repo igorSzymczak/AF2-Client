@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bmvyahnu58ymp"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_pcku4"]
+
+[node name="OverseerRayWeapon" type="Node" unique_id=1254313497]
+script = ExtResource("1_pcku4")
+weapon_name = "Overseer Ray Weapon"
+weapon_type = 16
+energy = true
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

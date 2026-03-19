@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bgo5t3sv3gqqx"]
+
+[ext_resource type="Script" uid="uid://712ngcx0fkeg" path="res://scenes/bullets/bullet_types/bullet.gd" id="1_vni04"]
+[ext_resource type="Texture2D" uid="uid://b3qs04hoq3fmk" path="res://assets/projectiles/Laser Round.png" id="2_l1tst"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nr3ro"]
+radius = 61.587337
+
+[node name="OverseerLaser" type="Area2D" unique_id=266558178]
+script = ExtResource("1_vni04")
+metadata/_custom_type_script = "uid://712ngcx0fkeg"
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=675384736]
+shape = SubResource("CircleShape2D_nr3ro")
+
+[node name="BulletSprite" type="Sprite2D" parent="." unique_id=1486149484]
+modulate = Color(1.1759251, 1.1759251, 1.1759251, 1)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+texture = ExtResource("2_l1tst")

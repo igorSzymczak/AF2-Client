@@ -3,36 +3,20 @@
 [ext_resource type="Script" uid="uid://bqrfuygmsop7l" path="res://scenes/weapons/OverseerDroneRay/overseer_drone_ray.gd" id="1_2ek4e"]
 [ext_resource type="Texture2D" uid="uid://dvyxeosuqjety" path="res://assets/particles/beam_texture.png" id="2_40v7q"]
 
-[sub_resource type="Curve" id="Curve_p78vp"]
-_data = [Vector2(0, 1), 0.0, 6.509587, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-point_0/position = Vector2(0, 1)
-point_0/right_tangent = 6.509587
-point_1/position = Vector2(1, 1)
-
 [sub_resource type="Gradient" id="Gradient_p78vp"]
-offsets = PackedFloat32Array(0, 0.94208497, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="Curve" id="Curve_40v7q"]
-_data = [Vector2(0, 1), 0.0, 11.900339, 0, 0, Vector2(1, 1), -6.280735, 0.0, 0, 0]
-point_count = 2
-point_0/position = Vector2(0, 1)
-point_0/right_tangent = 11.900339
-point_1/position = Vector2(1, 1)
-point_1/left_tangent = -6.280735
+offsets = PackedFloat32Array(0, 0.11196911, 0.6795367, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="OverseerDroneRay" type="Node2D" unique_id=1682771385 node_paths=PackedStringArray("base_line", "lines")]
 script = ExtResource("1_2ek4e")
 base_line = NodePath("BaseLine")
-lines = [NodePath("BaseLine"), NodePath("GradientLine")]
+lines = [NodePath("GradientLine"), NodePath("BaseLine")]
 metadata/_custom_type_script = "uid://cqa4aubsjga0s"
 
 [node name="GradientLine" type="Line2D" parent="." unique_id=902196543]
-modulate = Color(0, 1, 1, 0.3647059)
+modulate = Color(0, 1, 1, 0.21568628)
 points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
 width = 90.0
-width_curve = SubResource("Curve_p78vp")
 gradient = SubResource("Gradient_p78vp")
 texture = ExtResource("2_40v7q")
 texture_mode = 1
@@ -40,7 +24,6 @@ texture_mode = 1
 [node name="BaseLine" type="Line2D" parent="." unique_id=336011208]
 points = PackedVector2Array(0, 0, 10, 0, 55, 0, 128.6492, 0, 195.59134, 0, 277.40952, 0, 350.96323, 0, 424.51697, 0, 500, 0, 550, 0, 560, 0)
 width = 15.0
-width_curve = SubResource("Curve_40v7q")
 gradient = SubResource("Gradient_p78vp")
 texture = ExtResource("2_40v7q")
 texture_mode = 2

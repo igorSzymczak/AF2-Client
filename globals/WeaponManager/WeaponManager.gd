@@ -96,6 +96,8 @@ enum Type {
 	STAR_MELTER,
 	RAY_WEAPON,
 	OVERSEER_DRONE_RAY_WEAPON,
+	OVERSEER_RAY_WEAPON,
+	OVERSEER_LASER_GUN,
 }
 
 var _Weapons: Dictionary[Type, PackedScene] = {
@@ -115,7 +117,8 @@ var _Weapons: Dictionary[Type, PackedScene] = {
 	Type.STAR_MELTER: load("res://scenes/weapons/StarMelter/star_melter.tscn"),
 	Type.RAY_WEAPON: load("res://scenes/weapons/RayWeapon/ray_weapon.tscn"),
 	Type.OVERSEER_DRONE_RAY_WEAPON: load("res://scenes/weapons/OverseerDroneRay/overseer_drone_ray_weapon.tscn"),
-	
+	Type.OVERSEER_RAY_WEAPON: load("res://scenes/weapons/OverseerRay/overseer_ray_weapon.tscn"),
+	Type.OVERSEER_LASER_GUN: load("res://scenes/weapons/OverseerLaserGun/overseer_laser_gun.tscn")
 }
 
 func get_type(weapon: Weapon) -> Type:
@@ -140,6 +143,7 @@ enum BulletType {
 	SPAWNER_LASER,
 	ENERGY_BLAST_PROJECTILE,
 	TORPEDO,
+	OVERSEER_LASER,
 }
 
 var _Bullets: Dictionary[BulletType, PackedScene] = {
@@ -154,7 +158,8 @@ var _Bullets: Dictionary[BulletType, PackedScene] = {
 	BulletType.PIERCING_BULLET: load("res://scenes/bullets/bullets/PiercingGun/piercing_bullet.tscn"),
 	BulletType.SPAWNER_LASER: load("res://scenes/bullets/bullets/SpawnerLaser/spawner_laser.tscn"),
 	BulletType.ENERGY_BLAST_PROJECTILE: load("res://scenes/bullets/bullets/EnergyBlast/energy_blast_projectile.tscn"),
-	BulletType.TORPEDO: load("res://scenes/bullets/bullets/Torpedoes/torpedo.tscn")
+	BulletType.TORPEDO: load("res://scenes/bullets/bullets/Torpedoes/torpedo.tscn"),
+	BulletType.OVERSEER_LASER: load("res://scenes/weapons/OverseerLaserGun/overseer_laser.tscn")
 }
 
 func get_bullet_type(bullet: Bullet) -> BulletType:
@@ -215,13 +220,14 @@ func get_beam_scene(beam_type: BeamType) -> PackedScene:
 enum RayType {
 	RAY,
 	OVERSEER_DRONE_RAY,
+	OVERSEER_RAY,
 	
 }
 
 var _Rays: Dictionary[RayType, PackedScene] = {
 	RayType.RAY: load("res://scenes/bullets/rays/ray.tscn"),
 	RayType.OVERSEER_DRONE_RAY: load("res://scenes/weapons/OverseerDroneRay/overseer_drone_ray.tscn"),
-	
+	RayType.OVERSEER_RAY: load("res://scenes/weapons/OverseerRay/overseer_ray.tscn")
 }
 
 func get_ray_type(ray: Ray) -> RayType:

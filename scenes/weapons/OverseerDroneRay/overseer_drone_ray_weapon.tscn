@@ -4,6 +4,6 @@
 
 [node name="OverseerDroneRayWeapon" type="Node" unique_id=1225569455]
 script = ExtResource("1_i0j41")
-weapon_name = "Overseer Drone Ray"
+weapon_name = "Overseer Drone Ray Weapon"
 weapon_type = 15
 metadata/_custom_type_script = "uid://du5oehe5o6rs0"

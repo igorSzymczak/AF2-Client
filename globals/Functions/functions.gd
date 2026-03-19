@@ -61,3 +61,12 @@ func make_arc(radius: float, angle: float, steps: int = 32) -> PackedVector2Arra
 		pts.append(Vector2(cos(ang), sin(ang)) * radius)
 
 	return pts
+
+func random_sign() -> int:
+	return -1 if randi_range(0, 1) == 0 else 1
+
+func rand_vector2(min: float, max: float) -> Vector2:
+	var x: float = randf_range(min, max) * random_sign()
+	var y: float = randf_range(min, max) * random_sign()
+	
+	return Vector2(x, y)

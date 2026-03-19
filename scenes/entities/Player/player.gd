@@ -290,8 +290,12 @@ func handle_movement(delta: float) -> void:
 	
 	# przyspieszanie albo aktywny boost
 	if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
-		var boost_mul = speed_boost_strength if speed_boost_active else 1.0
-		velocity += direction * speed * delta * 2.0 * boost_mul
+		var boost_mul: float = speed_boost_strength if speed_boost_active else 1.0
+		var velocity_gain: Vector2 = direction * speed * delta * 2.0 * boost_mul
+		if speed_boost_active:
+			velocity += velocity_gain * 3.0
+		else:
+			velocity += velocity_gain
 	
 		# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
 		velocity = velocity.limit_length(momentum_speed_cap)
@@ -421,7 +425,7 @@ var camera_offset := Vector2.ZERO
 func camera_zoom_out(delta: float) -> void:
 	var zoom_value: float
 	if landed_structure == null:
-		zoom_value = max(0.25, 0.42 - abs(velocity.length()) / 5000.0)
+		zoom_value = max(0.25, 0.32 - abs(velocity.length()) / 5000.0)
 	else:
 		zoom_value = 0.8
 	var zoom_vector: Vector2 = camera.zoom.lerp(Vector2(zoom_value, zoom_value), delta)

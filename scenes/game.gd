@@ -263,7 +263,40 @@ func handle_client_ray_removed(id: int):
 
 
 
+## DEATH AREAS
+
+
+
+@rpc("authority", "call_remote", "unreliable")
+func update_death_area_property(id: int, prop: int, value: Variant):
+	handle_client_death_area_property_changed(id, prop, value)
+
+@rpc("authority", "call_remote", "reliable")
+func add_existing_death_areas(death_areas: Array[Dictionary]):
+	for death_area_data: Dictionary in death_areas:
+		handle_client_death_area_added(death_area_data)
+
+@rpc("authority", "call_remote", "reliable")
+func add_death_area(death_area_data: Dictionary):
+	handle_client_death_area_added(death_area_data)
+
+@rpc("authority", "call_remote", "reliable")
+func remove_death_area(id: int):
+	handle_client_death_area_removed(id)
+
+func handle_client_death_area_added(death_area_data: Dictionary):
+	g.add_death_area(death_area_data)
+
+func handle_client_death_area_property_changed(id: int, prop: int, value: Variant):
+	g.update_death_area_property(id, prop, value)
+
+func handle_client_death_area_removed(id: int):
+	g.remove_death_area(id)
+
+
+
 ## SPAWNERS
+
 
 
 @rpc("authority", "call_remote", "unreliable")

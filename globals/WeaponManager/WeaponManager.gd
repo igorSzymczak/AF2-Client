@@ -98,6 +98,7 @@ enum Type {
 	OVERSEER_DRONE_RAY_WEAPON,
 	OVERSEER_RAY_WEAPON,
 	OVERSEER_LASER_GUN,
+	DEATH_AREA_CREATOR,
 }
 
 var _Weapons: Dictionary[Type, PackedScene] = {
@@ -118,7 +119,8 @@ var _Weapons: Dictionary[Type, PackedScene] = {
 	Type.RAY_WEAPON: load("res://scenes/weapons/RayWeapon/ray_weapon.tscn"),
 	Type.OVERSEER_DRONE_RAY_WEAPON: load("res://scenes/weapons/OverseerDroneRay/overseer_drone_ray_weapon.tscn"),
 	Type.OVERSEER_RAY_WEAPON: load("res://scenes/weapons/OverseerRay/overseer_ray_weapon.tscn"),
-	Type.OVERSEER_LASER_GUN: load("res://scenes/weapons/OverseerLaserGun/overseer_laser_gun.tscn")
+	Type.OVERSEER_LASER_GUN: load("res://scenes/weapons/OverseerLaserGun/overseer_laser_gun.tscn"),
+	Type.DEATH_AREA_CREATOR: load("res://scenes/weapons/DeathAreaCreator/death_area_creator.tscn"),
 }
 
 func get_type(weapon: Weapon) -> Type:
@@ -238,3 +240,21 @@ func get_ray(ray_type: RayType) -> Ray:
 
 func get_ray_scene(ray_type: RayType) -> PackedScene:
 	return _Rays[ray_type]
+
+enum DeathAreaType {
+	DEATH_AREA,
+}
+
+var _DeathAreas: Dictionary[DeathAreaType, PackedScene] = {
+	DeathAreaType.DEATH_AREA: load("res://scenes/bullets/death_areas/death_area.tscn")
+	
+}
+
+func get_death_area_type(death_area: DeathArea) -> DeathAreaType:
+	return death_area.death_area_type
+
+func get_death_area(death_area_type: DeathAreaType) -> DeathArea:
+	return _DeathAreas[death_area_type].instantiate()
+
+func get_death_area_scene(death_area_type: DeathAreaType) -> PackedScene:
+	return _DeathAreas[death_area_type]

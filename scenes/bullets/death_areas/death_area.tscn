@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b61syxsvggt76"]
+
+[ext_resource type="Script" uid="uid://c5wfbuamfpa8k" path="res://scenes/bullets/death_areas/death_area.gd" id="1_vnt34"]
+[ext_resource type="Texture2D" uid="uid://c8yex6f1sds5l" path="res://assets/structures/InvertGlow.png" id="2_qusrv"]
+[ext_resource type="Texture2D" uid="uid://b3qs04hoq3fmk" path="res://assets/projectiles/Laser Round.png" id="2_xu6bi"]
+[ext_resource type="Shader" uid="uid://crl67472drqum" path="res://scenes/ui/stats bar/shield_bar.gdshader" id="3_xu6bi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f6hw6"]
+radius = 503.12027
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xu6bi"]
+
+[sub_resource type="Gradient" id="Gradient_li2io"]
+offsets = PackedFloat32Array(0, 0.17316018, 0.5064935)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0.92156863, 1, 0.46666667, 0, 0.42745098)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n5o8"]
+gradient = SubResource("Gradient_li2io")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5f03j"]
+seed = 4
+frequency = 0.0024
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_5f03j")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kg4aq"]
+shader = ExtResource("3_xu6bi")
+shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+shader_parameter/scroll1 = Vector2(-0.135, -0.01)
+shader_parameter/scroll2 = Vector2(-0.085, 0.095)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_87bem"]
+noise = SubResource("FastNoiseLite_prjor")
+seamless = true
+seamless_blend_skirt = 0.3
+
+[node name="DeathArea" type="Area2D" unique_id=1680006886 node_paths=PackedStringArray("collision")]
+script = ExtResource("1_vnt34")
+collision = NodePath("CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="." unique_id=219017285]
+visible = false
+shape = SubResource("CircleShape2D_f6hw6")
+debug_color = Color(1, 0, 0, 0.09019608)
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1706520488]
+self_modulate = Color(1, 0, 0, 0.023529412)
+scale = Vector2(16.711538, 16.711538)
+texture = ExtResource("2_xu6bi")
+
+[node name="DeathLines" type="RigidBody2D" parent="Background" unique_id=714181178]
+physics_material_override = SubResource("PhysicsMaterial_xu6bi")
+linear_velocity = Vector2(10, 0)
+linear_damp = -1.0
+constant_force = Vector2(0, 10)
+constant_torque = 10.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/DeathLines" unique_id=1762109220]
+polygon = PackedVector2Array(-0.11967779, -29.859608, 3.410817, -29.680092, 7.0609894, -28.842348, 11.309551, -27.466053, 14.540852, -26.029919, 16.81473, -24.474108, 19.208284, -22.499424, 21.302647, -19.98619, 23.995398, -17.592634, 25.252014, -15.019563, 25.850403, -13.344073, 27.525892, -10.352129, 29.081703, -7.420023, 29.79977, -5.0264673, 30.457998, -1.9148446, 30.637514, 1.3164557, 29.919447, 4.607595, 28.962025, 7.8388953, 28.243958, 10.352129, 25.97008, 14.181818, 24.115074, 16.695051, 19.926352, 20.943613, 16.934406, 23.037975, 12.147296, 25.611048, 5.5051785, 28.303797, 1.2566168, 29.261219, -0.29919448, 30.098965, 4.128884, 30.697353, 9.454545, 30.936708, 14.121979, 29.440737, 20.345224, 25.43153, 25.012657, 21.482162, 28.243958, 17.113924, 31.594936, 11.189874, 33.15075, 5.0264673, 33.98849, -3.470656, 33.15075, -12.087457, 30.936708, -18.550056, 25.670885, -26.867664, 18.191025, -30.996548, 6.941312, -32.97123, 1.5558113, -34.10817)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Background/DeathLines" unique_id=1343115391]
+polygon = PackedVector2Array(0.29919448, -30.158802, -4.9067893, -29.560413, -13.52359, -26.628307, -18.310701, -23.516685, -24.414268, -16.75489, -28.66283, -9.394707, -30.039125, -2.0345225, -30.158802, 5.8642116, -27.525892, 12.745685, -23.995398, 18.669735, -17.054085, 23.75604, -12.2669735, 26.448792, -4.2485614, 29.440737, -0.11967779, 30.098965, -0.29919448, 33.808975, -8.856156, 32.49252, -20.165707, 28.842348, -23.81588, 24.174913, -31.475258, 15.976985, -35.544304, 7.8388953, -39.373993, -7.958573, -38.057537, -22.080553, -27.10702, -35.364788, -3.8296893, -36.32221)
+
+[node name="AuraRed" type="Sprite2D" parent="." unique_id=1289248792]
+modulate = Color(2, 2, 2, 1)
+clip_children = 1
+scale = Vector2(1.2475, 1.2475)
+texture = ExtResource("2_qusrv")
+
+[node name="ShaderRed" type="Sprite2D" parent="AuraRed" unique_id=1346979110]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_kg4aq")
+scale = Vector2(1.7205244, 1.6855469)
+texture = SubResource("NoiseTexture2D_87bem")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=26770941]
+scale = Vector2(1.2425, 1.2425)
+texture = ExtResource("2_qusrv")

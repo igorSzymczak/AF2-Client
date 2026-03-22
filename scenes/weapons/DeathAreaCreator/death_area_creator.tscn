@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dh3q5gpftoa1b"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_b034x"]
+
+[node name="DeathAreaCreator" type="Node" unique_id=881114496]
+script = ExtResource("1_b034x")
+weapon_name = "Death Area Creator"
+weapon_type = 18
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"

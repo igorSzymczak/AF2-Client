@@ -38,6 +38,7 @@ var Players: Dictionary[int, Dictionary] = {}
 var Bullets: Dictionary[int, Dictionary] = {}
 var Beams: Dictionary[int, Dictionary] = {}
 var Rays: Dictionary[int, Dictionary] = {}
+var DeathAreas: Dictionary[int, Dictionary] = {}
 var Spawners: Dictionary[int, Dictionary] = {}
 var Turrets: Dictionary[int, Dictionary] = {}
 var Actors: Dictionary[int, Dictionary] = {}
@@ -637,6 +638,120 @@ func update_ray_property(ray_id: int, prop: RayProperty, value: Variant) -> void
 		return
 	
 	var props: PropertyContainer = Rays[ray_id]["props"]
+	props.set_property(prop, value)
+
+
+
+## Death Areas
+
+
+
+enum DeathAreaProperty {
+	GID,
+	DEATH_AREA_TYPE,
+	GLOBAL_POSITION,
+	ROTATION,
+	TIME_TO_LIVE,
+	LIFE_TIME,
+	START_SIZE,
+	SIZE,
+	END_SIZE,
+	CREATE_DEATH_LINES,
+}
+
+const DEATH_AREA_PROPERTY_SCHEMA: Dictionary[DeathAreaProperty, Dictionary] = {
+	DeathAreaProperty.GID: {
+		"type": TYPE_INT,
+		"default": -1
+	},
+	DeathAreaProperty.DEATH_AREA_TYPE: {
+		"type": TYPE_INT, # WeaponManager.DeathAreaType (enum)
+		"default": WeaponManager.DeathAreaType.DEATH_AREA
+	},
+	DeathAreaProperty.GLOBAL_POSITION: {
+		"type": TYPE_VECTOR2I,
+		"default": Vector2.ZERO
+	},
+	DeathAreaProperty.ROTATION: {
+		"type": TYPE_FLOAT,
+		"default": 0.0
+	},
+	DeathAreaProperty.TIME_TO_LIVE: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	DeathAreaProperty.LIFE_TIME: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	DeathAreaProperty.START_SIZE: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	DeathAreaProperty.SIZE: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	DeathAreaProperty.END_SIZE: {
+		"type": TYPE_FLOAT,
+		"default": 0.5
+	},
+	DeathAreaProperty.CREATE_DEATH_LINES: {
+		"type": TYPE_BOOL,
+		"default": false
+	},
+	
+}
+
+signal death_area_added(death_area: DeathArea)
+signal death_area_property_changed(death_area_id: int, prop: DeathAreaProperty, value: Variant)
+func add_death_area(death_area_data: Dictionary):
+	var gid: int = death_area_data[DeathAreaProperty.GID]
+	if DeathAreas.has(gid):
+		return
+	
+	var type: WeaponManager.DeathAreaType = death_area_data[DeathAreaProperty.DEATH_AREA_TYPE]
+	var death_area: DeathArea = WeaponManager.get_death_area(type)
+	if !is_instance_valid(death_area):
+		push_warning("DeathArea of type ", type, " non existant!")
+		return
+	
+	death_area.global_position = death_area_data[DeathAreaProperty.GLOBAL_POSITION]
+	death_area.rotation = death_area_data[DeathAreaProperty.ROTATION]
+	
+	DeathAreas[gid] = {
+		"node": death_area,
+		"props": death_area.props
+	}
+	g.current_world.add_child(death_area)
+	death_area_added.emit(death_area)
+	death_area.props.property_changed.connect(func(prop: int, value: Variant):
+		death_area_property_changed.emit(death_area.gid, prop, value)
+	)
+	death_area.props.from_dict(death_area_data)
+
+signal death_area_removed(death_area_id: int)
+func remove_death_area(death_area_id: int) -> void:
+	if DeathAreas.has(death_area_id):
+		DeathAreas.erase(death_area_id)
+		death_area_removed.emit(death_area_id)
+
+func get_death_area_property(death_area_id: int, prop: DeathAreaProperty) -> Variant:
+	if DeathAreas.has(death_area_id):
+		var props: PropertyContainer = DeathAreas[death_area_id].props
+		return props.get_property(prop)
+	return DEATH_AREA_PROPERTY_SCHEMA[prop].default
+
+func get_death_area_props(death_area_id: int) -> PropertyContainer:
+	if DeathAreas.has(death_area_id):
+		return DeathAreas[death_area_id].props
+	return null
+
+func update_death_area_property(death_area_id: int, prop: DeathAreaProperty, value: Variant) -> void:
+	if !DeathAreas.has(death_area_id):
+		return
+	
+	var props: PropertyContainer = DeathAreas[death_area_id]["props"]
 	props.set_property(prop, value)
 
 

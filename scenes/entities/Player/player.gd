@@ -1,5 +1,9 @@
-extends CharacterBody2D
-class_name Player
+class_name Player extends CharacterBody2D
+
+enum Event {
+	TELEPORT,
+	CONTROLED_BY_SERVER
+}
 
 var gid: int # GameManager ID
 
@@ -23,7 +27,7 @@ var landed_structure: Structure = null
 @onready var poi: POI = $PoiComponent
 @onready var humm_sound: AudioStreamPlayer2D = %HummSound
 
-
+@onready var interp: NetworkInterpolator = $NetworkInterpolator
 
 var username: String
 var nickname: String = "Player"
@@ -36,6 +40,7 @@ var user_prefs: UserPreferences
 var pvp: bool = false
 
 var speed: float
+var controlled_by_server: bool = false
 
 func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()
@@ -67,11 +72,16 @@ func _ready() -> void:
 	stats.get_stat(Stats.TYPE.SPEED_BOOST_DURATION).value_changed.connect(func reset(value: float): speed_boost_duration = value)
 	stats.get_stat(Stats.TYPE.SPEED_BOOST_STRENGTH).value_changed.connect(func reset(value: float): speed_boost_strength = value)
 	stats.get_stat(Stats.TYPE.SPEED_BOOST_TURN_SPEED).value_changed.connect(func reset(value: float): speed_boost_turn_speed = value)
-	
 
 func _on_speed_changed(value: float) -> void:
 	speed = value
 	momentum_speed_cap = value
+
+func handle_event(event: Event, event_data: Variant) -> void:
+	#if event == Event.TELEPORT:
+		#handle_teleport(event_data)
+	if event == Event.CONTROLED_BY_SERVER:
+		controlled_by_server = event_data
 
 var monitorable: bool = false
 func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
@@ -83,6 +93,7 @@ func _on_property_changed(prop: g.PlayerProperty, value: Variant) -> void:
 			nickname_label.set_text(nickname)
 		g.PlayerProperty.GLOBAL_POSITION:
 			server_position = value
+			interp.add_state(server_position, server_rotation)
 		g.PlayerProperty.ROTATION:
 			server_rotation = value
 		g.PlayerProperty.VELOCITY:
@@ -128,7 +139,6 @@ func _physics_process(delta: float) -> void:
 		
 	else:
 		handle_other_player(delta)
-
 
 var last_pos = Vector2.ZERO
 var last_rot = 0
@@ -185,7 +195,7 @@ func handle_other_player(delta: float) -> void:
 		return
 	
 	global_position = global_position.lerp(server_position, delta * 10)
-	rotation = lerp_angle(rotation, server_rotation,  delta * 10)
+	rotation = lerp_angle(rotation, server_rotation, delta * 10)
 	velocity = velocity.lerp(server_velocity, delta * 20)
 	
 	manage_sound()
@@ -244,9 +254,17 @@ func manage_sound() -> void:
 		humm_sound.volume_linear *= 2.0
 
 func handle_movement(delta: float) -> void:
+	
 	# SpeedBoost
 	manage_speed_boost(delta)
 	manage_sound()
+	
+	if controlled_by_server:
+		last_pos = global_position
+		velocity = server_velocity * 3
+		global_position = global_position.lerp(server_position, delta * 20)
+		rotation = lerp_angle(rotation, server_rotation, delta * 20)
+		return
 	
 	var turn_speed: float = stats.get_stat(Stats.TYPE.TURN_SPEED).value
 	

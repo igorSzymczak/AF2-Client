@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0bcb0dfhtema" path="res://scenes/components/Collector/Collector.tscn" id="6_o8fb4"]
 [ext_resource type="Texture2D" uid="uid://b1gyqxf8ompt1" path="res://assets/ui/other/Reticle.png" id="6_rarct"]
 [ext_resource type="AudioStream" uid="uid://cglewrnwra06b" path="res://audio/effects/Ship/spaceship_humm.mp3" id="8_tihqr"]
+[ext_resource type="Script" uid="uid://cs3f7llu4uou" path="res://scenes/components/NetworkInterpolator/network_interpolator.gd" id="9_2x42r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8t61"]
 radius = 54.99998
@@ -150,3 +151,6 @@ max_polyphony = 10
 panning_strength = 3.0
 bus = &"Ambience"
 parameters/looping = true
+
+[node name="NetworkInterpolator" type="Node" parent="." unique_id=1279375384]
+script = ExtResource("9_2x42r")

@@ -319,6 +319,11 @@ func get_player(user_id: int) -> Player:
 	else:
 		return null
 
+func create_player_event(user_id: int, event: Player.Event, event_data: Variant):
+	if Players.has(user_id):
+		var player: Player = Players[user_id]["node"]
+		player.handle_event(event, event_data)
+
 signal weapon_fired(shooter_id: int, weapon_name: String, weapon_args: Dictionary, bullet_args: Dictionary)
 
 signal player_shoot(index: int)

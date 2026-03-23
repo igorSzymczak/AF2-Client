@@ -142,12 +142,18 @@ func request_set_weapon(slot: int, weapon_type: WeaponManager.Type):
 func request_toogle_pvp(value: bool):
 	_handle_request_toggle_pvp(multiplayer.get_remote_sender_id(), value)
 
+@rpc("authority", "call_remote", "reliable")
+func create_player_event(id: int, event: Player.Event, event_data: Variant):
+	handle_client_player_event(id, event, event_data)
+
 func server_handle_local_player_property(_user_id: int, _prop: int, _value: Variant):
 	pass # Only Server
 
 func _handle_request_toggle_pvp(_user_id: int, _value: bool) -> void:
 	pass # Only Server
 
+func handle_client_player_event(id: int, event: Player.Event, event_data: Variant):
+	g.create_player_event(id, event, event_data)
 
 
 ## WEAPONS & BULLETS

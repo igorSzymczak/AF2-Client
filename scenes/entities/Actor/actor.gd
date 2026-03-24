@@ -25,6 +25,11 @@ enum TeleportData {
 func _ready() -> void:
 	health_component.health_depleted.connect(handle_death)
 	props.property_changed.connect(_on_property_changed)
+	
+	_on_ready()
+
+func _on_ready() -> void:
+	pass # Only for specific Actors
 
 var server_pos: Vector2 = Vector2.ZERO
 var server_rot: float = 0

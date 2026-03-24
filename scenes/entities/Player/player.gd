@@ -261,9 +261,10 @@ func handle_movement(delta: float) -> void:
 	
 	if controlled_by_server:
 		last_pos = global_position
-		velocity = server_velocity * 3
+		velocity = server_velocity
 		global_position = global_position.lerp(server_position, delta * 20)
 		rotation = lerp_angle(rotation, server_rotation, delta * 20)
+		#print(velocity)
 		return
 	
 	var turn_speed: float = stats.get_stat(Stats.TYPE.TURN_SPEED).value
@@ -310,13 +311,15 @@ func handle_movement(delta: float) -> void:
 	if (Input.is_action_pressed("Accelerate") and g.can_perform_actions) or speed_boost_active:
 		var boost_mul: float = speed_boost_strength if speed_boost_active else 1.0
 		var velocity_gain: Vector2 = direction * speed * delta * 2.0 * boost_mul
-		if speed_boost_active:
-			velocity += velocity_gain * 3.0
+		if velocity.length() < momentum_speed_cap:
+			if speed_boost_active:
+				velocity += velocity_gain * 3.0
+			else:
+				velocity += velocity_gain
 		else:
+			var prev_cap: float = velocity.length()
 			velocity += velocity_gain
-	
-		# UŻYWAMY momentum_speed_cap zamiast stałego MAX_SPEED
-		velocity = velocity.limit_length(momentum_speed_cap)
+			velocity = velocity.limit_length(prev_cap)
 	# hamowanie
 	elif Input.is_action_pressed("Decelerate") and g.can_perform_actions:
 		var decelerate_vector: Vector2 = velocity.normalized() * speed / 2.0 * delta

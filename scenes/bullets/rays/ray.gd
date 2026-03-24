@@ -10,8 +10,11 @@ var props := PropertyContainer.new(g.RAY_PROPERTY_SCHEMA)
 
 @export var is_local: bool = false
 @export var point_amount: int = 10
+@export var show_editor_version: bool = false
 
 func _ready() -> void:
+	if show_editor_version:
+		return
 	props.property_changed.connect(_on_property_changed)
 	#print("Beam ready!")
 	server_position = global_position

@@ -6,14 +6,13 @@
 [ext_resource type="AudioStream" uid="uid://b550gqbte7dln" path="res://audio/effects/Ship/Overseer/overseer_ray_attack.mp3" id="4_2pl4v"]
 
 [sub_resource type="Curve" id="Curve_06yfp"]
-_data = [Vector2(0, 0.52808994), 0.0, 0.0, 0, 0, Vector2(0.3306122, 1), 0.0, 0.0, 0, 0, Vector2(0.8653061, 0.77528095), -1.1489904, -1.1489904, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.3306122, 1), 0.0, 0.0, 0, 0, Vector2(0.77528095, 0.8653061), 0.0, 0.0, 0, 0, Vector2(0.8653061, 0.77528095), -1.1489904, -1.1489904, 0, 0]
 point_count = 4
-point_0/position = Vector2(0, 0.52808994)
+point_0/position = Vector2(0, 1)
 point_1/position = Vector2(0.3306122, 1)
-point_2/position = Vector2(0.8653061, 0.77528095)
-point_2/left_tangent = -1.1489904
-point_2/right_tangent = -1.1489904
-point_3/position = Vector2(1, 0)
+point_2/position = Vector2(0.77528095, 0.8653061)
+point_3/position = Vector2(0.8653061, 0.77528095)
+point_3/left_tangent = -1.1489904
 
 [sub_resource type="CurveTexture" id="CurveTexture_2pl4v"]
 curve = SubResource("Curve_06yfp")
@@ -80,6 +79,7 @@ metadata/_custom_type_script = "uid://cqa4aubsjga0s"
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1467615394]
 modulate = Color(0.7921569, 0, 1, 0.39607844)
 texture = ExtResource("3_06yfp")
+visibility_rect = Rect2(-100, -100, 4000, 200)
 local_coords = true
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_2pl4v")

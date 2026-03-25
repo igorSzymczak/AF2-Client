@@ -63,3 +63,16 @@ func handle_transfoming(_delta: float) -> void:
 		suck_ray.modulate.a = clampf(sin(angle) * 2.0, 0.0, 1.0)
 	else:
 		suck_ray.hide()
+
+func handle_death(_silent: bool = false) -> void:
+	if current_state != State.P2_END:
+		return
+	else:
+		return
+		actual_death()
+
+func actual_death() -> void:
+	if !is_queued_for_deletion():
+		poi.remove()
+		queue_free()
+		GlobalSignals.create_explosion.emit(global_position, "explosion_medium", 1, {})

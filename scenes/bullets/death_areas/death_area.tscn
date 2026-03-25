@@ -14,29 +14,29 @@ radius = 503.12027
 offsets = PackedFloat32Array(0, 0.17316018, 0.5064935)
 colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0.92156863, 1, 0.46666667, 0, 0.42745098)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6n5o8"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xu6bi"]
 gradient = SubResource("Gradient_li2io")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5f03j"]
 seed = 4
 frequency = 0.0024
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jgpo2"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_li2io"]
 generate_mipmaps = false
 noise = SubResource("FastNoiseLite_5f03j")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kg4aq"]
 shader = ExtResource("3_xu6bi")
-shader_parameter/texture2 = SubResource("NoiseTexture2D_jgpo2")
-shader_parameter/colorTexture = SubResource("GradientTexture2D_6n5o8")
+shader_parameter/texture2 = SubResource("NoiseTexture2D_li2io")
+shader_parameter/colorTexture = SubResource("GradientTexture2D_xu6bi")
 shader_parameter/scroll1 = Vector2(-0.135, -0.01)
 shader_parameter/scroll2 = Vector2(-0.085, 0.095)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_prjor"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kg4aq"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_87bem"]
-noise = SubResource("FastNoiseLite_prjor")
+noise = SubResource("FastNoiseLite_kg4aq")
 seamless = true
 seamless_blend_skirt = 0.3
 
@@ -55,6 +55,7 @@ scale = Vector2(16.711538, 16.711538)
 texture = ExtResource("2_xu6bi")
 
 [node name="DeathLines" type="RigidBody2D" parent="Background" unique_id=714181178]
+visible = false
 physics_material_override = SubResource("PhysicsMaterial_xu6bi")
 linear_velocity = Vector2(10, 0)
 linear_damp = -1.0
@@ -78,7 +79,3 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_kg4aq")
 scale = Vector2(1.7205244, 1.6855469)
 texture = SubResource("NoiseTexture2D_87bem")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=26770941]
-scale = Vector2(1.2425, 1.2425)
-texture = ExtResource("2_qusrv")

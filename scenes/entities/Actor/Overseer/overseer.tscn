@@ -95,9 +95,9 @@ colors = PackedColorArray(1, 1, 1, 0, 0.5019608, 1, 0.5019608, 0.39215687, 0.192
 gradient = SubResource("Gradient_flgpi")
 
 [sub_resource type="Curve" id="Curve_flgpi"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.29387754, 0.81006485), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.81006485, 0.29387754), 0.0, 0.0, 0, 0]
 point_count = 2
-point_1/position = Vector2(0.29387754, 0.81006485)
+point_1/position = Vector2(0.81006485, 0.29387754)
 
 [sub_resource type="CurveTexture" id="CurveTexture_n0ubb"]
 curve = SubResource("Curve_flgpi")
@@ -212,6 +212,6 @@ antialiased = true
 position = Vector2(1112, 0)
 amount = 64
 texture = ExtResource("12_flgpi")
-lifetime = 1.4000000000000001
+lifetime = 1.4
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tnlg7")

@@ -23,7 +23,7 @@ enum TeleportData {
 }
 
 func _ready() -> void:
-	health_component.health_depleted.connect(handle_death)
+	#health_component.health_depleted.connect(handle_death)
 	props.property_changed.connect(_on_property_changed)
 	
 	_on_ready()

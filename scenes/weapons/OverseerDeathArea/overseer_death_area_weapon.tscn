@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cjchu5klfer3q"]
+
+[ext_resource type="Script" uid="uid://du5oehe5o6rs0" path="res://scenes/weapons/weapon.gd" id="1_knvv4"]
+
+[node name="OverseerDroneAreaWeapon" type="Node" unique_id=1318744685]
+script = ExtResource("1_knvv4")
+weapon_name = "Overseer Death Area"
+weapon_type = 19
+metadata/_custom_type_script = "uid://du5oehe5o6rs0"
